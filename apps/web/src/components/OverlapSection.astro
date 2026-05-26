@@ -1,0 +1,37 @@
+---
+interface Props {
+  /** Background utility class (Tailwind) — e.g. "bg-bg", "bg-brand-blue", "bg-surface". */
+  bg?: string;
+  /** Stack index for the overlap effect — increment as sections stack down the page. */
+  z?: number;
+  /** Disable the -50px pull-up (use on the very first section, like a hero). */
+  noOverlap?: boolean;
+  /** Vertical padding override (Tailwind). Defaults to py-20 md:py-28. */
+  padding?: string;
+  /** Text color utility. Default inherits page. */
+  textColor?: string;
+  class?: string;
+}
+
+const {
+  bg = "bg-bg",
+  z = 1,
+  noOverlap = false,
+  padding = "py-20 md:py-28",
+  textColor = "",
+  class: className = "",
+} = Astro.props;
+---
+<section
+  class:list={[
+    "relative",
+    bg,
+    padding,
+    textColor,
+    !noOverlap && "-mt-[50px] md:-mt-[50px] rounded-t-[50px]",
+    className,
+  ]}
+  style={`z-index: ${z};`}
+>
+  <slot />
+</section>

@@ -10,7 +10,12 @@ export default defineConfig({
   site: 'https://esic.co',
   output: 'static',
   adapter: vercel(),
-  integrations: [react(), sitemap()],
+  integrations: [
+    react(),
+    sitemap({
+      filter: (page) => !page.includes("/dev/"),
+    }),
+  ],
   vite: {
     plugins: [tailwindcss()],
   },

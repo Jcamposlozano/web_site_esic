@@ -1,0 +1,25 @@
+---
+interface Props {
+  color?: "blue" | "teal" | "orange" | "white";
+  class?: string;
+}
+
+const { color = "blue", class: className = "" } = Astro.props;
+
+const colorClass = {
+  blue: "text-brand-blue",
+  teal: "text-brand-teal-dark",
+  orange: "text-brand-orange",
+  white: "text-white",
+}[color];
+---
+<span
+  class:list={[
+    "inline-flex items-center gap-3 text-[0.74rem] font-bold uppercase tracking-[0.22em]",
+    colorClass,
+    className,
+  ]}
+>
+  <span class="block h-px w-8 bg-current" aria-hidden="true"></span>
+  <slot />
+</span>

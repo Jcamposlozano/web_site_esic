@@ -1,0 +1,66 @@
+---
+type Variant = "primary" | "outline" | "teal" | "orange" | "ghost" | "white";
+
+interface Props {
+  href?: string;
+  variant?: Variant;
+  type?: "button" | "submit" | "reset";
+  target?: "_blank" | "_self";
+  rel?: string;
+  class?: string;
+}
+
+const {
+  href,
+  variant = "primary",
+  type = "button",
+  target,
+  rel,
+  class: className = "",
+} = Astro.props;
+
+const base =
+  "btn btn--anti-shrink inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 font-bold text-[0.9rem] tracking-[0.05em] uppercase no-underline cursor-pointer select-none border border-transparent";
+
+const variants: Record<Variant, string> = {
+  primary: "bg-brand-blue text-white hover:bg-brand-blue-dark",
+  outline:
+    "bg-transparent text-brand-blue border-brand-blue hover:bg-brand-blue hover:text-white",
+  teal: "bg-brand-teal text-brand-blue-dark hover:bg-brand-teal-dark hover:text-white",
+  orange: "bg-brand-orange text-white hover:bg-brand-orange-alt",
+  ghost:
+    "bg-transparent text-white border-white/60 hover:bg-white/10",
+  white: "bg-white text-brand-blue-dark hover:bg-bg-alt",
+};
+
+const classes = [base, variants[variant], className];
+---
+{
+  href ? (
+    <a href={href} target={target} rel={rel} class:list={classes}>
+      <slot />
+    </a>
+  ) : (
+    <button type={type} class:list={classes}>
+      <slot />
+    </button>
+  )
+}
+
+<style>
+  /* Anti-shrink: hover effect estricto. translateY only — nunca scale.
+     La regla existi&oacute; originalmente para combatir Elementor (que inyectaba scale on hover).
+     Aqu&iacute; ya no estamos en Elementor, pero mantengo la convenci&oacute;n por consistencia visual. */
+  .btn--anti-shrink {
+    transition: transform 0.22s ease, background-color 0.22s ease, color 0.22s ease, box-shadow 0.22s ease;
+    transform-origin: center center;
+    line-height: 1;
+  }
+  .btn--anti-shrink:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(0, 19, 63, 0.18);
+  }
+  .btn--anti-shrink:active {
+    transform: translateY(0);
+  }
+</style>

@@ -1,0 +1,104 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Container from "../../components/Container.astro";
+import SectionTag from "../../components/SectionTag.astro";
+import Button from "../../components/Button.astro";
+import OverlapSection from "../../components/OverlapSection.astro";
+---
+<Layout title="Component Library — ESIC dev">
+  <main>
+    <!-- Hero "fake" para validar el overlap del siguiente section -->
+    <section class="bg-brand-blue-dark text-white py-32 relative z-0">
+      <Container>
+        <SectionTag color="teal">Dev / Components</SectionTag>
+        <h1 class="font-display text-7xl md:text-9xl mt-4 leading-none">
+          Librer&iacute;a base
+        </h1>
+        <p class="mt-6 text-white/70 max-w-xl font-body">
+          Fase 1: showcase de componentes at&oacute;micos. URL no indexada,
+          uso interno para validar el design system.
+        </p>
+      </Container>
+    </section>
+
+    <!-- Section 1: SectionTag variants -->
+    <OverlapSection bg="bg-bg" z={1}>
+      <Container>
+        <SectionTag>SectionTag</SectionTag>
+        <h2 class="font-display text-4xl md:text-5xl mt-3 text-brand-blue-dark">
+          Eyebrow uppercase con l&iacute;nea
+        </h2>
+        <div class="mt-8 flex flex-col gap-3">
+          <SectionTag color="blue">Color blue (default)</SectionTag>
+          <SectionTag color="teal">Color teal-dark</SectionTag>
+          <SectionTag color="orange">Color orange</SectionTag>
+          <div class="bg-brand-blue-dark p-4 rounded-2xl inline-block">
+            <SectionTag color="white">Color white (sobre fondo oscuro)</SectionTag>
+          </div>
+        </div>
+      </Container>
+    </OverlapSection>
+
+    <!-- Section 2: Button variants -->
+    <OverlapSection bg="bg-bg-alt" z={2}>
+      <Container>
+        <SectionTag>Button</SectionTag>
+        <h2 class="font-display text-4xl md:text-5xl mt-3 text-brand-blue-dark">
+          6 variantes, anti-shrink, hover translateY
+        </h2>
+        <div class="mt-8 flex flex-wrap gap-4 items-center">
+          <Button variant="primary">Primary</Button>
+          <Button variant="outline">Outline</Button>
+          <Button variant="teal">Teal</Button>
+          <Button variant="orange">Orange</Button>
+          <Button variant="white">White</Button>
+        </div>
+        <div class="mt-4 inline-block bg-brand-blue-dark p-4 rounded-2xl">
+          <Button variant="ghost">Ghost (sobre fondo oscuro)</Button>
+        </div>
+
+        <h3 class="font-display text-2xl mt-12 text-brand-blue-dark">
+          Como `&lt;a&gt;` con href
+        </h3>
+        <div class="mt-4 flex flex-wrap gap-4 items-center">
+          <Button href="/" variant="primary">Link primary</Button>
+          <Button
+            href="https://esic.co/tratamiento-de-datos-personales/"
+            target="_blank"
+            rel="noopener"
+            variant="outline"
+          >
+            Link outline external
+          </Button>
+        </div>
+      </Container>
+    </OverlapSection>
+
+    <!-- Section 3: OverlapSection self-demo -->
+    <OverlapSection bg="bg-brand-blue" textColor="text-white" z={3}>
+      <Container>
+        <SectionTag color="teal">OverlapSection</SectionTag>
+        <h2 class="font-display text-4xl md:text-5xl mt-3">
+          Esta secci&oacute;n se monta con -50px sobre la anterior
+        </h2>
+        <p class="mt-4 max-w-xl text-white/80 font-body">
+          Bord top redondo de 50px y z-index incremental.
+          Cada secci&oacute;n nueva usa <code class="bg-white/20 px-2 py-0.5 rounded">z={"{n}"}</code> mayor que la anterior.
+        </p>
+      </Container>
+    </OverlapSection>
+
+    <OverlapSection bg="bg-surface" z={4}>
+      <Container>
+        <SectionTag color="orange">Container</SectionTag>
+        <h2 class="font-display text-4xl md:text-5xl mt-3 text-brand-blue-dark">
+          Ancho m&aacute;ximo 1200px con padding horizontal
+        </h2>
+        <p class="mt-4 max-w-xl text-ink-muted font-body">
+          Wrapper b&aacute;sico. Acepta <code class="bg-ink/5 px-2 py-0.5 rounded">as</code>
+          para semantica (section, header, etc.).
+        </p>
+      </Container>
+    </OverlapSection>
+  </main>
+</Layout>
