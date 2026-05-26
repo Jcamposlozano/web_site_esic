@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+/* ESIC Design System — tokens extracted from the WordPress/Elementor codebase.
+   Tailwind v4 picks these up automatically and exposes utility classes:
+   bg-brand-blue, text-brand-teal, font-display, shadow-card, rounded-section, etc. */
+@theme {
+  /* Brand palette */
+  --color-brand-blue: #0047E9;
+  --color-brand-blue-dark: #00133F;
+  --color-brand-teal: #0AE4C3;
+  --color-brand-teal-dark: #09CF90;
+  --color-brand-orange: #FF9600;
+  --color-brand-orange-alt: #FF8701;
+
+  /* Surfaces */
+  --color-bg: #F8F6F2;
+  --color-bg-alt: #F2F5FB;
+  --color-surface: #FFFFFF;
+
+  /* Text */
+  --color-ink: #0B132B;
+  --color-ink-muted: #5F6B7A;
+  --color-ink-light: #97A2B1;
+
+  /* Typography */
+  --font-display: "Sofia Sans Extra Condensed", system-ui, sans-serif;
+  --font-body: "DM Sans", system-ui, sans-serif;
+
+  /* Radii — the signature "stacked card" overlap uses --radius-section */
+  --radius-card: 1.5rem;       /* 24px */
+  --radius-pill: 999px;
+  --radius-section: 3.125rem;  /* 50px (top-only overlap) */
+
+  /* Shadows */
+  --shadow-soft: 0 20px 50px rgba(0, 19, 63, 0.12);
+  --shadow-medium: 0 10px 50px rgba(0, 19, 63, 0.1);
+  --shadow-deep: 0 30px 80px rgba(0, 16, 31, 0.4);
+  --shadow-subtle: 0 2px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* Base resets and body defaults */
+html {
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  background-color: var(--color-bg);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 1.05;
+  margin: 0;
+  text-transform: uppercase;
+}
