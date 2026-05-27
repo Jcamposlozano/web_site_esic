@@ -162,7 +162,13 @@ export default function BannerCarousel() {
         ))}
       </div>
 
-      <div className="eh-banner-indicators absolute left-1/2 -translate-x-1/2 bottom-6 z-20 flex gap-2">
+      {/*
+        Dots: bottom-[70px] los sitúa POR ENCIMA del overlap de 50px que la
+        siguiente sección (PorqueSection) hace sobre el banner, dejando ~20px
+        de aire entre los dots y la curva blanca del rounded-t-[50px].
+        Drop-shadow para legibilidad cuando el slide tiene fondo claro.
+      */}
+      <div className="eh-banner-indicators absolute left-1/2 -translate-x-1/2 bottom-[70px] z-20 flex gap-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.45)]">
         {slides.map((_, i) => (
           <button
             key={i}
@@ -173,7 +179,7 @@ export default function BannerCarousel() {
               resetAuto();
             }}
             className={`h-[10px] rounded-full border-0 cursor-pointer transition-all duration-200 ${
-              i === current ? "w-[30px] bg-white" : "w-[10px] bg-white/40 hover:bg-white/70"
+              i === current ? "w-[30px] bg-white" : "w-[10px] bg-white/60 hover:bg-white/90"
             }`}
           />
         ))}

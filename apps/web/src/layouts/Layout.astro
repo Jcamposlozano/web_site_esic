@@ -1,16 +1,24 @@
 ---
 import "../styles/global.css";
+import Nav from "../components/Nav.tsx";
 
 interface Props {
   title: string;
   description?: string;
   image?: string;
+  /**
+   * Si la página tiene hero full-bleed (como el home con el carrusel),
+   * pásalo true para que el nav flote por encima del primer contenido.
+   * Las páginas normales reservan padding-top para no quedar tapadas.
+   */
+  fullBleed?: boolean;
 }
 
 const {
   title,
   description = "ESIC Business &amp; Marketing School Medell&iacute;n — pregrados, m&aacute;ster y educaci&oacute;n ejecutiva.",
   image = "/og-default.jpg",
+  fullBleed = false,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
@@ -42,7 +50,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
       rel="stylesheet"
     />
   </head>
-  <body>
+  <body class:list={[!fullBleed && "pt-24"]}>
+    <Nav client:load />
     <slot />
   </body>
 </html>
