@@ -1,0 +1,62 @@
+---
+import Container from "../Container.astro";
+import OverlapSection from "../OverlapSection.astro";
+
+interface Props {
+  z?: number;
+}
+const { z = 7 } = Astro.props;
+
+const logos = [
+  { src: "/images/home/fundadores/grupo-bios.webp", alt: "Grupo Bios" },
+  { src: "/images/home/fundadores/bancolombia.webp", alt: "Bancolombia" },
+  { src: "/images/home/fundadores/crystal.webp", alt: "Crystal" },
+  { src: "/images/home/fundadores/telefonica.webp", alt: "Telefónica" },
+  { src: "/images/home/fundadores/accenture.webp", alt: "Accenture" },
+  { src: "/images/home/fundadores/postobon.webp", alt: "Postobón" },
+];
+
+// Duplicate for seamless loop
+const loop = [...logos, ...logos];
+---
+<OverlapSection bg="bg-[#F5F5F7]" z={z} padding="py-20 md:py-28">
+  <Container>
+    <div class="text-center md:text-left">
+      <h2 class="font-display text-3xl md:text-4xl font-extrabold uppercase leading-[0.95] text-brand-blue-dark mb-12">
+        Nuestros Miembros<br />Fundadores
+      </h2>
+    </div>
+  </Container>
+
+  <div class="marquee relative w-full py-8 overflow-hidden">
+    <div class="marquee-track flex gap-8 items-center w-max">
+      {loop.map((logo) => (
+        <div class="flex items-center justify-center flex-shrink-0 px-8 w-[240px] h-[120px]">
+          <img
+            src={logo.src}
+            alt={logo.alt}
+            loading="lazy"
+            class="w-full h-full object-contain transition-transform duration-300 hover:scale-105"
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</OverlapSection>
+
+<style>
+  .marquee {
+    mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+  }
+  .marquee-track {
+    animation: marqueeScroll 30s linear infinite;
+  }
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+  @keyframes marqueeScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+</style>

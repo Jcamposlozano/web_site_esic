@@ -1,0 +1,68 @@
+---
+import Container from "../Container.astro";
+import OverlapSection from "../OverlapSection.astro";
+
+interface Props {
+  z?: number;
+}
+
+const { z = 2 } = Astro.props;
+
+const cards = [
+  {
+    title: "Internacionalización",
+    body: "Acceso a realidades, no a folletos: inmersiones y dobles titulaciones como exposición a estándares (académicos y de negocio) que te obligan a subir el nivel.",
+    svg: `<circle cx="24" cy="24" r="20"/><ellipse cx="24" cy="24" rx="10" ry="20"/><path d="M4 24h40"/><path d="M7 14h34"/><path d="M7 34h34"/>`,
+  },
+  {
+    title: "Metodología práctica",
+    body: "Te entrenas en ejecución con criterio: no solo entregas; justificas decisiones, defiendes supuestos, iteras y corriges con evidencia.",
+    svg: `<circle cx="24" cy="14" r="6"/><circle cx="14" cy="34" r="4"/><circle cx="34" cy="34" r="4"/><path d="M24 20v6"/><path d="M20 30l-4 2"/><path d="M28 30l4 2"/>`,
+  },
+  {
+    title: "Networking corporativo",
+    body: "Reputación en movimiento: construyes señales, portafolio, desempeño y criterio, dentro de un ecosistema que te puede abrir puertas.",
+    svg: `<circle cx="24" cy="12" r="5"/><circle cx="10" cy="28" r="5"/><circle cx="38" cy="28" r="5"/><path d="M20 15l-7 10"/><path d="M28 15l7 10"/><path d="M15 28h18"/>`,
+  },
+];
+---
+<OverlapSection bg="bg-white" z={z} padding="py-16 md:py-24">
+  <Container>
+    <div class="grid gap-10 md:gap-14 md:grid-cols-[280px_1px_1fr]">
+      <div class="flex flex-col gap-6">
+        <h2 class="font-display text-4xl md:text-5xl font-extrabold uppercase leading-[0.95] text-brand-blue-dark">
+          Por qué<br />estudiar<br />en ESIC
+        </h2>
+        <a
+          href="/quienes-somos"
+          class="inline-flex items-center gap-2 self-start rounded-full bg-brand-blue text-white text-[0.78rem] font-bold uppercase tracking-[0.06em] px-5 py-3 hover:bg-brand-blue-dark transition-colors"
+        >
+          Conoce la experiencia ESIC
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <div class="hidden md:block bg-[#E5E5E5]"></div>
+
+      <div class="bg-[#F8F8F8] rounded-3xl p-6 md:p-8">
+        <div class="grid gap-5 md:grid-cols-3 h-full">
+          {cards.map((card) => (
+            <article class="bg-white rounded-2xl overflow-hidden shadow-[0_2px_12px_rgba(0,19,63,0.05)] flex flex-col">
+              <div class="bg-brand-blue h-6 rounded-t-2xl"></div>
+              <div class="p-6 flex flex-col flex-1">
+                <div class="w-12 h-12 mb-4 text-brand-blue">
+                  <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" class="w-full h-full" set:html={card.svg} />
+                </div>
+                <h3 class="font-display text-xl font-extrabold uppercase text-brand-blue-dark leading-tight mb-3">
+                  {card.title}
+                </h3>
+                <div class="w-10 h-[2px] bg-brand-blue mb-4"></div>
+                <p class="font-body text-[0.92rem] leading-[1.55] text-ink-muted">{card.body}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </Container>
+</OverlapSection>

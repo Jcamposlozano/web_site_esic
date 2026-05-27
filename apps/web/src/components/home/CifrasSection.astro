@@ -1,0 +1,100 @@
+---
+import Container from "../Container.astro";
+import OverlapSection from "../OverlapSection.astro";
+
+interface Props {
+  z?: number;
+}
+const { z = 5 } = Astro.props;
+
+const espana = [
+  { num: "TOP 1", desc: "Marketing y Economía Digital" },
+  { num: "62K+", desc: "Alumni de 80+ nacionalidades" },
+  { num: "60", desc: "Años formando profesionales" },
+];
+
+const medellin = [
+  { num: "+3,000", desc: "Participantes de programas a la medida" },
+  { num: "230", desc: "Máster graduados" },
+  { num: "350", desc: "Estudiantes de pregrado activos" },
+];
+---
+<OverlapSection bg="bg-brand-blue-dark" z={z} padding="py-16 md:py-20" textColor="text-white">
+  <Container>
+    <div class="mb-12 md:mb-14">
+      <span class="block font-body text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-white/30 mb-3">
+        Trayectoria &amp; Presencia Global
+      </span>
+      <h2 class="font-display text-5xl md:text-7xl font-extrabold uppercase leading-[0.92] tracking-[-0.02em] text-white">
+        Cifras y<br />Reconocimiento
+      </h2>
+    </div>
+
+    <div class="grid gap-10 md:gap-0 md:grid-cols-[1fr_1px_1fr] md:gap-x-16 items-start">
+      <!-- ESIC España -->
+      <div class="flex flex-col">
+        <div class="flex items-center gap-2.5 pb-6 border-b border-white/10">
+          <svg viewBox="0 0 30 20" class="w-[22px] h-[15px] rounded-[2px] flex-shrink-0">
+            <rect width="30" height="20" fill="#AA151B"/>
+            <rect y="5" width="30" height="10" fill="#F1BF00"/>
+          </svg>
+          <span class="font-body text-[1.4rem] font-bold uppercase tracking-[0.12em] text-[#7BA8FF]">
+            ESIC España
+          </span>
+        </div>
+        <div class="flex-1">
+          {espana.map((c, i) => (
+            <div class={`py-6 ${i < espana.length - 1 ? "border-b border-white/[0.07]" : ""}`}>
+              <div class="font-display font-black text-6xl md:text-7xl lg:text-[6rem] leading-none text-white tracking-[-0.03em] mb-1.5">
+                {c.num}
+              </div>
+              <div class="text-[0.85rem] text-white/45 leading-snug">{c.desc}</div>
+            </div>
+          ))}
+        </div>
+        <a
+          href="https://www.esic.edu"
+          target="_blank"
+          rel="noopener"
+          class="cifras-cta inline-flex items-center gap-2 mt-6 px-5 py-2.5 border border-white/20 rounded-full font-body text-[0.75rem] font-semibold uppercase tracking-[0.07em] text-white/60 w-fit transition-all hover:border-white/40 hover:text-white hover:bg-white/5"
+        >
+          Conoce ESIC España
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <div class="hidden md:block bg-white/10 self-stretch"></div>
+
+      <!-- ESIC Medellín -->
+      <div class="flex flex-col">
+        <div class="flex items-center gap-2.5 pb-6 border-b border-white/10">
+          <svg viewBox="0 0 30 20" class="w-[22px] h-[15px] rounded-[2px] flex-shrink-0">
+            <rect width="30" height="6.67" fill="#FCD116"/>
+            <rect y="6.67" width="30" height="6.67" fill="#003893"/>
+            <rect y="13.33" width="30" height="6.67" fill="#CE1126"/>
+          </svg>
+          <span class="font-body text-[1.4rem] font-bold uppercase tracking-[0.12em] text-[#FFB740]">
+            ESIC Medellín
+          </span>
+        </div>
+        <div class="flex-1">
+          {medellin.map((c, i) => (
+            <div class={`py-6 ${i < medellin.length - 1 ? "border-b border-white/[0.07]" : ""}`}>
+              <div class="font-display font-black text-6xl md:text-7xl lg:text-[6rem] leading-none text-white tracking-[-0.03em] mb-1.5">
+                {c.num}
+              </div>
+              <div class="text-[0.85rem] text-white/45 leading-snug">{c.desc}</div>
+            </div>
+          ))}
+        </div>
+        <a
+          href="/contacto"
+          class="cifras-cta inline-flex items-center gap-2 mt-6 px-5 py-2.5 border border-white/20 rounded-full font-body text-[0.75rem] font-semibold uppercase tracking-[0.07em] text-white/60 w-fit transition-all hover:border-white/40 hover:text-white hover:bg-white/5"
+        >
+          Solicitar Información
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </Container>
+</OverlapSection>

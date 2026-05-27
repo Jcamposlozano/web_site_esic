@@ -1,0 +1,88 @@
+---
+import Container from "../Container.astro";
+import OverlapSection from "../OverlapSection.astro";
+
+interface Props {
+  z?: number;
+}
+const { z = 4 } = Astro.props;
+
+const images = [
+  { src: "/images/home/campus/lounge-rethink.webp", alt: "Campus ESIC Medellín - Lounge Rethink" },
+  { src: "/images/home/campus/areas-comunes-03.webp", alt: "Campus ESIC Medellín - Áreas comunes" },
+  { src: "/images/home/campus/areas-comunes-16.webp", alt: "Campus ESIC Medellín - Áreas comunes" },
+];
+---
+<OverlapSection bg="bg-white" z={z} padding="py-16 md:py-20">
+  <Container>
+    <a
+      href="/campus/"
+      aria-label="Conoce el campus ESIC Medellín"
+      class="campus-card relative grid w-full bg-brand-blue rounded-[40px] overflow-hidden shadow-[0_30px_60px_rgba(0,19,63,0.18)] min-h-[440px] no-underline"
+    >
+      <div class="campus-media relative overflow-hidden min-h-[260px]">
+        {images.map((img, i) => (
+          <img
+            src={img.src}
+            alt={img.alt}
+            loading="lazy"
+            class={`absolute inset-0 w-full h-full object-cover opacity-0 campus-img-${i + 1}`}
+          />
+        ))}
+      </div>
+      <div class="relative px-6 py-10 md:px-14 md:py-14 text-white flex flex-col justify-center gap-5 z-[2]">
+        <span class="inline-flex items-center gap-2 text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-brand-orange w-fit">
+          <span class="block w-6 h-[2px] bg-brand-orange" aria-hidden="true"></span>
+          Campus ESIC Medellín
+        </span>
+        <h2 class="font-display text-3xl md:text-5xl font-extrabold uppercase leading-[1.02] text-white">
+          Conoce Nuestro <span class="text-brand-orange">Campus</span>
+        </h2>
+        <p class="font-body text-base md:text-[1.02rem] leading-[1.55] text-white/85 max-w-[46ch]">
+          Un espacio diseñado para impulsar la creatividad, la innovación y el aprendizaje
+          experiencial. Auditorio, Tech Lab, áreas comunes y salones pensados para transformar tu
+          futuro profesional.
+        </p>
+        <span class="campus-cta inline-flex items-center gap-2 mt-2 px-6 py-3 bg-white text-brand-blue rounded-full font-semibold text-[0.95rem] w-fit transition-all">
+          Conoce el campus
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14"/><path d="m13 5 7 7-7 7"/>
+          </svg>
+        </span>
+      </div>
+    </a>
+  </Container>
+</OverlapSection>
+
+<style>
+  .campus-card {
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 860px) {
+    .campus-card {
+      grid-template-columns: 1.05fr 1fr;
+    }
+  }
+  .campus-media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(100deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.25) 100%);
+    z-index: 2;
+  }
+  .campus-img-1 { animation: campusFade 15s infinite ease-in-out 0s; }
+  .campus-img-2 { animation: campusFade 15s infinite ease-in-out -10s; }
+  .campus-img-3 { animation: campusFade 15s infinite ease-in-out -5s; }
+  @keyframes campusFade {
+    0%, 28% { opacity: 1; }
+    35%, 95% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  .campus-cta:hover {
+    background-color: var(--color-brand-orange);
+    color: #fff;
+    transform: translateY(-2px);
+  }
+  .campus-cta svg { transition: transform 0.2s ease; }
+  .campus-cta:hover svg { transform: translateX(4px); }
+</style>

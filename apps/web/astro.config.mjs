@@ -19,10 +19,4 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  image: {
-    remotePatterns: [
-      { protocol: 'https', hostname: 'esic.co' },
-      { protocol: 'https', hostname: 'www.esic.co' },
-    ],
-  },
 });

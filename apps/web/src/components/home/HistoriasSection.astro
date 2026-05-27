@@ -1,0 +1,82 @@
+---
+import Container from "../Container.astro";
+import OverlapSection from "../OverlapSection.astro";
+
+interface Props {
+  z?: number;
+}
+const { z = 6 } = Astro.props;
+---
+<OverlapSection bg="bg-white" z={z} padding="py-16 md:py-20">
+  <Container>
+    <div class="flex flex-wrap justify-between items-end gap-4 mb-10">
+      <h2 class="font-display text-4xl md:text-6xl font-extrabold uppercase leading-[0.95] text-brand-blue-dark">
+        Historias<br />de Éxito
+      </h2>
+    </div>
+
+    <div class="grid gap-6 lg:grid-cols-[1fr_1.3fr_1fr] items-stretch">
+      <!-- Testimonio Daniela -->
+      <article class="testimonio-card bg-white rounded-3xl px-9 pt-10 pb-8 shadow-[0_2px_20px_rgba(0,19,63,0.07)] border border-[rgba(0,19,63,0.06)] flex flex-col items-center text-center min-h-[480px]">
+        <blockquote class="testimonio-quote text-[0.92rem] leading-[1.7] text-ink italic flex-1 w-full m-0">
+          En ESIC abrí los ojos al mundo real: descubrí industrias, encontré mi pasión y conocí
+          personas que hoy son parte de mi camino profesional. Gracias a esta experiencia, encontré
+          una oportunidad laboral que me ha retado y me ha abierto puertas que jamás imaginé.
+        </blockquote>
+        <div class="flex flex-col items-center gap-2 w-full pt-6 mt-7 border-t border-[rgba(0,19,63,0.07)]">
+          <div class="w-11 h-11 rounded-full bg-gradient-to-br from-brand-blue to-brand-teal flex items-center justify-center text-white font-display text-lg font-bold">
+            DT
+          </div>
+          <div>
+            <h4 class="font-body font-semibold text-ink text-[0.9rem]">Daniela Tobón</h4>
+            <p class="text-[0.78rem] text-ink-muted">Pregrado en Digital Business</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Video destacado -->
+      <div class="rounded-3xl overflow-hidden h-[480px] relative shadow-[0_8px_40px_rgba(0,19,63,0.14)] bg-black order-first lg:order-none">
+        <video
+          src="/videos/home/testimonio-master.mp4"
+          playsinline
+          controls
+          preload="metadata"
+          poster=""
+          class="w-full h-full object-cover"
+        ></video>
+      </div>
+
+      <!-- Testimonio Valeria -->
+      <article class="testimonio-card bg-white rounded-3xl px-9 pt-10 pb-8 shadow-[0_2px_20px_rgba(0,19,63,0.07)] border border-[rgba(0,19,63,0.06)] flex flex-col items-center text-center min-h-[480px]">
+        <blockquote class="testimonio-quote text-[0.92rem] leading-[1.7] text-ink italic flex-1 w-full m-0">
+          Después de pasar por una universidad tradicional, decidí dar un giro. Encontré una
+          metodología que realmente responde a lo que hoy exige el mercado: materias integradas,
+          desafíos reales y oportunidades de networking. Pero lo mejor aún está por venir: ¡muy
+          pronto viviré el Summer Camp en Madrid y ya estoy contando los días!
+        </blockquote>
+        <div class="flex flex-col items-center gap-2 w-full pt-6 mt-7 border-t border-[rgba(0,19,63,0.07)]">
+          <div class="w-11 h-11 rounded-full bg-gradient-to-br from-brand-blue to-brand-teal flex items-center justify-center text-white font-display text-lg font-bold">
+            VV
+          </div>
+          <div>
+            <h4 class="font-body font-semibold text-ink text-[0.9rem]">Valeria Velásquez</h4>
+            <p class="text-[0.78rem] text-ink-muted">Pregrado en Marketing Global</p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </Container>
+</OverlapSection>
+
+<style>
+  .testimonio-quote::before {
+    content: "\201C";
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 4rem;
+    color: var(--color-brand-blue);
+    line-height: 0.85;
+    display: block;
+    margin-bottom: 1rem;
+    opacity: 0.35;
+  }
+</style>
