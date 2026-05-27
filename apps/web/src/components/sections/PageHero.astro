@@ -1,0 +1,100 @@
+---
+/**
+ * PageHero — hero genérico usado por todas las páginas internas.
+ *
+ * Respeta el manual:
+ *  - Banner limpio: solo título + subtítulo + máx 1-2 CTAs
+ *  - Imagen siempre con overlay negro
+ *  - Sin tarjetas, sin íconos decorativos
+ *  - Hero sin overlap (es el primer bloque)
+ */
+
+import Container from "../Container.astro";
+
+type CTA = { label: string; href: string; variant?: "primary" | "outline" | "white"; target?: "_blank" };
+
+interface Props {
+  /** Pre-título corto (eyebrow) — ej. "Pregrado · Doble titulación" */
+  eyebrow?: string;
+  /** Título principal (recibe HTML para resaltar palabras) */
+  title: string;
+  /** Subtítulo en 1-2 líneas */
+  subtitle?: string;
+  /** Hasta 2 CTAs */
+  ctas?: CTA[];
+  /** Imagen de fondo. Si no se pasa, se usa color sólido azul oscuro. */
+  image?: string;
+  /** Imagen mobile (opcional). */
+  imageMobile?: string;
+  /** Texto en blanco siempre, salvo override. */
+  textColor?: string;
+  /** Color del eyebrow (text-brand-orange por defecto para pregrado) */
+  eyebrowColor?: string;
+  /** min-height del hero */
+  minHeight?: string;
+}
+
+const {
+  eyebrow,
+  title,
+  subtitle,
+  ctas = [],
+  image,
+  imageMobile,
+  textColor = "text-white",
+  eyebrowColor = "text-brand-orange",
+  minHeight = "min-h-[520px] md:min-h-[640px]",
+} = Astro.props;
+
+const ctaVariants = {
+  primary: "bg-brand-blue text-white hover:bg-brand-blue-dark",
+  outline: "bg-transparent text-white border border-white/60 hover:bg-white hover:text-brand-blue-dark",
+  white: "bg-white text-brand-blue-dark hover:bg-bg-alt",
+};
+---
+<section class:list={["relative w-full overflow-hidden bg-brand-blue-dark", textColor, minHeight, "flex items-end"]}>
+  {image && (
+    <picture class="absolute inset-0 z-0">
+      {imageMobile && <source media="(max-width: 768px)" srcset={imageMobile} />}
+      <img src={image} alt="" class="w-full h-full object-cover" />
+    </picture>
+  )}
+  <div class="absolute inset-0 z-[1] bg-black/55"></div>
+
+  <Container class="relative z-[2] pb-16 pt-32 md:pt-40 md:pb-24">
+    <div class="max-w-[820px]">
+      {eyebrow && (
+        <span class={`inline-flex items-center gap-3 text-[0.74rem] font-bold uppercase tracking-[0.22em] ${eyebrowColor} mb-4`}>
+          <span class="block h-px w-8 bg-current" aria-hidden="true"></span>
+          {eyebrow}
+        </span>
+      )}
+      <h1
+        class="font-display font-extrabold uppercase leading-[0.95] text-[clamp(2.5rem,6vw,4.5rem)]"
+        set:html={title}
+      ></h1>
+      {subtitle && (
+        <p class="mt-5 text-[1.05rem] md:text-[1.15rem] leading-[1.55] text-white/85 max-w-[58ch]">
+          {subtitle}
+        </p>
+      )}
+      {ctas.length > 0 && (
+        <div class="mt-9 flex flex-wrap gap-3">
+          {ctas.slice(0, 2).map((cta) => (
+            <a
+              href={cta.href}
+              target={cta.target}
+              rel={cta.target === "_blank" ? "noopener" : undefined}
+              class:list={[
+                "inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 font-bold text-[0.9rem] tracking-[0.05em] uppercase no-underline transition-all hover:-translate-y-0.5",
+                ctaVariants[cta.variant ?? "primary"],
+              ]}
+            >
+              {cta.label}
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  </Container>
+</section>

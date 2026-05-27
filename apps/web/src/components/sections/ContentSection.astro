@@ -1,0 +1,57 @@
+---
+/**
+ * ContentSection — bloque genérico para texto + opcional imagen / lista / cards.
+ *
+ * El slot principal recibe el contenido. Sirve para casi cualquier sección de
+ * texto institucional ("Nuestro Manifiesto", "Propósito del programa", etc.).
+ */
+
+import Container from "../Container.astro";
+import OverlapSection from "../OverlapSection.astro";
+
+interface Props {
+  z?: number;
+  bg?: string;
+  textColor?: string;
+  padding?: string;
+  eyebrow?: string;
+  eyebrowColor?: string;
+  title?: string;
+  /** Limita el ancho del título y subtítulo para legibilidad. */
+  maxWidth?: string;
+  class?: string;
+}
+
+const {
+  z = 3,
+  bg = "bg-white",
+  textColor,
+  padding = "py-16 md:py-24",
+  eyebrow,
+  eyebrowColor = "text-brand-blue",
+  title,
+  maxWidth = "max-w-[820px]",
+  class: className,
+} = Astro.props;
+---
+<OverlapSection bg={bg} z={z} padding={padding} textColor={textColor} class={className}>
+  <Container>
+    {(eyebrow || title) && (
+      <div class:list={[maxWidth, "mb-10"]}>
+        {eyebrow && (
+          <span class={`inline-flex items-center gap-3 text-[0.74rem] font-bold uppercase tracking-[0.22em] ${eyebrowColor} mb-4`}>
+            <span class="block h-px w-8 bg-current" aria-hidden="true"></span>
+            {eyebrow}
+          </span>
+        )}
+        {title && (
+          <h2
+            class="font-display font-extrabold uppercase leading-[0.95] text-[clamp(2rem,4.5vw,3.5rem)] text-brand-blue-dark"
+            set:html={title}
+          />
+        )}
+      </div>
+    )}
+    <slot />
+  </Container>
+</OverlapSection>

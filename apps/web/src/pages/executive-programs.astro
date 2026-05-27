@@ -1,0 +1,46 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/sections/PageHero.astro";
+import ContentSection from "../components/sections/ContentSection.astro";
+import ProgramCardGrid from "../components/sections/ProgramCardGrid.astro";
+import HighlightSection from "../components/sections/HighlightSection.astro";
+import FormPlaceholder from "../components/sections/FormPlaceholder.astro";
+
+const executives = [
+  {
+    href: "/digital-business-transformation/",
+    title: "Digital Business Transformation",
+    duration: "4 meses · Liderazgo y transformación digital",
+    image: "/images/wp/2026/02/ep.webp",
+    titleColor: "#C09C2E",
+  },
+];
+---
+<Layout title="Executive Programs — ESIC Medellín">
+  <PageHero
+    eyebrow="Educación ejecutiva"
+    title="Executive<br /><span class='text-brand-teal'>Programs</span>"
+    subtitle="Programas cortos diseñados para directivos y líderes en activo. Formato intensivo, casos de empresas reales y resultados aplicables al mismo día."
+    ctas={[{ label: "Solicitar Información", href: "#contacto" }]}
+    eyebrowColor="text-brand-teal"
+  />
+
+  <ContentSection
+    z={2}
+    eyebrow="Nuestros programas"
+    title="Para líderes en ejercicio"
+  >
+    <ProgramCardGrid programas={executives} columns={2} />
+  </ContentSection>
+
+  <HighlightSection
+    z={3}
+    color="blue"
+    eyebrow="Formaciones corporativas"
+    title="¿Necesitas un programa<br />para tu empresa?"
+    body="Diseñamos programas a la medida para equipos directivos: liderazgo, transformación digital, customer experience, marketing y datos."
+    ctas={[{ label: "Hablar con ESIC Corporate", href: "#contacto" }]}
+  />
+
+  <FormPlaceholder z={4} />
+</Layout>

@@ -1,0 +1,62 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/sections/PageHero.astro";
+import ContentSection from "../components/sections/ContentSection.astro";
+import HighlightSection from "../components/sections/HighlightSection.astro";
+import FormPlaceholder from "../components/sections/FormPlaceholder.astro";
+
+const agenda = [
+  { mes: "Mar", title: "Estrategia de Marketing Digital", duration: "12 sesiones · 24 horas" },
+  { mes: "May", title: "IA aplicada a negocios", duration: "8 sesiones · 16 horas" },
+  { mes: "Jul", title: "Customer Experience práctico", duration: "10 sesiones · 20 horas" },
+  { mes: "Sep", title: "Performance Marketing", duration: "12 sesiones · 24 horas" },
+  { mes: "Nov", title: "Liderazgo en transformación digital", duration: "8 sesiones · 16 horas" },
+];
+---
+<Layout title="Level Up — ESIC Medellín">
+  <PageHero
+    eyebrow="Level Up · Formación corta"
+    title="Aprende, aplica,<br /><span class='text-brand-teal'>sube de nivel</span>"
+    subtitle="Programas cortos para profesionales que necesitan habilidades específicas y aplicables ya. Sesiones intensivas con mentores de empresas líderes."
+    ctas={[{ label: "Ver agenda 2026", href: "#agenda" }]}
+    image="/images/wp/2026/03/level-up-marketing-landing-desktop-scaled.webp"
+    imageMobile="/images/wp/2026/03/level-up-marketing-landing-mobile-scaled.webp"
+    eyebrowColor="text-brand-teal"
+  />
+
+  <ContentSection
+    z={2}
+    eyebrow="Agenda 2026"
+    eyebrowColor="text-brand-teal-dark"
+    title="Próximos programas"
+  >
+    <div id="agenda" class="space-y-4 mt-6 max-w-[820px]">
+      {agenda.map((a) => (
+        <article class="flex flex-wrap gap-4 items-center bg-white rounded-2xl p-6 border border-[rgba(0,19,63,0.06)] shadow-[0_2px_12px_rgba(0,19,63,0.05)]">
+          <div class="shrink-0 w-20 h-20 rounded-2xl bg-bg-alt flex flex-col items-center justify-center">
+            <div class="font-display font-extrabold text-2xl text-brand-blue-dark uppercase leading-none">{a.mes}</div>
+            <div class="text-[0.65rem] uppercase tracking-[0.16em] text-ink-muted mt-1">2026</div>
+          </div>
+          <div class="flex-1 min-w-[200px]">
+            <h3 class="font-display text-xl font-extrabold uppercase text-brand-blue-dark">{a.title}</h3>
+            <p class="text-ink-muted text-[0.9rem] mt-1">{a.duration}</p>
+          </div>
+          <a href="#contacto" class="inline-flex items-center justify-center rounded-full bg-brand-blue text-white text-[0.78rem] font-bold uppercase tracking-[0.06em] px-5 py-2.5 hover:bg-brand-blue-dark transition-colors no-underline">
+            Más información
+          </a>
+        </article>
+      ))}
+    </div>
+  </ContentSection>
+
+  <HighlightSection
+    z={3}
+    color="purple"
+    eyebrow="¿Listo para tu próximo nivel?"
+    title="Empieza con<br />Level Up"
+    body="Habilidades aplicables al día siguiente, mentores con experiencia real, comunidad de profesionales."
+    ctas={[{ label: "Solicitar Información", href: "#contacto" }]}
+  />
+
+  <FormPlaceholder z={4} title="Reserva tu lugar en Level Up" />
+</Layout>

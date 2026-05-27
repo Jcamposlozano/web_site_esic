@@ -1,0 +1,47 @@
+---
+/**
+ * ScrollBreak — sección intermedia que rompe el ritmo visual (manual sección 9).
+ *
+ * - Fondo oscuro / azul profundo
+ * - Copy institucional fuerte
+ * - Máximo 1 CTA
+ */
+
+import Container from "../Container.astro";
+import OverlapSection from "../OverlapSection.astro";
+
+interface Props {
+  z?: number;
+  eyebrow?: string;
+  title: string;
+  cta?: { label: string; href: string };
+}
+
+const { z = 4, eyebrow, title, cta } = Astro.props;
+---
+<OverlapSection bg="bg-brand-blue-dark" textColor="text-white" z={z} padding="py-20 md:py-28">
+  <Container>
+    <div class="max-w-[820px]">
+      {eyebrow && (
+        <span class="inline-flex items-center gap-3 text-[0.74rem] font-bold uppercase tracking-[0.22em] text-brand-teal mb-5">
+          <span class="block h-px w-8 bg-current" aria-hidden="true"></span>
+          {eyebrow}
+        </span>
+      )}
+      <h2
+        class="font-display font-extrabold uppercase leading-[1] text-[clamp(2rem,5vw,4rem)] text-white"
+        set:html={title}
+      />
+      {cta && (
+        <div class="mt-9">
+          <a
+            href={cta.href}
+            class="inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 font-bold text-[0.9rem] tracking-[0.05em] uppercase no-underline bg-brand-teal text-brand-blue-dark hover:bg-brand-teal-dark hover:text-white transition-all hover:-translate-y-0.5"
+          >
+            {cta.label}
+          </a>
+        </div>
+      )}
+    </div>
+  </Container>
+</OverlapSection>

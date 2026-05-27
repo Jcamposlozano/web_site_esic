@@ -1,0 +1,107 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/sections/PageHero.astro";
+import ContentSection from "../components/sections/ContentSection.astro";
+import ProgramCardGrid from "../components/sections/ProgramCardGrid.astro";
+import HighlightSection from "../components/sections/HighlightSection.astro";
+import FormPlaceholder from "../components/sections/FormPlaceholder.astro";
+
+const pregrados = [
+  {
+    href: "/pregrado-marketing-global/",
+    title: "Dirección de Marketing Global",
+    duration: "Pregrado · 4 años",
+    image: "/images/wp/2026/02/pregrado_mkt_global_.webp",
+    titleColor: "#FF9600",
+  },
+  {
+    href: "/pregrado-digital-business/",
+    title: "Digital Business",
+    duration: "Pregrado · 4 años",
+    image: "/images/wp/2026/02/pregrado_digital_business.webp",
+    titleColor: "#FF9600",
+  },
+];
+
+const masters = [
+  {
+    href: "/master-digital-business/",
+    title: "Máster en Digital Business",
+    duration: "Máster · 11 meses",
+    image: "/images/wp/2026/02/master_db.webp",
+    titleColor: "#09CF90",
+  },
+  {
+    href: "/master-customer-experience/",
+    title: "Customer Experience Management",
+    duration: "Máster · 11 meses",
+    image: "/images/wp/2026/02/master_cx.webp",
+    titleColor: "#09CF90",
+  },
+  {
+    href: "/master-digital-marketing/",
+    title: "Digital Marketing",
+    duration: "Máster · 11 meses",
+    image: "/images/wp/2026/02/master_dm.webp",
+    titleColor: "#09CF90",
+  },
+];
+
+const executives = [
+  {
+    href: "/digital-business-transformation/",
+    title: "Digital Business Transformation",
+    duration: "Executive · 4 meses",
+    image: "/images/wp/2026/02/ep.webp",
+    titleColor: "#C09C2E",
+  },
+];
+---
+<Layout title="Programas — ESIC Medellín">
+  <PageHero
+    eyebrow="Todos los programas"
+    title="Desarrolla tu carrera con visión global"
+    subtitle="Pregrado, máster y educación ejecutiva en marketing, negocios y economía digital. Misma metodología práctica, mismo ecosistema corporativo."
+    ctas={[{ label: "Solicitar Información", href: "#contacto" }]}
+    image="/images/wp/2026/03/banner-general-pregrado-desktop.webp"
+    eyebrowColor="text-brand-teal"
+  />
+
+  <ContentSection
+    z={2}
+    eyebrow="Pregrado"
+    eyebrowColor="text-brand-orange"
+    title="Carreras con doble titulación"
+  >
+    <ProgramCardGrid programas={pregrados} columns={2} />
+  </ContentSection>
+
+  <ContentSection
+    z={3}
+    bg="bg-bg-alt"
+    eyebrow="Máster"
+    eyebrowColor="text-brand-teal-dark"
+    title="Másters de 11 meses"
+  >
+    <ProgramCardGrid programas={masters} columns={3} />
+  </ContentSection>
+
+  <ContentSection
+    z={4}
+    eyebrow="Executive Programs"
+    title="Educación ejecutiva"
+  >
+    <ProgramCardGrid programas={executives} columns={2} />
+  </ContentSection>
+
+  <HighlightSection
+    z={5}
+    color="blue"
+    eyebrow="Asesoría personalizada"
+    title="Agenda una<br />asesoría con admisiones"
+    body="Te ayudamos a elegir el programa que mejor encaja con tu trayectoria, intereses y plan profesional."
+    ctas={[{ label: "Hablar con un asesor", href: "#contacto" }]}
+  />
+
+  <FormPlaceholder z={6} />
+</Layout>

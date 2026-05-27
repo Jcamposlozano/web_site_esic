@@ -90,7 +90,7 @@ export const tree: SitemapNode[] = [
   {
     label: "Programas (página índice)",
     href: "/programas/",
-    status: "pending",
+    status: "built",
     sources: ["menu", "cta", "home"],
     area: "institucional",
     wpFile: "pages/programas-elementor.html",
@@ -104,7 +104,7 @@ export const tree: SitemapNode[] = [
           {
             label: "Pregrado general",
             href: "/pregrado/",
-            status: "pending",
+            status: "built",
             sources: ["banner"],
             area: "pregrado",
             wpFile: "pregrado-definitiva/index.html",
@@ -113,7 +113,7 @@ export const tree: SitemapNode[] = [
           {
             label: "Dirección de Marketing Global",
             href: "/pregrado-marketing-global/",
-            status: "pending",
+            status: "built",
             sources: ["home"],
             area: "pregrado",
             wpFile: "pregrado/marketing-global-elementor.html",
@@ -121,7 +121,7 @@ export const tree: SitemapNode[] = [
           {
             label: "Digital Business",
             href: "/pregrado-digital-business/",
-            status: "pending",
+            status: "built",
             sources: ["home"],
             area: "pregrado",
             wpFile: "pregrado/digital-business-elementor.html",
@@ -129,7 +129,7 @@ export const tree: SitemapNode[] = [
           {
             label: "Becas de Pregrado",
             href: "/pregrado/becas/",
-            status: "pending",
+            status: "built",
             sources: [],
             area: "pregrado",
             wpFile: "pregrado/becas-elementor.html",
@@ -146,7 +146,7 @@ export const tree: SitemapNode[] = [
           {
             label: "Máster general",
             href: "/master/",
-            status: "pending",
+            status: "built",
             sources: ["banner"],
             area: "master",
             wpFile: "master/index.html",
@@ -154,7 +154,7 @@ export const tree: SitemapNode[] = [
           {
             label: "Máster en Digital Business",
             href: "/master-digital-business/",
-            status: "pending",
+            status: "built",
             sources: ["home"],
             area: "master",
             wpFile: "master/digital-business-elementor.html",
@@ -162,7 +162,7 @@ export const tree: SitemapNode[] = [
           {
             label: "Máster en Customer Experience Management",
             href: "/master-customer-experience/",
-            status: "pending",
+            status: "built",
             sources: ["home"],
             area: "master",
             wpFile: "master/customer-experience-elementor.html",
@@ -170,7 +170,7 @@ export const tree: SitemapNode[] = [
           {
             label: "Máster en Digital Marketing",
             href: "/master-digital-marketing/",
-            status: "pending",
+            status: "built",
             sources: ["home"],
             area: "master",
             wpFile: "master/digital-marketing-elementor.html",
@@ -178,7 +178,7 @@ export const tree: SitemapNode[] = [
           {
             label: "Becas Máster",
             href: "/master/becas/",
-            status: "pending",
+            status: "built",
             sources: [],
             area: "master",
             wpFile: "master/becas.html",
@@ -195,7 +195,7 @@ export const tree: SitemapNode[] = [
           {
             label: "Executive Programs (índice)",
             href: "/executive-programs/",
-            status: "pending",
+            status: "built",
             sources: [],
             area: "executive",
             wpFile: "executive-programs/index.html",
@@ -203,7 +203,7 @@ export const tree: SitemapNode[] = [
           {
             label: "Digital Business Transformation",
             href: "/digital-business-transformation/",
-            status: "pending",
+            status: "built",
             sources: ["home"],
             area: "executive",
             wpFile: "executive-programs/elementor-widget.html",
@@ -222,7 +222,7 @@ export const tree: SitemapNode[] = [
       {
         label: "Quiénes Somos",
         href: "/quienes-somos/",
-        status: "pending",
+        status: "built",
         sources: ["submenu", "home", "footer"],
         area: "institucional",
         wpFile: "institucional/quienes-somos-elementor.html",
@@ -231,7 +231,7 @@ export const tree: SitemapNode[] = [
       {
         label: "Nuestro Campus",
         href: "/campus/",
-        status: "pending",
+        status: "built",
         sources: ["submenu", "home", "banner"],
         area: "institucional",
         wpFile: "campus.html",
@@ -240,7 +240,7 @@ export const tree: SitemapNode[] = [
       {
         label: "Equipo",
         href: "/equipo/",
-        status: "pending",
+        status: "built",
         sources: [],
         area: "institucional",
         wpFile: "equipo/equipo-elementor.html",
@@ -258,7 +258,7 @@ export const tree: SitemapNode[] = [
       {
         label: "Conoce Level Up",
         href: "/level-up/",
-        status: "pending",
+        status: "built",
         sources: ["submenu"],
         area: "level-up",
         wpFile: "level-up/level-up-elementor.html",
@@ -266,7 +266,7 @@ export const tree: SitemapNode[] = [
       {
         label: "Estrategia Marketing Digital",
         href: "/level-up/estrategia-marketing-digital/",
-        status: "pending",
+        status: "built",
         sources: [],
         area: "level-up",
         wpFile: "level-up/estrategia-marketing-digital-elementor.html",
@@ -314,7 +314,7 @@ export const tree: SitemapNode[] = [
       {
         label: "Alianzas",
         href: "/alianzas/",
-        status: "pending",
+        status: "built",
         sources: ["submenu"],
         area: "estudiantes",
         wpFile: "alianzas/alianzas-elementor.html",
@@ -347,7 +347,7 @@ export const tree: SitemapNode[] = [
       {
         label: "Open Day",
         href: "/open-day/",
-        status: "pending",
+        status: "built",
         sources: ["banner"],
         area: "evento",
         wpFile: "open-day/open-day-elementor.html",
@@ -355,7 +355,7 @@ export const tree: SitemapNode[] = [
       {
         label: "Open Day — Confirmación",
         href: "/open-day/confirmacion/",
-        status: "pending",
+        status: "built",
         sources: [],
         area: "evento",
         wpFile: "open-day/confirmacion-open-day-elementor.html",
@@ -364,7 +364,7 @@ export const tree: SitemapNode[] = [
       {
         label: "Start-Up Day",
         href: "/start-up-day/",
-        status: "pending",
+        status: "built",
         sources: [],
         area: "evento",
         wpFile: "start-up-day/start-up-day-elementor.html",
@@ -372,7 +372,7 @@ export const tree: SitemapNode[] = [
       {
         label: "Hatsu",
         href: "/hatsu/",
-        status: "pending",
+        status: "built",
         sources: [],
         area: "evento",
         wpFile: "hatsu/hatsu-elementor.html",
@@ -391,7 +391,7 @@ export const tree: SitemapNode[] = [
   {
     label: "Emprendimientos",
     href: "/emprendimientos/",
-    status: "pending",
+    status: "built",
     sources: [],
     area: "institucional",
     wpFile: "emprendimientos/index.html",
@@ -400,7 +400,7 @@ export const tree: SitemapNode[] = [
   {
     label: "Gracias (post-form)",
     href: "/gracias/",
-    status: "pending",
+    status: "built",
     sources: [],
     area: "institucional",
     wpFile: "gracias.html",

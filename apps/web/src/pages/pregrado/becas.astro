@@ -1,0 +1,102 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import PageHero from "../../components/sections/PageHero.astro";
+import ContentSection from "../../components/sections/ContentSection.astro";
+import HighlightSection from "../../components/sections/HighlightSection.astro";
+import FormPlaceholder from "../../components/sections/FormPlaceholder.astro";
+
+const becas = [
+  { title: "Excelencia Académica", pct: "15%", desc: "Para estudiantes con resultados académicos sobresalientes en el bachillerato." },
+  { title: "Movilidad Nacional", pct: "8%", desc: "Para aspirantes de otras ciudades de Colombia que se trasladen a Medellín." },
+  { title: "Hermanos Matriculados", pct: "5%", desc: "Si tienes un hermano(a) actualmente matriculado en ESIC Medellín." },
+  { title: "Familiar Antiguo Alumno", pct: "5%", desc: "Para familiares directos de egresados de cualquier programa ESIC." },
+];
+
+const requisitos = [
+  "Diligenciar el formulario de aplicación a la beca dentro del proceso de admisión.",
+  "Anexar certificados de notas de los últimos dos años de bachillerato.",
+  "Adjuntar carta de motivación firmada por el aspirante.",
+  "Resultados Saber 11 o equivalente internacional.",
+  "Cumplir con el proceso de admisión institucional vigente.",
+];
+
+const faqs = [
+  { q: "¿Puedo combinar varias becas?", a: "No. Cada estudiante aplica a una única categoría — la beca seleccionada por el comité." },
+  { q: "¿La beca cubre matrícula o el total?", a: "Las becas son sobre el valor de la matrícula semestral." },
+  { q: "¿Tengo que renovar cada semestre?", a: "Sí. La beca se mantiene mientras se cumplan los requisitos académicos definidos en el reglamento." },
+  { q: "¿Cuándo me notifican el resultado?", a: "Dentro de las dos semanas siguientes al cierre del proceso de admisión." },
+];
+---
+<Layout title="Becas y Ayudas Económicas Pregrado — ESIC Medellín">
+  <PageHero
+    eyebrow="Pregrado · Becas"
+    title="Becas y ayudas<br />económicas <span class='text-brand-orange'>Pregrado</span>"
+    subtitle="Hasta 40% de descuento en matrícula para estudiantes que cumplan los criterios de excelencia, movilidad o vínculo familiar con la comunidad ESIC."
+    ctas={[{ label: "Aplicar a una beca", href: "#aplicar" }]}
+  />
+
+  <ContentSection
+    z={2}
+    eyebrow="Categorías"
+    eyebrowColor="text-brand-orange"
+    title="Encuentra la beca que se ajusta a ti"
+  >
+    <div class="grid gap-5 md:grid-cols-2 mt-4">
+      {becas.map((b) => (
+        <article class="bg-white rounded-3xl p-8 border border-[rgba(0,19,63,0.06)] shadow-[0_2px_20px_rgba(0,19,63,0.05)]">
+          <div class="font-display text-5xl font-extrabold text-brand-orange leading-none mb-3">{b.pct}</div>
+          <h3 class="font-display text-xl font-extrabold uppercase text-brand-blue-dark mb-3">{b.title}</h3>
+          <p class="text-ink-muted leading-relaxed">{b.desc}</p>
+        </article>
+      ))}
+    </div>
+  </ContentSection>
+
+  <ContentSection
+    z={3}
+    bg="bg-bg-alt"
+    eyebrow="Requisitos generales"
+    eyebrowColor="text-brand-orange"
+    title="Lo que necesitas para aplicar"
+  >
+    <ol class="space-y-4 mt-6 max-w-[760px]">
+      {requisitos.map((r, i) => (
+        <li class="flex gap-4 items-start">
+          <span class="shrink-0 w-9 h-9 rounded-full bg-brand-orange text-white font-display font-extrabold flex items-center justify-center">{i + 1}</span>
+          <p class="text-ink leading-relaxed flex-1">{r}</p>
+        </li>
+      ))}
+    </ol>
+  </ContentSection>
+
+  <ContentSection
+    z={4}
+    eyebrow="FAQ"
+    eyebrowColor="text-brand-orange"
+    title="Preguntas frecuentes"
+  >
+    <div class="space-y-3 mt-4 max-w-[820px]">
+      {faqs.map((f) => (
+        <details class="group rounded-2xl border border-[rgba(0,19,63,0.08)] bg-white px-6 py-4 open:shadow-[0_2px_12px_rgba(0,19,63,0.06)]">
+          <summary class="cursor-pointer font-display font-bold uppercase text-brand-blue-dark text-lg list-none flex items-center justify-between gap-3">
+            <span>{f.q}</span>
+            <svg class="w-4 h-4 transition-transform group-open:rotate-180" viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 1l5 5 5-5"/></svg>
+          </summary>
+          <p class="mt-3 text-ink-muted leading-relaxed">{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </ContentSection>
+
+  <HighlightSection
+    z={5}
+    color="orange"
+    eyebrow="¿Listo para aplicar?"
+    title="Da el siguiente paso"
+    body="Diligencia el formulario y un asesor te acompañará en el proceso. Antes del cierre de convocatoria."
+    ctas={[{ label: "Aplicar ahora", href: "#aplicar" }]}
+  />
+
+  <div id="aplicar"></div>
+  <FormPlaceholder z={6} title="Aplica a una Beca de Pregrado" />
+</Layout>

@@ -1,0 +1,88 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/sections/PageHero.astro";
+import ContentSection from "../components/sections/ContentSection.astro";
+import ProgramCardGrid from "../components/sections/ProgramCardGrid.astro";
+import BeneficiosGrid from "../components/sections/BeneficiosGrid.astro";
+import HighlightSection from "../components/sections/HighlightSection.astro";
+import ScrollBreak from "../components/sections/ScrollBreak.astro";
+import FormPlaceholder from "../components/sections/FormPlaceholder.astro";
+
+const masters = [
+  {
+    href: "/master-digital-business/",
+    title: "Digital Business",
+    duration: "11 meses · Híbrido",
+    image: "/images/wp/2026/02/master_db.webp",
+    titleColor: "#09CF90",
+  },
+  {
+    href: "/master-customer-experience/",
+    title: "Customer Experience Management",
+    duration: "11 meses · Híbrido",
+    image: "/images/wp/2026/02/master_cx.webp",
+    titleColor: "#09CF90",
+  },
+  {
+    href: "/master-digital-marketing/",
+    title: "Digital Marketing",
+    duration: "11 meses · Híbrido",
+    image: "/images/wp/2026/02/master_dm.webp",
+    titleColor: "#09CF90",
+  },
+];
+---
+<Layout title="Másters — ESIC Medellín">
+  <PageHero
+    eyebrow="Posgrado · Modalidad híbrida"
+    title="Donde las <span class='text-brand-teal'>empresas</span><br />forman a sus líderes"
+    subtitle="Tres másters de 11 meses en marketing, customer experience y negocios digitales. Modalidad híbrida diseñada para profesionales en ejercicio que necesitan resultados aplicables al día siguiente."
+    ctas={[
+      { label: "Ver másters", href: "#masters" },
+      { label: "Conoce las becas", href: "/master/becas/", variant: "outline" },
+    ]}
+    eyebrowColor="text-brand-teal"
+  />
+
+  <ContentSection
+    z={2}
+    eyebrow="Nuestros másters"
+    eyebrowColor="text-brand-teal-dark"
+    title="Tres másters, una misma escuela"
+  >
+    <div id="masters">
+      <ProgramCardGrid programas={masters} columns={3} />
+    </div>
+  </ContentSection>
+
+  <BeneficiosGrid
+    z={3}
+    bg="bg-bg-alt"
+    eyebrow="Por qué un máster en ESIC"
+    title="Formato pensado para profesionales"
+    items={[
+      { value: "11 meses", label: "Duración", color: "teal" },
+      { value: "Híbrido", label: "Sesiones presenciales + online", color: "blue" },
+      { value: "ESIC", label: "Doble titulación España + Colombia", color: "orange" },
+      { value: "Empresas", label: "Casos reales con compañías aliadas", color: "purple" },
+    ]}
+  />
+
+  <ScrollBreak
+    z={4}
+    eyebrow="Trayectoria global"
+    title="62K alumni en 80+ países<br />60 años formando profesionales<br />líderes en marketing y economía digital"
+    cta={{ label: "Conoce ESIC", href: "/quienes-somos/" }}
+  />
+
+  <HighlightSection
+    z={5}
+    color="teal"
+    eyebrow="Becas de Máster"
+    title="Hasta 40% de beca<br />para profesionales"
+    body="Becas por trayectoria, por movilidad o por convenio corporativo. Conversa con un asesor para encontrar la más adecuada a tu perfil."
+    ctas={[{ label: "Aplicar a una beca", href: "/master/becas/" }]}
+  />
+
+  <FormPlaceholder z={6} />
+</Layout>

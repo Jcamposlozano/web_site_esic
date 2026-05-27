@@ -1,0 +1,79 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/sections/PageHero.astro";
+import ContentSection from "../components/sections/ContentSection.astro";
+import HighlightSection from "../components/sections/HighlightSection.astro";
+
+const areas = [
+  { title: "Dirección académica", body: "Diseño curricular, calidad académica y dirección de programas." },
+  { title: "Admisiones & alumni", body: "Acompañamiento a aspirantes, vínculo con egresados y networking corporativo." },
+  { title: "Industria & alianzas", body: "Relación con empresas, casos vivos, formaciones corporativas." },
+  { title: "Innovación pedagógica", body: "Metodologías activas, learning experience design y formación docente." },
+];
+
+const docentes = [
+  { name: "Daniela Tobón", role: "Marketing Digital", photo: "/images/wp/2024/08/DANIELA-scaled-1-812x1024.jpg" },
+  { name: "Juan", role: "Estrategia & Negocios", photo: "/images/wp/2024/08/JUAN-scaled-1-812x1024.jpg" },
+  { name: "Eliana", role: "Customer Experience", photo: "/images/wp/2024/08/ELIANA-2-scaled-1-812x1024.jpg" },
+  { name: "Yura", role: "Data & Analytics", photo: "/images/wp/2024/08/YURA-2-scaled-1-812x1024.jpg" },
+  { name: "Tatiana", role: "Branding & Comunicación", photo: "/images/wp/2024/08/tatiana-scaled-1-812x1024.jpg" },
+  { name: "Checho", role: "Innovación & Producto", photo: "/images/wp/2024/08/checho-scaled-1-812x1024.jpg" },
+  { name: "Juan M.", role: "Digital Business", photo: "/images/wp/2024/08/JUAN-M-2-812x1024.jpg" },
+  { name: "Marta", role: "Coordinación académica", photo: "/images/wp/2025/12/MARTA-812x1024.jpg" },
+];
+---
+<Layout title="Equipo — ESIC Medellín">
+  <PageHero
+    eyebrow="Nuestro equipo"
+    title="Talento que<br />transforma <span class='text-brand-teal'>futuros</span>"
+    subtitle="Directivos, docentes y mentores con trayectoria en empresas líderes y dedicación a formar profesionales con criterio."
+    ctas={[{ label: "Ver programas", href: "/programas/" }]}
+    eyebrowColor="text-brand-teal"
+  />
+
+  <ContentSection
+    z={2}
+    eyebrow="Áreas del equipo"
+    title="Estructura organizacional"
+  >
+    <div class="grid gap-6 md:grid-cols-2 mt-6">
+      {areas.map((a) => (
+        <article class="bg-white rounded-3xl p-8 border border-[rgba(0,19,63,0.06)] shadow-[0_2px_20px_rgba(0,19,63,0.05)]">
+          <h3 class="font-display text-xl font-extrabold uppercase text-brand-blue-dark mb-3">{a.title}</h3>
+          <div class="w-10 h-[2px] bg-brand-blue mb-4"></div>
+          <p class="text-ink-muted leading-[1.6]">{a.body}</p>
+        </article>
+      ))}
+    </div>
+  </ContentSection>
+
+  <ContentSection
+    z={3}
+    bg="bg-bg-alt"
+    eyebrow="Docentes"
+    title="Profesores que marcan la diferencia"
+  >
+    <div class="grid gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-6">
+      {docentes.map((d) => (
+        <article class="bg-white rounded-3xl overflow-hidden border border-[rgba(0,19,63,0.06)]">
+          <div class="relative aspect-[4/5] overflow-hidden bg-bg">
+            <img src={d.photo} alt={d.name} loading="lazy" class="w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-black/15"></div>
+          </div>
+          <div class="px-5 py-4">
+            <h3 class="font-display font-bold text-brand-blue-dark uppercase text-[0.95rem]">{d.name}</h3>
+            <p class="text-[0.78rem] text-ink-muted mt-1">{d.role}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </ContentSection>
+
+  <HighlightSection
+    z={4}
+    color="blue"
+    eyebrow="Sumérgete en la experiencia ESIC"
+    title="Trabaja con quienes lideran<br />la economía digital"
+    ctas={[{ label: "Ver programas", href: "/programas/" }]}
+  />
+</Layout>

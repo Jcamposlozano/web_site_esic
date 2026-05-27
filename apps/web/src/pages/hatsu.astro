@@ -1,0 +1,48 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/sections/PageHero.astro";
+import ContentSection from "../components/sections/ContentSection.astro";
+import HighlightSection from "../components/sections/HighlightSection.astro";
+---
+<Layout title="Hatsu — ESIC Medellín">
+  <PageHero
+    eyebrow="Hatsu · Experiencia ESIC"
+    title="<span class='text-brand-teal'>Hatsu</span>"
+    subtitle="Espacio diseñado para impulsar la creatividad y la innovación de la comunidad ESIC. Showcase de proyectos, eventos y experiencias seleccionadas."
+    ctas={[{ label: "Ver showcase", href: "#showcase" }]}
+    eyebrowColor="text-brand-teal"
+  />
+
+  <ContentSection
+    z={2}
+    eyebrow="Showcase"
+    title="Proyectos seleccionados"
+  >
+    <p class="text-ink-muted leading-relaxed max-w-[640px] mb-8">
+      Selección curada de proyectos, productos y experiencias generadas en el ecosistema Hatsu.
+      Estudiantes, profesionales y aliados que están construyendo algo nuevo.
+    </p>
+    <div id="showcase" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {[1,2,3,4,5,6].map((i) => (
+        <article class="bg-white rounded-3xl overflow-hidden border border-[rgba(0,19,63,0.06)] shadow-[0_2px_20px_rgba(0,19,63,0.05)]">
+          <div class="aspect-[4/3] bg-bg-alt relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-brand-teal/20 to-brand-blue/10"></div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-display text-lg font-extrabold uppercase text-brand-blue-dark mb-2">Proyecto #{i}</h3>
+            <p class="text-ink-muted text-[0.95rem] leading-relaxed">Caso destacado de la comunidad Hatsu. Contenido pendiente de migración.</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </ContentSection>
+
+  <HighlightSection
+    z={3}
+    color="teal"
+    eyebrow="Sé parte de Hatsu"
+    title="Construye con nosotros"
+    body="Si quieres mostrar un proyecto o sumarte a la comunidad, conversemos."
+    ctas={[{ label: "Hablar con ESIC", href: "/quienes-somos/" }]}
+  />
+</Layout>

@@ -1,0 +1,92 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/sections/PageHero.astro";
+import ContentSection from "../components/sections/ContentSection.astro";
+import BeneficiosGrid from "../components/sections/BeneficiosGrid.astro";
+import HighlightSection from "../components/sections/HighlightSection.astro";
+import ScrollBreak from "../components/sections/ScrollBreak.astro";
+import FormPlaceholder from "../components/sections/FormPlaceholder.astro";
+
+const ejes = [
+  {
+    title: "Transformación digital",
+    body: "Modelos de negocio digitales, automatización de procesos, IA aplicada a empresas y data-driven decision making.",
+  },
+  {
+    title: "E-commerce & growth",
+    body: "Arquitectura de tiendas online, performance marketing, retención, fidelización y conversion rate optimization.",
+  },
+  {
+    title: "Estrategia & innovación",
+    body: "Design thinking, lean startup, product management, lanzamiento de productos digitales y scaling.",
+  },
+  {
+    title: "Liderazgo digital",
+    body: "Gestión de equipos remotos, finanzas digitales, ética en IA, seguridad, sostenibilidad y compliance.",
+  },
+];
+---
+<Layout title="Pregrado en Digital Business — ESIC Medellín">
+  <PageHero
+    eyebrow="Pregrado · 4 años · Doble titulación"
+    title="<span class='text-brand-orange'>Digital</span> Business"
+    subtitle="Forma profesionales preparados para liderar la transformación digital en empresas, con criterio estratégico, dominio tecnológico y mentalidad emprendedora."
+    ctas={[
+      { label: "Solicitar Información", href: "#contacto" },
+      { label: "Conocer becas", href: "/pregrado/becas/", variant: "outline" },
+    ]}
+    image="/images/wp/2026/03/banner-digital-business-desktop.webp"
+    imageMobile="/images/wp/2026/03/banner-digital-business-mobile.webp"
+  />
+
+  <BeneficiosGrid
+    z={2}
+    eyebrow="Lo esencial"
+    title="Todo lo que necesitas saber"
+    items={[
+      { value: "4 años", label: "Duración", color: "orange" },
+      { value: "Medellín", label: "Campus presencial", color: "blue" },
+      { value: "ESIC + CEIPA", label: "Doble titulación", color: "teal" },
+      { value: "Summer Camp", label: "Inmersión en Madrid", color: "purple" },
+    ]}
+  />
+
+  <ContentSection
+    z={3}
+    bg="bg-bg-alt"
+    eyebrow="Plan de estudios"
+    eyebrowColor="text-brand-orange"
+    title="Cuatro ejes formativos"
+  >
+    <div class="grid gap-6 md:grid-cols-2 mt-6">
+      {ejes.map((e) => (
+        <article class="bg-white rounded-3xl p-8 shadow-[0_2px_20px_rgba(0,19,63,0.05)] border border-[rgba(0,19,63,0.05)]">
+          <h3 class="font-display text-xl font-extrabold uppercase text-brand-blue-dark mb-3">{e.title}</h3>
+          <div class="w-10 h-[2px] bg-brand-orange mb-4"></div>
+          <p class="text-ink-muted leading-[1.6]">{e.body}</p>
+        </article>
+      ))}
+    </div>
+  </ContentSection>
+
+  <ScrollBreak
+    z={4}
+    eyebrow="Mentalidad empresarial"
+    title="Trabajas en retos reales<br />con empresas del ecosistema<br />desde el primer semestre"
+    cta={{ label: "Conoce el campus", href: "/campus/" }}
+  />
+
+  <HighlightSection
+    z={5}
+    color="orange"
+    eyebrow="Inversión en tu futuro"
+    title="Hasta 40% de beca para Digital Business"
+    body="Programa de becas por excelencia académica y otras categorías. Aplica desde el momento de admisión."
+    ctas={[
+      { label: "Aplicar a beca", href: "/pregrado/becas/" },
+      { label: "Solicitar info", href: "#contacto", variant: "outline" },
+    ]}
+  />
+
+  <FormPlaceholder z={6} title="Solicita información del Pregrado en Digital Business" />
+</Layout>

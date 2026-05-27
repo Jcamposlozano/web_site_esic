@@ -1,0 +1,108 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/sections/PageHero.astro";
+import ContentSection from "../components/sections/ContentSection.astro";
+import ScrollBreak from "../components/sections/ScrollBreak.astro";
+import HighlightSection from "../components/sections/HighlightSection.astro";
+
+const valores = [
+  {
+    title: "Internacionalización",
+    body: "Acceso a realidades, no a folletos. Inmersiones y dobles titulaciones que obligan a subir el nivel.",
+    color: "orange",
+  },
+  {
+    title: "Metodología práctica",
+    body: "Entrenamiento en ejecución con criterio: justificas decisiones, defiendes supuestos, iteras con evidencia.",
+    color: "blue",
+  },
+  {
+    title: "Networking corporativo",
+    body: "Reputación en movimiento. Portafolio, desempeño y criterio dentro de un ecosistema que abre puertas.",
+    color: "teal",
+  },
+  {
+    title: "Excelencia ESIC",
+    body: "+60 años formando profesionales. Líderes en marketing y economía digital con presencia global.",
+    color: "purple",
+  },
+];
+
+const colorMap = {
+  orange: "bg-brand-orange",
+  blue: "bg-brand-blue",
+  teal: "bg-brand-teal-dark",
+  purple: "bg-[#A78BFA]",
+};
+---
+<Layout title="Quiénes Somos — ESIC Medellín">
+  <PageHero
+    eyebrow="ESIC Medellín"
+    title="Aquí se forman<br />los <span class='text-brand-teal'>líderes</span> digitales"
+    subtitle="ESIC Business & Marketing School en Medellín, con más de 60 años de historia en España y presencia en Colombia desde 2014. Escuela líder en marketing, negocios y economía digital."
+    ctas={[
+      { label: "Conoce el campus", href: "/campus/" },
+      { label: "Ver programas", href: "/programas/", variant: "outline" },
+    ]}
+    image="/images/wp/2026/04/BANNER-IV-QUIEN-17-scaled.webp"
+    eyebrowColor="text-brand-teal"
+  />
+
+  <ContentSection
+    z={2}
+    eyebrow="Nuestro manifiesto"
+    eyebrowColor="text-brand-blue"
+    title="Lo que somos"
+  >
+    <div class="max-w-[820px] text-[1.05rem] md:text-[1.15rem] leading-[1.7] text-ink-muted space-y-5">
+      <p>
+        Creemos que la educación deja de ser contenido cuando se convierte en criterio. Que el aula
+        importa cuando refleja el mundo real. Que un alumno de ESIC se distingue porque defiende
+        sus decisiones con evidencia, no con opiniones.
+      </p>
+      <p>
+        Por eso conectamos a estudiantes y profesionales con empresas, con casos vivos y con
+        estándares globales. Para que cuando salgan al mercado, salgan con criterio.
+      </p>
+    </div>
+  </ContentSection>
+
+  <ContentSection
+    z={3}
+    bg="bg-bg-alt"
+    eyebrow="Lo que nos define"
+    eyebrowColor="text-brand-blue"
+    title="Cuatro pilares"
+  >
+    <div class="grid gap-5 md:grid-cols-2 mt-6">
+      {valores.map((v) => (
+        <article class="bg-white rounded-3xl overflow-hidden shadow-[0_2px_20px_rgba(0,19,63,0.07)] border border-[rgba(0,19,63,0.06)]">
+          <div class={`h-6 ${colorMap[v.color as keyof typeof colorMap]}`}></div>
+          <div class="px-8 py-10">
+            <h3 class="font-display text-xl font-extrabold uppercase text-brand-blue-dark mb-3">{v.title}</h3>
+            <p class="text-ink-muted leading-relaxed">{v.body}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </ContentSection>
+
+  <ScrollBreak
+    z={4}
+    eyebrow="Cifras y reconocimiento"
+    title="62K alumni · 80+ países · 60 años<br />Escuela líder en marketing y economía digital"
+    cta={{ label: "Ver programas", href: "/programas/" }}
+  />
+
+  <HighlightSection
+    z={5}
+    color="blue"
+    eyebrow="Únete a ESIC"
+    title="Conversemos sobre<br />tu próxima etapa"
+    body="Un asesor te acompaña a elegir entre pregrado, máster o educación ejecutiva según tu trayectoria y objetivos."
+    ctas={[
+      { label: "Hablar con un asesor", href: "/programas/" },
+      { label: "Conoce el campus", href: "/campus/", variant: "outline" },
+    ]}
+  />
+</Layout>

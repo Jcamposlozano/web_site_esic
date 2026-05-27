@@ -1,0 +1,75 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/sections/PageHero.astro";
+import ContentSection from "../components/sections/ContentSection.astro";
+import ProgramCardGrid from "../components/sections/ProgramCardGrid.astro";
+import BeneficiosGrid from "../components/sections/BeneficiosGrid.astro";
+import HighlightSection from "../components/sections/HighlightSection.astro";
+import ScrollBreak from "../components/sections/ScrollBreak.astro";
+import FormPlaceholder from "../components/sections/FormPlaceholder.astro";
+
+const pregrados = [
+  {
+    href: "/pregrado-marketing-global/",
+    title: "Dirección de Marketing Global",
+    duration: "4 años · Doble titulación",
+    image: "/images/wp/2026/02/pregrado_mkt_global_.webp",
+    titleColor: "#FF9600",
+  },
+  {
+    href: "/pregrado-digital-business/",
+    title: "Digital Business",
+    duration: "4 años · Doble titulación",
+    image: "/images/wp/2026/02/pregrado_digital_business.webp",
+    titleColor: "#FF9600",
+  },
+];
+---
+<Layout title="Pregrados — ESIC Medellín">
+  <PageHero
+    eyebrow="Pregrado · Doble titulación"
+    title="Empieza tu carrera<br />en el <span class='text-brand-orange'>mundo real</span>"
+    subtitle="Dos pregrados en marketing y negocios digitales con doble titulación: ESIC España + Universidad CEIPA. Cuatro años de inmersión práctica, retos reales y networking corporativo."
+    ctas={[
+      { label: "Ver programas", href: "#programas" },
+      { label: "Conoce las becas", href: "/pregrado/becas/", variant: "outline" },
+    ]}
+    image="/images/wp/2026/03/banner-general-pregrado-desktop.webp"
+  />
+
+  <ContentSection
+    z={2}
+    eyebrow="Nuestros pregrados"
+    eyebrowColor="text-brand-orange"
+    title="Dos carreras, una misma visión global"
+  >
+    <div id="programas">
+      <ProgramCardGrid programas={pregrados} columns={2} />
+    </div>
+  </ContentSection>
+
+  <BeneficiosGrid
+    z={3}
+    bg="bg-bg-alt"
+    eyebrow="Por qué ESIC"
+    title="Formación que abre puertas"
+  />
+
+  <ScrollBreak
+    z={4}
+    eyebrow="Cifras y resultados"
+    title="350 estudiantes activos · 80+ nacionalidades en la red ESIC · 62K alumni"
+    cta={{ label: "Conoce más sobre ESIC", href: "/quienes-somos/" }}
+  />
+
+  <HighlightSection
+    z={5}
+    color="orange"
+    eyebrow="Becas y ayudas económicas"
+    title="Hasta <span class='underline'>40%</span> de beca para Pregrado"
+    body="Beca por excelencia académica, movilidad nacional, hermanos matriculados y antiguos alumnos. Aplica desde el momento de admisión."
+    ctas={[{ label: "Aplicar a una beca", href: "/pregrado/becas/" }]}
+  />
+
+  <FormPlaceholder z={6} />
+</Layout>

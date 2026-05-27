@@ -1,0 +1,89 @@
+---
+/**
+ * BeneficiosGrid — grilla 2x2 de stat-cards (manual sección 7).
+ *
+ * Default trae las 4 obligatorias del manual:
+ *  1. 4 Años — DURACIÓN
+ *  2. Medellín — COLOMBIA
+ *  3. Doble Titulación — ESIC + UNIVERSIDAD ALIADA
+ *  4. Inmersión Internacional — EXPERIENCIA INTERNACIONAL
+ *
+ * Pasa el prop `items` para sobreescribir con copy específico de cada programa.
+ */
+
+import Container from "../Container.astro";
+import OverlapSection from "../OverlapSection.astro";
+
+interface Item {
+  value: string;
+  label: string;
+  /** Acento por card (naranja / azul / verde / morado según paleta sugerida) */
+  color?: "orange" | "blue" | "teal" | "purple";
+}
+
+interface Props {
+  z?: number;
+  bg?: string;
+  title?: string;
+  eyebrow?: string;
+  items?: Item[];
+}
+
+const {
+  z = 2,
+  bg = "bg-white",
+  title,
+  eyebrow,
+  items = [
+    { value: "4 años", label: "Duración", color: "orange" },
+    { value: "Medellín", label: "Colombia", color: "blue" },
+    { value: "Doble titulación", label: "ESIC + universidad aliada", color: "teal" },
+    { value: "Inmersión internacional", label: "Experiencia global", color: "purple" },
+  ],
+} = Astro.props;
+
+const colorMap = {
+  orange: { bar: "bg-brand-orange", text: "text-brand-orange" },
+  blue: { bar: "bg-brand-blue", text: "text-brand-blue" },
+  teal: { bar: "bg-brand-teal-dark", text: "text-brand-teal-dark" },
+  purple: { bar: "bg-[#A78BFA]", text: "text-[#A78BFA]" },
+};
+---
+<OverlapSection bg={bg} z={z} padding="py-16 md:py-24">
+  <Container>
+    {(eyebrow || title) && (
+      <div class="mb-12">
+        {eyebrow && (
+          <span class="inline-flex items-center gap-3 text-[0.74rem] font-bold uppercase tracking-[0.22em] text-brand-blue mb-4">
+            <span class="block h-px w-8 bg-current" aria-hidden="true"></span>
+            {eyebrow}
+          </span>
+        )}
+        {title && (
+          <h2 class="font-display text-4xl md:text-5xl font-extrabold uppercase leading-[0.95] text-brand-blue-dark">
+            {title}
+          </h2>
+        )}
+      </div>
+    )}
+
+    <div class="grid gap-6 md:grid-cols-2">
+      {items.map((it) => {
+        const c = colorMap[it.color ?? "blue"];
+        return (
+          <article class="relative bg-white rounded-3xl overflow-hidden shadow-[0_2px_20px_rgba(0,19,63,0.07)] border border-[rgba(0,19,63,0.06)]">
+            <div class={`h-6 ${c.bar}`}></div>
+            <div class="px-8 py-10 md:px-10 md:py-12">
+              <div class={`font-display font-extrabold uppercase leading-[1] text-[clamp(2.25rem,4vw,3.25rem)] ${c.text}`}>
+                {it.value}
+              </div>
+              <div class="mt-3 text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-ink-muted">
+                {it.label}
+              </div>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </Container>
+</OverlapSection>

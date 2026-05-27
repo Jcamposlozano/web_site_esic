@@ -1,0 +1,56 @@
+---
+/**
+ * ProgramCardGrid — grilla de tarjetas fotográficas de programa (estilo home).
+ *
+ * Respeta el manual:
+ *  - Cards fotográficas con overlay negro (gradiente)
+ *  - 2 columnas → 16/9 ; 3 columnas → 4/3
+ *  - Color de título por área
+ *  - 1 CTA pequeño por card ("Ver programa")
+ */
+
+interface Programa {
+  href: string;
+  title: string;
+  duration?: string;
+  image: string;
+  titleColor?: string;
+}
+
+interface Props {
+  programas: Programa[];
+  columns?: 2 | 3;
+}
+
+const { programas, columns = 2 } = Astro.props;
+
+const gridCols = columns === 3 ? "md:grid-cols-3" : "md:grid-cols-2";
+const aspect = columns === 3 ? "aspect-[4/3]" : "aspect-[16/9]";
+---
+<div class:list={["grid gap-6", gridCols]}>
+  {programas.map((p) => (
+    <a
+      href={p.href}
+      class:list={[
+        "programa-card relative block rounded-2xl overflow-hidden no-underline transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(0,19,63,0.2)]",
+        aspect,
+      ]}
+      style={`background-image: url(${p.image}); background-size: cover; background-position: center top;`}
+    >
+      <div class="absolute inset-0 z-[1] rounded-2xl bg-[linear-gradient(90deg,rgba(0,0,0,0.98)_0%,rgba(0,0,0,0.9)_30%,rgba(0,0,0,0.7)_50%,rgba(0,0,0,0.4)_70%,rgba(0,0,0,0.2)_100%)]"></div>
+      <div class="absolute top-0 bottom-0 left-0 w-[70%] p-6 md:p-8 flex flex-col justify-center text-white z-[2]">
+        <h3
+          class="font-display text-2xl md:text-3xl font-extrabold uppercase leading-[1.05] mb-2"
+          style={p.titleColor ? `color: ${p.titleColor}` : undefined}
+        >
+          {p.title}
+        </h3>
+        {p.duration && <span class="text-[1rem] opacity-95 mt-1">{p.duration}</span>}
+        <span class="inline-flex items-center gap-2 mt-5 px-4 py-2 border border-white/50 rounded-lg text-[0.8rem] font-semibold uppercase tracking-[0.04em] w-fit hover:bg-white/20 transition-colors">
+          Ver programa
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </div>
+    </a>
+  ))}
+</div>

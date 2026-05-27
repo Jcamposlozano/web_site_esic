@@ -1,0 +1,102 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import PageHero from "../../components/sections/PageHero.astro";
+import ContentSection from "../../components/sections/ContentSection.astro";
+import HighlightSection from "../../components/sections/HighlightSection.astro";
+import FormPlaceholder from "../../components/sections/FormPlaceholder.astro";
+
+const beneficios = [
+  { title: "Hasta 40% de apoyo", body: "Cobertura significativa de la inversión total del programa según categoría y perfil." },
+  { title: "Mentoría profesional", body: "Acompañamiento personalizado durante el máster con líderes del ecosistema corporativo." },
+  { title: "Red global ESIC", body: "Acceso a la comunidad de 62K alumni en 80+ países desde el primer mes." },
+];
+
+const pasos = [
+  { step: "01", title: "Solicita información", body: "Diligencia el formulario y un asesor te contacta para conocer tu perfil." },
+  { step: "02", title: "Postulación", body: "Envías tu trayectoria, motivación y documentos académicos para evaluación." },
+  { step: "03", title: "Comité de becas", body: "El comité evalúa tu perfil y te notifica el resultado en máximo 2 semanas." },
+  { step: "04", title: "Matrícula", body: "Aceptas la beca, formalizas matrícula y arrancas el máster." },
+];
+
+const faqs = [
+  { q: "¿Aplica a todos los másters?", a: "Sí — las tres especializaciones (Digital Business, Customer Experience, Digital Marketing) participan del mismo programa de becas." },
+  { q: "¿Necesito experiencia previa?", a: "Cada categoría tiene criterios distintos. Algunas valoran trayectoria, otras formación previa o convenios corporativos." },
+  { q: "¿Puedo combinar con financiación?", a: "Sí. La beca aplica sobre el saldo de matrícula y se puede combinar con planes de financiación bancaria." },
+];
+---
+<Layout title="Becas de Máster — ESIC Medellín">
+  <PageHero
+    eyebrow="Máster · Becas"
+    title="Becas de hasta<br /><span class='text-brand-teal'>40%</span> para Máster"
+    subtitle="Programas de apoyo económico diseñados para profesionales con trayectoria, movilidad o convenio corporativo. Una beca que impulsa tu próxima etapa profesional."
+    ctas={[{ label: "Aplicar a una beca", href: "#aplicar" }]}
+    eyebrowColor="text-brand-teal"
+  />
+
+  <ContentSection
+    z={2}
+    eyebrow="Lo que recibes"
+    eyebrowColor="text-brand-teal-dark"
+    title="Una beca que impulsa tu futuro"
+  >
+    <div class="grid gap-6 md:grid-cols-3 mt-6">
+      {beneficios.map((b) => (
+        <article class="bg-white rounded-3xl p-8 border border-[rgba(0,19,63,0.06)] shadow-[0_2px_20px_rgba(0,19,63,0.05)]">
+          <h3 class="font-display text-xl font-extrabold uppercase text-brand-blue-dark mb-3">{b.title}</h3>
+          <div class="w-10 h-[2px] bg-brand-teal-dark mb-4"></div>
+          <p class="text-ink-muted leading-relaxed">{b.body}</p>
+        </article>
+      ))}
+    </div>
+  </ContentSection>
+
+  <ContentSection
+    z={3}
+    bg="bg-bg-alt"
+    eyebrow="Tu proceso paso a paso"
+    eyebrowColor="text-brand-teal-dark"
+    title="Cuatro pasos hasta tu beca"
+  >
+    <div class="space-y-4 mt-6 max-w-[820px]">
+      {pasos.map((p) => (
+        <div class="flex gap-6 items-start bg-white rounded-2xl p-6 border border-[rgba(0,19,63,0.06)]">
+          <div class="font-display text-4xl font-extrabold text-brand-teal-dark leading-none">{p.step}</div>
+          <div>
+            <h3 class="font-display text-lg font-extrabold uppercase text-brand-blue-dark mb-1">{p.title}</h3>
+            <p class="text-ink-muted leading-relaxed">{p.body}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </ContentSection>
+
+  <ContentSection
+    z={4}
+    eyebrow="FAQ"
+    eyebrowColor="text-brand-teal-dark"
+    title="Todo lo que necesitas saber"
+  >
+    <div class="space-y-3 mt-4 max-w-[820px]">
+      {faqs.map((f) => (
+        <details class="group rounded-2xl border border-[rgba(0,19,63,0.08)] bg-white px-6 py-4 open:shadow-[0_2px_12px_rgba(0,19,63,0.06)]">
+          <summary class="cursor-pointer font-display font-bold uppercase text-brand-blue-dark text-lg list-none flex items-center justify-between gap-3">
+            <span>{f.q}</span>
+            <svg class="w-4 h-4 transition-transform group-open:rotate-180" viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 1l5 5 5-5"/></svg>
+          </summary>
+          <p class="mt-3 text-ink-muted leading-relaxed">{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </ContentSection>
+
+  <HighlightSection
+    z={5}
+    color="teal"
+    eyebrow="¿Listo para aplicar?"
+    title="Da el siguiente paso"
+    ctas={[{ label: "Aplicar ahora", href: "#aplicar" }]}
+  />
+
+  <div id="aplicar"></div>
+  <FormPlaceholder z={6} title="Aplica a una beca de Máster" />
+</Layout>
