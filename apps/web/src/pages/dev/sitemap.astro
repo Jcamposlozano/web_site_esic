@@ -1,0 +1,156 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import SitemapNode from "../../components/dev/SitemapNode.astro";
+import { tree, flatten } from "../../components/dev/sitemap-data";
+
+const flat = flatten(tree);
+const totals = {
+  total: flat.length,
+  built: flat.filter((n) => n.status === "built").length,
+  pending: flat.filter((n) => n.status === "pending").length,
+  external: flat.filter((n) => n.status === "external").length,
+  legal: flat.filter((n) => n.status === "legal").length,
+};
+---
+<Layout title="Sitemap Helper — Mapa de páginas del rediseño">
+  <main class="min-h-dvh bg-bg-alt py-12 px-6">
+    <div class="max-w-[1100px] mx-auto">
+      <header class="mb-10">
+        <p class="text-sm uppercase tracking-[0.22em] font-bold text-brand-blue mb-3">
+          /dev/sitemap · Mapa de páginas
+        </p>
+        <h1 class="font-display text-5xl md:text-6xl font-extrabold text-brand-blue-dark uppercase leading-[0.95]">
+          Árbol completo del rediseño
+        </h1>
+        <p class="mt-4 max-w-[70ch] text-ink-muted text-[0.95rem] leading-relaxed">
+          Inventario de TODAS las páginas accesibles del sitio actual de
+          <code class="bg-white px-1.5 py-0.5 rounded text-[0.85em]">esic-redesign-wordpress</code>.
+          Partiendo del menú global, banners de la home, secciones de la home, footer y enlaces
+          externos. Sirve como checklist para la migración a React — ninguna URL puede quedar fuera.
+        </p>
+
+        <div class="mt-6 grid grid-cols-2 md:grid-cols-5 gap-3">
+          <div class="rounded-2xl bg-white px-4 py-3 shadow-[0_2px_8px_rgba(0,19,63,0.05)] text-center">
+            <div class="text-3xl font-display font-extrabold text-brand-blue-dark">{totals.total}</div>
+            <div class="text-[0.7rem] uppercase tracking-[0.12em] text-ink-muted">Total</div>
+          </div>
+          <div class="rounded-2xl bg-white px-4 py-3 shadow-[0_2px_8px_rgba(0,19,63,0.05)] text-center">
+            <div class="text-3xl font-display font-extrabold text-brand-teal-dark">{totals.built}</div>
+            <div class="text-[0.7rem] uppercase tracking-[0.12em] text-ink-muted">Built</div>
+          </div>
+          <div class="rounded-2xl bg-white px-4 py-3 shadow-[0_2px_8px_rgba(0,19,63,0.05)] text-center">
+            <div class="text-3xl font-display font-extrabold text-brand-orange">{totals.pending}</div>
+            <div class="text-[0.7rem] uppercase tracking-[0.12em] text-ink-muted">Pending</div>
+          </div>
+          <div class="rounded-2xl bg-white px-4 py-3 shadow-[0_2px_8px_rgba(0,19,63,0.05)] text-center">
+            <div class="text-3xl font-display font-extrabold text-ink-light">{totals.external}</div>
+            <div class="text-[0.7rem] uppercase tracking-[0.12em] text-ink-muted">External</div>
+          </div>
+          <div class="rounded-2xl bg-white px-4 py-3 shadow-[0_2px_8px_rgba(0,19,63,0.05)] text-center">
+            <div class="text-3xl font-display font-extrabold text-brand-blue-dark">{totals.legal}</div>
+            <div class="text-[0.7rem] uppercase tracking-[0.12em] text-ink-muted">Legal</div>
+          </div>
+        </div>
+
+        <div class="mt-6 flex gap-2 flex-wrap items-center">
+          <button data-action="expand-all" class="text-[0.78rem] uppercase tracking-[0.08em] font-semibold px-4 py-2 rounded-full bg-brand-blue text-white hover:bg-brand-blue-dark transition-colors">
+            Expandir todo
+          </button>
+          <button data-action="collapse-all" class="text-[0.78rem] uppercase tracking-[0.08em] font-semibold px-4 py-2 rounded-full bg-white text-brand-blue-dark border border-brand-blue-dark/15 hover:bg-bg transition-colors">
+            Colapsar todo
+          </button>
+          <select id="filter-status" class="text-[0.78rem] uppercase tracking-[0.08em] font-semibold px-4 py-2 rounded-full bg-white text-brand-blue-dark border border-brand-blue-dark/15 cursor-pointer">
+            <option value="all">Estado: todos</option>
+            <option value="built">Solo built</option>
+            <option value="pending">Solo pending</option>
+            <option value="external">Solo external</option>
+            <option value="legal">Solo legal</option>
+          </select>
+          <input
+            id="filter-search"
+            type="search"
+            placeholder="Buscar página…"
+            class="text-[0.85rem] px-4 py-2 rounded-full bg-white text-brand-blue-dark border border-brand-blue-dark/15 placeholder:text-ink-light min-w-[200px] flex-1 max-w-[280px]"
+          />
+        </div>
+      </header>
+
+      <section id="tree" class="bg-white rounded-3xl shadow-[0_2px_20px_rgba(0,19,63,0.07)] p-6 md:p-10">
+        {tree.map((node) => <SitemapNode node={node} level={0} />)}
+      </section>
+
+      <footer class="mt-10 text-center text-[0.78rem] text-ink-muted">
+        Fuente: <code>esic-redesign-wordpress/</code> · nav-global.html · footer-global.html · index.html ·
+        listado de archivos <code>*-elementor.html</code>
+      </footer>
+    </div>
+  </main>
+
+  <script>
+    const tree = document.getElementById("tree");
+
+    // Expand / collapse on click of the chevron
+    tree?.addEventListener("click", (e) => {
+      const target = e.target as HTMLElement;
+      const toggle = target.closest("[data-toggle]") as HTMLElement | null;
+      if (!toggle) return;
+      const item = toggle.closest("[data-node]") as HTMLElement | null;
+      if (!item) return;
+      item.classList.toggle("collapsed");
+    });
+
+    document.querySelector("[data-action='expand-all']")?.addEventListener("click", () => {
+      tree?.querySelectorAll("[data-node]").forEach((n) => n.classList.remove("collapsed"));
+    });
+    document.querySelector("[data-action='collapse-all']")?.addEventListener("click", () => {
+      tree?.querySelectorAll("[data-node][data-has-children='true']").forEach((n) =>
+        n.classList.add("collapsed")
+      );
+    });
+
+    // Filter by status + search
+    const statusFilter = document.getElementById("filter-status") as HTMLSelectElement | null;
+    const search = document.getElementById("filter-search") as HTMLInputElement | null;
+
+    const applyFilters = () => {
+      const sv = statusFilter?.value ?? "all";
+      const q = (search?.value ?? "").trim().toLowerCase();
+      const nodes = tree?.querySelectorAll<HTMLElement>("[data-node]") ?? [];
+
+      // First pass: hide based on status + text
+      nodes.forEach((n) => {
+        const statusOk = sv === "all" || n.dataset.status === sv;
+        const text = n.querySelector(".node-row")?.textContent?.toLowerCase() ?? "";
+        const textOk = !q || text.includes(q);
+        const visible = statusOk && textOk;
+        n.dataset.matchSelf = visible ? "1" : "0";
+        n.style.display = visible ? "" : "none";
+      });
+
+      // Second pass: re-show ancestors of any visible matches so the tree path stays intact
+      nodes.forEach((n) => {
+        if (n.dataset.matchSelf === "1") {
+          let cur: HTMLElement | null = n.parentElement;
+          while (cur && cur !== tree) {
+            if (cur.matches("[data-node]")) {
+              cur.style.display = "";
+              cur.classList.remove("collapsed");
+            }
+            cur = cur.parentElement;
+          }
+        }
+      });
+    };
+
+    statusFilter?.addEventListener("change", applyFilters);
+    search?.addEventListener("input", applyFilters);
+  </script>
+
+  <style is:global>
+    [data-node].collapsed > .node-children { display: none; }
+    [data-node].collapsed > .node-row [data-toggle] svg { transform: rotate(-90deg); }
+    [data-node]:not([data-has-children="true"]) [data-toggle] {
+      visibility: hidden;
+    }
+  </style>
+</Layout>

@@ -1,0 +1,93 @@
+---
+import type { SitemapNode } from "./sitemap-data";
+import { statusMeta, sourceMeta, areaColor } from "./sitemap-data";
+
+interface Props {
+  node: SitemapNode;
+  level?: number;
+}
+
+const { node, level = 0 } = Astro.props;
+const hasChildren = Boolean(node.children && node.children.length > 0);
+const accent = node.area ? areaColor[node.area] : "var(--color-brand-blue-dark)";
+const sMeta = statusMeta[node.status];
+---
+<div
+  class="node mt-1.5"
+  data-node
+  data-status={node.status}
+  data-has-children={String(hasChildren)}
+  style={`--accent: ${accent}; --indent: ${level * 24}px;`}
+>
+  <div class="node-row flex items-start gap-3 py-2.5 pl-[var(--indent)] border-l-2 border-transparent hover:border-[var(--accent)] hover:bg-[#FAFBFE] rounded-r-lg pr-3 transition-colors">
+    <button
+      data-toggle
+      type="button"
+      class="mt-0.5 shrink-0 w-5 h-5 grid place-items-center text-ink-muted hover:text-ink transition-colors"
+      aria-label="Expandir/colapsar"
+    >
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform">
+        <path d="m3 4 3 3 3-3"/>
+      </svg>
+    </button>
+
+    <span
+      class="shrink-0 mt-2 w-2 h-2 rounded-full"
+      style={`background: ${accent};`}
+      aria-hidden="true"
+    ></span>
+
+    <div class="flex-1 min-w-0">
+      <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
+        {node.href ? (
+          <a
+            href={node.href}
+            target={node.href.startsWith("http") ? "_blank" : "_self"}
+            rel={node.href.startsWith("http") ? "noopener" : undefined}
+            class="font-display font-extrabold uppercase tracking-[0.01em] text-[1.05rem] leading-tight text-brand-blue-dark hover:text-brand-blue transition-colors"
+          >
+            {node.label}
+          </a>
+        ) : (
+          <span class="font-display font-extrabold uppercase tracking-[0.01em] text-[1.05rem] leading-tight text-brand-blue-dark">
+            {node.label}
+          </span>
+        )}
+        <span class={`inline-flex items-center text-[0.62rem] font-bold uppercase tracking-[0.1em] px-2 py-0.5 rounded-full ${sMeta.class}`}>
+          {sMeta.label}
+        </span>
+      </div>
+
+      {node.href && (
+        <code class="block mt-1 text-[0.78rem] text-ink-muted break-all">
+          {node.href}
+        </code>
+      )}
+
+      <div class="mt-1 flex flex-wrap gap-1.5 items-center">
+        {node.sources.map((s) => (
+          <span class="inline-flex items-center text-[0.62rem] font-semibold uppercase tracking-[0.08em] px-2 py-0.5 rounded-full border border-ink-light/30 text-ink-muted bg-white">
+            {sourceMeta[s]}
+          </span>
+        ))}
+        {node.wpFile && (
+          <span class="inline-flex items-center text-[0.62rem] font-mono px-2 py-0.5 rounded-full bg-bg-alt text-ink-muted">
+            {node.wpFile}
+          </span>
+        )}
+      </div>
+
+      {node.note && (
+        <p class="mt-1.5 text-[0.82rem] text-ink-muted leading-snug">{node.note}</p>
+      )}
+    </div>
+  </div>
+
+  {hasChildren && (
+    <div class="node-children">
+      {node.children!.map((child) => (
+        <Astro.self node={child} level={level + 1} />
+      ))}
+    </div>
+  )}
+</div>
