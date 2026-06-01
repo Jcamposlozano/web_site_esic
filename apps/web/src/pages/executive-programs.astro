@@ -1,46 +1,156 @@
 ---
+/**
+ * /executive-programs — Executive Program: Digital Business Transformation
+ * (réplica fiel de executive-programs/index.html).
+ *
+ * Hero = banner con imagen de fondo + overlay negro, eyebrow "Executive Program:",
+ * título AZUL "DIGITAL BUSINESS TRANSFORMATION", año 2026 (teal) y logos cocreadores.
+ * El resto del cuerpo es compartido con /digital-business-transformation.
+ */
 import Layout from "../layouts/Layout.astro";
-import PageHero from "../components/sections/PageHero.astro";
-import ContentSection from "../components/sections/ContentSection.astro";
-import ProgramCardGrid from "../components/sections/ProgramCardGrid.astro";
-import HighlightSection from "../components/sections/HighlightSection.astro";
-import FormPlaceholder from "../components/sections/FormPlaceholder.astro";
-
-const executives = [
-  {
-    href: "/digital-business-transformation/",
-    title: "Digital Business Transformation",
-    duration: "4 meses · Liderazgo y transformación digital",
-    image: "/images/wp/2026/02/ep.webp",
-    titleColor: "#C09C2E",
-  },
-];
+import ExecutiveProgramBody from "../components/pages/programas/ExecutiveProgramBody.astro";
 ---
-<Layout title="Executive Programs — ESIC Medellín">
-  <PageHero
-    eyebrow="Educación ejecutiva"
-    title="Executive<br /><span class='text-brand-teal'>Programs</span>"
-    subtitle="Programas cortos diseñados para directivos y líderes en activo. Formato intensivo, casos de empresas reales y resultados aplicables al mismo día."
-    ctas={[{ label: "Solicitar Información", href: "#contacto" }]}
-    eyebrowColor="text-brand-teal"
-  />
+<Layout
+  title="Executive Program: Digital Business Transformation — ESIC Medellín"
+  description="Executive Program Digital Business Transformation 2026. 4 meses, inmersión en Madrid, cocreado por ESIC, Prestigio y Accenture."
+  fullBleed
+>
+  <main class="exec-program-widget">
+    <!-- Hero -->
+    <section class="exec__hero">
+      <div class="exec__hero-bg">
+        <img
+          src="/images/wp/2025/12/trabajo-en-equipo-estudiantes-esic-proyecto-digital.png"
+          alt="Executive Program ESIC"
+        />
+      </div>
+      <div class="exec__hero-container">
+        <div class="exec__hero-content">
+          <span class="exec__hero-eyebrow">Executive Program:</span>
+          <h1 class="exec__hero-title">DIGITAL BUSINESS<br />TRANSFORMATION</h1>
+          <div class="exec__hero-year">2026</div>
+          <div class="exec__hero-partners">
+            <span>Programa cocreado por:</span>
+            <div class="exec__partner-logo">
+              <img src="/images/wp/2026/02/logo-esic.png" alt="ESIC" />
+            </div>
+            <div class="exec__partner-logo">
+              <img src="/images/wp/2026/02/logo-prestigio.png" alt="Prestigio" />
+            </div>
+            <div class="exec__partner-logo exec__partner-accenture">
+              <img src="/images/wp/2026/02/logo-accenture.png" alt="Accenture" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <ContentSection
-    z={2}
-    eyebrow="Nuestros programas"
-    title="Para líderes en ejercicio"
-  >
-    <ProgramCardGrid programas={executives} columns={2} />
-  </ContentSection>
-
-  <HighlightSection
-    z={3}
-    color="blue"
-    eyebrow="Formaciones corporativas"
-    title="¿Necesitas un programa<br />para tu empresa?"
-    body="Diseñamos programas a la medida para equipos directivos: liderazgo, transformación digital, customer experience, marketing y datos."
-    ctas={[{ label: "Hablar con ESIC Corporate", href: "#contacto" }]}
-  />
-
-  <FormPlaceholder z={4} />
+    <ExecutiveProgramBody />
+  </main>
 </Layout>
+
+<style>
+  .exec-program-widget { color: #0B132B; }
+
+  /* ── Hero ── */
+  .exec__hero {
+    position: relative;
+    min-height: 85vh;
+    display: flex;
+    align-items: flex-end;
+    padding: 120px 0 6rem;
+  }
+  .exec__hero-bg { position: absolute; inset: 0; z-index: 0; }
+  .exec__hero-bg img { width: 100%; height: 100%; object-fit: cover; }
+  .exec__hero-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 1;
+  }
+  .exec__hero-container {
+    width: min(1200px, 92%);
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+  .exec__hero-content { max-width: 800px; color: #fff; }
+  .exec__hero-eyebrow {
+    font-family: "Sofia Sans Extra Condensed", sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.8);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  .exec__hero-title {
+    font-family: "Sofia Sans Extra Condensed", sans-serif;
+    color: #0047E9;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 0.88;
+    margin-bottom: 0.5rem;
+  }
+  .exec__hero-year {
+    font-family: "Sofia Sans Extra Condensed", sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: #0AE4C3;
+    margin-bottom: 2rem;
+  }
+  .exec__hero-partners {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+  .exec__hero-partners span {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .exec__partner-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 55px;
+  }
+  .exec__partner-logo img {
+    object-fit: contain;
+    height: 55px;
+    filter: brightness(0) invert(1);
+  }
+  .exec__partner-accenture img { transform: translateY(-4px); }
+
+  /* ── Responsive (réplica del original) ── */
+  @media (max-width: 768px) {
+    .exec__hero {
+      min-height: 65vh;
+      padding: 80px 0 2.5rem;
+    }
+    .exec__hero-eyebrow { font-size: 0.85rem; margin-bottom: 0.3rem; }
+    .exec__hero-title { font-size: clamp(2rem, 9vw, 3rem); line-height: 0.9; margin-bottom: 0.3rem; }
+    .exec__hero-year { font-size: clamp(1.4rem, 5vw, 2rem); margin-bottom: 1.2rem; }
+    .exec__hero-partners { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 1rem; }
+    .exec__hero-partners span { font-size: 0.7rem; width: 100%; margin-bottom: 0; }
+    .exec__partner-logo { height: 32px; }
+    .exec__partner-logo img { height: 32px; }
+  }
+
+  @media (max-width: 480px) {
+    .exec__hero {
+      min-height: 55vh;
+      padding: 70px 0 2rem;
+    }
+    .exec__hero-title { font-size: clamp(1.8rem, 10vw, 2.5rem); }
+    .exec__hero-year { font-size: clamp(1.2rem, 5.5vw, 1.6rem); margin-bottom: 1rem; }
+    .exec__hero-partners { gap: 0.8rem; }
+    .exec__partner-logo { height: 26px; }
+    .exec__partner-logo img { height: 26px; }
+  }
+</style>

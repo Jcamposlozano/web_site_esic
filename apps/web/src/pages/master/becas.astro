@@ -1,102 +1,211 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import PageHero from "../../components/sections/PageHero.astro";
-import ContentSection from "../../components/sections/ContentSection.astro";
-import HighlightSection from "../../components/sections/HighlightSection.astro";
-import FormPlaceholder from "../../components/sections/FormPlaceholder.astro";
+import Container from "../../components/Container.astro";
+import OverlapSection from "../../components/OverlapSection.astro";
+import BecasHero from "../../components/pages/master/BecasHero.astro";
 
+// Beneficios — íconos SVG stroke-based (manual: sin emojis/glyphs)
 const beneficios = [
-  { title: "Hasta 40% de apoyo", body: "Cobertura significativa de la inversión total del programa según categoría y perfil." },
-  { title: "Mentoría profesional", body: "Acompañamiento personalizado durante el máster con líderes del ecosistema corporativo." },
-  { title: "Red global ESIC", body: "Acceso a la comunidad de 62K alumni en 80+ países desde el primer mes." },
+  {
+    color: "blue",
+    title: "Hasta 40% de apoyo",
+    body: "Reduce el valor de tu matrícula con becas parciales según tu perfil.",
+    icon: "percent",
+  },
+  {
+    color: "teal",
+    title: "Mentoría académica",
+    body: "Acceso a docentes y expertos que acompañan tu proceso.",
+    icon: "star",
+  },
+  {
+    color: "orange",
+    title: "Red ESIC global",
+    body: "Conecta con una comunidad internacional de líderes y profesionales.",
+    icon: "globe",
+  },
 ];
 
 const pasos = [
-  { step: "01", title: "Solicita información", body: "Diligencia el formulario y un asesor te contacta para conocer tu perfil." },
-  { step: "02", title: "Postulación", body: "Envías tu trayectoria, motivación y documentos académicos para evaluación." },
-  { step: "03", title: "Comité de becas", body: "El comité evalúa tu perfil y te notifica el resultado en máximo 2 semanas." },
-  { step: "04", title: "Matrícula", body: "Aceptas la beca, formalizas matrícula y arrancas el máster." },
+  { n: "01", title: "Completa el formulario", body: "Cuéntanos tu perfil y el programa que deseas cursar." },
+  { n: "02", title: "Entrevista y evaluación", body: "Nuestro equipo revisa tu perfil y agenda una conversación contigo." },
+  { n: "03", title: "Resultado y matrícula", body: "Recibe tu resultado y asegura tu cupo en el máster elegido." },
 ];
 
 const faqs = [
-  { q: "¿Aplica a todos los másters?", a: "Sí — las tres especializaciones (Digital Business, Customer Experience, Digital Marketing) participan del mismo programa de becas." },
-  { q: "¿Necesito experiencia previa?", a: "Cada categoría tiene criterios distintos. Algunas valoran trayectoria, otras formación previa o convenios corporativos." },
-  { q: "¿Puedo combinar con financiación?", a: "Sí. La beca aplica sobre el saldo de matrícula y se puede combinar con planes de financiación bancaria." },
+  { q: "¿Quiénes pueden aplicar?", a: "Profesionales con interés en másters ESIC y alto potencial de liderazgo." },
+  { q: "¿Cuál es el porcentaje máximo?", a: "Las becas pueden cubrir hasta el 40% de la matrícula." },
+  { q: "¿Cuánto tarda la respuesta?", a: "El proceso tarda entre 7 y 10 días hábiles después de la entrevista." },
 ];
+
+const iconBg = {
+  blue: "bg-[linear-gradient(135deg,#0047E9,#001E80)] text-white",
+  teal: "bg-[linear-gradient(135deg,#0AE4C3,#00BFA5)] text-brand-blue-dark",
+  orange: "bg-[linear-gradient(135deg,#FF9600,#FF9600)] text-white",
+};
 ---
-<Layout title="Becas de Máster — ESIC Medellín">
-  <PageHero
-    eyebrow="Máster · Becas"
-    title="Becas de hasta<br /><span class='text-brand-teal'>40%</span> para Máster"
-    subtitle="Programas de apoyo económico diseñados para profesionales con trayectoria, movilidad o convenio corporativo. Una beca que impulsa tu próxima etapa profesional."
-    ctas={[{ label: "Aplicar a una beca", href: "#aplicar" }]}
-    eyebrowColor="text-brand-teal"
-  />
+<Layout
+  title="Becas para Máster en Colombia | ESIC Medellín"
+  description="Becas de hasta 40% para máster en Colombia. Opciones de financiación de estudios en Medellín con ayudas económicas y descuentos especiales en ESIC."
+  fullBleed
+>
+  <main>
+    <!-- 1. Hero -->
+    <BecasHero
+      image="/images/master/DSC02270_resultado.webp"
+      eyebrow="Becas ESIC Medellín"
+      title="Becas de hasta <span>40%</span>"
+      subtitle="Impulsa tu carrera con apoyo económico en nuestros programas de máster. Conecta con la red ESIC y acelera tu crecimiento profesional."
+      ctas={[
+        { label: "Solicita tu beca", href: "#form-becas", variant: "primary" },
+        { label: "Conoce los másters", href: "/master", variant: "outline" },
+      ]}
+    />
 
-  <ContentSection
-    z={2}
-    eyebrow="Lo que recibes"
-    eyebrowColor="text-brand-teal-dark"
-    title="Una beca que impulsa tu futuro"
-  >
-    <div class="grid gap-6 md:grid-cols-3 mt-6">
-      {beneficios.map((b) => (
-        <article class="bg-white rounded-3xl p-8 border border-[rgba(0,19,63,0.06)] shadow-[0_2px_20px_rgba(0,19,63,0.05)]">
-          <h3 class="font-display text-xl font-extrabold uppercase text-brand-blue-dark mb-3">{b.title}</h3>
-          <div class="w-10 h-[2px] bg-brand-teal-dark mb-4"></div>
-          <p class="text-ink-muted leading-relaxed">{b.body}</p>
-        </article>
-      ))}
-    </div>
-  </ContentSection>
+    <!-- 2. Beneficios + Formulario (lado a lado) -->
+    <OverlapSection bg="bg-white" z={2} padding="py-20 md:py-24">
+      <Container>
+        <div class="grid items-start gap-12 lg:grid-cols-[1fr_400px]">
+          <!-- Beneficios -->
+          <div class="pt-1">
+            <span class="inline-flex items-center gap-2 font-display text-[1rem] font-semibold uppercase tracking-[0.2em] text-brand-teal-dark">
+              <span class="block h-[2px] w-6 bg-current" aria-hidden="true"></span>
+              Beneficios
+            </span>
+            <h2 class="mt-[0.6rem] font-display text-[clamp(3rem,5vw,4.5rem)] font-semibold uppercase leading-[0.95] text-brand-blue-dark">
+              Una beca que impulsa tu futuro
+            </h2>
+            <p class="mt-[0.6rem] text-[1.15rem] text-ink-muted">
+              Apoyo económico y acompañamiento estratégico para acelerar tu desarrollo profesional.
+            </p>
 
-  <ContentSection
-    z={3}
-    bg="bg-bg-alt"
-    eyebrow="Tu proceso paso a paso"
-    eyebrowColor="text-brand-teal-dark"
-    title="Cuatro pasos hasta tu beca"
-  >
-    <div class="space-y-4 mt-6 max-w-[820px]">
-      {pasos.map((p) => (
-        <div class="flex gap-6 items-start bg-white rounded-2xl p-6 border border-[rgba(0,19,63,0.06)]">
-          <div class="font-display text-4xl font-extrabold text-brand-teal-dark leading-none">{p.step}</div>
-          <div>
-            <h3 class="font-display text-lg font-extrabold uppercase text-brand-blue-dark mb-1">{p.title}</h3>
-            <p class="text-ink-muted leading-relaxed">{p.body}</p>
+            <div class="mt-10 flex flex-col gap-7">
+              {beneficios.map((b) => (
+                <div class="flex items-start gap-5">
+                  <div class:list={["grid h-14 w-14 min-w-14 place-items-center rounded-2xl", iconBg[b.color]]}>
+                    {b.icon === "percent" && (
+                      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="5" x2="5" y2="19" /><circle cx="6.5" cy="6.5" r="2.5" /><circle cx="17.5" cy="17.5" r="2.5" /></svg>
+                    )}
+                    {b.icon === "star" && (
+                      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>
+                    )}
+                    {b.icon === "globe" && (
+                      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><line x1="2" y1="12" x2="22" y2="12" /><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /></svg>
+                    )}
+                  </div>
+                  <div>
+                    <h4 class="mb-[0.3rem] font-display text-[1.4rem] font-semibold uppercase text-brand-blue-dark">{b.title}</h4>
+                    <p class="text-[1.05rem] leading-[1.5] text-ink-muted">{b.body}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Formulario (Zoho → placeholder, fase CMS/Forms) -->
+          <div
+            id="form-becas"
+            class="scroll-mt-24 rounded-3xl border-2 border-[#E5E5E5] bg-white p-8 md:p-10"
+          >
+            <h3 class="mb-6 font-display text-[2rem] font-semibold uppercase leading-none text-brand-teal-dark">
+              Aplica a una<br />beca para<br />Máster
+            </h3>
+            <div class="rounded-2xl border-2 border-dashed border-ink-light/30 px-6 py-12 text-center">
+              <div class="mb-2 text-[0.7rem] font-bold uppercase tracking-[0.18em] text-brand-orange">
+                TODO · Pendiente fase CMS / Forms
+              </div>
+              <div class="font-body text-sm text-ink-muted">
+                Formulario Zoho (Aplica a una beca — Máster) se integra cuando definamos el stack de formularios.
+              </div>
+            </div>
           </div>
         </div>
-      ))}
-    </div>
-  </ContentSection>
+      </Container>
+    </OverlapSection>
 
-  <ContentSection
-    z={4}
-    eyebrow="FAQ"
-    eyebrowColor="text-brand-teal-dark"
-    title="Todo lo que necesitas saber"
-  >
-    <div class="space-y-3 mt-4 max-w-[820px]">
-      {faqs.map((f) => (
-        <details class="group rounded-2xl border border-[rgba(0,19,63,0.08)] bg-white px-6 py-4 open:shadow-[0_2px_12px_rgba(0,19,63,0.06)]">
-          <summary class="cursor-pointer font-display font-bold uppercase text-brand-blue-dark text-lg list-none flex items-center justify-between gap-3">
-            <span>{f.q}</span>
-            <svg class="w-4 h-4 transition-transform group-open:rotate-180" viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 1l5 5 5-5"/></svg>
-          </summary>
-          <p class="mt-3 text-ink-muted leading-relaxed">{f.a}</p>
-        </details>
-      ))}
-    </div>
-  </ContentSection>
+    <!-- 3. Testimonio + Video (split) -->
+    <OverlapSection bg="bg-bg" z={3} padding="py-20 md:py-24">
+      <Container>
+        <div class="grid items-center gap-8 md:grid-cols-2">
+          <!-- Testimonio -->
+          <div class="rounded-3xl bg-white p-8 md:p-10 shadow-[0_20px_50px_rgba(0,19,63,0.08)]">
+            <blockquote class="font-display text-[clamp(1.5rem,3vw,2rem)] font-semibold uppercase leading-[1.1] text-brand-blue-dark">
+              “Recibir la beca ESIC me permitió cambiar de rumbo profesional y hoy lidero un equipo de innovación.”
+            </blockquote>
+            <div class="mt-6 flex items-center gap-4">
+              <div class="h-12 w-12 flex-shrink-0 rounded-full bg-brand-teal-dark/20"></div>
+              <div>
+                <div class="font-semibold text-ink">Valentina Núñez</div>
+                <small class="text-ink-muted">Becaria Máster Digital Business</small>
+              </div>
+            </div>
+          </div>
+          <!-- Video card -->
+          <div class="relative flex aspect-[16/10] flex-col items-start justify-end overflow-hidden rounded-3xl bg-brand-blue-dark p-8 text-white">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(10,228,195,0.18),transparent_60%)]" aria-hidden="true"></div>
+            <button
+              type="button"
+              aria-label="Reproducir video de historias de becarios"
+              class="relative z-[1] mb-5 grid h-16 w-16 place-items-center rounded-full bg-brand-teal-dark text-brand-blue-dark transition-transform hover:-translate-y-0.5"
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
+            </button>
+            <strong class="relative z-[1] font-display text-[1.6rem] font-semibold uppercase">Historias de becarios</strong>
+            <span class="relative z-[1] text-white/80">Conoce cómo impactamos vidas reales</span>
+          </div>
+        </div>
+      </Container>
+    </OverlapSection>
 
-  <HighlightSection
-    z={5}
-    color="teal"
-    eyebrow="¿Listo para aplicar?"
-    title="Da el siguiente paso"
-    ctas={[{ label: "Aplicar ahora", href: "#aplicar" }]}
-  />
+    <!-- 4. Cómo aplicar — pasos -->
+    <OverlapSection bg="bg-white" z={4} padding="py-20 md:py-24">
+      <Container>
+        <div class="mb-10 max-w-[560px]">
+          <span class="inline-flex items-center gap-2 font-display text-[1rem] font-semibold uppercase tracking-[0.2em] text-brand-teal-dark">
+            <span class="block h-[2px] w-6 bg-current" aria-hidden="true"></span>
+            Cómo aplicar
+          </span>
+          <h2 class="mt-[0.6rem] font-display text-[clamp(2.5rem,5vw,4.2rem)] font-semibold uppercase leading-[0.95] text-brand-blue-dark">
+            Tu proceso paso a paso
+          </h2>
+          <p class="mt-[0.6rem] text-[1.05rem] text-ink-muted">Tres pasos simples para postularte a una beca ESIC.</p>
+        </div>
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {pasos.map((p) => (
+            <article class="rounded-[22px] bg-white p-7 shadow-[0_20px_50px_rgba(0,19,63,0.12)]">
+              <div class="mb-4 grid h-11 w-11 place-items-center rounded-xl bg-brand-teal-dark/12 font-display text-[1.1rem] font-bold text-brand-teal-dark">
+                {p.n}
+              </div>
+              <h3 class="mb-2 font-display text-[1.25rem] font-semibold uppercase text-brand-blue-dark">{p.title}</h3>
+              <p class="text-ink-muted leading-relaxed">{p.body}</p>
+            </article>
+          ))}
+        </div>
+      </Container>
+    </OverlapSection>
 
-  <div id="aplicar"></div>
-  <FormPlaceholder z={6} title="Aplica a una beca de Máster" />
+    <!-- 5. Preguntas frecuentes -->
+    <OverlapSection bg="bg-bg" z={5} padding="py-20 md:py-24">
+      <Container>
+        <div class="mb-10 max-w-[560px]">
+          <span class="inline-flex items-center gap-2 font-display text-[1rem] font-semibold uppercase tracking-[0.2em] text-brand-teal-dark">
+            <span class="block h-[2px] w-6 bg-current" aria-hidden="true"></span>
+            Preguntas frecuentes
+          </span>
+          <h2 class="mt-[0.6rem] font-display text-[clamp(2.5rem,5vw,4.2rem)] font-semibold uppercase leading-[0.95] text-brand-blue-dark">
+            Todo lo que necesitas saber
+          </h2>
+          <p class="mt-[0.6rem] text-[1.05rem] text-ink-muted">Resolvemos dudas comunes sobre el proceso de becas.</p>
+        </div>
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {faqs.map((f) => (
+            <article class="rounded-3xl border border-[rgba(0,19,63,0.06)] bg-white p-7 shadow-[0_2px_20px_rgba(0,19,63,0.05)]">
+              <h3 class="mb-3 font-display text-[1.25rem] font-semibold uppercase text-brand-blue-dark">{f.q}</h3>
+              <p class="text-ink-muted leading-relaxed">{f.a}</p>
+            </article>
+          ))}
+        </div>
+      </Container>
+    </OverlapSection>
+  </main>
 </Layout>

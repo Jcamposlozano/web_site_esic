@@ -1,79 +1,289 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import PageHero from "../components/sections/PageHero.astro";
-import ContentSection from "../components/sections/ContentSection.astro";
-import HighlightSection from "../components/sections/HighlightSection.astro";
+import Container from "../components/Container.astro";
 
-const areas = [
-  { title: "Dirección académica", body: "Diseño curricular, calidad académica y dirección de programas." },
-  { title: "Admisiones & alumni", body: "Acompañamiento a aspirantes, vínculo con egresados y networking corporativo." },
-  { title: "Industria & alianzas", body: "Relación con empresas, casos vivos, formaciones corporativas." },
-  { title: "Innovación pedagógica", body: "Metodologías activas, learning experience design y formación docente." },
+type Member = { name: string; role: string; photo?: string; featured?: boolean };
+type Area = { title: string; count: string; members: Member[] };
+
+const areas: Area[] = [
+  {
+    title: "Dirección",
+    count: "06 líderes",
+    members: [
+      { name: "Juan Esteban Jaramillo", role: "Presidente", photo: "/images/wp/2024/08/JUAN-scaled-1-812x1024.jpg", featured: true },
+      { name: "Sara Velásquez", role: "Directora Académica Corporate", photo: "/images/wp/2025/07/Sara-V-812x1024.jpg" },
+      { name: "Yurani Sánchez", role: "Directora Académica Pregrados", photo: "/images/wp/2024/08/YURA-2-scaled-1-812x1024.jpg" },
+      { name: "Juan Manuel Jiménez", role: "Director Growth & Corporate", photo: "/images/wp/2024/08/JUAN-M-2-812x1024.jpg" },
+      { name: "Daniela Upegui", role: "Directora de Marketing", photo: "/images/wp/2025/07/DANIELA-U2-812x1024.jpg" },
+      { name: "Marta Ramírez", role: "Directora Financiera y Administrativa", photo: "/images/wp/2025/12/MARTA-812x1024.jpg" },
+    ],
+  },
+  {
+    title: "Académica & Pregrados",
+    count: "03 integrantes",
+    members: [
+      { name: "Eliana Monsalve", role: "Líder Pregrados", photo: "/images/wp/2024/08/ELIANA-2-scaled-1-812x1024.jpg" },
+      { name: "Tatiana Serna", role: "Analista Pregrados", photo: "/images/wp/2024/08/tatiana-scaled-1-812x1024.jpg" },
+      { name: "Alejandra Londoño", role: "Student Service Pregrado", photo: "/images/wp/2026/02/ALEJA.jpg-812x1024.jpeg" },
+    ],
+  },
+  {
+    title: "Corporate",
+    count: "02 integrantes",
+    members: [
+      { name: "Stephany Aldana", role: "Analista Corporate", photo: "/images/wp/2025/06/ESTEFANI-ALDANA-812x1024.jpg" },
+      { name: "Carolina Soto", role: "Student Service Corporate", photo: "/images/wp/2026/02/CARO.jpg-812x1024.jpeg" },
+    ],
+  },
+  {
+    title: "Marketing & Diseño",
+    count: "03 integrantes",
+    members: [
+      { name: "Sergio Vaquero", role: "Diseño Audiovisual", photo: "/images/wp/2024/08/checho-scaled-1-812x1024.jpg" },
+      { name: "Valeria Velásquez", role: "Community Manager", photo: "/images/wp/2025/07/VALERIA-812x1024.jpg" },
+      { name: "Jerónimo Martínez", role: "UI/UX", photo: "/images/wp/2025/09/Diseno-sin-titulo-37-796x1024.png" },
+    ],
+  },
+  {
+    title: "Fábrica de Inteligencia Artificial",
+    count: "03 integrantes · FAI",
+    members: [
+      { name: "Jonathan Lozano", role: "Líder Fábrica de Inteligencia Artificial", featured: true },
+      { name: "Samuel", role: "Fábrica de Inteligencia Artificial" },
+      { name: "Jerónimo Martínez", role: "UI/UX · Fábrica de IA", photo: "/images/wp/2025/09/Diseno-sin-titulo-37-796x1024.png" },
+    ],
+  },
+  {
+    title: "Administrativa & Operaciones",
+    count: "04 integrantes",
+    members: [
+      { name: "Daniela Hernández", role: "Analista Admin y Contable", photo: "/images/wp/2024/08/DANIELA-scaled-1-812x1024.jpg" },
+      { name: "Leidy Ochoa", role: "Auxiliar Contable", photo: "/images/wp/2025/06/Leidy-812x1024.jpg" },
+      { name: "Zoraida Restrepo", role: "Servicios Generales", photo: "/images/wp/2025/06/zora-812x1024.jpg" },
+      { name: "Johan Vélez", role: "Servicios Generales", photo: "/images/wp/2025/06/jhoa-812x1024.jpg" },
+    ],
+  },
 ];
 
-const docentes = [
-  { name: "Daniela Tobón", role: "Marketing Digital", photo: "/images/wp/2024/08/DANIELA-scaled-1-812x1024.jpg" },
-  { name: "Juan", role: "Estrategia & Negocios", photo: "/images/wp/2024/08/JUAN-scaled-1-812x1024.jpg" },
-  { name: "Eliana", role: "Customer Experience", photo: "/images/wp/2024/08/ELIANA-2-scaled-1-812x1024.jpg" },
-  { name: "Yura", role: "Data & Analytics", photo: "/images/wp/2024/08/YURA-2-scaled-1-812x1024.jpg" },
-  { name: "Tatiana", role: "Branding & Comunicación", photo: "/images/wp/2024/08/tatiana-scaled-1-812x1024.jpg" },
-  { name: "Checho", role: "Innovación & Producto", photo: "/images/wp/2024/08/checho-scaled-1-812x1024.jpg" },
-  { name: "Juan M.", role: "Digital Business", photo: "/images/wp/2024/08/JUAN-M-2-812x1024.jpg" },
-  { name: "Marta", role: "Coordinación académica", photo: "/images/wp/2025/12/MARTA-812x1024.jpg" },
-];
+const personIcon = `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>`;
 ---
-<Layout title="Equipo — ESIC Medellín">
-  <PageHero
-    eyebrow="Nuestro equipo"
-    title="Talento que<br />transforma <span class='text-brand-teal'>futuros</span>"
-    subtitle="Directivos, docentes y mentores con trayectoria en empresas líderes y dedicación a formar profesionales con criterio."
-    ctas={[{ label: "Ver programas", href: "/programas/" }]}
-    eyebrowColor="text-brand-teal"
-  />
-
-  <ContentSection
-    z={2}
-    eyebrow="Áreas del equipo"
-    title="Estructura organizacional"
+<Layout
+  title="Equipo — ESIC Medellín"
+  description="Conoce al equipo de ESIC Medellín: dirección, académica, corporate, marketing, Fábrica de IA y operaciones. Talento que transforma futuros."
+  fullBleed
+>
+  <!-- ================== HERO ================== -->
+  <section
+    class="relative overflow-hidden isolate flex items-center min-h-[clamp(420px,70vh,640px)] bg-brand-blue-dark"
   >
-    <div class="grid gap-6 md:grid-cols-2 mt-6">
-      {areas.map((a) => (
-        <article class="bg-white rounded-3xl p-8 border border-[rgba(0,19,63,0.06)] shadow-[0_2px_20px_rgba(0,19,63,0.05)]">
-          <h3 class="font-display text-xl font-extrabold uppercase text-brand-blue-dark mb-3">{a.title}</h3>
-          <div class="w-10 h-[2px] bg-brand-blue mb-4"></div>
-          <p class="text-ink-muted leading-[1.6]">{a.body}</p>
-        </article>
-      ))}
+    <img
+      class="absolute inset-0 w-full h-full object-cover -z-20"
+      src="/images/wp/2024/08/JUAN-scaled-1-1624x2048.jpg"
+      alt="Equipo ESIC Medellín"
+    />
+    <div
+      class="absolute inset-0 -z-10"
+      style="background:linear-gradient(180deg, rgba(0,19,63,0.55) 0%, rgba(0,19,63,0.85) 100%),linear-gradient(90deg, rgba(0,0,0,0.4), rgba(0,0,0,0.1))"
+    >
     </div>
-  </ContentSection>
+    <Container class="text-white py-[clamp(5rem,12vw,8rem)] pt-[clamp(7rem,12vw,9rem)]">
+      <!-- Banner placeholder: zona reservada sobre el hero para futuro banner personalizado -->
+      <div
+        class="relative z-[2] aspect-[16/4] rounded-[18px] border-2 border-dashed border-[rgba(10,228,195,0.55)] flex items-center justify-center text-center p-6 backdrop-blur-[2px]"
+        style="background:repeating-linear-gradient(45deg, rgba(255,255,255,0.04) 0 14px, transparent 14px 28px), rgba(0,19,63,0.35)"
+        role="img"
+        aria-label="Espacio reservado para banner"
+      >
+        <div>
+          <div
+            class="font-display font-extrabold uppercase text-white leading-none text-[clamp(1.4rem,3.4vw,2.4rem)] tracking-[0.18em]"
+          >
+            (Espacio de banner)
+          </div>
+          <div
+            class="mt-3 text-[0.78rem] font-semibold tracking-[0.16em] uppercase text-[rgba(10,228,195,0.85)]"
+          >
+            Área disponible para banner personalizado
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
 
-  <ContentSection
-    z={3}
-    bg="bg-bg-alt"
-    eyebrow="Docentes"
-    title="Profesores que marcan la diferencia"
+  <!-- ================== INTRO ================== -->
+  <section
+    class="relative -mt-[50px] rounded-t-[50px] bg-bg z-[2] pt-[clamp(4.5rem,8vw,7rem)] pb-[clamp(2rem,4vw,3rem)]"
   >
-    <div class="grid gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-6">
-      {docentes.map((d) => (
-        <article class="bg-white rounded-3xl overflow-hidden border border-[rgba(0,19,63,0.06)]">
-          <div class="relative aspect-[4/5] overflow-hidden bg-bg">
-            <img src={d.photo} alt={d.name} loading="lazy" class="w-full h-full object-cover" />
-            <div class="absolute inset-0 bg-black/15"></div>
-          </div>
-          <div class="px-5 py-4">
-            <h3 class="font-display font-bold text-brand-blue-dark uppercase text-[0.95rem]">{d.name}</h3>
-            <p class="text-[0.78rem] text-ink-muted mt-1">{d.role}</p>
-          </div>
-        </article>
-      ))}
-    </div>
-  </ContentSection>
+    <Container>
+      <div class="text-center max-w-[760px] mx-auto">
+        <span
+          class="inline-flex items-center gap-2 text-[0.74rem] font-bold uppercase tracking-[0.22em] text-brand-blue mb-3.5 before:content-[''] before:w-[22px] before:h-[2px] before:bg-brand-blue before:rounded-sm"
+          >Nuestro equipo</span
+        >
+        <h2
+          class="font-display font-extrabold uppercase text-brand-blue-dark text-[clamp(2rem,4.4vw,3rem)] leading-[0.95]"
+        >
+          Talento que transforma futuros
+        </h2>
+        <p class="mt-5 text-[1.05rem] text-ink-muted">
+          Expertos en operaciones, liderazgo académico, desarrollo corporativo, gestión de
+          pregrados, marketing, diseño audiovisual, servicios estudiantiles y análisis
+          administrativo. Todos comprometidos con ofrecer una educación de calidad y experiencias
+          formativas excepcionales en Medellín.
+        </p>
+      </div>
+    </Container>
+  </section>
 
-  <HighlightSection
-    z={4}
-    color="blue"
-    eyebrow="Sumérgete en la experiencia ESIC"
-    title="Trabaja con quienes lideran<br />la economía digital"
-    ctas={[{ label: "Ver programas", href: "/programas/" }]}
-  />
+  <!-- ================== TEAM BY AREAS ================== -->
+  <section class="relative bg-bg z-[3] pt-[clamp(2rem,4vw,3rem)] pb-[clamp(4rem,7vw,6rem)]">
+    <Container>
+      {
+        areas.map((area, ai) => (
+          <div class:list={[ai > 0 && "mt-[clamp(3.5rem,6vw,5rem)]"]}>
+            <div
+              class="flex items-baseline justify-between gap-6 mb-8 pb-4 border-b border-[#E7E2D8] max-[720px]:flex-col max-[720px]:items-start max-[720px]:gap-1"
+            >
+              <h3
+                class="font-display font-extrabold uppercase text-brand-blue-dark text-[clamp(1.6rem,3vw,2.4rem)]"
+              >
+                {area.title}
+              </h3>
+              <span class="text-[0.78rem] font-bold tracking-[0.18em] uppercase text-brand-blue whitespace-nowrap">
+                {area.count}
+              </span>
+            </div>
+            <div class="grid grid-cols-2 max-[420px]:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-[1.4rem] max-[720px]:gap-4">
+              {area.members.map((m) => (
+                <article
+                  class:list={[
+                    "bg-surface rounded-[22px] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_22px_40px_-22px_rgba(0,19,63,0.22)]",
+                    m.featured
+                      ? "border-2 border-brand-blue shadow-[0_18px_36px_-22px_rgba(0,71,233,0.4)]"
+                      : "border border-[#E7E2D8] hover:border-[rgba(0,71,233,0.25)]",
+                  ]}
+                >
+                  <div class="relative aspect-[4/5] overflow-hidden bg-gradient-to-br from-[#2a2f3a] to-[#1a1f2c]">
+                    {m.photo ? (
+                      <>
+                        <img
+                          src={m.photo}
+                          alt={m.name}
+                          loading="lazy"
+                          class="w-full h-full object-cover transition-transform duration-500 hover:scale-[1.04]"
+                        />
+                        <div class="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-transparent to-[rgba(0,19,63,0.35)]" />
+                      </>
+                    ) : (
+                      <div
+                        class="absolute inset-0 flex items-center justify-center"
+                        style="background:repeating-linear-gradient(45deg, rgba(255,255,255,0.04) 0 14px, transparent 14px 28px), linear-gradient(135deg, #2a2f3a 0%, #14182a 100%)"
+                      >
+                        <div class="w-[56%] opacity-35 [&_svg]:w-full [&_svg]:h-auto [&_svg]:stroke-brand-teal" set:html={personIcon} />
+                      </div>
+                    )}
+                  </div>
+                  <div class="px-[1.2rem] pt-[1.2rem] pb-[1.4rem]">
+                    <h4 class="font-display font-extrabold uppercase text-brand-blue-dark text-[1.35rem] max-[720px]:text-[1.15rem] leading-none">
+                      {m.name}
+                    </h4>
+                    <p class="mt-2 text-[0.86rem] max-[720px]:text-[0.8rem] text-ink-muted leading-[1.3]">
+                      {m.role}
+                    </p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </Container>
+  </section>
+
+  <!-- ================== DOCENTES ================== -->
+  <section
+    class="relative -mt-[50px] rounded-t-[50px] bg-brand-blue-dark text-white z-[4] py-[clamp(5rem,9vw,7.5rem)]"
+  >
+    <Container>
+      <div class="text-center max-w-[780px] mx-auto mb-12">
+        <span
+          class="inline-flex items-center gap-2 text-[0.74rem] font-bold uppercase tracking-[0.22em] text-brand-teal mb-3.5 before:content-[''] before:w-[22px] before:h-[2px] before:bg-brand-teal before:rounded-sm"
+          >Nuestros docentes</span
+        >
+        <h2
+          class="font-display font-extrabold uppercase text-white text-[clamp(2.2rem,5vw,3.4rem)]"
+        >
+          Profesores que marcan la diferencia
+        </h2>
+        <p class="mt-4 text-[1.05rem] text-white/[0.78]">
+          Profesionales en activo del mundo de los negocios y el marketing que comparten su
+          experiencia con nuestros estudiantes. Aquí presentamos a quienes nos acompañan de forma
+          recurrente en aulas y programas.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 max-[420px]:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-[1.4rem] max-[720px]:gap-4">
+        {
+          Array.from({ length: 4 }).map(() => (
+            <article class="bg-white/[0.04] border border-white/[0.12] rounded-[22px] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[rgba(10,228,195,0.5)] hover:shadow-[0_22px_40px_-22px_rgba(10,228,195,0.25)]">
+              <div class="relative aspect-[4/5] overflow-hidden">
+                <div
+                  class="absolute inset-0 flex items-center justify-center"
+                  style="background:repeating-linear-gradient(45deg, rgba(255,255,255,0.04) 0 14px, transparent 14px 28px), linear-gradient(135deg, #2a2f3a 0%, #14182a 100%)"
+                >
+                  <div class="w-[56%] opacity-35 [&_svg]:w-full [&_svg]:h-auto [&_svg]:stroke-brand-teal" set:html={personIcon} />
+                </div>
+              </div>
+              <div class="px-[1.2rem] pt-[1.2rem] pb-[1.4rem]">
+                <span class="inline-block mb-3 px-2.5 py-1 rounded-full bg-[rgba(10,228,195,0.15)] text-brand-teal text-[0.66rem] font-bold tracking-[0.14em] uppercase">
+                  Docente
+                </span>
+                <h4 class="font-display font-extrabold uppercase text-white text-[1.35rem] leading-none">
+                  Nombre del docente
+                </h4>
+                <p class="mt-2 text-[0.86rem] text-white/[0.72] leading-[1.3]">
+                  Especialidad / Programa
+                </p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+
+      <p
+        class="mt-10 text-center text-[0.82rem] tracking-[0.16em] uppercase text-white/55"
+      >
+        Próximamente · Estamos preparando los perfiles de nuestros docentes recurrentes
+      </p>
+    </Container>
+  </section>
+
+  <!-- ================== CTA HIGHLIGHT ================== -->
+  <section
+    class="relative -mt-[50px] rounded-t-[50px] bg-brand-blue text-white z-[5] py-[clamp(4.5rem,8vw,7rem)] text-center"
+  >
+    <Container>
+      <h2
+        class="font-display font-extrabold uppercase text-white text-[clamp(2.4rem,5.2vw,3.8rem)] max-w-[18ch] mx-auto"
+      >
+        Sumérgete en la experiencia ESIC
+      </h2>
+      <p class="mx-auto max-w-[56ch] mt-5 mb-8 text-[1.05rem] text-white/[0.86]">
+        Conoce de cerca a nuestro equipo, nuestros programas y todo lo que hacemos para transformar
+        tu futuro profesional.
+      </p>
+      <div class="flex gap-3.5 justify-center flex-wrap">
+        <a
+          href="/programas/"
+          class="inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 font-bold text-[0.82rem] tracking-[0.08em] uppercase no-underline border-2 border-white/45 text-white transition-all hover:-translate-y-0.5 hover:border-white hover:bg-white/[0.08]"
+          >Ver programas</a
+        >
+        <a
+          href="#contacto"
+          class="inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 font-bold text-[0.82rem] tracking-[0.08em] uppercase no-underline bg-white text-brand-blue transition-all hover:-translate-y-0.5"
+          >Hablemos</a
+        >
+      </div>
+    </Container>
+  </section>
 </Layout>

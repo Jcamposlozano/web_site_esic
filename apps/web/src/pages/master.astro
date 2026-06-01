@@ -1,88 +1,134 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import PageHero from "../components/sections/PageHero.astro";
-import ContentSection from "../components/sections/ContentSection.astro";
-import ProgramCardGrid from "../components/sections/ProgramCardGrid.astro";
-import BeneficiosGrid from "../components/sections/BeneficiosGrid.astro";
+import Container from "../components/Container.astro";
+import OverlapSection from "../components/OverlapSection.astro";
 import HighlightSection from "../components/sections/HighlightSection.astro";
-import ScrollBreak from "../components/sections/ScrollBreak.astro";
 import FormPlaceholder from "../components/sections/FormPlaceholder.astro";
+import HeroBannerMasters from "../components/pages/master/HeroBannerMasters.astro";
+import MastersGrid from "../components/pages/master/MastersGrid.astro";
+import CifrasReconocimiento from "../components/pages/master/CifrasReconocimiento.astro";
+import ComparadorGrid from "../components/pages/master/ComparadorGrid.astro";
 
 const masters = [
   {
-    href: "/master-digital-business/",
-    title: "Digital Business",
-    duration: "11 meses · Híbrido",
-    image: "/images/wp/2026/02/master_db.webp",
-    titleColor: "#09CF90",
+    href: "/master-digital-business",
+    title: "Máster en Digital Business",
+    duration: "11 meses · Modalidad híbrida",
+    imageDesktop: "/images/wp/2026/02/master_db.webp",
+    imageMobile: "/images/wp/2026/02/mobile_master_db.webp",
+    position: "85%",
   },
   {
-    href: "/master-customer-experience/",
-    title: "Customer Experience Management",
-    duration: "11 meses · Híbrido",
-    image: "/images/wp/2026/02/master_cx.webp",
-    titleColor: "#09CF90",
+    href: "/master-customer-experience",
+    title: "Máster en Customer Experience Management",
+    duration: "11 meses · Modalidad híbrida",
+    imageDesktop: "/images/wp/2026/02/master_cx.webp",
+    imageMobile: "/images/wp/2026/02/mobile_master_cx.webp",
+    position: "70%",
   },
   {
-    href: "/master-digital-marketing/",
-    title: "Digital Marketing",
-    duration: "11 meses · Híbrido",
-    image: "/images/wp/2026/02/master_dm.webp",
-    titleColor: "#09CF90",
+    href: "/master-digital-marketing",
+    title: "Máster en Digital Marketing",
+    duration: "11 meses · Modalidad híbrida",
+    imageDesktop: "/images/wp/2026/02/master_dm.webp",
+    imageMobile: "/images/wp/2026/02/mobile_master_dm.webp",
+    position: "85%",
+  },
+];
+
+const comparador = [
+  {
+    interest: "Si te interesa...",
+    title: "Liderar la transformación digital y modelos de negocio",
+    recommendation: "→ Máster en Digital Business",
+  },
+  {
+    interest: "Si te interesa...",
+    title: "Estrategia de marketing, datos y performance digital",
+    recommendation: "→ Máster en Digital Marketing",
+  },
+  {
+    interest: "Si te interesa...",
+    title: "Diseñar experiencias y liderar con innovación",
+    recommendation: "→ Máster en Customer Experience Management",
   },
 ];
 ---
-<Layout title="Másters — ESIC Medellín">
-  <PageHero
-    eyebrow="Posgrado · Modalidad híbrida"
-    title="Donde las <span class='text-brand-teal'>empresas</span><br />forman a sus líderes"
-    subtitle="Tres másters de 11 meses en marketing, customer experience y negocios digitales. Modalidad híbrida diseñada para profesionales en ejercicio que necesitan resultados aplicables al día siguiente."
-    ctas={[
-      { label: "Ver másters", href: "#masters" },
-      { label: "Conoce las becas", href: "/master/becas/", variant: "outline" },
-    ]}
-    eyebrowColor="text-brand-teal"
-  />
+<Layout
+  title="Másters ESIC Medellín | Programas de Posgrado"
+  description="Programas de Másters en Colombia. Digital Business, Digital Marketing y Customer Experience Management en ESIC Medellín con visión global."
+  fullBleed
+>
+  <main>
+    <!-- 1. Hero — Banner Másters -->
+    <HeroBannerMasters
+      href="#programas"
+      imageDesktop="/images/wp/2026/05/global-management-program-master-desktop-scaled.webp"
+      imageMobile="/images/wp/2026/05/global-management-program-master-mobile-scaled.webp"
+      alt="Programas de Máster ESIC Medellín"
+      ctaLabel="Ver programas"
+    />
 
-  <ContentSection
-    z={2}
-    eyebrow="Nuestros másters"
-    eyebrowColor="text-brand-teal-dark"
-    title="Tres másters, una misma escuela"
-  >
-    <div id="masters">
-      <ProgramCardGrid programas={masters} columns={3} />
-    </div>
-  </ContentSection>
+    <!-- 2. Selector de Másteres -->
+    <span id="programas" class="block h-0 scroll-mt-24" aria-hidden="true"></span>
+    <OverlapSection bg="bg-white" z={2} padding="py-20 md:py-24">
+      <Container>
+        <div class="mb-10 max-w-[560px]">
+          <span class="inline-flex items-center gap-2 font-display text-[1rem] font-semibold uppercase tracking-[0.2em] text-brand-teal-dark">
+            <span class="block h-[2px] w-6 bg-current" aria-hidden="true"></span>
+            Explora
+          </span>
+          <h2 class="mt-[0.6rem] font-display text-[clamp(2.5rem,5vw,4.2rem)] font-semibold uppercase leading-[0.95] text-brand-blue-dark">
+            Nuestros Másters
+          </h2>
+          <p class="mt-[0.6rem] text-[1.05rem] text-ink-muted">
+            Programas de posgrado en Colombia diseñados para acelerar tu carrera y adaptarse a tus objetivos profesionales.
+          </p>
+        </div>
+        <MastersGrid programas={masters} />
+      </Container>
+    </OverlapSection>
 
-  <BeneficiosGrid
-    z={3}
-    bg="bg-bg-alt"
-    eyebrow="Por qué un máster en ESIC"
-    title="Formato pensado para profesionales"
-    items={[
-      { value: "11 meses", label: "Duración", color: "teal" },
-      { value: "Híbrido", label: "Sesiones presenciales + online", color: "blue" },
-      { value: "ESIC", label: "Doble titulación España + Colombia", color: "orange" },
-      { value: "Empresas", label: "Casos reales con compañías aliadas", color: "purple" },
-    ]}
-  />
+    <!-- 3. Cifras y Reconocimiento -->
+    <CifrasReconocimiento z={3} />
 
-  <ScrollBreak
-    z={4}
-    eyebrow="Trayectoria global"
-    title="62K alumni en 80+ países<br />60 años formando profesionales<br />líderes en marketing y economía digital"
-    cta={{ label: "Conoce ESIC", href: "/quienes-somos/" }}
-  />
+    <!-- 4. Comparador Rápido -->
+    <OverlapSection bg="bg-white" z={4} padding="py-20 md:py-24">
+      <Container>
+        <div class="mb-10 max-w-[560px]">
+          <span class="inline-flex items-center gap-2 font-display text-[1rem] font-semibold uppercase tracking-[0.2em] text-brand-teal-dark">
+            <span class="block h-[2px] w-6 bg-current" aria-hidden="true"></span>
+            ¿Cuál es para ti?
+          </span>
+          <h2 class="mt-[0.6rem] font-display text-[clamp(2.5rem,5vw,4.2rem)] font-semibold uppercase leading-[0.95] text-brand-blue-dark">
+            Encuentra tu máster ideal
+          </h2>
+          <p class="mt-[0.6rem] text-[1.05rem] text-ink-muted">
+            Una guía rápida para ayudarte a decidir según tus intereses profesionales.
+          </p>
+        </div>
+        <ComparadorGrid items={comparador} />
+      </Container>
+    </OverlapSection>
 
-  <HighlightSection
-    z={5}
-    color="teal"
-    eyebrow="Becas de Máster"
-    title="Hasta 40% de beca<br />para profesionales"
-    body="Becas por trayectoria, por movilidad o por convenio corporativo. Conversa con un asesor para encontrar la más adecuada a tu perfil."
-    ctas={[{ label: "Aplicar a una beca", href: "/master/becas/" }]}
-  />
+    <!-- 5. Highlight Section -->
+    <HighlightSection
+      z={5}
+      color="teal"
+      eyebrow="Da el siguiente paso"
+      title="Tu futuro profesional comienza aquí"
+      body="Conoce la información completa de nuestros programas o agenda una sesión con nuestro equipo de admisiones para resolver todas tus dudas."
+      ctas={[{ label: "Solicitar información", href: "#formulario", variant: "white" }]}
+    />
 
-  <FormPlaceholder z={6} />
+    <!-- 6. Formulario (Zoho → FormPlaceholder) -->
+    <div id="formulario"></div>
+    <FormPlaceholder
+      z={6}
+      bg="bg-bg"
+      title="Solicita información"
+      body="Completa el formulario y un asesor se pondrá en contacto contigo para guiarte en el proceso. 318 086 6698 · analistacorporate@esic.co"
+      formLabel="Formulario Zoho (Solicitar información — Máster)"
+    />
+  </main>
 </Layout>

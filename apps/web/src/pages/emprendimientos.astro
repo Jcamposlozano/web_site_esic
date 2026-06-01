@@ -1,73 +1,74 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import PageHero from "../components/sections/PageHero.astro";
-import ContentSection from "../components/sections/ContentSection.astro";
-import HighlightSection from "../components/sections/HighlightSection.astro";
+import Container from "../components/Container.astro";
+import EmprendimientosGrid from "../components/pages/eventos/EmprendimientosGrid.tsx";
 
-const filtros = ["Todo", "Tech", "Retail", "Servicios", "Marketing", "Sostenibilidad"];
-
-const proyectos = [
-  { tag: "Tech", title: "Plataforma de logística IA", desc: "Startup de optimización de rutas con IA, fundada por egresados ESIC." },
-  { tag: "Retail", title: "Marca de moda sostenible", desc: "E-commerce de moda con cadena de producción local y trazable." },
-  { tag: "Marketing", title: "Agencia de contenido B2B", desc: "Estudio especializado en content marketing para SaaS." },
-  { tag: "Servicios", title: "Consultora de transformación digital", desc: "Acompañamiento a pymes en digitalización de procesos." },
-  { tag: "Sostenibilidad", title: "Marketplace de productos zero waste", desc: "Plataforma de comercio circular para Latinoamérica." },
-  { tag: "Tech", title: "App de salud mental", desc: "App con IA conversacional para acompañamiento emocional." },
-];
+const title = "Emprendimientos — Comunidad ESIC Medellín";
+const description =
+  "Conoce los proyectos y emprendimientos que están construyendo los estudiantes y egresados de ESIC Medellín. Negocios reales, ideas en movimiento.";
 ---
-<Layout title="Emprendimientos — ESIC Medellín">
-  <PageHero
-    eyebrow="Comunidad ESIC Medellín"
-    title="Hecho por<br />nuestros <span class='text-brand-teal'>estudiantes</span>"
-    subtitle="Emprendimientos, productos y proyectos creados por estudiantes y egresados de ESIC Medellín. Ecosistema que conecta talento con oportunidades."
-    ctas={[{ label: "Sumar mi proyecto", href: "#sumar" }]}
-    eyebrowColor="text-brand-teal"
-  />
-
-  <ContentSection
-    z={2}
-    eyebrow="Comunidad ESIC"
-    title="Proyectos de la red"
-  >
-    <div class="flex flex-wrap gap-2 mb-8">
-      {filtros.map((f, i) => (
-        <button
-          type="button"
-          class:list={[
-            "text-[0.78rem] uppercase tracking-[0.08em] font-semibold px-4 py-2 rounded-full transition-colors",
-            i === 0
-              ? "bg-brand-blue text-white"
-              : "bg-white text-brand-blue-dark border border-brand-blue-dark/15 hover:bg-bg",
-          ]}
-        >
-          {f}
-        </button>
-      ))}
-    </div>
-
-    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-      {proyectos.map((p) => (
-        <article class="group bg-white rounded-3xl p-7 border border-[rgba(0,19,63,0.06)] shadow-[0_2px_20px_rgba(0,19,63,0.05)] transition-transform hover:-translate-y-1">
-          <span class="inline-flex items-center text-[0.65rem] font-bold uppercase tracking-[0.16em] text-brand-teal-dark bg-brand-teal/15 rounded-full px-3 py-1 mb-4">
-            {p.tag}
+<Layout title={title} description={description} fullBleed>
+  <main class="bg-bg">
+    <!-- HERO -->
+    <section class="relative flex min-h-[70vh] items-end overflow-hidden bg-brand-blue-dark pb-32 pt-36 md:pb-[8rem]">
+      <img
+        src="/images/wp/2026/04/areas-comunes-03.webp"
+        alt=""
+        class="absolute inset-0 z-0 h-full w-full object-cover"
+        fetchpriority="high"
+      />
+      <div class="absolute inset-0 z-[1] bg-gradient-to-br from-[rgba(0,19,63,0.82)] to-[rgba(0,19,63,0.55)]"></div>
+      <Container class="relative z-[2]">
+        <p class="mb-8 text-[0.85rem] tracking-[0.04em] text-white/65">
+          <a href="/" class="text-white/65 transition-colors hover:text-brand-teal">Inicio</a>
+          <span class="mx-1.5">/</span>Emprendimientos
+        </p>
+        <div class="max-w-[720px]">
+          <span class="mb-[1.2rem] inline-block text-[0.8rem] font-semibold uppercase tracking-[0.12em] text-brand-teal">
+            Comunidad ESIC Medellín
           </span>
-          <h3 class="font-display text-lg font-extrabold uppercase text-brand-blue-dark mb-2 leading-tight">{p.title}</h3>
-          <p class="text-ink-muted text-[0.95rem] leading-relaxed mb-4">{p.desc}</p>
-          <span class="inline-flex items-center gap-2 text-[0.78rem] font-bold uppercase tracking-[0.06em] text-brand-blue group-hover:text-brand-blue-dark transition-colors">
-            Ver caso
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </span>
-        </article>
-      ))}
-    </div>
-  </ContentSection>
+          <h1 class="mb-6 font-display text-[clamp(3rem,7vw,5.5rem)] font-extrabold uppercase leading-[0.95] text-white">
+            Hecho por <span class="text-brand-teal">nuestros estudiantes</span>
+          </h1>
+          <p class="max-w-[580px] text-[1.15rem] leading-[1.6] text-white/85">
+            Conoce los proyectos y emprendimientos que están construyendo quienes pasan por nuestras aulas. Negocios reales, ideas en movimiento.
+          </p>
+        </div>
+      </Container>
+    </section>
 
-  <HighlightSection
-    z={3}
-    color="teal"
-    eyebrow="¿Tu emprendimiento debería estar aquí?"
-    title="Súmate al directorio"
-    body="Si eres estudiante o egresado ESIC y tienes un proyecto activo, nos encantaría conocerlo."
-    ctas={[{ label: "Postular mi proyecto", href: "/quienes-somos/" }]}
-  />
+    <!-- INTRO + FILTROS + GRID -->
+    <section class="relative z-[2] -mt-[50px] rounded-t-[50px] bg-bg pb-20 pt-20 md:pt-24">
+      <Container>
+        <div class="mx-auto mb-12 max-w-[760px] text-center">
+          <p class="text-[1.15rem] leading-[1.65] text-ink-muted">
+            Este escaparate reúne emprendimientos creados por estudiantes y egresados de ESIC. Una muestra viva de cómo la formación se traduce en negocios, marcas y proyectos.
+          </p>
+        </div>
+
+        <EmprendimientosGrid client:load />
+      </Container>
+    </section>
+
+    <!-- CTA -->
+    <section class="relative z-[3] -mt-[50px] rounded-t-[50px] bg-brand-blue py-20 text-center md:py-24">
+      <Container>
+        <div class="mx-auto max-w-[680px]">
+          <h2 class="mb-[1.2rem] font-display text-[clamp(2.5rem,5vw,3.5rem)] font-extrabold uppercase leading-[0.95] text-white">
+            ¿Tu emprendimiento debería estar aquí?
+          </h2>
+          <p class="mb-8 text-[1.1rem] leading-[1.6] text-white/85">
+            Si eres estudiante o egresado de ESIC y estás construyendo algo, queremos conocerlo y ayudarte a contarlo.
+          </p>
+          <a
+            href="/contacto"
+            class="inline-flex items-center gap-2.5 rounded-full bg-white px-8 py-4 text-[0.85rem] font-bold uppercase tracking-[0.06em] text-brand-blue no-underline transition-all hover:-translate-y-0.5 hover:bg-[#F0F0F0]"
+          >
+            Cuéntanos tu historia
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+          </a>
+        </div>
+      </Container>
+    </section>
+  </main>
 </Layout>

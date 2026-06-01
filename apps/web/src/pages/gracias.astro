@@ -1,35 +1,49 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import ContentSection from "../components/sections/ContentSection.astro";
+import Container from "../components/Container.astro";
+
+const title = "Gracias — Formulario enviado | ESIC Medellín";
+const description =
+  "Hemos recibido tu solicitud. Uno de nuestros asesores se pondrá en contacto contigo muy pronto.";
 ---
-<Layout title="¡Gracias! · ESIC Medellín">
-  <ContentSection z={1} bg="bg-bg" padding="py-24 md:py-32">
-    <div class="max-w-[720px] mx-auto text-center">
-      <div class="inline-flex w-20 h-20 rounded-full bg-brand-teal grid place-items-center mb-8">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M20 6 9 17l-5-5"/>
-        </svg>
-      </div>
-      <span class="inline-flex items-center gap-3 text-[0.74rem] font-bold uppercase tracking-[0.22em] text-brand-blue mb-3">
-        <span class="block h-px w-8 bg-current" aria-hidden="true"></span>
+<Layout title={title} description={description}>
+  <main class="bg-bg">
+    <Container class="flex min-h-[80vh] flex-col items-center justify-center gap-8 py-24 text-center">
+      <span class="eg-label inline-flex items-center gap-2 text-[0.8rem] font-semibold uppercase tracking-[0.14em] text-brand-blue">
         Formulario enviado
       </span>
-      <h1 class="font-display text-5xl md:text-6xl font-extrabold uppercase text-brand-blue-dark leading-[0.95]">
-        Hemos recibido<br />tu solicitud
+
+      <h1 class="font-display text-[clamp(5rem,10vw,9rem)] font-bold uppercase leading-[0.9] tracking-[-0.01em] text-brand-blue-dark">
+        Hemos recibido<br /><span class="text-brand-blue">tu solicitud</span>
       </h1>
-      <div class="w-20 h-[2px] bg-brand-blue mx-auto my-8"></div>
-      <p class="text-[1.05rem] text-ink-muted leading-relaxed max-w-[55ch] mx-auto">
-        Uno de nuestros asesores se pondrá en contacto contigo muy pronto por el medio que
-        indicaste. Mientras tanto, puedes seguir explorando los programas.
+
+      <div class="h-[2px] w-10 bg-brand-teal"></div>
+
+      <p class="max-w-[460px] text-[1.05rem] leading-[1.7] text-ink-muted">
+        Uno de nuestros asesores se pondrá en contacto contigo muy pronto por el medio que indicaste.
       </p>
-      <div class="mt-10 flex flex-wrap gap-3 justify-center">
-        <a href="/" class="inline-flex items-center justify-center rounded-full bg-brand-blue text-white text-[0.85rem] font-bold uppercase tracking-[0.06em] px-7 py-3 hover:bg-brand-blue-dark transition-colors no-underline">
-          Volver al inicio
-        </a>
-        <a href="/programas/" class="inline-flex items-center justify-center rounded-full bg-white text-brand-blue-dark text-[0.85rem] font-bold uppercase tracking-[0.06em] px-7 py-3 border border-brand-blue-dark/15 hover:bg-bg-alt transition-colors no-underline">
-          Ver programas
-        </a>
-      </div>
-    </div>
-  </ContentSection>
+
+      <a
+        href="/"
+        class="inline-flex items-center gap-2.5 rounded-full bg-brand-blue px-7 py-3.5 text-[0.85rem] font-semibold uppercase tracking-[0.1em] text-white no-underline transition-all hover:-translate-y-0.5 hover:bg-[#0037B4]"
+      >
+        Volver al inicio
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5">
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
+      </a>
+    </Container>
+  </main>
 </Layout>
+
+<style>
+  .eg-label::before,
+  .eg-label::after {
+    content: "";
+    display: block;
+    width: 32px;
+    height: 1.5px;
+    background: var(--color-brand-blue);
+    opacity: 0.4;
+  }
+</style>

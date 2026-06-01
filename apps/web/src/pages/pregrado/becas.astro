@@ -1,102 +1,235 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import PageHero from "../../components/sections/PageHero.astro";
-import ContentSection from "../../components/sections/ContentSection.astro";
-import HighlightSection from "../../components/sections/HighlightSection.astro";
-import FormPlaceholder from "../../components/sections/FormPlaceholder.astro";
+import Container from "../../components/Container.astro";
+import OverlapSection from "../../components/OverlapSection.astro";
+import BecasFaq, { type FaqItem } from "../../components/pages/pregrado/BecasFaq.tsx";
+import BecasModal from "../../components/pages/pregrado/BecasModal.tsx";
 
 const becas = [
-  { title: "Excelencia Académica", pct: "15%", desc: "Para estudiantes con resultados académicos sobresalientes en el bachillerato." },
-  { title: "Movilidad Nacional", pct: "8%", desc: "Para aspirantes de otras ciudades de Colombia que se trasladen a Medellín." },
-  { title: "Hermanos Matriculados", pct: "5%", desc: "Si tienes un hermano(a) actualmente matriculado en ESIC Medellín." },
-  { title: "Familiar Antiguo Alumno", pct: "5%", desc: "Para familiares directos de egresados de cualquier programa ESIC." },
+  {
+    title: "Excelencia Académica",
+    pct: "Beca del 15%",
+    body: "Para bachilleres con promedios sobresalientes o alto puntaje en pruebas Saber 11.",
+    icon: '<path d="M12 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 14.3 7.2 16.9l.9-5.4-3.9-3.8 5.4-.8z"/>',
+  },
+  {
+    title: "Movilidad Nacional",
+    pct: "Beca del 8%",
+    body: "Facilita el acceso al campus Medellín a estudiantes cuya residencia familiar está fuera de Antioquia.",
+    icon: '<circle cx="12" cy="12" r="10"/><ellipse cx="12" cy="12" rx="5" ry="10"/><path d="M2 12h20"/>',
+  },
+  {
+    title: "Hermanos Matriculados y Egresados",
+    pct: "Beca del 5%",
+    body: "Para hermanos que cursan pregrado simultáneamente en ESIC Medellín o sean egresados.",
+    icon: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+  },
+  {
+    title: "Familiar Antiguo Alumno",
+    pct: "Beca del 5%",
+    body: "Para hijos o hermanos de antiguos alumnos que hayan finalizado estudios en ESIC.",
+    icon: '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+  },
 ];
 
 const requisitos = [
-  "Diligenciar el formulario de aplicación a la beca dentro del proceso de admisión.",
-  "Anexar certificados de notas de los últimos dos años de bachillerato.",
-  "Adjuntar carta de motivación firmada por el aspirante.",
-  "Resultados Saber 11 o equivalente internacional.",
-  "Cumplir con el proceso de admisión institucional vigente.",
+  "Ser admitido en un programa de pregrado de ESIC Medellín.",
+  "No ser beneficiario de otras becas o descuentos institucionales (no acumulables).",
+  "Realizar la solicitud dentro de los plazos establecidos en el calendario académico.",
+  "Aportar la documentación veraz y completa requerida para cada modalidad.",
+  "Formalizar la matrícula en los plazos indicados tras la concesión de la beca.",
 ];
 
-const faqs = [
-  { q: "¿Puedo combinar varias becas?", a: "No. Cada estudiante aplica a una única categoría — la beca seleccionada por el comité." },
-  { q: "¿La beca cubre matrícula o el total?", a: "Las becas son sobre el valor de la matrícula semestral." },
-  { q: "¿Tengo que renovar cada semestre?", a: "Sí. La beca se mantiene mientras se cumplan los requisitos académicos definidos en el reglamento." },
-  { q: "¿Cuándo me notifican el resultado?", a: "Dentro de las dos semanas siguientes al cierre del proceso de admisión." },
+const faqs: FaqItem[] = [
+  {
+    q: "¿Puedo solicitar más de una beca?",
+    a: "No. Las becas y ayudas económicas de ESIC no son acumulables entre sí. Debes elegir la modalidad que te ofrezca mayor beneficio o que mejor se ajuste a tu perfil.",
+  },
+  {
+    q: "¿Las becas son renovables?",
+    a: "Sí. Para la renovación en cursos sucesivos, será indispensable tener un promedio mínimo en el expediente académico y haber aprobado todas las asignaturas matriculadas. Cada beca debe solicitarse expresamente dentro de los plazos de renovación de matrícula.",
+  },
+  {
+    q: "¿Qué promedio debo mantener?",
+    a: "Depende de la modalidad. Para la Beca de Excelencia Académica se requiere un promedio mínimo de 4.5. Para las demás becas, el promedio mínimo es de 4.0 en el expediente académico de la titulación cursada.",
+  },
+  {
+    q: "¿Cómo me notifican la resolución?",
+    a: "La resolución de la beca será comunicada por el consejo académico de ESIC Medellín de manera individual en las fechas establecidas en las descripciones de cada una de las becas.",
+  },
 ];
+
+const cronograma = [
+  { badge: "Mes 1", title: "Apertura de Convocatoria", desc: "Inicio del periodo de recepción de solicitudes para el próximo semestre." },
+  { badge: "Mes 3", title: "Cierre de Solicitudes", desc: "Fecha límite para enviar formularios y documentación soporte." },
+  { badge: "Mes 6", title: "Resultados", desc: "Comunicación oficial de la resolución de becas a los candidatos." },
+];
+
 ---
-<Layout title="Becas y Ayudas Económicas Pregrado — ESIC Medellín">
-  <PageHero
-    eyebrow="Pregrado · Becas"
-    title="Becas y ayudas<br />económicas <span class='text-brand-orange'>Pregrado</span>"
-    subtitle="Hasta 40% de descuento en matrícula para estudiantes que cumplan los criterios de excelencia, movilidad o vínculo familiar con la comunidad ESIC."
-    ctas={[{ label: "Aplicar a una beca", href: "#aplicar" }]}
-  />
+<Layout
+  title="Becas y Ayudas Económicas Pregrado — ESIC Medellín"
+  description="Becas y ayudas económicas para pregrado en ESIC Medellín: excelencia académica, movilidad nacional, hermanos matriculados y familiares de antiguos alumnos."
+  fullBleed
+>
+  <BecasModal client:load />
 
-  <ContentSection
-    z={2}
-    eyebrow="Categorías"
-    eyebrowColor="text-brand-orange"
-    title="Encuentra la beca que se ajusta a ti"
-  >
-    <div class="grid gap-5 md:grid-cols-2 mt-4">
-      {becas.map((b) => (
-        <article class="bg-white rounded-3xl p-8 border border-[rgba(0,19,63,0.06)] shadow-[0_2px_20px_rgba(0,19,63,0.05)]">
-          <div class="font-display text-5xl font-extrabold text-brand-orange leading-none mb-3">{b.pct}</div>
-          <h3 class="font-display text-xl font-extrabold uppercase text-brand-blue-dark mb-3">{b.title}</h3>
-          <p class="text-ink-muted leading-relaxed">{b.desc}</p>
-        </article>
-      ))}
-    </div>
-  </ContentSection>
+  <main>
+    <!-- Hero (imagen de fondo con overlay) -->
+    <section class="relative flex items-end overflow-hidden min-h-[88vh]">
+      <img
+        src="/images/wp/2025/12/vida-universitaria-estudiantes-esic-campus-medellin.png"
+        alt=""
+        class="absolute inset-0 w-full h-full object-cover object-center z-0"
+      />
+      <div class="absolute inset-0 z-[1] bg-black/55"></div>
+      <Container class="relative z-[2] w-full py-28 md:py-32">
+        <h1 class="font-display text-[clamp(3.5rem,10vw,7.5rem)] font-extrabold uppercase leading-[0.88] text-white mb-6">
+          Becas y Ayudas<br /><span class="text-brand-orange">Económicas</span><br />Pregrado
+        </h1>
+        <p class="text-[1.05rem] leading-relaxed text-white/85 max-w-[500px] mb-10">
+          ESIC Medellín apoya a estudiantes de nuevo ingreso mediante un plan de becas y ayudas económicas al estudio, fomentando la excelencia y la igualdad de oportunidades.
+        </p>
+        <button
+          type="button"
+          data-open-becas-modal
+          class="inline-flex items-center justify-center gap-2 rounded-full px-8 py-3.5 font-bold text-[0.82rem] uppercase tracking-[0.06em] text-white no-underline transition-all hover:-translate-y-0.5 bg-brand-blue hover:bg-[#0038CC] cursor-pointer border-0"
+        >
+          Aplica a una beca
+        </button>
+      </Container>
+    </section>
 
-  <ContentSection
-    z={3}
-    bg="bg-bg-alt"
-    eyebrow="Requisitos generales"
-    eyebrowColor="text-brand-orange"
-    title="Lo que necesitas para aplicar"
-  >
-    <ol class="space-y-4 mt-6 max-w-[760px]">
-      {requisitos.map((r, i) => (
-        <li class="flex gap-4 items-start">
-          <span class="shrink-0 w-9 h-9 rounded-full bg-brand-orange text-white font-display font-extrabold flex items-center justify-center">{i + 1}</span>
-          <p class="text-ink leading-relaxed flex-1">{r}</p>
-        </li>
-      ))}
-    </ol>
-  </ContentSection>
+    <!-- Tipos de Beca -->
+    <OverlapSection bg="bg-bg" z={2} padding="py-16 md:py-20">
+      <Container>
+        <h2 class="font-display text-[clamp(2rem,5vw,3.2rem)] font-extrabold uppercase leading-[0.95] text-center text-brand-blue-dark mb-12">
+          Encuentra la beca<br />que se ajusta a ti
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {becas.map((b) => (
+            <div class="bg-white rounded-2xl overflow-hidden shadow-[0_2px_20px_rgba(0,0,0,0.06)]">
+              <div class="h-1.5 bg-brand-orange"></div>
+              <div class="p-6">
+                <div class="w-12 h-12 rounded-xl bg-[rgba(0,71,233,0.08)] grid place-items-center mb-4 text-brand-blue">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6" set:html={b.icon}></svg>
+                </div>
+                <h3 class="font-display text-[1.15rem] font-extrabold uppercase leading-tight text-brand-blue-dark mb-1">{b.title}</h3>
+                <div class="text-[0.82rem] font-bold text-brand-orange mb-3">{b.pct}</div>
+                <p class="text-[0.88rem] leading-relaxed text-ink-muted">{b.body}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Container>
+    </OverlapSection>
 
-  <ContentSection
-    z={4}
-    eyebrow="FAQ"
-    eyebrowColor="text-brand-orange"
-    title="Preguntas frecuentes"
-  >
-    <div class="space-y-3 mt-4 max-w-[820px]">
-      {faqs.map((f) => (
-        <details class="group rounded-2xl border border-[rgba(0,19,63,0.08)] bg-white px-6 py-4 open:shadow-[0_2px_12px_rgba(0,19,63,0.06)]">
-          <summary class="cursor-pointer font-display font-bold uppercase text-brand-blue-dark text-lg list-none flex items-center justify-between gap-3">
-            <span>{f.q}</span>
-            <svg class="w-4 h-4 transition-transform group-open:rotate-180" viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 1l5 5 5-5"/></svg>
-          </summary>
-          <p class="mt-3 text-ink-muted leading-relaxed">{f.a}</p>
-        </details>
-      ))}
-    </div>
-  </ContentSection>
+    <!-- Requisitos -->
+    <OverlapSection bg="bg-white" z={3} padding="py-16 md:py-20">
+      <Container>
+        <div class="grid md:grid-cols-2 rounded-[24px] overflow-hidden max-w-[960px] mx-auto">
+          <div class="bg-brand-orange text-white p-8 md:p-10">
+            <h2 class="font-display text-[clamp(2rem,4vw,2.8rem)] font-extrabold uppercase leading-[0.95] mb-6">Requisitos Generales</h2>
+            <ol class="list-none" style="counter-reset: req">
+              {requisitos.map((r) => (
+                <li class="flex gap-2.5 mb-3 text-[0.88rem] leading-relaxed text-white/[0.88] req-li">
+                  <span class="req-num font-bold text-white min-w-[1.2rem]"></span>
+                  {r}
+                </li>
+              ))}
+            </ol>
+          </div>
+          <div class="min-h-[260px] md:min-h-[380px]">
+            <img
+              src="/images/wp/2025/09/DSC01730_resultado-scaled.jpg"
+              alt="Estudiantes ESIC Medellín"
+              class="w-full h-full object-cover object-center"
+            />
+          </div>
+        </div>
+      </Container>
+    </OverlapSection>
 
-  <HighlightSection
-    z={5}
-    color="orange"
-    eyebrow="¿Listo para aplicar?"
-    title="Da el siguiente paso"
-    body="Diligencia el formulario y un asesor te acompañará en el proceso. Antes del cierre de convocatoria."
-    ctas={[{ label: "Aplicar ahora", href: "#aplicar" }]}
-  />
+    <!-- FAQ -->
+    <OverlapSection bg="bg-bg" z={4} padding="py-16 md:py-20">
+      <Container>
+        <h2 class="font-display text-[clamp(2rem,5vw,3.2rem)] font-extrabold uppercase leading-[0.95] text-center text-brand-blue-dark mb-12">Preguntas Frecuentes</h2>
+        <BecasFaq client:visible items={faqs} />
+      </Container>
+    </OverlapSection>
 
-  <div id="aplicar"></div>
-  <FormPlaceholder z={6} title="Aplica a una Beca de Pregrado" />
+    <!-- Cronograma -->
+    <OverlapSection bg="bg-white" z={5} padding="py-16 md:py-20">
+      <Container>
+        <h2 class="font-display text-[clamp(2rem,5vw,3.2rem)] font-extrabold uppercase leading-[0.95] text-center text-brand-blue-dark mb-12">Cronograma</h2>
+        <div class="becas-tl max-w-[560px] mx-auto relative pl-[110px] md:pl-[130px]">
+          {cronograma.map((c) => (
+            <div class="relative pb-10 last:pb-0">
+              <div class="becas-tl-badge absolute top-0 w-[90px] md:w-[100px] h-[38px] rounded-full border-2 border-brand-blue grid place-items-center text-[0.82rem] font-bold text-brand-blue bg-white z-[1]">{c.badge}</div>
+              <h4 class="font-body font-bold text-base mb-1 text-ink">{c.title}</h4>
+              <p class="text-[0.9rem] text-ink-muted leading-relaxed">{c.desc}</p>
+            </div>
+          ))}
+        </div>
+      </Container>
+    </OverlapSection>
+
+    <!-- CTA final -->
+    <OverlapSection bg="bg-bg" z={6} padding="py-16 md:py-20">
+      <Container>
+        <div class="bg-brand-orange rounded-[32px] px-8 py-12 md:px-16 md:py-20 flex flex-col md:flex-row justify-between items-center gap-8 md:gap-12 text-center md:text-left">
+          <div>
+            <h2 class="font-display text-[clamp(3rem,6vw,5rem)] font-extrabold uppercase leading-[0.9] text-white">¿Listo para aplicar<br />a una Beca?</h2>
+            <p class="text-[1.1rem] text-white/85 mt-3 font-medium">Da el primer paso hacia tu futuro en ESIC Medellín.</p>
+          </div>
+          <div class="flex flex-col items-center md:items-end gap-3 shrink-0">
+            <button
+              type="button"
+              data-open-becas-modal
+              class="inline-flex items-center gap-2 rounded-full px-8 py-3.5 font-bold text-[0.82rem] uppercase tracking-[0.06em] text-brand-orange bg-white hover:bg-[#FFF8F0] transition-all hover:-translate-y-0.5 cursor-pointer border-0"
+            >
+              Aplica a una beca &rarr;
+            </button>
+            <a
+              href="/images/wp/2026/05/Documento_becas_ayudas_economicas_esic_medellin_V2.pdf"
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center gap-2 rounded-full px-6 py-3 font-bold text-[0.78rem] uppercase tracking-[0.06em] text-white bg-transparent border-2 border-white/45 hover:border-white transition-all no-underline"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
+              Descargar brochure
+            </a>
+          </div>
+        </div>
+      </Container>
+    </OverlapSection>
+  </main>
+
+  <style>
+    /* Numeración de requisitos (counter) */
+    .req-li { counter-increment: req; }
+    .req-num::before { content: counter(req) "."; }
+
+    /* Línea vertical del cronograma */
+    .becas-tl::before {
+      content: "";
+      position: absolute;
+      left: 60px;
+      top: 20px;
+      bottom: 20px;
+      width: 2px;
+      background: rgba(0, 19, 63, 0.12);
+    }
+    .becas-tl-badge { left: -110px; }
+    @media (min-width: 768px) {
+      .becas-tl-badge { left: -130px; }
+    }
+  </style>
+
+  <script is:inline>
+    document.querySelectorAll("[data-open-becas-modal]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        window.dispatchEvent(new CustomEvent("open-becas-modal"));
+      });
+    });
+  </script>
 </Layout>

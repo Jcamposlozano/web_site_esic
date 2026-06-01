@@ -1,75 +1,345 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import PageHero from "../components/sections/PageHero.astro";
-import ContentSection from "../components/sections/ContentSection.astro";
-import ProgramCardGrid from "../components/sections/ProgramCardGrid.astro";
-import BeneficiosGrid from "../components/sections/BeneficiosGrid.astro";
-import HighlightSection from "../components/sections/HighlightSection.astro";
-import ScrollBreak from "../components/sections/ScrollBreak.astro";
+import Container from "../components/Container.astro";
+import OverlapSection from "../components/OverlapSection.astro";
 import FormPlaceholder from "../components/sections/FormPlaceholder.astro";
 
+const ArrowRightPath = "M5 12h14M12 5l7 7-7 7";
+const ArrowDownPath = "M12 5v14M5 12l7 7 7-7";
+
+// Selector de pregrados (cards fotográficas con overlay)
 const pregrados = [
   {
     href: "/pregrado-marketing-global/",
     title: "Dirección de Marketing Global",
     duration: "4 años · Doble titulación",
     image: "/images/wp/2026/02/pregrado_mkt_global_.webp",
-    titleColor: "#FF9600",
+    imageMobile: "/images/wp/2026/02/mobile_pregrado_mkt_global_.webp",
   },
   {
     href: "/pregrado-digital-business/",
     title: "Digital Business",
     duration: "4 años · Doble titulación",
     image: "/images/wp/2026/02/pregrado_digital_business.webp",
-    titleColor: "#FF9600",
+    imageMobile: "/images/wp/2026/02/mobile_pregrado_digital_business.webp",
   },
 ];
+
+// Banderas Colombia + España (SVG inline)
+const flagCo =
+  '<svg viewBox="0 0 30 20" width="24" height="16" style="border-radius:2px"><rect width="30" height="6.67" fill="#FCD116"/><rect y="6.67" width="30" height="6.67" fill="#003893"/><rect y="13.33" width="30" height="6.67" fill="#CE1126"/></svg>';
+const flagEs =
+  '<svg viewBox="0 0 30 20" width="24" height="16" style="border-radius:2px"><rect width="30" height="20" fill="#AA151B"/><rect y="5" width="30" height="10" fill="#F1BF00"/></svg>';
+
+// Información común (2x2 stat cards)
+const stats = [
+  {
+    color: "orange",
+    value: "4 Años",
+    label: "Duración",
+    icon: '<circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>',
+  },
+  {
+    color: "blue",
+    value: "Medellín",
+    label: "(Alto de las Palmas)",
+    icon: '<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle>',
+  },
+  {
+    color: "teal",
+    value: "Doble Título",
+    label: "ESIC University + Ceipa",
+    icon: '<path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path>',
+  },
+  {
+    color: "purple",
+    value: "Inmersión internacional",
+    label: "En el campus de Madrid",
+    icon: '<circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>',
+  },
+];
+const statBg: Record<string, string> = {
+  orange: "bg-gradient-to-br from-brand-orange to-brand-orange",
+  blue: "bg-gradient-to-br from-brand-blue to-[#001E80]",
+  teal: "bg-gradient-to-br from-brand-teal-dark to-[#07A872]",
+  purple: "bg-gradient-to-br from-[#6B21A8] to-[#4C1D95]",
+};
+
+// Cifras
+const cifrasEspana = [
+  { num: "TOP 1", desc: "Marketing y Economía Digital" },
+  { num: "62K+", desc: "Alumni de 80+ nacionalidades" },
+  { num: "60", desc: "Años formando profesionales" },
+];
+const cifrasMedellin = [
+  { num: "+3,000", desc: "Participantes de programas a la medida" },
+  { num: "230", desc: "Máster graduados" },
+  { num: "350", desc: "Estudiantes de pregrado activos" },
+];
 ---
-<Layout title="Pregrados — ESIC Medellín">
-  <PageHero
-    eyebrow="Pregrado · Doble titulación"
-    title="Empieza tu carrera<br />en el <span class='text-brand-orange'>mundo real</span>"
-    subtitle="Dos pregrados en marketing y negocios digitales con doble titulación: ESIC España + Universidad CEIPA. Cuatro años de inmersión práctica, retos reales y networking corporativo."
-    ctas={[
-      { label: "Ver programas", href: "#programas" },
-      { label: "Conoce las becas", href: "/pregrado/becas/", variant: "outline" },
-    ]}
-    image="/images/wp/2026/03/banner-general-pregrado-desktop.webp"
-  />
+<Layout
+  title="Pregrados ESIC Medellín | Formación con Visión Global"
+  description="Pregrados en marketing y negocios en ESIC Medellín. Digital Business y Dirección de Marketing Global con doble titulación internacional."
+  fullBleed
+>
+  <main>
+    <!-- 1. Hero Banner General Pregrados (full-bleed, CTA pinned) -->
+    <section class="relative w-full overflow-hidden leading-none">
+      <a href="#programas" aria-label="Ver programas de pregrado" class="block no-underline">
+        <picture class="block w-full">
+          <source media="(max-width: 768px)" srcset="/images/wp/2026/03/banner-esic-vertical-scaled.webp" type="image/webp" />
+          <source media="(min-width: 769px)" srcset="/images/wp/2026/03/banner-general-pregrado-desktop.webp" type="image/webp" />
+          <img
+            src="/images/wp/2026/03/banner-general-pregrado-desktop.webp"
+            alt="Programas de Pregrado ESIC - Inscripciones abiertas"
+            class="w-full h-auto block object-cover object-center"
+            loading="eager"
+            width="2560"
+            height="1168"
+          />
+        </picture>
+      </a>
+      <div class="pointer-events-none absolute inset-0 bg-black/15"></div>
 
-  <ContentSection
-    z={2}
-    eyebrow="Nuestros pregrados"
-    eyebrowColor="text-brand-orange"
-    title="Dos carreras, una misma visión global"
-  >
-    <div id="programas">
-      <ProgramCardGrid programas={pregrados} columns={2} />
+      <a
+        href="#programas"
+        class="hero-banner-cta absolute z-10 inline-flex items-center justify-center gap-3 rounded-full bg-brand-orange text-white font-semibold no-underline whitespace-nowrap shadow-[0_10px_30px_rgba(255,150,0,0.4)] transition-all hover:bg-[#E68700] px-5 py-3 text-[0.85rem] md:px-10 md:py-5 md:text-[1.1rem]"
+      >
+        Ver programas
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 md:w-[22px] md:h-[22px] -rotate-90"><path d="M12 5v14M5 12l7 7 7-7" /></svg>
+      </a>
+    </section>
+
+    <!-- 2. Selector de Pregrados -->
+    <OverlapSection bg="bg-white" z={2} padding="pt-20 pb-0 md:pt-24" class="overflow-hidden">
+      <Container>
+        <div class="mb-10">
+          <span class="inline-flex items-center gap-3 text-[0.9rem] font-display font-extrabold uppercase tracking-[0.2em] text-brand-orange">
+            <span class="block h-0.5 w-6 bg-current" aria-hidden="true"></span>
+            Explora
+          </span>
+          <h2 class="font-display text-[clamp(2.5rem,5vw,4.2rem)] font-extrabold uppercase leading-[0.95] text-brand-blue-dark mt-3 mb-3">Nuestros pregrados</h2>
+          <p class="text-ink-muted max-w-[520px] text-[1.05rem]">Dos pregrados en marketing y negocios digitales para construir tu futuro profesional.</p>
+        </div>
+
+        <div id="programas" class="grid gap-6 md:grid-cols-2">
+          {pregrados.map((p) => (
+            <a
+              href={p.href}
+              class="relative block rounded-xl overflow-hidden no-underline aspect-[4/3] md:aspect-video transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(0,19,63,0.2)]"
+            >
+              <picture class="absolute inset-0 z-0">
+                <source media="(max-width: 768px)" srcset={p.imageMobile} />
+                <img src={p.image} alt="" class="w-full h-full object-cover object-top" />
+              </picture>
+              <div class="absolute inset-0 z-[1] bg-[linear-gradient(90deg,rgba(0,0,0,0.95)_0%,rgba(0,0,0,0.9)_25%,rgba(0,0,0,0.7)_35%,rgba(0,0,0,0.4)_55%,transparent_75%)] md:bg-[linear-gradient(90deg,rgba(0,0,0,0.95)_0%,rgba(0,0,0,0.9)_25%,rgba(0,0,0,0.7)_35%,rgba(0,0,0,0.4)_55%,transparent_75%)]"></div>
+              <div class="absolute inset-y-0 left-0 w-[70%] md:w-[65%] p-6 md:p-8 flex flex-col justify-center text-white z-[2]">
+                <h3 class="font-display text-2xl md:text-3xl font-extrabold uppercase leading-[1.1] mb-2 text-brand-orange">{p.title}</h3>
+                <span class="text-base opacity-95 mb-1">{p.duration}</span>
+                <span class="inline-flex items-center gap-2 mt-1 mb-1">
+                  <Fragment set:html={flagCo} />
+                  <Fragment set:html={flagEs} />
+                </span>
+                <span class="inline-flex items-center gap-2 mt-4 px-4 py-2 border border-white/50 rounded-lg text-[0.8rem] font-semibold uppercase tracking-[0.04em] w-fit hover:bg-white/20 transition-colors">
+                  Ver programa
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-3.5 h-3.5"><path d={ArrowRightPath} /></svg>
+                </span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </Container>
+
+      <!-- Banner Becas -->
+      <div class="mt-12 mx-auto w-[calc(100%-2rem)] md:w-[min(1200px,calc(100%-4rem))] bg-brand-orange rounded-2xl md:rounded-[24px] px-6 py-6 md:px-10 md:py-8">
+        <div class="flex items-center justify-between gap-6 md:gap-8 flex-wrap">
+          <h3 class="font-display text-2xl md:text-[clamp(1.8rem,3.5vw,2.8rem)] font-extrabold uppercase text-white leading-none m-0">
+            Transforma tu futuro con hasta 40% de beca
+          </h3>
+          <a
+            href="/pregrado/becas/"
+            class="inline-flex items-center gap-2 rounded-full bg-white text-brand-orange font-bold text-[0.9rem] md:text-base px-6 py-3.5 md:px-9 md:py-4 no-underline transition-all hover:-translate-y-0.5 hover:bg-[#F0F0F0] whitespace-nowrap"
+          >
+            Conoce nuestras becas
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-3.5 h-3.5"><path d={ArrowRightPath} /></svg>
+          </a>
+        </div>
+      </div>
+    </OverlapSection>
+
+    <!-- 3. Información Común (stat cards 2x2) -->
+    <OverlapSection bg="bg-bg" z={3} padding="py-16 md:py-24">
+      <Container>
+        <div class="grid gap-8 md:gap-12 md:grid-cols-[1fr_1.5fr] items-center">
+          <div>
+            <span class="inline-flex items-center gap-3 text-[0.9rem] font-display font-extrabold uppercase tracking-[0.2em] text-brand-orange">
+              <span class="block h-0.5 w-6 bg-current" aria-hidden="true"></span>
+              Lo que incluye tu pregrado
+            </span>
+            <h2 class="font-display text-[clamp(2rem,4vw,3rem)] font-extrabold uppercase leading-[0.95] text-brand-blue-dark mt-4 mb-6">Formación<br />integral</h2>
+            <a
+              href="#programas"
+              class="inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 font-semibold text-[0.95rem] no-underline transition-all hover:-translate-y-0.5 bg-brand-blue text-white hover:bg-brand-blue-dark"
+            >
+              Encuentra tu pregrado
+            </a>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {stats.map((s) => (
+              <div class={`relative overflow-hidden rounded-3xl p-6 text-white flex flex-col justify-end min-h-[140px] ${statBg[s.color]}`}>
+                <div class="absolute -top-5 -right-5 w-20 h-20 rounded-[20px] bg-white/15 rotate-[15deg]" aria-hidden="true"></div>
+                <div class="absolute top-4 left-5 w-9 h-9 rounded-[10px] bg-white/20 grid place-items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" set:html={s.icon}></svg>
+                </div>
+                <strong class="font-display text-[clamp(1.5rem,3vw,2rem)] font-extrabold leading-none mb-1">{s.value}</strong>
+                <span class="text-[0.8rem] uppercase tracking-[0.05em] opacity-90">{s.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Container>
+    </OverlapSection>
+
+    <!-- 4. Comparador Rápido -->
+    <OverlapSection bg="bg-white" z={4} padding="py-16 md:py-24">
+      <Container>
+        <div class="mb-10">
+          <span class="inline-flex items-center gap-3 text-[0.9rem] font-display font-extrabold uppercase tracking-[0.2em] text-brand-orange">
+            <span class="block h-0.5 w-6 bg-current" aria-hidden="true"></span>
+            ¿Cuál es para ti?
+          </span>
+          <h2 class="font-display text-[clamp(2.5rem,5vw,4.2rem)] font-extrabold uppercase leading-[0.95] text-brand-blue-dark mt-3 mb-3">Encuentra tu pregrado ideal</h2>
+          <p class="text-ink-muted max-w-[520px] text-[1.05rem]">Una guía rápida para ayudarte a decidir según tus intereses profesionales.</p>
+        </div>
+        <div class="grid gap-6 md:grid-cols-2">
+          <div class="bg-surface rounded-[20px] p-7 shadow-[0_20px_50px_rgba(0,19,63,0.12)] border-l-4 border-brand-orange">
+            <div class="text-[0.85rem] text-ink-muted uppercase tracking-[0.08em] mb-2">Si te interesa...</div>
+            <h4 class="font-display text-[1.1rem] font-extrabold uppercase mb-2 text-brand-blue-dark">Tecnología, innovación y gestión de negocios digitales</h4>
+            <div class="text-brand-orange font-semibold text-[0.95rem]">&rarr; Pregrado en Digital Business</div>
+          </div>
+          <div class="bg-surface rounded-[20px] p-7 shadow-[0_20px_50px_rgba(0,19,63,0.12)] border-l-4 border-brand-orange">
+            <div class="text-[0.85rem] text-ink-muted uppercase tracking-[0.08em] mb-2">Si te interesa...</div>
+            <h4 class="font-display text-[1.1rem] font-extrabold uppercase mb-2 text-brand-blue-dark">Estrategia comercial, branding y mercados globales</h4>
+            <div class="text-brand-orange font-semibold text-[0.95rem]">&rarr; Pregrado en Dirección de Marketing Global</div>
+          </div>
+        </div>
+      </Container>
+    </OverlapSection>
+
+    <!-- 5. Highlight (única sección highlight — naranja) -->
+    <OverlapSection bg="bg-brand-orange-alt" textColor="text-white" z={5} padding="py-20 md:py-28">
+      <Container>
+        <div class="max-w-[650px] mx-auto text-center">
+          <span class="inline-flex items-center gap-3 text-[0.9rem] font-display font-extrabold uppercase tracking-[0.2em] text-white">
+            <span class="block h-0.5 w-6 bg-current" aria-hidden="true"></span>
+            Da el primer paso
+          </span>
+          <h2 class="font-display text-[clamp(2.5rem,5vw,4.2rem)] font-extrabold uppercase leading-[0.95] mt-3 mb-3">Tu carrera profesional comienza aquí</h2>
+          <p class="opacity-90 text-[1.05rem]">Agenda una sesión con nuestro equipo de admisiones para resolver todas tus dudas.</p>
+          <div class="mt-8 flex justify-center">
+            <a
+              href="#formulario"
+              class="inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 font-bold text-[0.95rem] no-underline transition-all hover:-translate-y-0.5 bg-white text-brand-orange hover:bg-[#F0F0F0]"
+            >
+              Solicitar información
+            </a>
+          </div>
+        </div>
+      </Container>
+    </OverlapSection>
+
+    <!-- 6. Cifras y Reconocimiento (dark navy) -->
+    <OverlapSection bg="bg-brand-blue-dark" textColor="text-white" z={6} padding="py-[4.5rem] md:py-20">
+      <Container>
+        <div class="mb-14">
+          <span class="block font-body text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-white/30 mb-3">Trayectoria &amp; Presencia Global</span>
+          <h2 class="font-display text-[clamp(2.75rem,7vw,5.5rem)] font-extrabold uppercase leading-[0.92] tracking-[-0.02em]">Cifras y<br />Reconocimiento</h2>
+        </div>
+        <div class="grid md:grid-cols-[1fr_1px_1fr] gap-12 md:gap-0 md:gap-x-16 items-start">
+          <!-- España -->
+          <div class="flex flex-col">
+            <div class="flex items-center gap-2.5 pb-6 border-b border-white/10">
+              <svg viewBox="0 0 30 20" class="w-[22px] h-[15px] rounded-sm shrink-0"><rect width="30" height="20" fill="#AA151B"/><rect y="5" width="30" height="10" fill="#F1BF00"/></svg>
+              <span class="font-body text-[0.7rem] font-bold uppercase tracking-[0.12em] text-[#7BA8FF]">ESIC España</span>
+            </div>
+            <div class="flex-1">
+              {cifrasEspana.map((c, i) => (
+                <div class={`py-6 ${i < cifrasEspana.length - 1 ? "border-b border-white/[0.07]" : "pb-2"}`}>
+                  <div class="font-display text-[clamp(3.75rem,6vw,6rem)] font-black leading-none tracking-[-0.03em] mb-1.5">{c.num}</div>
+                  <div class="text-[0.85rem] text-white/45 leading-snug">{c.desc}</div>
+                </div>
+              ))}
+            </div>
+            <a
+              href="https://www.esic.edu"
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center gap-2 mt-8 px-[1.4rem] py-[0.7rem] border border-white/[0.18] rounded-full font-body text-[0.75rem] font-semibold uppercase tracking-[0.07em] text-white/60 no-underline transition-all hover:border-white/40 hover:text-white hover:bg-white/5 hover:-translate-y-px w-fit"
+            >
+              Conoce ESIC España
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-[13px] h-[13px]"><path d={ArrowRightPath} /></svg>
+            </a>
+          </div>
+
+          <div class="hidden md:block bg-white/[0.08] self-stretch w-px" aria-hidden="true"></div>
+
+          <!-- Medellín -->
+          <div class="flex flex-col">
+            <div class="flex items-center gap-2.5 pb-6 border-b border-white/10">
+              <svg viewBox="0 0 30 20" class="w-[22px] h-[15px] rounded-sm shrink-0"><rect width="30" height="6.67" fill="#FCD116"/><rect y="6.67" width="30" height="6.67" fill="#003893"/><rect y="13.33" width="30" height="6.67" fill="#CE1126"/></svg>
+              <span class="font-body text-[0.7rem] font-bold uppercase tracking-[0.12em] text-[#FFB740]">ESIC Medellín</span>
+            </div>
+            <div class="flex-1">
+              {cifrasMedellin.map((c, i) => (
+                <div class={`py-6 ${i < cifrasMedellin.length - 1 ? "border-b border-white/[0.07]" : "pb-2"}`}>
+                  <div class="font-display text-[clamp(3.75rem,6vw,6rem)] font-black leading-none tracking-[-0.03em] mb-1.5">{c.num}</div>
+                  <div class="text-[0.85rem] text-white/45 leading-snug">{c.desc}</div>
+                </div>
+              ))}
+            </div>
+            <a
+              href="#formulario"
+              class="inline-flex items-center gap-2 mt-8 px-[1.4rem] py-[0.7rem] border border-white/[0.18] rounded-full font-body text-[0.75rem] font-semibold uppercase tracking-[0.07em] text-white/60 no-underline transition-all hover:border-white/40 hover:text-white hover:bg-white/5 hover:-translate-y-px w-fit"
+            >
+              Conoce ESIC Medellín
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-[13px] h-[13px]"><path d={ArrowRightPath} /></svg>
+            </a>
+          </div>
+        </div>
+      </Container>
+    </OverlapSection>
+
+    <!-- 7. Formulario (placeholder) -->
+    <div id="formulario">
+      <FormPlaceholder
+        z={7}
+        bg="bg-bg"
+        title="Solicita información"
+        body="Completa el formulario y un asesor se pondrá en contacto contigo para guiarte en el proceso. 315 647 0299 · analista.comercial@esic.co"
+      />
     </div>
-  </ContentSection>
+  </main>
 
-  <BeneficiosGrid
-    z={3}
-    bg="bg-bg-alt"
-    eyebrow="Por qué ESIC"
-    title="Formación que abre puertas"
-  />
-
-  <ScrollBreak
-    z={4}
-    eyebrow="Cifras y resultados"
-    title="350 estudiantes activos · 80+ nacionalidades en la red ESIC · 62K alumni"
-    cta={{ label: "Conoce más sobre ESIC", href: "/quienes-somos/" }}
-  />
-
-  <HighlightSection
-    z={5}
-    color="orange"
-    eyebrow="Becas y ayudas económicas"
-    title="Hasta <span class='underline'>40%</span> de beca para Pregrado"
-    body="Beca por excelencia académica, movilidad nacional, hermanos matriculados y antiguos alumnos. Aplica desde el momento de admisión."
-    ctas={[{ label: "Aplicar a una beca", href: "/pregrado/becas/" }]}
-  />
-
-  <FormPlaceholder z={6} />
+  <style>
+    /* CTA del hero: posición pinada como en el WP (desktop 90%/80%, mobile centrado abajo) */
+    .hero-banner-cta {
+      left: 50%;
+      bottom: 12%;
+      transform: translateX(-50%);
+    }
+    .hero-banner-cta:hover {
+      transform: translateX(-50%) translateY(-3px);
+    }
+    @media (min-width: 769px) {
+      .hero-banner-cta {
+        left: 90%;
+        top: 80%;
+        bottom: auto;
+        transform: translate(-50%, -50%);
+      }
+      .hero-banner-cta:hover {
+        transform: translate(-50%, -50%) translateY(-3px);
+      }
+    }
+  </style>
 </Layout>

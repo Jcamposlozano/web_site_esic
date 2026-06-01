@@ -1,53 +1,101 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import ContentSection from "../../components/sections/ContentSection.astro";
----
-<Layout title="¡Registro confirmado! · Open Day ESIC Medellín">
-  <ContentSection z={1} bg="bg-bg" padding="py-20 md:py-28">
-    <div class="max-w-[720px] mx-auto text-center">
-      <div class="inline-flex w-20 h-20 rounded-full bg-brand-teal grid place-items-center mb-8">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M20 6 9 17l-5-5"/>
-        </svg>
-      </div>
-      <span class="inline-flex items-center gap-3 text-[0.74rem] font-bold uppercase tracking-[0.22em] text-brand-blue mb-3">
-        <span class="block h-px w-8 bg-current" aria-hidden="true"></span>
-        Open Day · Confirmación
-      </span>
-      <h1 class="font-display text-5xl md:text-6xl font-extrabold uppercase text-brand-blue-dark leading-[0.95]">
-        ¡Registro<br />confirmado!
-      </h1>
-      <p class="mt-5 text-[1.05rem] text-ink-muted leading-relaxed max-w-[55ch] mx-auto">
-        Te esperamos el sábado para vivir la experiencia ESIC. Recibirás un correo con todos los
-        detalles y un recordatorio el día antes del evento.
-      </p>
-    </div>
-  </ContentSection>
 
-  <ContentSection z={2} bg="bg-white" padding="py-12 md:py-16">
-    <div class="grid gap-6 md:grid-cols-2 max-w-[820px] mx-auto">
-      <article class="bg-bg-alt rounded-3xl p-8">
-        <h3 class="font-display text-xl font-extrabold uppercase text-brand-blue-dark mb-4">Detalles del evento</h3>
-        <ul class="space-y-3 text-ink leading-relaxed">
-          <li><strong class="text-brand-blue-dark">Fecha:</strong> Sábado 30 de mayo de 2026</li>
-          <li><strong class="text-brand-blue-dark">Hora:</strong> 9:00 am – 12:00 pm</li>
-          <li><strong class="text-brand-blue-dark">Lugar:</strong> Campus ESIC Medellín</li>
-          <li><strong class="text-brand-blue-dark">Dirección:</strong> Km 17 vía Las Palmas, Mall La Reserva, Envigado</li>
-        </ul>
-      </article>
-      <article class="bg-bg-alt rounded-3xl p-8">
-        <h3 class="font-display text-xl font-extrabold uppercase text-brand-blue-dark mb-4">Próximos pasos</h3>
-        <ul class="space-y-3 text-ink leading-relaxed">
-          <li><a href="https://www.google.com/calendar" target="_blank" rel="noopener" class="text-brand-blue underline">Agregar a Google Calendar</a></li>
-          <li><a href="https://www.google.com/maps/place/Mall+La+Reserva,+Envigado" target="_blank" rel="noopener" class="text-brand-blue underline">Ver en Google Maps</a></li>
-          <li><a href="https://wa.me/573000000000" target="_blank" rel="noopener" class="text-brand-blue underline">Contactar por WhatsApp</a></li>
-        </ul>
-      </article>
+const title = "¡Registro confirmado! — Open Day ESIC Medellín";
+const description =
+  "Tu registro al Open Day de ESIC Medellín está confirmado. Sábado 30 de mayo de 2026, 9:00 a.m. – 12:00 m. Campus ESIC Medellín.";
+
+const calendarUrl =
+  "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Open%20Day%20ESIC%20Medell%C3%ADn&dates=20260530T140000Z/20260530T170000Z&details=Te%20esperamos%20en%20el%20Open%20Day%20de%20ESIC%20Medell%C3%ADn.%20Una%20ma%C3%B1ana%20para%20conocer%20el%20campus%2C%20los%20programas%20y%20vivir%20la%20experiencia%20ESIC.&location=Campus%20ESIC%20Medell%C3%ADn%2C%20Km%2017%20V%C3%ADa%20Las%20Palmas%2C%20Mall%20La%20Reserva";
+const mapsUrl = "https://maps.app.goo.gl/rp74M6ZRSzTD1QoS9";
+const waUrl =
+  "https://wa.me/573160108050?text=%C2%A1Hola!%20Me%20interesa%20el%20Open%20Day%20ESIC%20Medell%C3%ADn%20del%2030%20de%20mayo.";
+---
+<Layout title={title} description={description}>
+  <main class="bg-bg py-16 md:py-24">
+    <div class="mx-auto w-full max-w-[880px] px-5">
+      <div
+        role="status"
+        aria-live="polite"
+        class="rounded-[18px] border border-[rgba(0,19,63,0.12)] bg-white p-7 shadow-[0_12px_32px_rgba(2,6,23,0.07)] md:p-8"
+      >
+        <!-- Head -->
+        <div class="flex items-start gap-[18px] border-b border-[rgba(0,19,63,0.12)] pb-[18px]">
+          <span
+            aria-hidden="true"
+            class="grid h-12 w-12 flex-none place-items-center rounded-full border border-[rgba(255,135,1,0.35)] bg-[rgba(255,135,1,0.12)] text-brand-orange-alt"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+          </span>
+          <div>
+            <h1 class="font-display text-[1.75rem] font-extrabold uppercase leading-[1.05] tracking-[0.01em] text-brand-blue-dark">
+              ¡Registro confirmado!
+            </h1>
+            <p class="mt-2 text-ink-muted">
+              Te enviaremos un correo con la confirmación y los detalles del Open Day. ¡Nos vemos pronto!
+            </p>
+          </div>
+        </div>
+
+        <!-- Grid -->
+        <div class="grid grid-cols-1 gap-4 pt-5 md:grid-cols-2">
+          <!-- Detalles del evento -->
+          <section class="rounded-[14px] border border-[rgba(0,19,63,0.12)] bg-[#FAFAF8] px-5 py-[18px]" aria-labelledby="detalles">
+            <h2 id="detalles" class="mb-3 font-display text-[1.25rem] font-extrabold uppercase tracking-[0.01em] text-brand-blue-dark">
+              Detalles del evento
+            </h2>
+            <p class="my-2 text-[0.95rem] leading-[1.5] text-[#334155]">
+              <span class="text-[0.75rem] font-bold uppercase tracking-[0.08em] text-[#64748B]">Fecha y hora</span><br />
+              <strong class="font-bold text-brand-blue-dark">Sábado 30 de mayo de 2026<br />9:00 a.&nbsp;m. – 12:00 m.</strong>
+            </p>
+            <p class="my-2 text-[0.95rem] leading-[1.5] text-[#334155]">
+              <span class="text-[0.75rem] font-bold uppercase tracking-[0.08em] text-[#64748B]">Lugar</span><br />
+              Campus ESIC Medellín — Espacio Auditorio
+            </p>
+            <p class="my-2 text-[0.95rem] leading-[1.5] text-[#334155]">
+              <span class="text-[0.75rem] font-bold uppercase tracking-[0.08em] text-[#64748B]">Dirección</span><br />
+              Km 17 Vía Las Palmas, Mall La Reserva, Envigado — Antioquia
+            </p>
+          </section>
+
+          <!-- Próximos pasos -->
+          <section class="rounded-[14px] border border-[rgba(0,19,63,0.12)] bg-[#FAFAF8] px-5 py-[18px]" aria-labelledby="acciones">
+            <h2 id="acciones" class="mb-3 font-display text-[1.25rem] font-extrabold uppercase tracking-[0.01em] text-brand-blue-dark">
+              Próximos pasos
+            </h2>
+            <div class="mb-3.5 flex flex-wrap items-center gap-2.5">
+              <a
+                href={calendarUrl}
+                target="_blank"
+                rel="noopener"
+                class="inline-flex items-center justify-center gap-2 rounded-full border-[1.5px] border-brand-blue-dark bg-brand-blue-dark px-[18px] py-[11px] text-[0.85rem] font-bold tracking-[0.04em] text-white no-underline transition-all hover:-translate-y-px hover:bg-[#001a52]"
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-[15px] w-[15px] flex-none">
+                  <rect x="3" y="4" width="18" height="18" rx="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" />
+                </svg>
+                Guardar en Google Calendar
+              </a>
+              <a
+                href={mapsUrl}
+                target="_blank"
+                rel="noopener"
+                class="inline-flex items-center justify-center gap-2 rounded-full border-[1.5px] border-brand-blue-dark bg-white px-[18px] py-[11px] text-[0.85rem] font-bold tracking-[0.04em] text-brand-blue-dark no-underline transition-all hover:-translate-y-px hover:bg-brand-blue-dark hover:text-white"
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-[15px] w-[15px] flex-none">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" />
+                </svg>
+                Cómo llegar
+              </a>
+            </div>
+            <p class="text-[0.95rem] leading-[1.5] text-[#334155]">
+              ¿Tienes dudas? Escríbenos por
+              <a href={waUrl} target="_blank" rel="noopener" class="font-bold text-brand-blue-dark underline hover:text-brand-orange-alt">WhatsApp</a>.
+            </p>
+          </section>
+        </div>
+      </div>
     </div>
-    <div class="text-center mt-12">
-      <a href="/" class="inline-flex items-center justify-center rounded-full bg-brand-blue text-white text-[0.85rem] font-bold uppercase tracking-[0.06em] px-7 py-3 hover:bg-brand-blue-dark transition-colors no-underline">
-        Volver al inicio
-      </a>
-    </div>
-  </ContentSection>
+  </main>
 </Layout>

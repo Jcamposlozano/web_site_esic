@@ -1,92 +1,102 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import PageHero from "../components/sections/PageHero.astro";
-import ContentSection from "../components/sections/ContentSection.astro";
-import BeneficiosGrid from "../components/sections/BeneficiosGrid.astro";
-import HighlightSection from "../components/sections/HighlightSection.astro";
-import ScrollBreak from "../components/sections/ScrollBreak.astro";
-import FormPlaceholder from "../components/sections/FormPlaceholder.astro";
+import ProgramaPregradoPage from "../components/pages/pregrado/ProgramaPregradoPage.astro";
+import type { PlanYear, Institution } from "../components/pages/pregrado/PlanEstudiosTabs.tsx";
 
-const ejes = [
+const planYears: PlanYear[] = [
   {
-    title: "Transformación digital",
-    body: "Modelos de negocio digitales, automatización de procesos, IA aplicada a empresas y data-driven decision making.",
+    tab: "Año 1",
+    title: "Currículo de Fundamentos de Carrera - Año 1",
+    items: [
+      { label: "Aldea Global", detail: "Pensamiento Empresarial (Business Environment, Imágenes de la organización, Sistemas de información contable y financiera)" },
+      { label: "Business Intelligence", detail: "Negocios y Mercados (Introducción al BI, Segmentación de mercados, Decisiones estratégicas, Introducción al marketing digital)" },
+      { label: "Conciencia Organizacional", detail: "Factor Humano en las Organizaciones (Clima y cultura organizacional, Relaciones de colaboración, Ser profesional)" },
+      { label: "Prospectiva", detail: "Mercado y Tendencias (Economía y entorno socioeconómico, Tendencias y escenarios de futuro, Análisis de mercados globales, Matemáticas y Estadística)" },
+      { label: "Laboratorio de Ideas", detail: "Análisis del entorno y creatividad (Autoconocimiento, Proceso creativo y desarrollo de la innovación, Exploremos el entorno y sus desafíos)" },
+      { label: "Profundización Tecnología", detail: "Liderazgo consciente, Arte Digital, Transformación Digital, Metodologías Ágiles, Business Intelligence" },
+    ],
   },
   {
-    title: "E-commerce & growth",
-    body: "Arquitectura de tiendas online, performance marketing, retención, fidelización y conversion rate optimization.",
+    tab: "Año 2",
+    title: "Currículo de Fundamentos de Carrera - Año 2",
+    items: [
+      { label: "Aldea Global", detail: "Business Tools and Techniques (Contexto económico internacional, Negocios internacionales, Marco jurídico y Derecho Digital, La nueva Economía Digital)" },
+      { label: "Business Intelligence", detail: "Negocios y Procesos (El producto, El proceso, Supply chain management, Datamining)" },
+      { label: "Conciencia Organizacional", detail: "Gestión de relaciones con Stakeholders (Solución de Conflictos, Ética y buenas prácticas, Marco jurídico)" },
+      { label: "Prospectiva", detail: "Simulación y modelación empresarial (Estructuración de modelos, Gestión de Riesgos, Simulación y pronósticos, Investigación Digital de mercado)" },
+      { label: "Laboratorio de Ideas", detail: "Innovación y Viabilidad de Proyectos (Gestión de la innovación, Modelación de ideas, Plan de marketing, Tecnología de la Economía Digital)" },
+      { label: "Profundización Tecnología", detail: "Diseño de Producto Digital, Programación & IA, Tecnología de la Economía Digital, Data Management" },
+    ],
+    note: { label: "Summer Camp:", text: "2 semanas de inmersión en Madrid, España (obligatorio)" },
   },
   {
-    title: "Estrategia & innovación",
-    body: "Design thinking, lean startup, product management, lanzamiento de productos digitales y scaling.",
+    tab: "Año 3",
+    title: "Currículo de Fundamentos de Carrera - Año 3",
+    items: [
+      { label: "Aldea Global", detail: "Multicultural Project (Towards an intercultural society, Global Issues, Sistemas complejos, STEM y sostenibilidad, Social Media Management)" },
+      { label: "Business Intelligence", detail: "Negocios y Finanzas (Sistemas de control gerencial, Administración financiera, Financial, Generación de Valor)" },
+      { label: "Conciencia Organizacional", detail: "Gobierno Corporativo (Conflictos de intereses, Desarrollo organizacional, Gestión del cambio, Christian Social Thinking y Business Ethics)" },
+      { label: "Prospectiva", detail: "Becoming a Global Manager (Toma de decisiones estratégicas, Enterprise Resource Planning - ERP, CSR)" },
+      { label: "Laboratorio de Ideas", detail: "Creación de Empresas (Admin. de emprendimientos y Design Thinking, Tratamiento Jurídico, Finanzas estratégicas para emprendimientos digitales, Digital Business and entrepreneurship)" },
+    ],
+    note: { label: "Opción:", text: "Alternativa de cursarlo en alguno de los 11 Campus de ESIC en España" },
   },
   {
-    title: "Liderazgo digital",
-    body: "Gestión de equipos remotos, finanzas digitales, ética en IA, seguridad, sostenibilidad y compliance.",
+    tab: "Año 4",
+    title: "Currículo Específico de Fundamentos de la Carrera - Año 4",
+    items: [
+      { label: "Laboratorio de Ideas", detail: "Direccionamiento empresarial y de innovación, Escalamiento empresarial, Financing Resources for digital entrepreneurship, Fintech & Blockchain" },
+      { label: "Gestión Tecnológica", detail: "Gestión tecnológica en el ámbito empresarial, Cuarta revolución industrial, Digital Analytics y Dashboarding, Machine Learning" },
+      { label: "Gestión Estratégica", detail: "Pensamiento estratégico, Formulación y selección de estrategia, Prospectiva estratégica, Business Intelligence" },
+      { label: "Habilidades Gerenciales", detail: "Toma de decisiones, Ambidestrismo, Inteligencia emocional, Gestión de relaciones" },
+      { label: "Proyección Profesional", detail: "Plan de negocio, Plan de fortalecimiento, Práctica empresarial, Misión Académica Cultural y empresarial, Investigación" },
+    ],
+    note: { label: "Doble Titulación:", text: "Alternativa de cursarlo en Universidades aliadas a ESIC" },
   },
 ];
+
+const institutions: Institution[] = [
+  {
+    title: "Digital<br/>Business",
+    subtitle: "Título propio español de ESIC University",
+    logo: "/images/wp/2024/08/cropped-logo-esic-web-1.png",
+    logoAlt: "ESIC",
+  },
+  {
+    title: "Profesional en<br/>Administración de Empresas",
+    logo: "/images/wp/2024/08/Logo-CEIPA-curvas_logo-CEIPA-gris-01-e1722627736717.png",
+    logoAlt: "CEIPA",
+  },
+];
+
+const priceFeatures = [
+  { text: "4 años de formación" },
+  { text: "Doble titulación internacional" },
+  { text: "Oportunidad de 6 meses o un año en ESIC University en Madrid" },
+  { text: "Acceso a plataformas digitales" },
+  { text: "Formación en liderazgo" },
+];
 ---
-<Layout title="Pregrado en Digital Business — ESIC Medellín">
-  <PageHero
-    eyebrow="Pregrado · 4 años · Doble titulación"
-    title="<span class='text-brand-orange'>Digital</span> Business"
-    subtitle="Forma profesionales preparados para liderar la transformación digital en empresas, con criterio estratégico, dominio tecnológico y mentalidad emprendedora."
-    ctas={[
-      { label: "Solicitar Información", href: "#contacto" },
-      { label: "Conocer becas", href: "/pregrado/becas/", variant: "outline" },
+<Layout
+  title="Pregrado en Digital Business — ESIC Medellín"
+  description="Pregrado en Digital Business en ESIC Medellín. Doble titulación internacional, inmersión en Madrid y enfoque en tecnología, innovación y negocios digitales."
+  fullBleed
+>
+  <ProgramaPregradoPage
+    heroDesktop="/images/wp/2026/03/banner-digital-business-desktop.webp"
+    heroMobile="/images/wp/2026/03/banner-digital-business-mobile.webp"
+    heroAlt="Pregrado en Digital Business - ESIC Medellín"
+    exploraBody="Formamos líderes éticos, innovadores y orientados a resultados, listos para impulsar el marketing, los negocios digitales y la innovación aplicada en organizaciones de impacto regional y global."
+    formTitle="Pregrado en Digital Business"
+    testimoniosBody={[
+      "Conoce las historias de éxito de nuestros estudiantes que están liderando la transformación digital en empresas de toda Latinoamérica y el mundo.",
+      "Formamos profesionales capaces de crear, innovar y liderar en el ecosistema digital, con habilidades técnicas y visión estratégica de negocio.",
     ]}
-    image="/images/wp/2026/03/banner-digital-business-desktop.webp"
-    imageMobile="/images/wp/2026/03/banner-digital-business-mobile.webp"
+    videoSrc="/images/wp/2026/02/testimonio-felipe.mp4"
+    price="$29.469.000"
+    priceFeatures={priceFeatures}
+    planYears={planYears}
+    institutions={institutions}
+    brochureHref="/images/wp/2026/03/Brochure-WEB-BUSINESS.pdf"
   />
-
-  <BeneficiosGrid
-    z={2}
-    eyebrow="Lo esencial"
-    title="Todo lo que necesitas saber"
-    items={[
-      { value: "4 años", label: "Duración", color: "orange" },
-      { value: "Medellín", label: "Campus presencial", color: "blue" },
-      { value: "ESIC + CEIPA", label: "Doble titulación", color: "teal" },
-      { value: "Summer Camp", label: "Inmersión en Madrid", color: "purple" },
-    ]}
-  />
-
-  <ContentSection
-    z={3}
-    bg="bg-bg-alt"
-    eyebrow="Plan de estudios"
-    eyebrowColor="text-brand-orange"
-    title="Cuatro ejes formativos"
-  >
-    <div class="grid gap-6 md:grid-cols-2 mt-6">
-      {ejes.map((e) => (
-        <article class="bg-white rounded-3xl p-8 shadow-[0_2px_20px_rgba(0,19,63,0.05)] border border-[rgba(0,19,63,0.05)]">
-          <h3 class="font-display text-xl font-extrabold uppercase text-brand-blue-dark mb-3">{e.title}</h3>
-          <div class="w-10 h-[2px] bg-brand-orange mb-4"></div>
-          <p class="text-ink-muted leading-[1.6]">{e.body}</p>
-        </article>
-      ))}
-    </div>
-  </ContentSection>
-
-  <ScrollBreak
-    z={4}
-    eyebrow="Mentalidad empresarial"
-    title="Trabajas en retos reales<br />con empresas del ecosistema<br />desde el primer semestre"
-    cta={{ label: "Conoce el campus", href: "/campus/" }}
-  />
-
-  <HighlightSection
-    z={5}
-    color="orange"
-    eyebrow="Inversión en tu futuro"
-    title="Hasta 40% de beca para Digital Business"
-    body="Programa de becas por excelencia académica y otras categorías. Aplica desde el momento de admisión."
-    ctas={[
-      { label: "Aplicar a beca", href: "/pregrado/becas/" },
-      { label: "Solicitar info", href: "#contacto", variant: "outline" },
-    ]}
-  />
-
-  <FormPlaceholder z={6} title="Solicita información del Pregrado en Digital Business" />
 </Layout>

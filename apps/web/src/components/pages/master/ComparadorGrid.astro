@@ -1,0 +1,31 @@
+---
+/**
+ * ComparadorGrid — "Encuentra tu máster ideal" (réplica .comparador-grid del WP).
+ *
+ * Tres tarjetas blancas con borde izquierdo teal: "Si te interesa..." + título
+ * del perfil + recomendación de máster con flecha.
+ */
+
+interface Item {
+  interest: string;
+  title: string;
+  recommendation: string;
+}
+
+interface Props {
+  items: Item[];
+}
+
+const { items } = Astro.props;
+---
+<div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+  {items.map((it) => (
+    <div class="rounded-[20px] border-l-4 border-brand-teal-dark bg-white p-7 shadow-[0_20px_50px_rgba(0,19,63,0.12)]">
+      <div class="mb-2 text-[0.85rem] uppercase tracking-[0.08em] text-ink-muted">{it.interest}</div>
+      <h4 class="mb-2 font-display text-[1.1rem] font-extrabold uppercase leading-tight text-brand-blue-dark">
+        {it.title}
+      </h4>
+      <div class="text-[0.95rem] font-semibold text-brand-teal-dark">{it.recommendation}</div>
+    </div>
+  ))}
+</div>

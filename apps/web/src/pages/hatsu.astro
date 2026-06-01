@@ -1,48 +1,205 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import PageHero from "../components/sections/PageHero.astro";
-import ContentSection from "../components/sections/ContentSection.astro";
-import HighlightSection from "../components/sections/HighlightSection.astro";
+import Container from "../components/Container.astro";
+import HatsuHeroVideo from "../components/pages/eventos/HatsuHeroVideo.tsx";
+import HatsuShowcase from "../components/pages/eventos/HatsuShowcase.tsx";
+
+const title = "Think Different. Think Hatsu — Desafío ESIC × Hatsu";
+const description =
+  "El Desafío Junior Empresarial reunió a estudiantes de colegio para crear su propia versión del universo Hatsu. Conoce la galería de videos de los participantes.";
+
+const HERO_PHOTO = "/images/wp/2026/03/hatsu-hero-grupo-scaled.webp";
+const HERO_VIDEO = "/images/wp/2026/03/DJE-HATSU-VIDEO-CAMPANA.mp4";
 ---
-<Layout title="Hatsu — ESIC Medellín">
-  <PageHero
-    eyebrow="Hatsu · Experiencia ESIC"
-    title="<span class='text-brand-teal'>Hatsu</span>"
-    subtitle="Espacio diseñado para impulsar la creatividad y la innovación de la comunidad ESIC. Showcase de proyectos, eventos y experiencias seleccionadas."
-    ctas={[{ label: "Ver showcase", href: "#showcase" }]}
-    eyebrowColor="text-brand-teal"
-  />
+<Layout title={title} description={description} fullBleed>
+  <main class="esic-hatsu bg-[#0A0A0A] text-white">
+    <!-- ── SECTION 1 — HERO ── -->
+    <section class="hatsu-hero relative flex min-h-[90vh] items-stretch overflow-hidden bg-[#0A0A0A]">
+      <div class="hatsu-hero-inner relative flex min-h-[90vh] w-full items-center max-[600px]:flex-col max-[600px]:pb-20">
+        <!-- Photo bg -->
+        <div class="hatsu-hero-photo absolute inset-0 z-0 overflow-hidden">
+          <img src={HERO_PHOTO} alt="Estudiantes Desafío ESIC × Hatsu" class="h-full w-full object-cover object-[center_top]" loading="eager" />
+        </div>
 
-  <ContentSection
-    z={2}
-    eyebrow="Showcase"
-    title="Proyectos seleccionados"
-  >
-    <p class="text-ink-muted leading-relaxed max-w-[640px] mb-8">
-      Selección curada de proyectos, productos y experiencias generadas en el ecosistema Hatsu.
-      Estudiantes, profesionales y aliados que están construyendo algo nuevo.
-    </p>
-    <div id="showcase" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {[1,2,3,4,5,6].map((i) => (
-        <article class="bg-white rounded-3xl overflow-hidden border border-[rgba(0,19,63,0.06)] shadow-[0_2px_20px_rgba(0,19,63,0.05)]">
-          <div class="aspect-[4/3] bg-bg-alt relative overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-br from-brand-teal/20 to-brand-blue/10"></div>
-          </div>
-          <div class="p-6">
-            <h3 class="font-display text-lg font-extrabold uppercase text-brand-blue-dark mb-2">Proyecto #{i}</h3>
-            <p class="text-ink-muted text-[0.95rem] leading-relaxed">Caso destacado de la comunidad Hatsu. Contenido pendiente de migración.</p>
-          </div>
-        </article>
-      ))}
-    </div>
-  </ContentSection>
+        <!-- Text col -->
+        <div class="relative z-[3] flex w-full flex-shrink-0 flex-col justify-center px-[5%] py-28 md:w-[52%] md:py-32 md:pl-[5%] md:pr-12">
+          <h1 class="hatsu-hero-h1 mb-6 font-display text-[clamp(4.5rem,9vw,10.5rem)] font-extrabold uppercase leading-[0.92] tracking-[-0.02em]">
+            <span class="block text-white">Think<br />Different.</span>
+            <span class="hatsu-grad-sky block">Think<br />Hatsu.</span>
+          </h1>
+          <p class="max-w-[460px] text-[clamp(1rem,1.6vw,1.1rem)] leading-[1.75] text-white/[0.62]">
+            El Desafío Junior Empresarial reunió a estudiantes de colegio para crear su propia versión del universo Hatsu. Estos son sus videos.
+          </p>
+        </div>
 
-  <HighlightSection
-    z={3}
-    color="teal"
-    eyebrow="Sé parte de Hatsu"
-    title="Construye con nosotros"
-    body="Si quieres mostrar un proyecto o sumarte a la comunidad, conversemos."
-    ctas={[{ label: "Hablar con ESIC", href: "/quienes-somos/" }]}
-  />
+        <!-- Video card -->
+        <HatsuHeroVideo client:load src={HERO_VIDEO} />
+      </div>
+    </section>
+
+    <!-- ── SECTION 2 — SHOWCASE ── -->
+    <section class="hatsu-showcase relative z-[5] -mt-[50px] overflow-hidden rounded-t-[50px] bg-[#0A0A0A] pb-24 pt-28 max-[600px]:pb-16 max-[600px]:pt-[4.5rem]">
+      <Container class="max-w-[1140px]">
+        <div class="relative z-[1] mb-14 text-center max-[600px]:mb-9">
+          <span class="mb-5 inline-block text-[0.72rem] font-bold uppercase tracking-[0.3em] text-[#FF4D9A]">Galería de participantes</span>
+          <h2 class="mb-4 font-display text-[clamp(3rem,7vw,7rem)] font-extrabold uppercase leading-[0.92] text-white">
+            Sus <em class="hatsu-grad-pink not-italic">ideas</em><br />en video.
+          </h2>
+          <p class="mx-auto max-w-[560px] text-[clamp(0.95rem,1.4vw,1.05rem)] leading-[1.7] text-white/60">
+            Cada equipo llevó el universo Hatsu a su propio terreno. Estas son las piezas que crearon.
+          </p>
+        </div>
+
+        <HatsuShowcase client:load />
+      </Container>
+    </section>
+
+    <!-- ── SECTION 3 — CIERRE / PREMIACIÓN ── -->
+    <section class="hatsu-cierre relative z-[6] -mt-[50px] overflow-hidden rounded-t-[50px] bg-bg pb-24 pt-28 text-[#0A0A0A] max-[600px]:pb-16 max-[600px]:pt-[4.5rem]">
+      <Container class="max-w-[1140px]">
+        <div class="grid grid-cols-1 items-center gap-16 md:grid-cols-[1.1fr_1fr] max-[900px]:gap-10">
+          <div>
+            <span class="mb-4 inline-block text-[0.68rem] font-bold uppercase tracking-[0.28em] text-brand-blue">Etiqueta oficial</span>
+            <div class="hatsu-grad-hashtag mb-6 whitespace-nowrap font-display text-[clamp(2.5rem,7vw,6.5rem)] font-extrabold uppercase leading-[0.95] tracking-[-0.03em]">#Djeesicyhatsu</div>
+            <p class="max-w-[460px] text-[clamp(1rem,1.5vw,1.1rem)] leading-[1.7] text-[rgba(10,10,10,0.7)]">
+              Usa el hashtag para que encontremos tu video y lo sumemos a esta galería. Comparte, etiqueta y celebra a tu equipo.
+            </p>
+          </div>
+
+          <div class="hatsu-premiacion relative overflow-hidden rounded-[24px] bg-[#0A0A0A] p-[2.5rem_2.25rem] text-white max-[600px]:p-[1.75rem_1.5rem]">
+            <div class="relative z-[1]">
+              <div class="mb-4 text-[0.68rem] font-bold uppercase tracking-[0.28em] text-brand-teal">Ceremonia de premiación</div>
+              <h3 class="mb-5 font-display text-[clamp(3rem,5.5vw,4.75rem)] font-extrabold uppercase leading-[0.9] text-white">
+                Jueves<br />23 <em class="hatsu-grad-yellow not-italic">de abril</em>
+              </h3>
+              <div class="mt-5 grid grid-cols-1 gap-x-6 gap-y-4 border-t border-white/[0.12] pt-6 min-[400px]:grid-cols-2">
+                <div>
+                  <span class="mb-1 block text-[0.6rem] font-bold uppercase tracking-[0.22em] text-white/50">Hora</span>
+                  <span class="block font-display text-[1.55rem] font-extrabold uppercase leading-none text-white">4:30 pm</span>
+                </div>
+                <div>
+                  <span class="mb-1 block text-[0.6rem] font-bold uppercase tracking-[0.22em] text-white/50">Lugar</span>
+                  <span class="block font-display text-[1.55rem] font-extrabold uppercase leading-none text-white">ESIC Medellín</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </section>
+  </main>
 </Layout>
+
+<style>
+  /* Gradientes y glows del tema oscuro Hatsu — difíciles de reproducir 1:1 en Tailwind */
+  .esic-hatsu .hatsu-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background:
+      radial-gradient(ellipse at 10% 30%, rgba(255, 77, 154, 0.2) 0%, transparent 48%),
+      radial-gradient(ellipse at 50% 85%, rgba(255, 224, 64, 0.09) 0%, transparent 40%);
+  }
+  .esic-hatsu .hatsu-hero-photo::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      linear-gradient(
+        105deg,
+        #0a0a0a 0%,
+        rgba(10, 10, 10, 0.95) 35%,
+        rgba(10, 10, 10, 0.72) 55%,
+        rgba(10, 10, 10, 0.3) 75%,
+        transparent 100%
+      ),
+      radial-gradient(ellipse at 8% 20%, rgba(255, 77, 154, 0.3) 0%, transparent 42%),
+      radial-gradient(ellipse at 75% 85%, rgba(10, 228, 195, 0.18) 0%, transparent 40%),
+      linear-gradient(to top, rgba(10, 10, 10, 0.7) 0%, transparent 30%);
+  }
+  .esic-hatsu .hatsu-showcase::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse at 10% 20%, rgba(255, 77, 154, 0.1) 0%, transparent 45%),
+      radial-gradient(ellipse at 90% 80%, rgba(75, 184, 232, 0.08) 0%, transparent 45%);
+  }
+  .esic-hatsu .hatsu-premiacion::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse at 10% 10%, rgba(255, 77, 154, 0.22) 0%, transparent 50%),
+      radial-gradient(ellipse at 95% 95%, rgba(75, 184, 232, 0.16) 0%, transparent 50%);
+  }
+
+  /* Gradient text helpers */
+  .esic-hatsu .hatsu-grad-sky {
+    background: linear-gradient(135deg, #4bb8e8 0%, #ff4d9a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .esic-hatsu .hatsu-grad-pink {
+    background: linear-gradient(135deg, #ff4d9a 0%, #4bb8e8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .esic-hatsu .hatsu-grad-yellow {
+    background: linear-gradient(135deg, #ff4d9a 0%, #ffe040 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .esic-hatsu .hatsu-grad-hashtag {
+    background: linear-gradient(135deg, #0047e9 0%, #ff4d9a 60%, #4bb8e8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Instagram embeds: respetar el grid */
+  .esic-hatsu .hatsu-showcase-item :global(.instagram-media) {
+    margin: 0 !important;
+    min-width: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 16px !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  @media (max-width: 600px) {
+    .esic-hatsu .hatsu-hero,
+    .esic-hatsu .hatsu-hero-inner {
+      min-height: auto;
+    }
+    .esic-hatsu .hatsu-hero-photo img {
+      object-position: center 20%;
+    }
+    .esic-hatsu .hatsu-hero-photo::before {
+      background:
+        linear-gradient(
+          to top,
+          #0a0a0a 0%,
+          rgba(10, 10, 10, 0.88) 30%,
+          rgba(10, 10, 10, 0.45) 60%,
+          rgba(10, 10, 10, 0.55) 100%
+        ),
+        radial-gradient(ellipse at 10% 5%, rgba(255, 77, 154, 0.3) 0%, transparent 45%),
+        radial-gradient(ellipse at 85% 90%, rgba(10, 228, 195, 0.18) 0%, transparent 40%);
+    }
+    .esic-hatsu .hatsu-grad-hashtag {
+      white-space: normal;
+    }
+  }
+</style>

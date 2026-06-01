@@ -1,84 +1,45 @@
 ---
+/**
+ * /digital-business-transformation — Executive Program (réplica fiel de
+ * executive-programs/elementor-widget.html).
+ *
+ * Hero = banner-image responsive (mobile/desktop) que enlaza a #contacto.
+ * El resto del cuerpo es compartido con /executive-programs vía ExecutiveProgramBody.
+ *
+ * fullBleed: el hero es un banner a ancho completo y el cuerpo usa el patrón
+ * de overlap propio del widget (stats bar -50px, etc.), igual que el original.
+ */
 import Layout from "../layouts/Layout.astro";
-import PageHero from "../components/sections/PageHero.astro";
-import ContentSection from "../components/sections/ContentSection.astro";
-import BeneficiosGrid from "../components/sections/BeneficiosGrid.astro";
-import HighlightSection from "../components/sections/HighlightSection.astro";
-import FormPlaceholder from "../components/sections/FormPlaceholder.astro";
-
-const modulos = [
-  { title: "Visión digital", body: "Diagnóstico de madurez digital, oportunidades y construcción del caso de negocio." },
-  { title: "Tecnología & datos", body: "IA aplicada, cloud, automatización y arquitectura de datos para directivos." },
-  { title: "Modelo operativo", body: "Reorganización de procesos, equipos digitales, gobierno y métricas." },
-  { title: "Liderazgo del cambio", body: "Gestión del cambio, comunicación, cultura digital y resistencia organizacional." },
-];
-
-const cocreadores = [
-  { name: "Accenture", logo: "/images/wp/2026/02/logo-accenture.png" },
-  { name: "ESIC", logo: "/images/wp/2026/02/logo-esic.png" },
-  { name: "Prestigio", logo: "/images/wp/2026/02/logo-prestigio.png" },
-];
+import ExecutiveProgramBody from "../components/pages/programas/ExecutiveProgramBody.astro";
 ---
-<Layout title="Digital Business Transformation — Executive Program — ESIC Medellín">
-  <PageHero
-    eyebrow="Executive Program · 4 meses"
-    title="Digital Business<br /><span class='text-brand-teal'>Transformation</span>"
-    subtitle="Programa cocreado con líderes del ecosistema corporativo para directivos que necesitan acelerar la transformación digital de sus organizaciones."
-    ctas={[{ label: "Solicitar Información", href: "#contacto" }]}
-    eyebrowColor="text-brand-teal"
-  />
+<Layout
+  title="Digital Business Transformation — Executive Program — ESIC Medellín"
+  description="Executive Program Digital Business Transformation 2026. 4 meses, inmersión en Madrid, cocreado por ESIC, Prestigio y Accenture."
+  fullBleed
+>
+  <main class="exec-program-widget">
+    <!-- Hero Banner -->
+    <section class="exec__hero-banner">
+      <a href="#contacto" aria-label="Más información sobre Digital Business Transformation">
+        <picture>
+          <source media="(max-width: 768px)" srcset="/images/wp/2026/03/banner-digital-business-mobile.webp" type="image/webp" />
+          <source media="(min-width: 769px)" srcset="/images/wp/2026/03/banner-digital-business-desktop.webp" type="image/webp" />
+          <img
+            src="/images/wp/2026/03/banner-digital-business-desktop.webp"
+            alt="Digital Business Transformation - Executive Program ESIC"
+            loading="eager"
+          />
+        </picture>
+      </a>
+    </section>
 
-  <BeneficiosGrid
-    z={2}
-    eyebrow="Lo esencial"
-    title="Información general"
-    items={[
-      { value: "4 meses", label: "Duración", color: "blue" },
-      { value: "Híbrido", label: "Presencial + online", color: "teal" },
-      { value: "Directivos", label: "Líderes en activo", color: "orange" },
-      { value: "Cocreado", label: "Con empresas del ecosistema", color: "purple" },
-    ]}
-  />
-
-  <ContentSection
-    z={3}
-    bg="bg-bg-alt"
-    eyebrow="Estructura del programa"
-    title="Cuatro módulos integrados"
-  >
-    <div class="grid gap-6 md:grid-cols-2 mt-6">
-      {modulos.map((m) => (
-        <article class="bg-white rounded-3xl p-8 shadow-[0_2px_20px_rgba(0,19,63,0.05)] border border-[rgba(0,19,63,0.05)]">
-          <h3 class="font-display text-xl font-extrabold uppercase text-brand-blue-dark mb-3">{m.title}</h3>
-          <div class="w-10 h-[2px] bg-brand-blue mb-4"></div>
-          <p class="text-ink-muted leading-[1.6]">{m.body}</p>
-        </article>
-      ))}
-    </div>
-  </ContentSection>
-
-  <ContentSection
-    z={4}
-    eyebrow="Programa cocreado por"
-    title="Empresas del ecosistema"
-  >
-    <div class="grid gap-6 sm:grid-cols-3 mt-6 items-center">
-      {cocreadores.map((c) => (
-        <div class="bg-white rounded-2xl p-8 flex items-center justify-center h-32 border border-[rgba(0,19,63,0.06)]">
-          <img src={c.logo} alt={c.name} class="max-h-16 w-auto object-contain" />
-        </div>
-      ))}
-    </div>
-  </ContentSection>
-
-  <HighlightSection
-    z={5}
-    color="blue"
-    eyebrow="Inversión & financiación"
-    title="Programas con respaldo<br />corporativo"
-    body="Convenios con empresas para que la inversión sea parte del plan de desarrollo profesional. Conversa con un asesor."
-    ctas={[{ label: "Hablar con un asesor", href: "#contacto" }]}
-  />
-
-  <FormPlaceholder z={6} title="Solicita información del Executive Program" />
+    <ExecutiveProgramBody />
+  </main>
 </Layout>
+
+<style>
+  .exec-program-widget { color: #0B132B; }
+  .exec__hero-banner { position: relative; width: 100%; }
+  .exec__hero-banner a { display: block; width: 100%; }
+  .exec__hero-banner img { width: 100%; height: auto; display: block; }
+</style>

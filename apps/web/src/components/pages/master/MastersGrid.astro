@@ -1,0 +1,61 @@
+---
+/**
+ * MastersGrid — selector de los 3 másters (réplica fiel del WP .eh-programas-grid).
+ *
+ * Cards fotográficas full-bleed con gradiente negro horizontal, título por
+ * área (blanco), duración y CTA "VER PROGRAMA". Usa <picture> mobile/desktop
+ * y respeta el background-position del original (85% en db/dm, center en cx).
+ */
+
+interface Programa {
+  href: string;
+  title: string;
+  duration: string;
+  imageDesktop: string;
+  imageMobile: string;
+  /** posición horizontal del fondo en desktop (ej. "85%" o "70%") */
+  position?: string;
+}
+
+interface Props {
+  programas: Programa[];
+}
+
+const { programas } = Astro.props;
+---
+<div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+  {programas.map((p) => (
+    <a
+      href={p.href}
+      class="group relative block aspect-[3/4] overflow-hidden rounded-xl no-underline transition-all duration-300 hover:-translate-y-[5px] hover:shadow-[0_20px_40px_rgba(0,19,63,0.2)]"
+    >
+      <!-- Imagen de fondo -->
+      <picture class="absolute inset-0 z-0 block h-full w-full">
+        <source media="(max-width: 768px)" srcset={p.imageMobile} type="image/webp" />
+        <img
+          src={p.imageDesktop}
+          alt=""
+          class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.05]"
+          style={`object-position: ${p.position ?? "70%"} center;`}
+          loading="lazy"
+        />
+      </picture>
+
+      <!-- Overlay: gradiente horizontal (desktop) / vertical (mobile) -->
+      <div
+        class="absolute inset-0 z-[1] rounded-xl bg-[linear-gradient(180deg,transparent_0%,transparent_20%,rgba(0,0,0,0.6)_40%,rgba(0,0,0,0.9)_100%)] md:bg-[linear-gradient(90deg,rgba(0,0,0,0.95)_0%,rgba(0,0,0,0.9)_25%,rgba(0,0,0,0.7)_35%,rgba(0,0,0,0.4)_55%,transparent_75%)]"
+        aria-hidden="true"
+      ></div>
+
+      <!-- Contenido -->
+      <div class="absolute bottom-0 left-0 right-0 z-[2] flex min-h-[55%] flex-col items-start justify-end p-6 text-white md:bottom-0 md:right-auto md:top-0 md:min-h-0 md:w-3/4 md:justify-center md:p-8">
+        <h3 class="font-display text-[1.8rem] font-extrabold uppercase leading-[1.1] text-white">{p.title}</h3>
+        <span class="mt-[0.4rem] text-[1rem] text-white/95">{p.duration}</span>
+        <span class="mt-5 inline-flex w-fit items-center gap-2 rounded-lg border border-white/50 px-4 py-2 text-[0.9rem] font-semibold uppercase tracking-[0.04em] text-white transition-all duration-200 hover:border-white/80 hover:bg-white/20">
+          Ver programa
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+        </span>
+      </div>
+    </a>
+  ))}
+</div>

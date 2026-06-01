@@ -1,72 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import PageHero from "../components/sections/PageHero.astro";
-import ContentSection from "../components/sections/ContentSection.astro";
-import BeneficiosGrid from "../components/sections/BeneficiosGrid.astro";
-import HighlightSection from "../components/sections/HighlightSection.astro";
-import ScrollBreak from "../components/sections/ScrollBreak.astro";
-import FormPlaceholder from "../components/sections/FormPlaceholder.astro";
-
-const modulos = [
-  { title: "Estrategia digital", body: "Planificación 360, propuesta de valor digital, segmentación, posicionamiento y arquitectura de marca." },
-  { title: "Adquisición & performance", body: "SEO, SEM, paid social, programmatic, attribution modeling y CRO." },
-  { title: "Contenido & creatividad", body: "Brand storytelling, contenido para audiencias digitales, formatos, IA generativa aplicada." },
-  { title: "Analítica & growth", body: "Marketing analytics, dashboards, experimentación, retención, lifecycle marketing." },
-];
+import MasterProgramPage from "../components/pages/master-programa/MasterProgramPage.astro";
+import { digitalMarketing } from "../components/pages/master-programa/data";
 ---
-<Layout title="Máster en Digital Marketing — ESIC Medellín">
-  <PageHero
-    eyebrow="Máster · 11 meses · Modalidad híbrida"
-    title="Máster en<br /><span class='text-brand-teal'>Digital Marketing</span>"
-    subtitle="Cubrir las nuevas demandas de marketing digital del mercado. Forma a profesionales que dominan adquisición, performance, analítica y creatividad como una sola disciplina."
-    ctas={[{ label: "Solicitar Información", href: "#contacto" }]}
-    eyebrowColor="text-brand-teal"
-  />
-
-  <BeneficiosGrid
-    z={2}
-    eyebrow="Lo esencial"
-    title="Todo lo que necesitas saber"
-    items={[
-      { value: "11 meses", label: "Duración", color: "teal" },
-      { value: "Híbrido", label: "Presencial + online", color: "blue" },
-      { value: "ESIC", label: "Doble titulación", color: "orange" },
-      { value: "Empresas", label: "Retos reales", color: "purple" },
-    ]}
-  />
-
-  <ContentSection
-    z={3}
-    bg="bg-bg-alt"
-    eyebrow="Plan de estudios"
-    eyebrowColor="text-brand-teal-dark"
-    title="Cuatro módulos integrados"
-  >
-    <div class="grid gap-6 md:grid-cols-2 mt-6">
-      {modulos.map((m) => (
-        <article class="bg-white rounded-3xl p-8 shadow-[0_2px_20px_rgba(0,19,63,0.05)] border border-[rgba(0,19,63,0.05)]">
-          <h3 class="font-display text-xl font-extrabold uppercase text-brand-blue-dark mb-3">{m.title}</h3>
-          <div class="w-10 h-[2px] bg-brand-teal-dark mb-4"></div>
-          <p class="text-ink-muted leading-[1.6]">{m.body}</p>
-        </article>
-      ))}
-    </div>
-  </ContentSection>
-
-  <ScrollBreak
-    z={4}
-    eyebrow="Aprende con casos vivos"
-    title="Construyes piezas reales con<br />marcas del ecosistema y mides<br />su impacto en mercado"
-  />
-
-  <HighlightSection
-    z={5}
-    color="teal"
-    eyebrow="Inversión en tu futuro"
-    title="Becas de hasta 40%"
-    body="Beneficios por trayectoria, movilidad o convenio corporativo."
-    ctas={[{ label: "Aplicar a una beca", href: "/master/becas/" }]}
-  />
-
-  <FormPlaceholder z={6} title="Solicita información del Máster en Digital Marketing" />
+<Layout
+  title={digitalMarketing.metaTitle}
+  description={digitalMarketing.metaDescription}
+  fullBleed
+>
+  <MasterProgramPage data={digitalMarketing} accordionMode="multi" />
 </Layout>

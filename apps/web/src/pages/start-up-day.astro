@@ -1,98 +1,356 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import PageHero from "../components/sections/PageHero.astro";
-import ContentSection from "../components/sections/ContentSection.astro";
-import HighlightSection from "../components/sections/HighlightSection.astro";
-import FormPlaceholder from "../components/sections/FormPlaceholder.astro";
+import Container from "../components/Container.astro";
 
-const razones = [
-  { title: "Aprende ejecutando", body: "No es teoría: armas tu idea con metodologías de empresas reales." },
-  { title: "Mentores con experiencia", body: "Acompañamiento de founders y líderes del ecosistema." },
-  { title: "Networking real", body: "Conoces inversores, otros founders y comunidad emprendedora local." },
-  { title: "Recursos posteriores", body: "Acceso a la red ESIC, alianzas, espacios y oportunidades de inversión." },
+const title = "Start Up Day 2026 — ESIC Medellín | Impulsa tus ideas";
+const description =
+  "Start Up Day 2026 en ESIC Medellín. Un día con todas las herramientas para hacer crecer tu emprendimiento: asesorías, mentorías, networking, charlas y pitch.";
+
+const FORM_URL =
+  "https://docs.google.com/forms/d/e/1FAIpQLSe6Or45DPN90z15t1oKI5N_OaY74np11_Dr9z6JIktzYapdYw/viewform?usp=publish-editor";
+
+const features = [
+  {
+    title: "Asesorías en marketing",
+    icon: `<path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/>`,
+  },
+  {
+    title: "Asesoría financiera",
+    icon: `<line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>`,
+  },
+  {
+    title: "Asesoría tecnológica",
+    icon: `<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>`,
+  },
+  {
+    title: "Networking",
+    icon: `<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>`,
+  },
+  {
+    title: "Charlas",
+    icon: `<path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1v-4h3v2zM3 19a2 2 0 0 0 2 2h1v-4H3v2z"/>`,
+  },
+  {
+    title: "Exhibición de marcas",
+    icon: `<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>`,
+  },
+  {
+    title: "Mentorías",
+    icon: `<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>`,
+  },
+  {
+    title: "Pitch de emprendimientos",
+    icon: `<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>`,
+  },
+];
+
+const reasons = [
+  "Conecta con otros emprendimientos",
+  "Descubre nuevos emprendimientos",
+  "Aprende de expertos",
+  "Haz crecer tu marca",
 ];
 
 const agenda = [
-  { hora: "9:00 am", title: "Apertura & desayuno", body: "Networking inicial entre participantes y mentores." },
-  { hora: "9:30 am", title: "Charla principal", body: "Visión, oportunidades y casos de éxito del ecosistema." },
-  { hora: "10:30 am", title: "Workshops paralelos", body: "Idea validation, modelo de negocio, pitch deck." },
-  { hora: "12:30 pm", title: "Mentorías 1:1", body: "Sesiones individuales con founders y mentores invitados." },
-  { hora: "2:00 pm", title: "Demo Day & cierre", body: "Presentaciones cortas y cierre con la comunidad." },
+  { time: "8:30 a.m.", title: "Inicio de actividades" },
+  { time: "9:00 a.m.", title: "Apertura" },
+  { time: "10:00 a.m.", title: "Panel de emprendimiento" },
+  { time: "2:00 p.m.", title: "Pitch startups" },
+];
+
+const standIcon = `<path d="M3 9l1.5-5h15L21 9"/><path d="M4 9v11h16V9"/><path d="M9 20v-6h6v6"/><path d="M3 9h18"/>`;
+const chatIcon = `<path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>`;
+const dollarIcon = `<line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>`;
+const checkIcon = `<polyline points="20 6 9 17 4 12"/>`;
+const pinIcon = `<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>`;
+const infoIcon = `<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>`;
+const targetIcon = `<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>`;
+const heartIcon = `<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>`;
+const arrowIcon = `<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>`;
+
+const standItems = [
+  { icon: dollarIcon, html: "<strong>Valor de inscripción:</strong> $25.000" },
+  { icon: pinIcon, html: "Incluye espacio de stand" },
+  {
+    icon: infoIcon,
+    html: "Cupos limitados. Realizas la inscripción por el link y el pago lo coordinas con Alejandra de Student Service.",
+  },
+];
+
+const asesoriaItems = [
+  { icon: checkIcon, html: "Entrada sin stand" },
+  { icon: targetIcon, html: "Espacios de aprendizaje y networking" },
+  { icon: heartIcon, html: "Mentorías y presentación de pitch." },
 ];
 ---
-<Layout title="Start-Up Day ESIC Medellín">
-  <PageHero
-    eyebrow="Start-Up Day"
-    title="<span class='text-brand-orange'>Start-Up</span> Day"
-    subtitle="Un día completo para entrar al ecosistema emprendedor. Workshops, mentorías y networking con founders y líderes."
-    ctas={[{ label: "Inscríbete", href: "#inscripcion" }]}
-  />
+<Layout title={title} description={description} fullBleed>
+  <main class="esic-startup-day bg-bg">
+    <!-- HERO -->
+    <section class="esud-hero relative isolate z-[1] overflow-hidden bg-brand-blue-dark">
+      <a
+        class="esud-hero-link block w-full no-underline"
+        href={FORM_URL}
+        target="_blank"
+        rel="noopener"
+        aria-label="Inscríbete al Start Up Day 2026"
+      >
+        <picture>
+          <source media="(max-width: 768px)" srcset="/images/wp/2026/05/BANNER-02-scaled.webp" />
+          <img
+            src="/images/wp/2026/05/BANNER-01-scaled.webp"
+            alt="Start Up Day 2026 - ESIC Medellín. Impulsa tus ideas, conecta con oportunidades. 27 de mayo de 2026. Campus ESIC Medellín."
+            class="mx-auto block h-auto w-full"
+            fetchpriority="high"
+          />
+        </picture>
+      </a>
+    </section>
 
-  <ContentSection
-    z={2}
-    eyebrow="Dos formatos"
-    eyebrowColor="text-brand-orange"
-    title="Dos formas de vivir el Start-Up Day"
-  >
-    <div class="grid gap-6 md:grid-cols-2 mt-6">
-      <article class="bg-white rounded-3xl p-8 border border-[rgba(0,19,63,0.06)] shadow-[0_2px_20px_rgba(0,19,63,0.05)]">
-        <span class="inline-flex items-center text-[0.7rem] font-bold uppercase tracking-[0.18em] text-brand-orange mb-3">Para founders</span>
-        <h3 class="font-display text-2xl font-extrabold uppercase text-brand-blue-dark mb-3">Ya tienes una idea</h3>
-        <p class="text-ink-muted leading-relaxed">Workshops avanzados, pitch coaching y mentorías individuales para llevarla al siguiente nivel.</p>
-      </article>
-      <article class="bg-white rounded-3xl p-8 border border-[rgba(0,19,63,0.06)] shadow-[0_2px_20px_rgba(0,19,63,0.05)]">
-        <span class="inline-flex items-center text-[0.7rem] font-bold uppercase tracking-[0.18em] text-brand-orange mb-3">Para exploradores</span>
-        <h3 class="font-display text-2xl font-extrabold uppercase text-brand-blue-dark mb-3">Estás explorando</h3>
-        <p class="text-ink-muted leading-relaxed">Charlas inspiracionales, dinámicas de validación y conexión con la comunidad emprendedora.</p>
-      </article>
-    </div>
-  </ContentSection>
+    <!-- MODALIDADES -->
+    <section class="relative z-[2] -mt-[50px] rounded-t-[50px] bg-bg py-20 md:py-24">
+      <Container class="max-w-[1100px]">
+        <div class="mb-12 text-center">
+          <span class="mb-3.5 inline-block text-[0.78rem] font-bold uppercase tracking-[0.18em] text-brand-orange-alt">Cómo participar</span>
+          <h2 class="font-display text-[clamp(2.2rem,5.5vw,3.6rem)] font-extrabold uppercase text-brand-blue-dark">Dos formas de vivir el Start Up Day</h2>
+          <p class="mx-auto mt-3 max-w-[640px] text-[1.05rem] leading-[1.6] text-ink-muted">Elige la modalidad que mejor se ajuste a tu emprendimiento o a la experiencia que buscas.</p>
+        </div>
 
-  <ContentSection
-    z={3}
-    bg="bg-bg-alt"
-    eyebrow="Razones para no quedarte por fuera"
-    eyebrowColor="text-brand-orange"
-    title="Por qué venir"
-  >
-    <div class="grid gap-6 md:grid-cols-2 mt-6">
-      {razones.map((r) => (
-        <article class="bg-white rounded-3xl p-8 border border-[rgba(0,19,63,0.06)]">
-          <h3 class="font-display text-xl font-extrabold uppercase text-brand-blue-dark mb-3">{r.title}</h3>
-          <div class="w-10 h-[2px] bg-brand-orange mb-4"></div>
-          <p class="text-ink-muted leading-relaxed">{r.body}</p>
-        </article>
-      ))}
-    </div>
-  </ContentSection>
-
-  <ContentSection
-    z={4}
-    eyebrow="Lo que vas a vivir"
-    eyebrowColor="text-brand-orange"
-    title="Agenda del día"
-  >
-    <div class="space-y-3 mt-6 max-w-[760px]">
-      {agenda.map((a) => (
-        <article class="flex gap-5 items-start bg-white rounded-2xl p-6 border border-[rgba(0,19,63,0.06)]">
-          <div class="shrink-0 w-24 font-display font-extrabold text-brand-orange text-lg uppercase">{a.hora}</div>
-          <div>
-            <h3 class="font-display text-lg font-extrabold uppercase text-brand-blue-dark mb-1">{a.title}</h3>
-            <p class="text-ink-muted leading-relaxed">{a.body}</p>
+        <div class="mb-[2.6rem] grid grid-cols-1 gap-6 md:grid-cols-2">
+          <!-- Stand -->
+          <div class="esud-mode-card flex flex-col gap-4 rounded-[22px] border border-[rgba(0,19,63,0.12)] bg-white p-8 transition-all">
+            <div class="grid h-14 w-14 place-items-center rounded-[14px] bg-[rgba(255,135,1,0.12)] text-brand-orange-alt">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-[26px] w-[26px]" set:html={standIcon} />
+            </div>
+            <h3 class="font-display text-[clamp(1.7rem,3.4vw,2.1rem)] font-extrabold uppercase leading-none text-brand-blue-dark">Participa con Stand</h3>
+            <p class="text-[1rem] leading-[1.55] text-ink-muted">Para emprendedores que venderán sus productos o servicios.</p>
+            <span class="mt-0.5 inline-flex items-center gap-2 self-start rounded-full bg-brand-orange-alt px-4 py-[0.55rem] text-[0.82rem] font-bold uppercase tracking-[0.06em] text-white">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" set:html={dollarIcon} />
+              Valor Inscripción: $25.000
+            </span>
           </div>
-        </article>
-      ))}
-    </div>
-  </ContentSection>
 
-  <HighlightSection
-    z={5}
-    color="orange"
-    eyebrow="Asegura tu lugar"
-    title="Inscríbete al<br />Start-Up Day"
-    ctas={[{ label: "Inscribirme ahora", href: "#inscripcion" }]}
-  />
+          <!-- Asesoría -->
+          <div class="esud-mode-card esud-mode-card--asesoria flex flex-col gap-4 rounded-[22px] border border-[rgba(0,19,63,0.12)] bg-white p-8 transition-all">
+            <div class="grid h-14 w-14 place-items-center rounded-[14px] bg-[rgba(0,71,233,0.10)] text-brand-blue">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-[26px] w-[26px]" set:html={chatIcon} />
+            </div>
+            <h3 class="font-display text-[clamp(1.7rem,3.4vw,2.1rem)] font-extrabold uppercase leading-none text-brand-blue-dark">Participa con Asesoría sin costo</h3>
+            <p class="text-[1rem] leading-[1.55] text-ink-muted">Para quienes buscan mentoría, aprendizaje y networking.</p>
+            <span class="mt-0.5 inline-flex items-center gap-2 self-start rounded-full bg-brand-blue px-4 py-[0.55rem] text-[0.82rem] font-bold uppercase tracking-[0.06em] text-white">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" set:html={checkIcon} />
+              Sin stand
+            </span>
+          </div>
+        </div>
 
-  <div id="inscripcion"></div>
-  <FormPlaceholder z={6} title="Inscríbete al Start-Up Day" />
+        <div class="text-center">
+          <a
+            href={FORM_URL}
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center justify-center gap-2.5 rounded-full border-2 border-brand-orange-alt bg-brand-orange-alt px-[2.4rem] py-[1.1rem] text-[0.85rem] font-bold uppercase tracking-[0.08em] text-white no-underline transition-all hover:-translate-y-0.5 hover:border-[#E67700] hover:bg-[#E67700]"
+          >
+            Quiero inscribirme
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-[18px] w-[18px]" set:html={arrowIcon} />
+          </a>
+        </div>
+      </Container>
+    </section>
+
+    <!-- QUÉ ENCONTRARÁS -->
+    <section class="relative z-[3] -mt-[50px] rounded-t-[50px] bg-white py-20 md:py-24">
+      <Container class="max-w-[1100px]">
+        <div class="mb-12 text-center">
+          <span class="mb-3.5 inline-block text-[0.78rem] font-bold uppercase tracking-[0.18em] text-brand-orange-alt">¿Qué encontrarás?</span>
+          <h2 class="font-display text-[clamp(2.2rem,5.5vw,3.6rem)] font-extrabold uppercase text-brand-blue-dark">Todo lo que tu idea necesita</h2>
+          <p class="mx-auto mt-3 max-w-[640px] text-[1.05rem] leading-[1.6] text-ink-muted">En ESIC creemos en las ideas que nacen para transformar. Un solo día con todas las herramientas para hacer crecer tu emprendimiento.</p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-[1.1rem] min-[520px]:grid-cols-2 md:grid-cols-4">
+          {features.map((f) => (
+            <div class="esud-feature-card rounded-[16px] border border-[rgba(0,19,63,0.12)] bg-white p-[1.6rem_1.3rem] transition-all">
+              <div class="mb-[0.9rem] grid h-10 w-10 place-items-center rounded-[10px] bg-[rgba(0,71,233,0.08)] text-brand-blue">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5" set:html={f.icon} />
+              </div>
+              <h3 class="font-display text-[1.25rem] font-bold uppercase leading-[1.1] text-brand-blue-dark">{f.title}</h3>
+            </div>
+          ))}
+        </div>
+      </Container>
+    </section>
+
+    <!-- POR QUÉ ASISTIR -->
+    <section class="relative z-[4] -mt-[50px] rounded-t-[50px] bg-bg py-20 md:py-24">
+      <Container class="max-w-[1100px]">
+        <div class="mb-12 text-center">
+          <span class="mb-3.5 inline-block text-[0.78rem] font-bold uppercase tracking-[0.18em] text-brand-orange-alt">¿Por qué asistir?</span>
+          <h2 class="font-display text-[clamp(2.2rem,5.5vw,3.6rem)] font-extrabold uppercase text-brand-blue-dark">Razones para no quedarte por fuera</h2>
+          <p class="mx-auto mt-3 max-w-[640px] text-[1.05rem] leading-[1.6] text-ink-muted">Un día pensado para que tu emprendimiento dé el siguiente paso.</p>
+        </div>
+
+        <div class="mx-auto grid max-w-[880px] grid-cols-1 gap-[1.1rem] md:grid-cols-2">
+          {reasons.map((r) => (
+            <div class="esud-reason flex items-start gap-4 rounded-[16px] border border-[rgba(0,19,63,0.12)] bg-white p-[1.5rem_1.6rem] transition-all">
+              <div class="grid h-9 w-9 flex-none place-items-center rounded-full bg-[rgba(255,135,1,0.14)] text-brand-orange-alt">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="h-[18px] w-[18px]" set:html={checkIcon} />
+              </div>
+              <div class="pt-[0.15rem] font-display text-[1.3rem] font-bold uppercase leading-[1.15] text-brand-blue-dark">{r}</div>
+            </div>
+          ))}
+        </div>
+      </Container>
+    </section>
+
+    <!-- AGENDA -->
+    <section class="relative z-[5] -mt-[50px] rounded-t-[50px] bg-white py-20 md:py-24">
+      <Container class="max-w-[1100px]">
+        <div class="mb-12 text-center">
+          <span class="mb-3.5 inline-block text-[0.78rem] font-bold uppercase tracking-[0.18em] text-brand-orange-alt">Agenda del día</span>
+          <h2 class="font-display text-[clamp(2.2rem,5.5vw,3.6rem)] font-extrabold uppercase text-brand-blue-dark">Lo que vas a vivir</h2>
+          <p class="mx-auto mt-3 max-w-[640px] text-[1.05rem] leading-[1.6] text-ink-muted">Una jornada completa con espacios para aprender, conectar y mostrar tu emprendimiento.</p>
+        </div>
+
+        <div class="flex justify-center">
+          <ul class="esud-agenda-list ml-2 flex max-w-[760px] flex-col border-l-2 border-[rgba(255,135,1,0.22)] pl-8">
+            {agenda.map((item) => (
+              <li class="esud-agenda-item relative border-b border-[rgba(0,19,63,0.12)] py-[1.15rem] pl-4 last:border-none">
+                <span class="mb-1 block font-display text-[1.05rem] font-bold uppercase tracking-[0.04em] text-brand-orange-alt">{item.time}</span>
+                <h3 class="font-display text-[1.5rem] font-extrabold uppercase leading-[1.05] text-brand-blue-dark">{item.title}</h3>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Container>
+    </section>
+
+    <!-- INSCRIPCIONES -->
+    <section id="esud-formulario" class="relative z-[6] -mt-[50px] rounded-t-[50px] bg-bg py-20 md:py-24">
+      <Container class="max-w-[1100px]">
+        <div class="mb-12 text-center">
+          <span class="mb-3.5 inline-block text-[0.78rem] font-bold uppercase tracking-[0.18em] text-brand-orange-alt">Reserva tu lugar</span>
+          <h2 class="font-display text-[clamp(2.2rem,5.5vw,3.6rem)] font-extrabold uppercase text-brand-blue-dark">Inscríbete al Start Up Day</h2>
+          <p class="mx-auto mt-3 max-w-[640px] text-[1.05rem] leading-[1.6] text-ink-muted">Cupos limitados. Te confirmaremos tu participación por correo y WhatsApp.</p>
+        </div>
+
+        <div class="mx-auto grid max-w-[1000px] grid-cols-1 gap-[1.6rem] md:grid-cols-2">
+          <!-- STAND -->
+          <div class="esud-enroll-card esud-enroll-card--stand flex flex-col gap-[1.2rem] rounded-[24px] border border-[rgba(0,19,63,0.12)] bg-white p-[2.4rem_2rem] transition-all">
+            <div class="flex items-center gap-4">
+              <div class="grid h-14 w-14 flex-none place-items-center rounded-[14px] bg-[rgba(255,135,1,0.12)] text-brand-orange-alt">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-[26px] w-[26px]" set:html={standIcon} />
+              </div>
+              <h3 class="font-display text-[clamp(1.5rem,3.2vw,1.9rem)] font-extrabold uppercase leading-[1.05] text-brand-blue-dark">Quiero participar con stand</h3>
+            </div>
+            <p class="text-[1rem] leading-[1.55] text-ink-muted">Inscripción para emprendedores que venderán productos o servicios durante la feria.</p>
+            <ul class="mt-0.5 flex flex-col gap-[0.85rem]">
+              {standItems.map((it) => (
+                <li class="flex items-start gap-[0.85rem] text-[0.98rem] leading-[1.5] text-ink">
+                  <span class="mt-[0.05rem] grid h-7 w-7 flex-none place-items-center rounded-full bg-[rgba(255,135,1,0.14)] text-brand-orange-alt">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" set:html={it.icon} />
+                  </span>
+                  <span set:html={it.html} />
+                </li>
+              ))}
+            </ul>
+            <div class="mt-4">
+              <a
+                href={FORM_URL}
+                target="_blank"
+                rel="noopener"
+                class="inline-flex items-center justify-center gap-2.5 rounded-full border-2 border-brand-orange-alt bg-brand-orange-alt px-[2.4rem] py-[1.1rem] text-[0.85rem] font-bold uppercase tracking-[0.08em] text-white no-underline transition-all hover:-translate-y-0.5 hover:border-[#E67700] hover:bg-[#E67700]"
+              >
+                Inscribirme con stand
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-[18px] w-[18px]" set:html={arrowIcon} />
+              </a>
+            </div>
+          </div>
+
+          <!-- ASESORÍA -->
+          <div class="esud-enroll-card esud-enroll-card--asesoria flex flex-col gap-[1.2rem] rounded-[24px] border border-[rgba(0,19,63,0.12)] bg-white p-[2.4rem_2rem] transition-all">
+            <div class="flex items-center gap-4">
+              <div class="grid h-14 w-14 flex-none place-items-center rounded-[14px] bg-[rgba(0,71,233,0.10)] text-brand-blue">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-[26px] w-[26px]" set:html={chatIcon} />
+              </div>
+              <h3 class="font-display text-[clamp(1.5rem,3.2vw,1.9rem)] font-extrabold uppercase leading-[1.05] text-brand-blue-dark">Quiero recibir asesoría</h3>
+            </div>
+            <p class="text-[1rem] leading-[1.55] text-ink-muted">Inscripción para asistentes interesados en mentorías, orientación o acompañamiento emprendedor y presentación de pitch.</p>
+            <ul class="mt-0.5 flex flex-col gap-[0.85rem]">
+              {asesoriaItems.map((it) => (
+                <li class="flex items-start gap-[0.85rem] text-[0.98rem] leading-[1.5] text-ink">
+                  <span class="mt-[0.05rem] grid h-7 w-7 flex-none place-items-center rounded-full bg-[rgba(0,71,233,0.10)] text-brand-blue">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" set:html={it.icon} />
+                  </span>
+                  <span set:html={it.html} />
+                </li>
+              ))}
+            </ul>
+            <div class="mt-4">
+              <a
+                href={FORM_URL}
+                target="_blank"
+                rel="noopener"
+                class="inline-flex items-center justify-center gap-2.5 rounded-full border-2 border-brand-blue bg-brand-blue px-[2.4rem] py-[1.1rem] text-[0.85rem] font-bold uppercase tracking-[0.08em] text-white no-underline transition-all hover:-translate-y-0.5 hover:border-brand-blue-dark hover:bg-brand-blue-dark"
+              >
+                Registrarme para asesoría
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-[18px] w-[18px]" set:html={arrowIcon} />
+              </a>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </section>
+  </main>
 </Layout>
+
+<style>
+  .esic-startup-day .esud-hero-link:hover,
+  .esic-startup-day .esud-hero-link:focus {
+    filter: brightness(1.04);
+    opacity: 0.98;
+    transition: filter 0.25s ease, opacity 0.25s ease;
+  }
+  .esic-startup-day .esud-mode-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0, 19, 63, 0.1);
+    border-color: rgba(255, 135, 1, 0.45);
+  }
+  .esic-startup-day .esud-mode-card--asesoria:hover {
+    border-color: rgba(0, 71, 233, 0.4);
+  }
+  .esic-startup-day .esud-feature-card:hover,
+  .esic-startup-day .esud-reason:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0, 19, 63, 0.08);
+    border-color: rgba(255, 135, 1, 0.35);
+  }
+  .esic-startup-day .esud-enroll-card--stand:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0, 19, 63, 0.1);
+    border-color: rgba(255, 135, 1, 0.45);
+  }
+  .esic-startup-day .esud-enroll-card--asesoria:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0, 19, 63, 0.1);
+    border-color: rgba(0, 71, 233, 0.4);
+  }
+  /* Timeline dots */
+  .esic-startup-day .esud-agenda-item::before {
+    content: "";
+    position: absolute;
+    left: -2.55rem;
+    top: 1.65rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-brand-orange-alt);
+    box-shadow: 0 0 0 4px rgba(255, 135, 1, 0.18);
+  }
+  @media (max-width: 768px) {
+    .esic-startup-day .esud-agenda-list {
+      padding-left: 1.5rem;
+    }
+    .esic-startup-day .esud-agenda-item::before {
+      left: -2.05rem;
+    }
+  }
+</style>

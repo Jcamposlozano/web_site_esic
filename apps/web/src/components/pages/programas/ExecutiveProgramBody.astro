@@ -1,0 +1,837 @@
+---
+/**
+ * ExecutiveProgramBody — cuerpo compartido del Executive Program
+ * "Digital Business Transformation" (réplica fiel de executive-programs/*.html).
+ *
+ * Contiene todo lo que va DESPUÉS del hero (idéntico en ambas páginas):
+ *  - Stats bar (4 / Madrid / $30.345.000 / 2h)
+ *  - Propósito + pilares
+ *  - Información General (4 columnas, fondo azul)
+ *  - Estructura del Programa (3 módulos + highlight Madrid)
+ *  - Cocreadores (ESIC · Prestigio · Accenture)
+ *  - Metodología (círculos dorados + DMLA + categorías + barra internacional)
+ *  - Quote CTA (Juan Manuel Jiménez)
+ *
+ * El acento de Executive es AZUL (#0047E9); la metodología usa dorado (#C09C2E)
+ * tal como en el original. Los estilos son scoped (Astro) — markup 1:1.
+ */
+---
+<!-- Stats Bar -->
+<div class="exec__container" style="position:relative; z-index:12;">
+  <div class="exec__stats-bar">
+    <div class="exec__stat-item">
+      <div class="exec__stat-number">4</div>
+      <div class="exec__stat-label">Meses de duración</div>
+    </div>
+    <div class="exec__stat-item">
+      <div class="exec__stat-number">MADRID</div>
+      <div class="exec__stat-label">Inmersión internacional</div>
+    </div>
+    <div class="exec__stat-item">
+      <div class="exec__stat-number">$30.345.000</div>
+      <div class="exec__stat-label">COP Inversión (IVA incluido)</div>
+    </div>
+    <div class="exec__stat-item">
+      <div class="exec__stat-number">2h</div>
+      <div class="exec__stat-label">Dedicación semanal</div>
+    </div>
+  </div>
+</div>
+
+<!-- Propósito -->
+<section class="exec__proposito exec__overlap">
+  <div class="exec__container">
+    <div class="exec__proposito-grid">
+      <div>
+        <h2>PROPÓSITO DEL PROGRAMA</h2>
+        <p>Impulsar a los altos ejecutivos a liderar la transformación digital de manera estratégica y sistémica, acelerando el desarrollo de un pensamiento digital que genere impacto en la cultura, la innovación y la competitividad de sus organizaciones.</p>
+      </div>
+      <div>
+        <div class="exec__pilares">
+          <div class="exec__pilar">
+            <div class="exec__pilar-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <span>Liderazgo</span>
+          </div>
+          <div class="exec__pilar">
+            <div class="exec__pilar-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="3" width="20" height="14" rx="2"/>
+                <line x1="8" y1="21" x2="16" y2="21"/>
+                <line x1="12" y1="17" x2="12" y2="21"/>
+              </svg>
+            </div>
+            <span>Tecnologías Emergentes</span>
+          </div>
+          <div class="exec__pilar">
+            <div class="exec__pilar-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                <polyline points="2 17 12 22 22 17"/>
+                <polyline points="2 12 12 17 22 12"/>
+              </svg>
+            </div>
+            <span>Innovación</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Información General -->
+<section class="exec__info exec__overlap">
+  <div class="exec__container">
+    <h2>INFORMACIÓN GENERAL</h2>
+    <div class="exec__info-row">
+      <div class="exec__info-col">
+        <div class="exec__info-col-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+        </div>
+        <h3>Fechas</h3>
+        <p>Inicio: martes 2 de junio 2026<br />Fin: viernes 2 de octubre 2026</p>
+      </div>
+      <div class="exec__info-col">
+        <div class="exec__info-col-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+        </div>
+        <h3>Inmersión Internacional</h3>
+        <p>Madrid – 4 días<br />Sep 29 a Oct 2, 2026</p>
+      </div>
+      <div class="exec__info-col">
+        <div class="exec__info-col-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+        <h3>Duración</h3>
+        <p>4 meses · 2h/semana<br />Jueves 7:00–9:00am<br />2 sesiones presenciales</p>
+      </div>
+      <div class="exec__info-col">
+        <div class="exec__info-col-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="1" x2="12" y2="23"/>
+            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+          </svg>
+        </div>
+        <h3>Inversión</h3>
+        <div class="exec__precio">$30.345.000</div>
+        <p class="exec__nota">IVA incluido. *No incluye tiquetes ni hospedaje en Madrid</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Estructura del Programa -->
+<section class="exec__estructura exec__overlap">
+  <div class="exec__container">
+    <h2>ESTRUCTURA DEL PROGRAMA</h2>
+    <div class="exec__modulos-grid">
+      <!-- Liderazgo -->
+      <div class="exec__modulo-col">
+        <span class="exec__modulo-badge">Junio</span>
+        <h3>Liderazgo</h3>
+        <ul>
+          <li>KICKOFF <span class="exec__badge-p">Presencial</span> <span class="exec__fecha">Jun 2</span></li>
+          <li>Los cambios sociales I <span class="exec__fecha">Jun 4</span></li>
+          <li>Los cambios sociales II <span class="exec__fecha">Jun 11</span></li>
+          <li>Cultura Digital <span class="exec__fecha">Jun 18</span></li>
+          <li>Liderazgo <span class="exec__badge-p">Presencial</span> <span class="exec__fecha">Jun 25</span></li>
+        </ul>
+      </div>
+      <!-- Tecnologías Emergentes -->
+      <div class="exec__modulo-col">
+        <span class="exec__modulo-badge">Julio – Agosto</span>
+        <h3>Tecnologías Emergentes</h3>
+        <ul>
+          <li>Peer mentoring <span class="exec__fecha">Jul 16</span></li>
+          <li>Caso con protagonista <span class="exec__fecha">Jul 23</span></li>
+          <li>IoT <span class="exec__fecha">Jul 30</span></li>
+          <li>Ciberseguridad <span class="exec__fecha">Ago 6</span></li>
+          <li>Blockchain <span class="exec__fecha">Ago 13</span></li>
+          <li>Workshop IA <span class="exec__badge-p">Presencial</span> <span class="exec__fecha">Ago 20</span></li>
+        </ul>
+      </div>
+      <!-- Innovación -->
+      <div class="exec__modulo-col">
+        <span class="exec__modulo-badge">Septiembre – Octubre</span>
+        <h3>Innovación</h3>
+        <ul>
+          <li>Caso con protagonista <span class="exec__fecha">Sep 3</span></li>
+          <li>Innovación I <span class="exec__fecha">Sep 10</span></li>
+          <li>Innovación II <span class="exec__fecha">Sep 17</span></li>
+          <li>Caso con protagonista <span class="exec__fecha">Sep 24</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="exec__madrid-highlight">
+      <span>Experiencia Internacional Madrid — 4 días</span>
+      <span class="exec__fecha-m">Martes 29 de septiembre a viernes 2 de octubre 2026</span>
+    </div>
+  </div>
+</section>
+
+<!-- Cocreadores -->
+<section class="exec__cocreadores exec__overlap">
+  <div class="exec__container">
+    <h2>Programa cocreado por</h2>
+    <div class="exec__logos-row">
+      <div class="exec__logo-item exec__logo-esic">
+        <img src="/images/wp/2024/08/cropped-logo-esic-web-1.png" alt="ESIC" />
+      </div>
+      <div class="exec__logo-item exec__logo-prestigio">
+        <img src="/images/wp/2026/02/logo-prestigio.png" alt="Prestigio" />
+      </div>
+      <div class="exec__logo-item exec__logo-accenture">
+        <img src="/images/wp/2026/02/logo-accenture.png" alt="Accenture" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Metodología -->
+<section class="exec__metodologia exec__overlap">
+  <div class="exec__metodologia-header">
+    <h2>METODOLOGÍA:</h2>
+  </div>
+
+  <div class="exec__metodologia-circles">
+    <div class="exec__metodologia-circles-container">
+      <div class="exec__metodologia-curve">
+        <svg viewBox="0 0 800 60" preserveAspectRatio="none">
+          <path d="M0,30 Q200,0 400,30 T800,30" />
+        </svg>
+      </div>
+
+      <div class="exec__metodologia-circle-item">
+        <div class="exec__metodologia-circle"><span>Liderazgo</span></div>
+      </div>
+
+      <span class="exec__metodologia-plus">+</span>
+
+      <div class="exec__metodologia-circle-item">
+        <div class="exec__metodologia-circle"><span>Tecnologías<br />Emergentes</span></div>
+      </div>
+
+      <span class="exec__metodologia-plus">+</span>
+
+      <div class="exec__metodologia-circle-item">
+        <div class="exec__metodologia-circle"><span>Innovación</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="exec__metodologia-dmla">
+    <h3>DMLA</h3>
+    <p>(Digital Maturity &amp; Leadership Assessment)</p>
+  </div>
+
+  <div class="exec__metodologia-categories">
+    <div class="exec__cat-item"><span>MASTERCLASSES</span></div>
+    <div class="exec__cat-item"><span>CASOS CON PROTAGONISTA</span></div>
+    <div class="exec__cat-item"><span>MENTORÍAS INDIVIDUALES</span></div>
+    <div class="exec__cat-item"><span>EXPERIENCIAS PRESENCIALES</span></div>
+  </div>
+
+  <div class="exec__intl-bar">
+    <div class="exec__spain-flag">
+      <div class="exec__stripe-red"></div>
+      <div class="exec__stripe-yellow"></div>
+      <div class="exec__stripe-red"></div>
+    </div>
+    <h3>EXPERIENCIA INTERNACIONAL</h3>
+    <p class="exec__intl-subtitle">Inmersión de 4 días en Madrid, España</p>
+  </div>
+</section>
+
+<!-- Quote CTA -->
+<section class="exec__quote-cta exec__overlap" id="contacto">
+  <div class="exec__container">
+    <blockquote>"ES MOMENTO DE TRANSFORMAR,<br /><em>no de adaptarse.</em><br />Tú marcas la diferencia"</blockquote>
+    <div class="exec__quote-divider"></div>
+    <h3>JUAN MANUEL JIMÉNEZ</h3>
+    <p class="exec__cargo">Director Comercial ESIC Medellín</p>
+    <a class="exec__telefono" href="tel:+573042364804">+57 304 2364804</a>
+  </div>
+</section>
+
+<style>
+  /* ── Tokens locales (réplica del original) ── */
+  .exec__container {
+    width: min(1200px, 92%);
+    margin: 0 auto;
+  }
+
+  /* ── Stats Bar ── */
+  .exec__stats-bar {
+    background: #fff;
+    border-radius: 24px;
+    padding: 2.5rem 3rem;
+    margin-top: -50px;
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 20px 60px rgba(0,19,63,0.12);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+  .exec__stat-item { text-align: center; }
+  .exec__stat-number {
+    font-family: "Sofia Sans Extra Condensed", sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #0047E9;
+    line-height: 1;
+  }
+  .exec__stat-label {
+    font-size: 0.8rem;
+    color: #5F6B7A;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 0.4rem;
+  }
+
+  /* ── Overlap pattern ── */
+  .exec__overlap {
+    position: relative;
+    margin-top: -50px;
+    border-radius: 50px 50px 0 0;
+  }
+
+  /* ── Propósito ── */
+  .exec__proposito {
+    margin-top: -100px;
+    padding: 10rem 0 7rem;
+    background: #F5F3EF;
+    z-index: 2;
+  }
+  .exec__proposito-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .exec__proposito h2 {
+    font-family: "Sofia Sans Extra Condensed", sans-serif;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 0.95;
+    color: #00133F;
+    margin-bottom: 1.5rem;
+  }
+  .exec__proposito p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #5F6B7A;
+    margin: 0;
+  }
+  .exec__pilares {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+  }
+  .exec__pilar {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.8rem 1.2rem;
+    background: #fff;
+    border-radius: 12px;
+  }
+  .exec__pilar-icon {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    border-radius: 10px;
+    background: #0047E9;
+    display: grid;
+    place-items: center;
+    color: #fff;
+  }
+  .exec__pilar-icon svg { width: 18px; height: 18px; }
+  .exec__pilar span {
+    font-family: "Sofia Sans Extra Condensed", sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #00133F;
+  }
+
+  /* ── Info General ── */
+  .exec__info {
+    padding: 6rem 0 7rem;
+    background: #0047E9;
+    z-index: 3;
+  }
+  .exec__info h2 {
+    font-family: "Sofia Sans Extra Condensed", sans-serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 0.95;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .exec__info-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+  .exec__info-col { text-align: center; }
+  .exec__info-col-icon { color: #fff; margin-bottom: 1rem; }
+  .exec__info-col-icon svg { width: 32px; height: 32px; stroke: #fff; }
+  .exec__info-col h3 {
+    font-family: "Sofia Sans Extra Condensed", sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+  .exec__info-col p {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.85);
+  }
+  .exec__info-col .exec__precio {
+    font-family: "Sofia Sans Extra Condensed", sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    color: #0AE4C3;
+    line-height: 1;
+  }
+  .exec__info-col .exec__nota {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.65);
+    font-style: italic;
+    margin-top: 0.4rem;
+  }
+
+  /* ── Estructura ── */
+  .exec__estructura {
+    padding: 6rem 0 7rem;
+    background: #F5F3EF;
+    z-index: 4;
+  }
+  .exec__estructura h2 {
+    font-family: "Sofia Sans Extra Condensed", sans-serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 0.95;
+    color: #00133F;
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .exec__modulos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .exec__modulo-col {
+    background: #fff;
+    border-radius: 16px;
+    padding: 1.5rem;
+  }
+  .exec__modulo-badge {
+    display: inline-block;
+    font-family: "Sofia Sans Extra Condensed", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #fff;
+    padding: 0.3rem 0.9rem;
+    border-radius: 50px;
+    margin-bottom: 0.8rem;
+    background: #0047E9;
+  }
+  .exec__modulo-col h3 {
+    font-family: "Sofia Sans Extra Condensed", sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #00133F;
+    margin-bottom: 0.6rem;
+  }
+  .exec__modulo-col ul { list-style: none; padding: 0; margin: 0; }
+  .exec__modulo-col li {
+    font-size: 0.82rem;
+    color: #5F6B7A;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+  .exec__modulo-col li:last-child { border-bottom: none; }
+  .exec__fecha {
+    color: #97A2B1;
+    white-space: nowrap;
+    font-size: 0.75rem;
+  }
+  .exec__badge-p {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 0.1rem 0.4rem;
+    border-radius: 50px;
+    background: rgba(0,71,233,0.1);
+    color: #0047E9;
+    white-space: nowrap;
+  }
+  .exec__madrid-highlight {
+    background: #0047E9;
+    border-radius: 12px;
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .exec__madrid-highlight span {
+    font-family: "Sofia Sans Extra Condensed", sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #fff;
+  }
+  .exec__madrid-highlight .exec__fecha-m {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.7);
+    font-weight: 400;
+    font-family: "DM Sans", sans-serif;
+    text-transform: none;
+  }
+
+  /* ── Cocreadores ── */
+  .exec__cocreadores {
+    padding: 5rem 0 6rem;
+    background: #fff;
+    text-align: center;
+    z-index: 5;
+  }
+  .exec__cocreadores h2 {
+    font-family: "Sofia Sans Extra Condensed", sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #5F6B7A;
+    letter-spacing: 0.1em;
+    margin-bottom: 2.5rem;
+  }
+  .exec__logos-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8rem;
+    flex-wrap: wrap;
+  }
+  .exec__logo-item { display: flex; align-items: center; justify-content: center; }
+  .exec__logo-item img { object-fit: contain; transition: all 0.3s; }
+  .exec__logo-item img:hover { transform: scale(1.05); }
+  .exec__logo-esic img { height: 63px; }
+  .exec__logo-prestigio img { height: 54px; }
+  .exec__logo-accenture img { height: 45px; }
+
+  /* ── Metodología ── */
+  .exec__metodologia {
+    padding: 0;
+    background: #00133F;
+    position: relative;
+    z-index: 6;
+  }
+  .exec__metodologia-header {
+    background: linear-gradient(90deg, #8B7420 0%, #C09C2E 50%, #8B7420 100%);
+    padding: 1rem 2rem;
+    text-align: center;
+  }
+  .exec__metodologia-header h2 {
+    font-family: "Sofia Sans Extra Condensed", sans-serif;
+    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #00133F;
+    letter-spacing: 0.15em;
+    margin: 0;
+  }
+  .exec__metodologia-circles { padding: 4rem 2rem 3rem; position: relative; }
+  .exec__metodologia-circles-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .exec__metodologia-curve {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    right: 10%;
+    height: 60px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .exec__metodologia-curve svg { width: 100%; height: 100%; }
+  .exec__metodologia-curve path { fill: none; stroke: #C09C2E; stroke-width: 3; }
+  .exec__metodologia-circle-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+    z-index: 1;
+    flex: 1;
+  }
+  .exec__metodologia-circle {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #C09C2E 0%, #9A7A24 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 32px rgba(192,156,46,0.3), inset 0 2px 4px rgba(255,255,255,0.2);
+    position: relative;
+  }
+  .exec__metodologia-circle span {
+    font-family: "Sofia Sans Extra Condensed", sans-serif;
+    font-size: clamp(0.85rem, 1.5vw, 1rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #fff;
+    text-align: center;
+    line-height: 1.2;
+    padding: 0 0.5rem;
+  }
+  .exec__metodologia-plus {
+    font-family: "Sofia Sans Extra Condensed", sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0.5rem;
+    position: relative;
+    z-index: 1;
+  }
+  .exec__metodologia-dmla { text-align: center; padding: 0 2rem 3rem; }
+  .exec__metodologia-dmla h3 {
+    font-family: "Sofia Sans Extra Condensed", sans-serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 800;
+    color: #fff;
+    margin: 0;
+    letter-spacing: 0.1em;
+  }
+  .exec__metodologia-dmla p {
+    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+    color: rgba(255,255,255,0.8);
+    margin: 0.5rem 0 0;
+  }
+  .exec__metodologia-categories {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    padding: 2.5rem 2rem;
+    border-top: 1px solid rgba(192,156,46,0.2);
+    border-bottom: 1px solid rgba(192,156,46,0.2);
+  }
+  .exec__cat-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 2rem;
+    position: relative;
+  }
+  .exec__cat-item:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 70%;
+    width: 1px;
+    background: rgba(192,156,46,0.5);
+  }
+  .exec__cat-item span {
+    font-family: "Sofia Sans Extra Condensed", sans-serif;
+    font-size: clamp(0.75rem, 1.5vw, 0.95rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #C09C2E;
+    letter-spacing: 0.08em;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .exec__intl-bar {
+    background: linear-gradient(135deg, #8B7420 0%, #C09C2E 30%, #9A7A24 70%, #8B7420 100%);
+    padding: 3rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .exec__intl-bar::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    animation: execShimmer 3s infinite;
+  }
+  @keyframes execShimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+  .exec__spain-flag {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    margin: 0 auto 1.5rem;
+    position: relative;
+    z-index: 1;
+  }
+  .exec__stripe-red { height: 4px; background: #AA151B; }
+  .exec__stripe-yellow { height: 8px; background: #F1BF00; }
+  .exec__intl-bar h3 {
+    font-family: "Sofia Sans Extra Condensed", sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #fff;
+    letter-spacing: 0.15em;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  }
+  .exec__intl-subtitle {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.85);
+    margin-top: 0.8rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── Quote CTA ── */
+  .exec__quote-cta {
+    padding: 6rem 0;
+    background: #00133F;
+    color: #fff;
+    text-align: center;
+    z-index: 7;
+  }
+  .exec__quote-cta blockquote {
+    font-family: "Sofia Sans Extra Condensed", sans-serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 0.95;
+    max-width: 650px;
+    margin: 0 auto 2.5rem;
+  }
+  .exec__quote-cta blockquote em { font-style: normal; color: #0AE4C3; }
+  .exec__quote-divider {
+    width: 50px;
+    height: 2px;
+    background: rgba(255,255,255,0.3);
+    margin: 0 auto 2rem;
+  }
+  .exec__quote-cta h3 {
+    font-family: "Sofia Sans Extra Condensed", sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 0.2rem;
+  }
+  .exec__cargo { font-size: 0.9rem; color: rgba(255,255,255,0.7); margin-bottom: 0.5rem; }
+  .exec__telefono {
+    font-family: "Sofia Sans Extra Condensed", sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #0AE4C3;
+    text-decoration: none;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 1024px) {
+    .exec__stats-bar { grid-template-columns: repeat(2, 1fr); }
+    .exec__proposito-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .exec__info-row { grid-template-columns: repeat(2, 1fr); }
+    .exec__modulos-grid { grid-template-columns: 1fr; }
+    .exec__metodologia-circle { width: 110px; height: 110px; }
+    .exec__metodologia-plus { font-size: 2rem; }
+  }
+
+  @media (max-width: 768px) {
+    .exec__overlap { margin-top: 0 !important; border-radius: 0; }
+    .exec__proposito { margin-top: 0; padding: 3rem 0; text-align: center; }
+    .exec__proposito-grid { text-align: center; }
+    .exec__stat-number { font-size: 1.5rem; word-break: break-all; }
+    .exec__stats-bar { grid-template-columns: 1fr 1fr; padding: 1.5rem; gap: 1.2rem; text-align: center; }
+    .exec__info { padding: 3rem 0; }
+    .exec__info-row { grid-template-columns: 1fr 1fr; }
+    .exec__estructura { padding: 3rem 0; }
+    .exec__cocreadores { padding: 3rem 0; }
+    .exec__quote-cta { padding: 3rem 0; }
+    .exec__info-col .exec__precio { font-size: 1.4rem; }
+    .exec__modulo-col li { flex-wrap: wrap; }
+    .exec__logos-row { gap: 3rem; flex-direction: column; }
+    .exec__logo-esic img { height: 49px; }
+    .exec__logo-prestigio img { height: 42px; }
+    .exec__logo-accenture img { height: 35px; }
+    .exec__metodologia { overflow: hidden; }
+    .exec__metodologia-circles { padding: 3rem 1.5rem 2rem; }
+    .exec__metodologia-circles-container { flex-direction: column; gap: 1.5rem; }
+    .exec__metodologia-curve { display: none; }
+    .exec__metodologia-plus { font-size: 1.5rem; transform: rotate(90deg); }
+    .exec__metodologia-circle { width: 100px; height: 100px; }
+    .exec__metodologia-categories { flex-wrap: wrap; gap: 1rem; padding: 2rem 1rem; }
+    .exec__cat-item {
+      width: 100%;
+      justify-content: flex-start;
+      padding: 0.5rem 1.2rem;
+      border-bottom: 1px solid rgba(192,156,46,0.15);
+    }
+    .exec__cat-item:last-child { border-bottom: none; }
+    .exec__cat-item:not(:last-child)::after { display: none; }
+    .exec__cat-item span { white-space: normal; text-align: left; font-size: 0.9rem; }
+    .exec__spain-flag { width: 140px; }
+    .exec__stripe-red { height: 3px; }
+    .exec__stripe-yellow { height: 6px; }
+    .exec__intl-bar { padding: 2.5rem 1.5rem; }
+  }
+
+  @media (max-width: 480px) {
+    .exec__stats-bar { grid-template-columns: 1fr; margin-top: -20px; padding: 1.2rem 1rem; }
+    .exec__info-row { grid-template-columns: 1fr; }
+    .exec__stat-number { font-size: 1.2rem; }
+    .exec__proposito { padding: 2rem 0 2.5rem; }
+    .exec__info { padding: 2.5rem 0; }
+    .exec__estructura { padding: 2.5rem 0; }
+    .exec__cocreadores { padding: 2.5rem 0; }
+    .exec__quote-cta { padding: 2.5rem 0; }
+  }
+</style>

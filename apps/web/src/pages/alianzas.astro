@@ -1,75 +1,104 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import PageHero from "../components/sections/PageHero.astro";
-import ContentSection from "../components/sections/ContentSection.astro";
-import HighlightSection from "../components/sections/HighlightSection.astro";
+import Container from "../components/Container.astro";
+import AlianzasGrid from "../components/pages/eventos/AlianzasGrid.tsx";
 
-const pasos = [
-  { step: "01", title: "Activas tu carnet ESIC", body: "Solo necesitas estar matriculado en cualquier programa de ESIC Medellín." },
-  { step: "02", title: "Eliges una alianza", body: "Revisa el listado de comercios y servicios aliados con beneficios para estudiantes." },
-  { step: "03", title: "Disfrutas el beneficio", body: "Presentas tu carnet en el comercio o usas el código exclusivo para descuentos online." },
-];
+const title = "Alianzas — Beneficios para la comunidad ESIC Medellín";
+const description =
+  "Marcas que reconocen y premian a la comunidad ESIC Medellín. Activa beneficios en bienestar, gastronomía, cultura y servicios con tu carné institucional.";
 
-const alianzas = [
-  { name: "Hatsu", logo: null, desc: "Descuentos exclusivos para estudiantes ESIC en bebidas y eventos." },
-  { name: "Mall La Reserva", logo: null, desc: "Promociones en restaurantes y servicios del centro comercial donde está nuestro campus." },
-  { name: "Cowork ESIC", logo: null, desc: "Tarifas preferenciales para uso de espacios de coworking en el campus." },
-  { name: "Programa de empleabilidad", logo: null, desc: "Acceso prioritario a ofertas laborales de empresas aliadas del ecosistema." },
+const steps = [
+  {
+    num: "01",
+    title: "Explora las alianzas",
+    body: "Filtra por categoría y revisa el detalle de cada beneficio: condiciones, vigencia y ubicación.",
+    icon: `<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>`,
+  },
+  {
+    num: "02",
+    title: "Presenta tu carné ESIC",
+    body: "Tu carné institucional vigente es la llave. Algunos aliados también aceptan código exclusivo.",
+    icon: `<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M8 15h2"/>`,
+  },
+  {
+    num: "03",
+    title: "Disfruta tu beneficio",
+    body: "Aplica al instante. Algunos beneficios tienen días u horarios específicos: revisa cada ficha.",
+    icon: `<path d="M20 12V5a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v14l3-3 3 3 3-3 3 3"/><path d="M16 16l4 4M20 16l-4 4"/>`,
+  },
 ];
 ---
-<Layout title="Alianzas Estudiantes — ESIC Medellín">
-  <PageHero
-    eyebrow="Estudiantes ESIC"
-    title="Beneficios &<br /><span class='text-brand-teal'>alianzas</span>"
-    subtitle="Acceso preferente a comercios, servicios y experiencias del ecosistema. Pensado para estudiantes activos de ESIC Medellín."
-    ctas={[{ label: "Ver alianzas", href: "#alianzas" }]}
-    eyebrowColor="text-brand-teal"
-  />
+<Layout title={title} description={description} fullBleed>
+  <main class="esic-alianzas bg-bg">
+    <!-- HERO BANNER -->
+    <section class="relative block overflow-hidden bg-bg leading-[0]">
+      <a href="#alianzas-grid" aria-label="Ver alianzas ESIC" class="block cursor-pointer">
+        <picture>
+          <source media="(max-width: 768px)" srcset="/images/wp/2026/05/BANNER-ALIANZAS-02-scaled.webp" type="image/webp" />
+          <source srcset="/images/wp/2026/05/BANNER-ALIANZAS-01.webp" type="image/webp" />
+          <img
+            src="/images/wp/2026/05/BANNER-ALIANZAS-01.webp"
+            alt="Banner alianzas ESIC"
+            class="block h-auto w-full align-bottom"
+            fetchpriority="high"
+          />
+        </picture>
+      </a>
+    </section>
 
-  <ContentSection
-    z={2}
-    eyebrow="Tres pasos. Listo."
-    title="Cómo funciona"
-  >
-    <div class="grid gap-6 md:grid-cols-3 mt-6">
-      {pasos.map((p) => (
-        <article class="bg-white rounded-3xl p-8 border border-[rgba(0,19,63,0.06)] shadow-[0_2px_20px_rgba(0,19,63,0.05)]">
-          <div class="font-display text-4xl font-extrabold text-brand-blue leading-none mb-4">{p.step}</div>
-          <h3 class="font-display text-lg font-extrabold uppercase text-brand-blue-dark mb-2">{p.title}</h3>
-          <p class="text-ink-muted leading-relaxed">{p.body}</p>
-        </article>
-      ))}
-    </div>
-  </ContentSection>
-
-  <ContentSection
-    z={3}
-    bg="bg-bg-alt"
-    eyebrow="Nuestras alianzas"
-    title="Comercios & servicios aliados"
-  >
-    <div id="alianzas" class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 mt-6">
-      {alianzas.map((a) => (
-        <article class="bg-white rounded-3xl p-8 border border-[rgba(0,19,63,0.06)] shadow-[0_2px_20px_rgba(0,19,63,0.05)]">
-          <div class="w-12 h-12 rounded-2xl bg-brand-blue/10 grid place-items-center mb-4">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-brand-blue w-6 h-6">
-              <path d="M20 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1Z"/>
-              <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
-            </svg>
+    <!-- HOW IT WORKS -->
+    <section class="relative z-[2] -mt-[50px] rounded-t-[40px] bg-bg pb-[clamp(3rem,6vw,5rem)] pt-[clamp(4.5rem,8vw,7rem)]">
+      <Container class="max-w-[1180px]">
+        <div class="mx-auto mb-[3.2rem] max-w-[720px] text-center">
+          <div class="ali-tag mb-[0.9rem] inline-flex items-center gap-2 text-[0.74rem] font-bold uppercase tracking-[0.22em] text-brand-blue">
+            Cómo funciona
           </div>
-          <h3 class="font-display text-xl font-extrabold uppercase text-brand-blue-dark mb-3">{a.name}</h3>
-          <p class="text-ink-muted leading-relaxed">{a.desc}</p>
-        </article>
-      ))}
-    </div>
-  </ContentSection>
+          <h2 class="font-display text-[clamp(2.4rem,5vw,3.6rem)] font-extrabold uppercase text-brand-blue-dark">Tres pasos. Listo.</h2>
+          <p class="mt-[0.9rem] text-[1.05rem] text-[#5C6477]">Activar un beneficio es simple: identifica la alianza, presenta tu carné institucional y disfruta.</p>
+        </div>
 
-  <HighlightSection
-    z={4}
-    color="blue"
-    eyebrow="¿Eres comercio o marca?"
-    title="Únete a nuestra red<br />de alianzas"
-    body="Si tu empresa quiere conectar con estudiantes y profesionales del ecosistema ESIC, conversemos."
-    ctas={[{ label: "Hablar con ESIC", href: "/quienes-somos/" }]}
-  />
+        <div class="grid grid-cols-1 gap-[1.4rem] md:grid-cols-3">
+          {steps.map((s) => (
+            <div class="ali-step relative overflow-hidden rounded-[24px] border border-[#E7E2D8] bg-white p-[2rem_1.8rem] transition-all hover:-translate-y-1 hover:shadow-[0_22px_40px_-22px_rgba(0,19,63,0.18)]">
+              <div class="absolute right-[1.4rem] top-4 font-display text-[4rem] font-extrabold leading-none text-brand-blue opacity-[0.18]">{s.num}</div>
+              <div class="mb-[1.2rem] inline-flex h-[46px] w-[46px] items-center justify-center rounded-[12px] bg-[rgba(0,71,233,0.10)] text-brand-blue">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={s.icon} />
+              </div>
+              <h3 class="mb-[0.55rem] font-display text-[1.5rem] font-extrabold uppercase text-brand-blue-dark">{s.title}</h3>
+              <p class="text-[0.95rem] leading-[1.55] text-[#5C6477]">{s.body}</p>
+            </div>
+          ))}
+        </div>
+      </Container>
+    </section>
+
+    <!-- GRID + FILTERS + MODAL -->
+    <section id="alianzas-grid" class="relative z-[3] -mt-[50px] rounded-t-[40px] bg-white pb-[clamp(5rem,9vw,8rem)] pt-[clamp(4.5rem,8vw,7rem)]">
+      <Container class="max-w-[1180px]">
+        <AlianzasGrid client:load />
+      </Container>
+    </section>
+  </main>
 </Layout>
+
+<style>
+  .esic-alianzas .ali-tag::before {
+    content: "";
+    width: 22px;
+    height: 2px;
+    background: var(--color-brand-blue);
+    border-radius: 2px;
+  }
+</style>
+
+<script>
+  // Smooth scroll del banner hacia el grid de alianzas
+  document.querySelectorAll('.esic-alianzas a[href="#alianzas-grid"]').forEach((link) => {
+    link.addEventListener("click", (e) => {
+      const target = document.getElementById("alianzas-grid");
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+</script>

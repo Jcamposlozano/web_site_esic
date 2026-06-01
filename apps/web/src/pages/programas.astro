@@ -1,107 +1,359 @@
 ---
+/**
+ * /programas — Índice de Programas (réplica fiel de pages/programas-elementor.html).
+ *
+ * Secciones (orden del original):
+ *  1. Hero (campus-exterior, overlay negro)
+ *  2. Explora Nuestros Programas — 4 category cards (Pregrado / Máster / Executive / Empresarial)
+ *  3. Level Up
+ *  4. La Vida en ESIC — 4 cards
+ *  5. CTA Asesoría (azul)
+ *  + Formulario (FormPlaceholder; el original abre modales Zoho)
+ *
+ * Reglas: overlap 50px + rounded-t-[50px] con z incremental; hero sin overlap;
+ * toda imagen con overlay negro; SVG stroke-based; botones hover translateY(-2px).
+ */
 import Layout from "../layouts/Layout.astro";
-import PageHero from "../components/sections/PageHero.astro";
-import ContentSection from "../components/sections/ContentSection.astro";
-import ProgramCardGrid from "../components/sections/ProgramCardGrid.astro";
-import HighlightSection from "../components/sections/HighlightSection.astro";
+import Container from "../components/Container.astro";
+import OverlapSection from "../components/OverlapSection.astro";
 import FormPlaceholder from "../components/sections/FormPlaceholder.astro";
 
-const pregrados = [
+const arrow = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`;
+
+// 4 tarjetas de categoría (fotográficas, overlay negro, color de título por área)
+const categorias = [
   {
-    href: "/pregrado-marketing-global/",
-    title: "Dirección de Marketing Global",
-    duration: "Pregrado · 4 años",
+    href: "/pregrado/",
+    title: "PREGRADO",
+    sub: "4 años · Doble titulación Colombia/España",
+    cta: "VER PROGRAMAS",
+    titleColor: "#FF9600",
     image: "/images/wp/2026/02/pregrado_mkt_global_.webp",
-    titleColor: "#FF9600",
+    imageMobile: "/images/wp/2026/02/mobile_pregrado_mkt_global_.webp",
   },
   {
-    href: "/pregrado-digital-business/",
-    title: "Digital Business",
-    duration: "Pregrado · 4 años",
-    image: "/images/wp/2026/02/pregrado_digital_business.webp",
-    titleColor: "#FF9600",
-  },
-];
-
-const masters = [
-  {
-    href: "/master-digital-business/",
-    title: "Máster en Digital Business",
-    duration: "Máster · 11 meses",
-    image: "/images/wp/2026/02/master_db.webp",
+    href: "/master/",
+    title: "MÁSTER",
+    sub: "11 meses · Modalidad híbrida",
+    cta: "VER PROGRAMAS",
     titleColor: "#09CF90",
-  },
-  {
-    href: "/master-customer-experience/",
-    title: "Customer Experience Management",
-    duration: "Máster · 11 meses",
-    image: "/images/wp/2026/02/master_cx.webp",
-    titleColor: "#09CF90",
-  },
-  {
-    href: "/master-digital-marketing/",
-    title: "Digital Marketing",
-    duration: "Máster · 11 meses",
     image: "/images/wp/2026/02/master_dm.webp",
-    titleColor: "#09CF90",
+    imageMobile: "/images/wp/2026/02/mobile_master_dm.webp",
   },
-];
-
-const executives = [
   {
     href: "/digital-business-transformation/",
-    title: "Digital Business Transformation",
-    duration: "Executive · 4 meses",
-    image: "/images/wp/2026/02/ep.webp",
+    title: "EXECUTIVE PROGRAMS",
+    sub: "4 meses · Liderazgo y transformación",
+    cta: "VER PROGRAMA",
     titleColor: "#C09C2E",
+    image: "/images/wp/2026/02/ep.webp",
+    imageMobile: "/images/wp/2026/02/ep-m.webp",
+  },
+  {
+    href: "#contacto",
+    title: "EMPRESARIAL",
+    sub: "Formaciones a la medida para empresas",
+    cta: "CONTÁCTANOS",
+    titleColor: "#0047E9",
+    image: "/images/wp/2026/04/Empresarial.webp",
+    imageMobile: "/images/wp/2026/04/Empresarial-M.webp",
+  },
+];
+
+// La Vida en ESIC (4 cards)
+const vida = [
+  {
+    title: "Aulas",
+    body: "Espacios diseñados para el trabajo práctico",
+    image: "/images/wp/2026/02/aulas.webp",
+    alt: "Aulas ESIC",
+  },
+  {
+    title: "Cowork y Networking",
+    body: "Conecta con personas que están construyendo",
+    image: "/images/wp/2026/02/cowork.webp",
+    alt: "Cowork y Networking ESIC",
+  },
+  {
+    title: "Eventos y Conferencias",
+    body: "Eventos que te mantienen actualizado con lo que está pasando en los negocios, marketing y tecnología",
+    image: "/images/wp/2026/02/eventos.webp",
+    alt: "Eventos ESIC",
+  },
+  {
+    title: "Campus Medellín",
+    body: "Vive la experiencia ESIC en el Alto de las Palmas (Medellín)",
+    image: "/images/wp/2026/04/campus-exterior-01.webp",
+    alt: "Campus Medellín ESIC",
   },
 ];
 ---
 <Layout title="Programas — ESIC Medellín">
-  <PageHero
-    eyebrow="Todos los programas"
-    title="Desarrolla tu carrera con visión global"
-    subtitle="Pregrado, máster y educación ejecutiva en marketing, negocios y economía digital. Misma metodología práctica, mismo ecosistema corporativo."
-    ctas={[{ label: "Solicitar Información", href: "#contacto" }]}
-    image="/images/wp/2026/03/banner-general-pregrado-desktop.webp"
-    eyebrowColor="text-brand-teal"
-  />
+  <main class="esic-prog">
+    <!-- 1. Hero -->
+    <section class="esic-prog__hero relative flex items-end overflow-hidden bg-brand-blue-dark">
+      <Container class="relative z-[2] pb-32 pt-32 md:pb-48 md:pt-40">
+        <div class="max-w-[750px] text-white">
+          <span class="hidden md:block text-[0.875rem] font-semibold uppercase tracking-[0.1em] text-white/80 mb-4">
+            ESIC Business &amp; Marketing School
+          </span>
+          <h1 class="font-display font-extrabold uppercase leading-[0.9] text-[clamp(3rem,7vw,5.5rem)] -tracking-[0.01em]">
+            Desarrolla tu carrera con <span class="text-brand-blue">ESIC Medellín</span>
+          </h1>
+          <p class="mt-6 max-w-[520px] text-[1.15rem] leading-[1.6] text-white/85">
+            Escuela de Negocios Española con +60 años, líder en Marketing y Economía Digital.
+          </p>
+          <div class="mt-8 flex flex-col sm:flex-row flex-wrap gap-4">
+            <a href="#contacto" class="esic-prog__btn esic-prog__btn--primary">
+              AGENDA UNA ASESORÍA <Fragment set:html={arrow} />
+            </a>
+            <a href="#programas" class="esic-prog__btn esic-prog__btn--outline">
+              EXPLORAR PROGRAMAS <Fragment set:html={arrow} />
+            </a>
+          </div>
+        </div>
+      </Container>
+    </section>
 
-  <ContentSection
-    z={2}
-    eyebrow="Pregrado"
-    eyebrowColor="text-brand-orange"
-    title="Carreras con doble titulación"
-  >
-    <ProgramCardGrid programas={pregrados} columns={2} />
-  </ContentSection>
+    <!-- 2. Explora Nuestros Programas — 4 category cards -->
+    <OverlapSection bg="bg-[#F5F5F7]" z={2} padding="py-16 md:py-24">
+      <span id="programas" class="block -translate-y-24"></span>
+      <Container>
+        <div class="mb-12 flex flex-col md:flex-row md:justify-between md:items-start gap-8">
+          <h2 class="font-display font-extrabold uppercase leading-[0.95] text-[clamp(3rem,6vw,4.5rem)] text-brand-blue-dark m-0">
+            EXPLORA<br />NUESTROS<br />PROGRAMAS
+          </h2>
+          <div class="md:text-right md:max-w-[320px]">
+            <p class="text-[1.15rem] leading-[1.5] text-ink-muted mb-4">
+              Formación práctica, internacional y conectada con el mundo real.
+            </p>
+            <a href="#contacto" class="esic-prog__btn esic-prog__btn--primary">AGENDA UNA ASESORÍA</a>
+          </div>
+        </div>
 
-  <ContentSection
-    z={3}
-    bg="bg-bg-alt"
-    eyebrow="Máster"
-    eyebrowColor="text-brand-teal-dark"
-    title="Másters de 11 meses"
-  >
-    <ProgramCardGrid programas={masters} columns={3} />
-  </ContentSection>
+        <div class="grid gap-6 md:grid-cols-2">
+          {categorias.map((c) => (
+            <a
+              href={c.href}
+              class="esic-prog__cat group relative block overflow-hidden rounded-2xl aspect-[3/4] md:aspect-[16/9] no-underline transition-all duration-300 hover:-translate-y-[5px] hover:shadow-[0_20px_40px_rgba(0,19,63,0.2)]"
+            >
+              <picture class="absolute inset-0 z-0">
+                <source media="(max-width: 768px)" srcset={c.imageMobile} />
+                <img src={c.image} alt="" class="w-full h-full object-cover" />
+              </picture>
+              <div class="esic-prog__cat-overlay absolute inset-0 z-[1] rounded-2xl"></div>
+              <div class="esic-prog__cat-info absolute inset-y-0 left-0 z-[2] flex w-[70%] flex-col items-start justify-center p-6 md:p-8 text-white">
+                <h3
+                  class="font-display font-extrabold uppercase leading-[1.05] text-[clamp(2.8rem,9vw,3.8rem)] md:text-[clamp(1.8rem,3vw,2.4rem)] m-0 mb-2"
+                  style={`color:${c.titleColor}`}
+                >
+                  {c.title}
+                </h3>
+                <p class="text-[1rem] opacity-95 mb-5 text-white">{c.sub}</p>
+                <span class="inline-flex w-fit items-center gap-2 rounded-lg border border-white/50 px-4 py-2 text-[0.85rem] font-semibold uppercase tracking-[0.04em] transition-all group-hover:bg-white/20 group-hover:border-white/80">
+                  {c.cta} <Fragment set:html={arrow} />
+                </span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </Container>
+    </OverlapSection>
 
-  <ContentSection
-    z={4}
-    eyebrow="Executive Programs"
-    title="Educación ejecutiva"
-  >
-    <ProgramCardGrid programas={executives} columns={2} />
-  </ContentSection>
+    <!-- 3. Level Up -->
+    <OverlapSection bg="bg-white" z={3} padding="py-16 md:py-24">
+      <Container>
+        <div class="esic-prog__levelup relative overflow-hidden rounded-[40px] px-6 py-10 md:px-14 md:py-16">
+          <div class="esic-prog__levelup-glow pointer-events-none absolute inset-0"></div>
+          <div class="relative z-[1] grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
+            <div>
+              <div class="mb-6 flex flex-wrap items-center gap-1">
+                <img
+                  src="/images/wp/2026/03/logo-level-up-scaled.png"
+                  alt="Level Up by ESIC"
+                  class="h-8 md:h-[50px] w-auto max-w-[200px]"
+                />
+              </div>
+              <h2 class="font-display font-bold normal-case leading-[0.95] text-[clamp(2.5rem,5vw,3.8rem)] text-white m-0 mb-5">
+                Desarrolla habilidades que hoy marcan la diferencia
+              </h2>
+              <p class="max-w-[480px] text-[1.05rem] leading-[1.6] text-white/70 m-0 mb-8">
+                Cursos prácticos, presenciales, para desarrollar habilidades clave en marketing, creatividad y entornos digitales.
+              </p>
+              <a href="/level-up/" class="esic-prog__btn esic-prog__btn--teal">
+                EXPLORA LEVEL UP <Fragment set:html={arrow} />
+              </a>
+            </div>
 
-  <HighlightSection
-    z={5}
-    color="blue"
-    eyebrow="Asesoría personalizada"
-    title="Agenda una<br />asesoría con admisiones"
-    body="Te ayudamos a elegir el programa que mejor encaja con tu trayectoria, intereses y plan profesional."
-    ctas={[{ label: "Hablar con un asesor", href: "#contacto" }]}
-  />
+            <div class="esic-prog__levelup-visual relative hidden min-h-[300px] overflow-hidden rounded-[20px] lg:block">
+              <img
+                src="/images/wp/2026/03/level-up.png"
+                alt="Level Up by ESIC"
+                class="absolute inset-0 h-full w-full object-cover object-center"
+              />
+              <div class="absolute inset-0 rounded-[20px] bg-black/55"></div>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </OverlapSection>
 
-  <FormPlaceholder z={6} />
+    <!-- 4. La Vida en ESIC -->
+    <OverlapSection bg="bg-white" z={4} padding="py-16 md:py-24">
+      <Container>
+        <div class="mb-8 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+          <h2 class="font-display font-extrabold uppercase leading-[0.95] text-[clamp(2.5rem,5vw,3.5rem)] text-brand-blue-dark m-0">
+            LA VIDA<br />EN ESIC
+          </h2>
+          <a href="/campus/" class="esic-prog__btn esic-prog__btn--primary">
+            CONOCE EL CAMPUS <Fragment set:html={arrow} />
+          </a>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-2">
+          {vida.map((v) => (
+            <div class="relative min-h-[280px] overflow-hidden rounded-[20px]">
+              <img src={v.image} alt={v.alt} width="800" height="450" loading="lazy" class="absolute inset-0 h-full w-full object-cover" />
+              <div class="esic-prog__vida-overlay pointer-events-none absolute inset-0 z-[1]"></div>
+              <div class="absolute inset-x-0 bottom-0 z-[2] flex flex-col justify-end p-6 text-white">
+                <h3 class="font-display text-[1.5rem] font-bold uppercase tracking-[0.05em] leading-tight m-0 mb-2 [text-shadow:0_2px_6px_rgba(0,0,0,0.6)]">
+                  {v.title}
+                </h3>
+                <p class="text-[1.1rem] leading-[1.5] opacity-95 m-0 [text-shadow:0_2px_6px_rgba(0,0,0,0.6)]">
+                  {v.body}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Container>
+    </OverlapSection>
+
+    <!-- 5. CTA Asesoría -->
+    <OverlapSection bg="bg-brand-blue" z={5} padding="py-16 md:py-24" textColor="text-white">
+      <Container>
+        <div class="mx-auto max-w-[640px] text-center">
+          <h2 class="font-display font-extrabold uppercase leading-[0.95] text-[clamp(2.5rem,5vw,3.5rem)] text-white m-0 mb-6">
+            AGENDA UNA ASESORÍA PERSONALIZADA
+          </h2>
+          <p class="text-[1.15rem] leading-[1.6] text-white/85 m-0 mb-8">
+            Conversemos sobre tu futuro. Nuestro equipo te acompaña para encontrar el programa ideal.
+          </p>
+          <a href="#contacto" class="esic-prog__btn esic-prog__btn--white">
+            AGENDAR ASESORÍA <Fragment set:html={arrow} />
+          </a>
+        </div>
+      </Container>
+    </OverlapSection>
+
+    <!-- Formulario (el original abre modales Zoho: general + empresarial) -->
+    <div id="contacto">
+      <FormPlaceholder
+        z={6}
+        title="Solicitar Información"
+        body="Cuéntanos qué programa te interesa (pregrado, máster, programa ejecutivo, formación empresarial o Level Up) y un asesor te contactará."
+        formLabel="Formulario Zoho — Solicitar Información"
+      />
+    </div>
+  </main>
 </Layout>
+
+<style>
+  /* Hero con overlay diagonal (réplica del gradiente del original) */
+  .esic-prog__hero {
+    min-height: 85vh;
+    background-image:
+      linear-gradient(90deg, rgba(0,0,0,0.97) 0%, rgba(0,0,0,0.80) 45%, rgba(0,0,0,0.35) 75%, rgba(0,0,0,0) 100%),
+      linear-gradient(to top, rgba(0,0,0,0.70) 0%, transparent 40%),
+      url('/images/wp/2026/04/campus-exterior-01.webp');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+  @media (max-width: 768px) {
+    .esic-prog__hero {
+      min-height: 70vh;
+      background-image:
+        linear-gradient(180deg, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.78) 50%, rgba(0,0,0,0.60) 100%),
+        linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 35%),
+        url('/images/wp/2026/04/campus-exterior-01.webp');
+    }
+  }
+
+  /* Botones (réplica de .esic-prog-page__btn) */
+  .esic-prog__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.6rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    transition: all 0.25s ease;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .esic-prog__btn:hover { transform: translateY(-2px); }
+  .esic-prog__btn--primary {
+    background: #0047E9;
+    color: #fff;
+    box-shadow: 0 16px 35px rgba(0, 71, 233, 0.25);
+  }
+  .esic-prog__btn--primary:hover {
+    background: #0037B4;
+    box-shadow: 0 20px 40px rgba(0, 71, 233, 0.35);
+  }
+  .esic-prog__btn--outline {
+    background: #fff;
+    border-color: rgba(0, 19, 63, 0.15);
+    color: #00133F;
+  }
+  .esic-prog__btn--outline:hover { border-color: #0047E9; color: #0047E9; }
+  .esic-prog__btn--teal {
+    background: #0AE4C3;
+    color: #00133F;
+    box-shadow: 0 10px 30px rgba(10, 228, 195, 0.25);
+  }
+  .esic-prog__btn--teal:hover { background: #08D1B3; }
+  .esic-prog__btn--white {
+    background: #fff;
+    color: #0047E9;
+  }
+  .esic-prog__btn--white:hover { background: #F0F0F0; }
+
+  /* Overlay tarjetas categoría (diagonal en desktop, vertical en mobile) */
+  .esic-prog__cat-overlay {
+    background: linear-gradient(90deg, rgba(0,0,0,0.98) 0%, rgba(0,0,0,0.9) 30%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.4) 70%, rgba(0,0,0,0.2) 100%);
+  }
+  @media (max-width: 768px) {
+    .esic-prog__cat-overlay {
+      background: linear-gradient(180deg, transparent 0%, transparent 10%, rgba(0,0,0,0.4) 30%, rgba(0,0,0,0.9) 100%);
+    }
+    .esic-prog__cat-info {
+      inset: auto 0 0 0;
+      width: 100%;
+      min-height: 50%;
+      justify-content: flex-end;
+    }
+  }
+
+  /* Overlay La Vida en ESIC */
+  .esic-prog__vida-overlay {
+    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 40%, rgba(0,0,0,0.3) 70%, transparent 100%);
+  }
+
+  /* Level Up — caja oscura con glow radial */
+  .esic-prog__levelup {
+    background: linear-gradient(135deg, #001028 0%, #00133F 40%, #001E47 100%);
+  }
+  .esic-prog__levelup-glow {
+    background:
+      radial-gradient(circle at 15% 30%, rgba(0,71,233,0.15), transparent 50%),
+      radial-gradient(circle at 85% 70%, rgba(10,228,195,0.08), transparent 50%);
+  }
+</style>

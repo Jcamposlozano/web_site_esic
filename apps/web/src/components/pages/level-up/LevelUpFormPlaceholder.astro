@@ -1,0 +1,215 @@
+---
+/**
+ * LevelUpFormPlaceholder — caja "formulario pendiente" para el embed de Zoho
+ * de la landing de Level Up Marketing Digital.
+ *
+ * NO construye un formulario funcional (regla del proyecto): muestra los campos
+ * del formulario original como vista previa deshabilitada, estilada para el
+ * panel oscuro de la sección intro. Cuando se defina el stack de formularios,
+ * este bloque se reemplaza por el embed real de Zoho.
+ *
+ * Acento morado (#A78BFA / #7C3AED) en lugar del teal del original WP.
+ */
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  /** Texto del botón de envío (deshabilitado). */
+  submitLabel?: string;
+}
+
+const {
+  title = "Déjanos tus datos",
+  subtitle = "Recibe toda la información del curso y asegura tu cupo.",
+  submitLabel = "INSCRIBIRME",
+} = Astro.props;
+---
+<div class="lupf-wrap">
+  <h3 class="lupf-title" set:html={title} />
+  <p class="lupf-sub" set:html={subtitle} />
+
+  <div class="lupf-todo" role="note">
+    <span class="lupf-todo-tag">TODO · Pendiente fase formularios</span>
+    <span class="lupf-todo-text">Formulario Zoho — se integra cuando definamos el stack de formularios.</span>
+  </div>
+
+  <div class="lupf-form" aria-hidden="true">
+    <div class="lupf-row">
+      <div class="lupf-group">
+        <label>Nombre <em>*</em></label>
+        <span class="lupf-field">Tu nombre</span>
+      </div>
+      <div class="lupf-group">
+        <label>Apellido <em>*</em></label>
+        <span class="lupf-field">Tu apellido</span>
+      </div>
+    </div>
+
+    <div class="lupf-group">
+      <label>Correo electrónico <em>*</em></label>
+      <span class="lupf-field">tu@email.com</span>
+    </div>
+
+    <div class="lupf-row">
+      <div class="lupf-group">
+        <label>Empresa</label>
+        <span class="lupf-field">Tu empresa</span>
+      </div>
+      <div class="lupf-group">
+        <label>Cargo</label>
+        <span class="lupf-field">Tu cargo</span>
+      </div>
+    </div>
+
+    <div class="lupf-group">
+      <label>Teléfono <em>*</em></label>
+      <span class="lupf-field">300 123 4567</span>
+    </div>
+
+    <div class="lupf-group">
+      <label>Dirección</label>
+      <span class="lupf-field">Tu dirección</span>
+    </div>
+
+    <div class="lupf-group">
+      <label>Medio de contacto</label>
+      <span class="lupf-field lupf-select">WhatsApp</span>
+    </div>
+
+    <label class="lupf-terms">
+      <span class="lupf-check" aria-hidden="true"></span>
+      <span>Acepto <a href="https://esic.co/politicas-de-privacidad/" target="_blank" rel="noopener">términos y condiciones</a> <em>*</em></span>
+    </label>
+
+    <button type="button" class="lupf-submit" disabled>{submitLabel} →</button>
+  </div>
+</div>
+
+<style>
+  .lupf-wrap {
+    border-top: 3px solid #a78bfa;
+    border-radius: 0 0 16px 16px;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 2rem;
+    width: 100%;
+    max-width: 420px;
+  }
+  .lupf-title {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 0 0 0.35rem;
+  }
+  .lupf-sub {
+    font-size: 0.92rem;
+    color: rgba(255, 255, 255, 0.65);
+    margin: 0 0 1.25rem;
+  }
+  .lupf-todo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    border: 1px dashed rgba(167, 139, 250, 0.5);
+    border-radius: 12px;
+    padding: 0.85rem 1rem;
+    margin-bottom: 1.4rem;
+    background: rgba(167, 139, 250, 0.06);
+  }
+  .lupf-todo-tag {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #a78bfa;
+  }
+  .lupf-todo-text {
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.4;
+  }
+  .lupf-form { display: block; }
+  .lupf-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+  .lupf-group { margin-bottom: 0.85rem; }
+  .lupf-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 0.35rem;
+  }
+  .lupf-group label em { color: #a78bfa; font-style: normal; }
+  .lupf-field {
+    display: block;
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border-radius: 10px;
+    border: 1.5px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.06);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.45);
+    line-height: 1.2;
+  }
+  .lupf-select { position: relative; }
+  .lupf-select::after {
+    content: "";
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid rgba(255, 255, 255, 0.45);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.45);
+    transform: translateY(-65%) rotate(45deg);
+  }
+  .lupf-terms {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.65);
+    margin-top: 0.75rem;
+  }
+  .lupf-terms em { color: #a78bfa; font-style: normal; }
+  .lupf-check {
+    width: 16px;
+    height: 16px;
+    margin-top: 0.15rem;
+    border-radius: 4px;
+    border: 1.5px solid rgba(255, 255, 255, 0.3);
+    flex-shrink: 0;
+  }
+  .lupf-terms a { color: #a78bfa; text-decoration: underline; }
+  .lupf-submit {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 999px;
+    border: none;
+    background: #7c3aed;
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-top: 0.5rem;
+    opacity: 0.85;
+    cursor: not-allowed;
+  }
+
+  @media (max-width: 600px) {
+    .lupf-wrap {
+      max-width: 100%;
+      border-radius: 0 0 12px 12px;
+      padding: 1.5rem;
+    }
+    .lupf-title { font-size: 1.4rem; }
+    .lupf-row { gap: 0.5rem; }
+  }
+</style>

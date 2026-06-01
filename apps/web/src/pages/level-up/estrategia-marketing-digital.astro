@@ -1,92 +1,1029 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import PageHero from "../../components/sections/PageHero.astro";
-import ContentSection from "../../components/sections/ContentSection.astro";
-import BeneficiosGrid from "../../components/sections/BeneficiosGrid.astro";
-import HighlightSection from "../../components/sections/HighlightSection.astro";
-import FormPlaceholder from "../../components/sections/FormPlaceholder.astro";
+import LevelUpFormPlaceholder from "../../components/pages/level-up/LevelUpFormPlaceholder.astro";
 
-const logros = [
-  "Diseñar un plan de marketing digital completo, con objetivos medibles.",
-  "Manejar las plataformas clave de adquisición y performance.",
-  "Construir un funnel de conversión y un sistema de medición.",
-  "Tomar decisiones data-driven a partir de tableros y modelos de atribución.",
+/**
+ * Estrategia de Marketing Digital en 8 Horas — Level Up.
+ * Réplica fiel de estrategia-marketing-digital-elementor.html.
+ *
+ * Sistema de overlap (50px + rounded-t + z incremental), acento MORADO
+ * (#A78BFA / #7C3AED) reemplazando el teal del original WP.
+ * El formulario Zoho se reemplaza por LevelUpFormPlaceholder (regla del proyecto).
+ *
+ * fullBleed: el banner hero arranca pegado arriba; el Nav flota encima.
+ */
+
+const logrosLeft = [
+  "Construir una estrategia de marketing digital desde cero",
+  "Definir tu audiencia y su recorrido digital",
+  "Usar los canales de forma estratégica",
+  "Diseñar tácticas claras por canal",
+  "Entender cómo se activa una marca con visión digital",
+];
+
+const logrosRight = [
+  "Definición clara de tu cliente digital",
+  "Rol real de cada canal (y cuáles no deberías usar)",
+  "Prioridades claras de marketing",
+  "Un plan estratégico accionable",
+  "Criterio para decir NO a modas o ideas sueltas",
 ];
 
 const modulos = [
-  { title: "Fundamentos & estrategia", body: "Customer journey, propuesta de valor, segmentación, OKRs digitales." },
-  { title: "Adquisición & canales", body: "SEO, SEM, paid social, programmatic, partnerships y orgánico." },
-  { title: "Contenido & creatividad", body: "Storytelling, formatos por plataforma, IA aplicada a creatividad." },
-  { title: "Analítica & growth", body: "Dashboards, KPIs, atribución, experimentos y retención." },
+  {
+    n: 1,
+    title: "Fundamentos de estrategia digital aplicada",
+    body: "Entiende cómo funciona una estrategia digital y qué la diferencia de la ejecución táctica.",
+  },
+  {
+    n: 2,
+    title: "¿Qué es y qué no es una marca en lo digital?",
+    body: "Define el rol real de tu marca y evita errores comunes de posicionamiento.",
+  },
+  {
+    n: 3,
+    title: "Buyer Persona y Customer Journey digital",
+    body: "Identifica a tu cliente ideal y diseña su recorrido digital estratégico.",
+  },
+  {
+    n: 4,
+    title: "Canales, herramientas y momentos de impacto",
+    body: "Selecciona los canales adecuados según objetivos, audiencia y etapa del recorrido.",
+  },
+  {
+    n: 5,
+    title: "Construcción del plan estratégico completo",
+    body: "Integra objetivos, mensajes, canales y tácticas en un plan claro.",
+  },
+  {
+    n: 6,
+    title: "Casos reales y dinámicas de activación",
+    body: "Ejercicios prácticos aplicados a tu propio negocio.",
+  },
+  {
+    n: 7,
+    title: "Tu estrategia lista para ejecutar",
+    body: "Consolida tu estrategia con foco en implementación.",
+  },
+];
+
+const diferenciaChecks = [
+  "100% práctico y accionable",
+  "Aplicado a tu propia marca o proyecto",
+  "Sin teoría innecesaria",
+  "Acompañamiento directo de una experta en estrategia digital",
 ];
 ---
-<Layout title="Estrategia de Marketing Digital — Level Up — ESIC Medellín">
-  <PageHero
-    eyebrow="Level Up · Programa corto"
-    title="Estrategia de<br /><span class='text-brand-teal'>Marketing Digital</span>"
-    subtitle="Programa intensivo para profesionales que necesitan construir y ejecutar un plan completo de marketing digital. Aplicable desde la primera sesión."
-    ctas={[{ label: "Solicitar Información", href: "#contacto" }]}
-    image="/images/wp/2026/03/level-up-marketing-landing-desktop-scaled.webp"
-    imageMobile="/images/wp/2026/03/level-up-marketing-landing-mobile-scaled.webp"
-    eyebrowColor="text-brand-teal"
-  />
+<Layout
+  title="Estrategia de Marketing Digital en 8 Horas — Level Up — ESIC Medellín"
+  description="Del pensamiento estratégico a la ejecución real. En 8 horas sales con un mapa claro de decisiones digitales para tu marca. Level Up by ESIC con Alicia Mejía."
+  fullBleed
+>
+  <div class="esic-lup-marketing">
+    <!-- ═══ HERO BANNER ═══ -->
+    <section class="lupmk-hero-banner">
+      <a href="#formulario" aria-label="Inscríbete a Estrategia de Marketing Digital en 8 Horas">
+        <picture>
+          <source
+            media="(max-width: 768px)"
+            srcset="/images/wp/2026/03/level-up-marketing-landing-mobile-scaled.webp"
+            type="image/webp"
+          />
+          <source
+            media="(min-width: 769px)"
+            srcset="/images/wp/2026/03/level-up-marketing-landing-desktop-scaled.webp"
+            type="image/webp"
+          />
+          <img
+            src="/images/wp/2026/03/level-up-marketing-landing-desktop-scaled.webp"
+            alt="Estrategia de Marketing Digital en 8 Horas - Level Up ESIC"
+            loading="eager"
+            width="1280"
+            height="600"
+          />
+        </picture>
+      </a>
+    </section>
 
-  <BeneficiosGrid
-    z={2}
-    eyebrow="Lo esencial"
-    title="Formato del programa"
-    items={[
-      { value: "8 semanas", label: "Duración", color: "purple" },
-      { value: "Híbrido", label: "Presencial + online", color: "blue" },
-      { value: "Mentor", label: "Sesiones 1:1", color: "teal" },
-      { value: "Casos reales", label: "Empresas aliadas", color: "orange" },
-    ]}
-  />
+    <!-- ═══ INTRO + FORMULARIO ═══ -->
+    <section class="lupmk-intro" id="formulario">
+      <div class="lupmk-container">
+        <div class="lupmk-intro-content">
+          <div class="lupmk-intro-left">
+            <img
+              src="/images/wp/2026/03/logo-level-up-scaled.png"
+              alt="Level Up by ESIC"
+              class="lupmk-intro-logo"
+              width="288"
+              height="90"
+            />
+            <span class="lupmk-intro-eyebrow">Level Up by ESIC</span>
+            <h1>
+              Estrategia de<br /><span>Marketing Digital</span><br />en 8 Horas
+            </h1>
+            <p class="lupmk-intro-sub">
+              Del pensamiento estratégico a la ejecución real. En
+              solo 8 horas vas a salir con un mapa claro de decisiones digitales
+              para tu marca: qué hacer, qué no hacer y por
+              dónde empezar.
+            </p>
+            <p class="lupmk-intro-price">
+              Inversión:
+              <span class="lupmk-intro-price-amount">$600.000 COP</span>
+            </p>
 
-  <ContentSection
-    z={3}
-    bg="bg-bg-alt"
-    eyebrow="Lo que vas a lograr"
-    eyebrowColor="text-brand-teal-dark"
-    title="Resultados aplicables"
-  >
-    <ul class="space-y-4 mt-6 max-w-[760px]">
-      {logros.map((l) => (
-        <li class="flex gap-3 items-start">
-          <span class="shrink-0 mt-1 w-5 h-5 rounded-full bg-brand-teal-dark flex items-center justify-center">
-            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 8 3 3 7-7"/></svg>
-          </span>
-          <span class="text-ink leading-relaxed">{l}</span>
-        </li>
-      ))}
-    </ul>
-  </ContentSection>
+            <div class="lupmk-info-bar">
+              <div class="lupmk-info-bar-item">
+                <span class="lupmk-info-bar-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2" />
+                    <line x1="16" y1="2" x2="16" y2="6" />
+                    <line x1="8" y1="2" x2="8" y2="6" />
+                    <line x1="3" y1="10" x2="21" y2="10" />
+                  </svg>
+                </span>
+                <div class="lupmk-info-bar-text">
+                  <strong>11 y 18 de abril</strong>
+                  <span>Fechas del curso</span>
+                </div>
+              </div>
+              <div class="lupmk-info-bar-sep"></div>
+              <div class="lupmk-info-bar-item">
+                <span class="lupmk-info-bar-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="9" />
+                    <polyline points="12 7 12 12 15 14" />
+                  </svg>
+                </span>
+                <div class="lupmk-info-bar-text">
+                  <strong>8:00 a.m. – 12:00 p.m.</strong>
+                  <span>Horario</span>
+                </div>
+              </div>
+              <div class="lupmk-info-bar-sep"></div>
+              <div class="lupmk-info-bar-item">
+                <span class="lupmk-info-bar-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                </span>
+                <div class="lupmk-info-bar-text">
+                  <strong>Campus ESIC</strong>
+                  <span>Modalidad presencial</span>
+                </div>
+              </div>
+            </div>
 
-  <ContentSection
-    z={4}
-    eyebrow="Contenido del programa"
-    eyebrowColor="text-brand-teal-dark"
-    title="Cuatro módulos"
-  >
-    <div class="grid gap-6 md:grid-cols-2 mt-6">
-      {modulos.map((m) => (
-        <article class="bg-white rounded-3xl p-8 shadow-[0_2px_20px_rgba(0,19,63,0.05)] border border-[rgba(0,19,63,0.05)]">
-          <h3 class="font-display text-xl font-extrabold uppercase text-brand-blue-dark mb-3">{m.title}</h3>
-          <div class="w-10 h-[2px] bg-brand-teal-dark mb-4"></div>
-          <p class="text-ink-muted leading-[1.6]">{m.body}</p>
-        </article>
-      ))}
-    </div>
-  </ContentSection>
+            <div class="lupmk-intro-expert">
+              <span>con</span>
+              <strong>Alicia Mejía</strong>
+            </div>
+          </div>
 
-  <HighlightSection
-    z={5}
-    color="purple"
-    eyebrow="¿Listos para construir?"
-    title="Estrategia digital<br />de tu marca"
-    body="Sales con un plan ejecutable, las métricas para medirlo y la confianza para defenderlo."
-    ctas={[{ label: "Solicitar Información", href: "#contacto" }]}
-  />
+          <div class="lupmk-intro-right">
+            <LevelUpFormPlaceholder />
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <FormPlaceholder z={6} title="Inscríbete al programa" />
+    <!-- ═══ LO QUE VAS A LOGRAR ═══ -->
+    <section class="lupmk-section lupmk-logros">
+      <div class="lupmk-container">
+        <div class="lupmk-section-header">
+          <span class="lupmk-section-tag">Objetivos</span>
+          <h2 class="lupmk-section-title">Lo que vas a lograr</h2>
+        </div>
+
+        <div class="lupmk-logros-grid">
+          <div class="lupmk-logros-left">
+            <h3>En este curso aprenderás a:</h3>
+            <ul class="lupmk-logros-list">
+              {logrosLeft.map((l) => <li>{l}</li>)}
+            </ul>
+          </div>
+
+          <div class="lupmk-logros-right">
+            <h4>Además saldrás con:</h4>
+            <ul class="lupmk-check-list">
+              {logrosRight.map((l) => (
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  <span>{l}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ CONTENIDO DEL PROGRAMA ═══ -->
+    <section class="lupmk-section lupmk-contenido">
+      <div class="lupmk-container">
+        <div class="lupmk-section-header">
+          <span class="lupmk-section-tag">Temario</span>
+          <h2 class="lupmk-section-title">Contenido del programa</h2>
+        </div>
+
+        <div class="lupmk-modulos-grid">
+          {modulos.map((m) => (
+            <article class="lupmk-modulo-card">
+              <span class="lupmk-modulo-num">{m.n}</span>
+              <h4>{m.title}</h4>
+              <p>{m.body}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ POR QUÉ ES DIFERENTE ═══ -->
+    <section class="lupmk-section lupmk-diferente">
+      <div class="lupmk-container">
+        <div class="lupmk-diferente-single">
+          <span class="lupmk-section-tag">Diferencia</span>
+          <h2>¿Por qué este curso<br />es <span>diferente</span>?</h2>
+          <p class="lupmk-diferente-intro">
+            LEVEL UP no es un curso tradicional de marketing digital. Es un
+            espacio para ordenar ideas, tomar decisiones estratégicas y
+            construir un plan digital que tenga sentido para tu negocio. En solo
+            8 horas trabajarás sobre tu propia marca y saldrás con
+            claridad, foco y un plan listo para ejecutarse.
+          </p>
+          <ul class="lupmk-diferente-checks">
+            {diferenciaChecks.map((c) => (
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                {c}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ESTE PROGRAMA ES PARA ═══ -->
+    <section class="lupmk-section lupmk-paraquien">
+      <div class="lupmk-container">
+        <div class="lupmk-section-header">
+          <span class="lupmk-section-tag">Target</span>
+          <h2 class="lupmk-section-title">Este programa es para</h2>
+        </div>
+
+        <div class="lupmk-paraquien-grid">
+          <div class="lupmk-paraquien-card">
+            <div class="lupmk-paraquien-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                <polyline points="9 22 9 12 15 12 15 22" />
+              </svg>
+            </div>
+            <p>Marcas que ya venden (o quieren vender)</p>
+          </div>
+
+          <div class="lupmk-paraquien-card">
+            <div class="lupmk-paraquien-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                <path d="M2 17l10 5 10-5" />
+                <path d="M2 12l10 5 10-5" />
+              </svg>
+            </div>
+            <p>Emprendedores que quieren dejar de improvisar</p>
+          </div>
+
+          <div class="lupmk-paraquien-card">
+            <div class="lupmk-paraquien-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+            </div>
+            <p>Managers que necesitan ordenar su canal digital</p>
+          </div>
+
+          <div class="lupmk-paraquien-card">
+            <div class="lupmk-paraquien-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                <line x1="9" y1="9" x2="9.01" y2="9" />
+                <line x1="15" y1="9" x2="15.01" y2="9" />
+              </svg>
+            </div>
+            <p>Equipos pequeños que necesitan foco estratégico</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ SOBRE LA EXPERTA ═══ -->
+    <section class="lupmk-section lupmk-experta">
+      <div class="lupmk-container">
+        <div class="lupmk-experta-single">
+          <span class="lupmk-experta-tag">Sobre la experta</span>
+          <h3>Alicia Mejía</h3>
+          <p class="lupmk-experta-role">Gerente de THINKLICIOUS</p>
+          <p class="lupmk-experta-bio">
+            Experta en ecommerce y estrategia digital con más de 15
+            años de experiencia, acompañando a más de 60
+            empresas en el desarrollo de sus canales digitales transaccionales.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ CTA FINAL ═══ -->
+    <section class="lupmk-cta-final">
+      <div class="lupmk-container">
+        <div class="lupmk-cta-box">
+          <h2>¿Listos para construir la estrategia digital de su marca?</h2>
+          <a href="#formulario" class="lupmk-btn">Reservar mi cupo →</a>
+        </div>
+      </div>
+    </section>
+  </div>
 </Layout>
+
+<style>
+  .esic-lup-marketing {
+    --lup-dark: #00133f;
+    --lup-purple: #a78bfa;
+    --lup-purple-solid: #7c3aed;
+    --bg-cream: #f8f6f2;
+    --bg-white: #ffffff;
+    --text-dark: #0b132b;
+    --text-muted: #5f6b7a;
+    --border: rgba(0, 19, 63, 0.1);
+    font-family: var(--font-body);
+    color: var(--text-dark);
+    line-height: 1.6;
+    overflow-x: hidden;
+    width: 100%;
+    background: var(--lup-dark);
+  }
+  .esic-lup-marketing :where(h1, h2, h3, h4) {
+    font-family: var(--font-display);
+    font-weight: 800;
+    margin: 0;
+    text-transform: none;
+  }
+  .esic-lup-marketing p { margin: 0; }
+
+  .lupmk-container {
+    width: min(1100px, 90%);
+    margin: 0 auto;
+  }
+  .lupmk-section {
+    padding: 5rem 0;
+    position: relative;
+  }
+
+  /* Buttons */
+  .lupmk-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 2.2rem;
+    border-radius: 999px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s;
+    text-decoration: none;
+    line-height: 1;
+  }
+
+  /* ═══ HERO BANNER ═══ */
+  .lupmk-hero-banner {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    padding-top: 80px;
+    padding-bottom: 90px;
+    background: #000;
+    line-height: 0;
+    font-size: 0;
+  }
+  .lupmk-hero-banner a {
+    display: block;
+    cursor: pointer;
+  }
+  .lupmk-hero-banner img {
+    width: 100%;
+    height: auto;
+    display: block;
+    vertical-align: bottom;
+  }
+
+  /* ═══ INTRO SECTION (overlap - dark) ═══ */
+  .lupmk-intro {
+    position: relative;
+    margin-top: -80px;
+    border-radius: 50px 50px 0 0;
+    z-index: 5;
+    background: linear-gradient(135deg, #1a0d3d 0%, #150b33 50%, #1c1042 100%);
+    padding: 5rem 0;
+    box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.3);
+  }
+  .lupmk-intro-content {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .lupmk-intro-left { padding-right: 2rem; }
+  .lupmk-intro-logo {
+    height: 90px;
+    width: auto;
+    margin-bottom: 1.5rem;
+  }
+  .lupmk-intro-eyebrow {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--lup-purple);
+    margin-bottom: 1rem;
+  }
+  .lupmk-intro h1 {
+    font-size: clamp(2.8rem, 5.5vw, 4.2rem);
+    text-transform: uppercase;
+    line-height: 1;
+    color: #fff;
+    margin-bottom: 1rem;
+  }
+  .lupmk-intro h1 span { color: var(--lup-purple); }
+  .lupmk-intro-sub {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 520px;
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+  }
+  .lupmk-intro-price {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 0.85rem;
+    margin-bottom: 0;
+  }
+  .lupmk-intro-price-amount {
+    font-family: var(--font-display);
+    font-size: 1.9rem;
+    font-weight: 800;
+    color: var(--lup-purple);
+    letter-spacing: 0.02em;
+  }
+
+  /* ═══ INFO BAR ═══ */
+  .lupmk-info-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: linear-gradient(90deg, #1a0d3d 0%, #4c1d95 100%);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-top: 1.75rem;
+    margin-bottom: 1.75rem;
+    position: relative;
+    min-height: 76px;
+  }
+  .lupmk-info-bar::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 5px;
+    background: var(--lup-purple);
+  }
+  .lupmk-info-bar-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.7rem;
+    flex: 1;
+    padding: 1rem 1rem 1rem 1.25rem;
+  }
+  .lupmk-info-bar-item:first-child { padding-left: 1.75rem; }
+  .lupmk-info-bar-sep {
+    width: 1px;
+    height: 36px;
+    background: rgba(167, 139, 250, 0.4);
+    flex-shrink: 0;
+  }
+  .lupmk-info-bar-icon {
+    flex-shrink: 0;
+    display: block;
+    color: var(--lup-purple);
+  }
+  .lupmk-info-bar-icon svg {
+    width: 22px;
+    height: 22px;
+    display: block;
+  }
+  .lupmk-info-bar-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .lupmk-info-bar-text strong {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--lup-purple);
+    text-transform: uppercase;
+    line-height: 1.15;
+    white-space: nowrap;
+  }
+  .lupmk-info-bar-text span {
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.6);
+    white-space: nowrap;
+  }
+
+  .lupmk-intro-expert {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.85rem 1.25rem;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    width: fit-content;
+  }
+  .lupmk-intro-expert span {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .lupmk-intro-expert strong {
+    font-size: 1.05rem;
+    color: #fff;
+    font-weight: 600;
+  }
+  .lupmk-intro-right {
+    display: flex;
+    justify-content: center;
+  }
+
+  /* ═══ LOGROS SECTION ═══ */
+  .lupmk-logros {
+    background: var(--bg-cream);
+    color: var(--text-dark);
+    position: relative;
+    z-index: 6;
+    margin-top: -50px;
+    border-radius: 50px 50px 0 0;
+    overflow: hidden;
+    padding-top: 6rem;
+  }
+  .lupmk-section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .lupmk-section-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--lup-purple-solid);
+    margin-bottom: 0.75rem;
+  }
+  .lupmk-section-tag::before {
+    content: "";
+    width: 24px;
+    height: 2px;
+    background: var(--lup-purple-solid);
+    border-radius: 2px;
+  }
+  .lupmk-section-title {
+    font-size: clamp(2.2rem, 4vw, 3rem);
+    text-transform: uppercase;
+    line-height: 1;
+    color: var(--text-dark);
+  }
+  .lupmk-logros-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+  .lupmk-logros-left h3 {
+    font-size: 1.35rem;
+    color: var(--text-dark);
+    margin-bottom: 1.25rem;
+    text-transform: uppercase;
+  }
+  .lupmk-logros-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .lupmk-logros-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-bottom: 0.9rem;
+    line-height: 1.55;
+  }
+  .lupmk-logros-list li::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    background: var(--lup-purple-solid);
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 0.55rem;
+  }
+  .lupmk-logros-right {
+    background: var(--bg-white);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2rem;
+  }
+  .lupmk-logros-right h4 {
+    font-size: 1.15rem;
+    color: var(--lup-purple-solid);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+  }
+  .lupmk-check-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .lupmk-check-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.98rem;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+    line-height: 1.5;
+  }
+  .lupmk-check-list li svg {
+    width: 18px;
+    height: 18px;
+    color: var(--lup-purple-solid);
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  /* ═══ CONTENIDO SECTION ═══ */
+  .lupmk-contenido {
+    background: var(--bg-white);
+    color: var(--text-dark);
+    margin-top: -50px;
+    border-radius: 50px 50px 0 0;
+    position: relative;
+    z-index: 7;
+    overflow: hidden;
+    padding-top: 6rem;
+  }
+  .lupmk-modulos-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+  .lupmk-modulo-card {
+    background: var(--bg-cream);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    transition: all 0.3s;
+  }
+  .lupmk-modulo-card:hover {
+    border-color: var(--lup-purple-solid);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  }
+  .lupmk-modulo-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    background: var(--lup-purple-solid);
+    color: #fff;
+    border-radius: 8px;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 800;
+    margin-bottom: 0.85rem;
+  }
+  .lupmk-modulo-card h4 {
+    font-size: 1.1rem;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+  .lupmk-modulo-card p {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* ═══ DIFERENTE SECTION ═══ */
+  .lupmk-diferente {
+    background: var(--bg-cream);
+    color: var(--text-dark);
+    margin-top: -50px;
+    border-radius: 50px 50px 0 0;
+    position: relative;
+    z-index: 8;
+    overflow: hidden;
+    padding-top: 6rem;
+  }
+  .lupmk-diferente-single {
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .lupmk-diferente-single h2 {
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    text-transform: uppercase;
+    line-height: 1.1;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+  }
+  .lupmk-diferente-single h2 span { color: var(--lup-purple-solid); }
+  .lupmk-diferente-intro {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: 1.5rem;
+  }
+  .lupmk-diferente-checks {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+    text-align: left;
+  }
+  .lupmk-diferente-checks li {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.98rem;
+    color: var(--text-dark);
+    margin-bottom: 0.65rem;
+  }
+  .lupmk-diferente-checks li svg {
+    width: 18px;
+    height: 18px;
+    color: var(--lup-purple-solid);
+    flex-shrink: 0;
+  }
+
+  /* ═══ PARA QUIEN SECTION ═══ */
+  .lupmk-paraquien {
+    background: var(--bg-white);
+    color: var(--text-dark);
+    margin-top: -50px;
+    border-radius: 50px 50px 0 0;
+    position: relative;
+    z-index: 9;
+    overflow: hidden;
+    padding-top: 6rem;
+  }
+  .lupmk-paraquien-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+  .lupmk-paraquien-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--bg-cream);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    transition: all 0.3s;
+  }
+  .lupmk-paraquien-card:hover { border-color: var(--lup-purple-solid); }
+  .lupmk-paraquien-icon {
+    width: 46px;
+    height: 46px;
+    background: rgba(124, 58, 237, 0.12);
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+  }
+  .lupmk-paraquien-icon svg {
+    width: 22px;
+    height: 22px;
+    color: var(--lup-purple-solid);
+  }
+  .lupmk-paraquien-card p {
+    font-size: 1rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+
+  /* ═══ EXPERTA SECTION ═══ */
+  .lupmk-experta {
+    background: var(--lup-dark);
+    color: #fff;
+    border-radius: 50px 50px 0 0;
+    margin-top: -50px;
+    position: relative;
+    z-index: 10;
+    overflow: visible;
+    padding-top: 6rem;
+    padding-bottom: 5rem;
+  }
+  .lupmk-experta-single {
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .lupmk-experta-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--lup-purple);
+    margin-bottom: 0.5rem;
+  }
+  .lupmk-experta-single h3 {
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 0.25rem;
+  }
+  .lupmk-experta-role {
+    font-size: 1.05rem;
+    color: var(--lup-purple);
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+  .lupmk-experta-bio {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.75;
+  }
+
+  /* ═══ CTA FINAL ═══ */
+  .lupmk-cta-final {
+    background: var(--bg-cream);
+    color: var(--text-dark);
+    padding: 5rem 0;
+    position: relative;
+    z-index: 11;
+    margin-top: -50px;
+    border-radius: 50px 50px 0 0;
+    overflow: hidden;
+    padding-top: 6rem;
+  }
+  .lupmk-cta-box {
+    background: linear-gradient(135deg, #7c3aed, #a78bfa);
+    border-radius: 32px;
+    padding: clamp(2.5rem, 5vw, 4rem);
+    text-align: center;
+    color: #fff;
+  }
+  .lupmk-cta-box h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    color: #fff;
+  }
+  .lupmk-cta-box .lupmk-btn {
+    background: var(--lup-dark);
+    color: #fff;
+  }
+  .lupmk-cta-box .lupmk-btn:hover,
+  .lupmk-cta-box .lupmk-btn:focus {
+    background: #001a5c;
+    color: #fff;
+    transform: translateY(-2px);
+  }
+
+  /* ═══ RESPONSIVE ═══ */
+  @media (max-width: 900px) {
+    .lupmk-intro-content {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+    .lupmk-intro-left {
+      padding-right: 0;
+      order: 1;
+    }
+    .lupmk-intro-right { order: 2; }
+    .lupmk-intro-sub {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .lupmk-intro-expert {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .lupmk-logros-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    .lupmk-diferente-single { text-align: left; }
+    .lupmk-diferente-checks { display: block; }
+  }
+  @media (max-width: 600px) {
+    .lupmk-intro-content {
+      text-align: left;
+      gap: 1.5rem;
+    }
+    .lupmk-intro-sub {
+      margin-left: 0;
+      margin-right: 0;
+      margin-bottom: 1.75rem;
+      font-size: 0.97rem;
+      line-height: 1.6;
+    }
+    .lupmk-intro-expert {
+      margin-left: 0;
+      margin-right: 0;
+    }
+    .lupmk-intro-eyebrow { margin-bottom: 0.75rem; }
+    .lupmk-intro h1 { margin-bottom: 1.25rem; }
+    .lupmk-section { padding: 3rem 0; }
+    .lupmk-intro {
+      padding: 3rem 0;
+      padding-top: 4rem;
+      margin-top: -60px;
+    }
+    .lupmk-modulos-grid { grid-template-columns: 1fr; }
+    .lupmk-paraquien-grid { grid-template-columns: 1fr; }
+    .lupmk-info-bar {
+      flex-direction: column;
+      border-radius: 14px;
+      min-height: unset;
+    }
+    .lupmk-info-bar::before {
+      width: 100%;
+      height: 4px;
+      bottom: auto;
+      right: 0;
+      border-radius: 14px 14px 0 0;
+    }
+    .lupmk-info-bar-item {
+      padding: 0.9rem 1.25rem;
+      gap: 0.75rem;
+    }
+    .lupmk-info-bar-item:first-child {
+      padding-left: 1.25rem;
+      padding-top: 1.25rem;
+    }
+    .lupmk-info-bar-sep {
+      width: calc(100% - 2.5rem);
+      height: 1px;
+      margin: 0 1.25rem;
+    }
+    .lupmk-info-bar-text strong {
+      font-size: 1rem;
+      white-space: normal;
+    }
+    .lupmk-info-bar-text span { white-space: normal; }
+    .lupmk-hero-banner { padding-top: 65px; }
+    .lupmk-intro h1 { font-size: clamp(2.2rem, 9vw, 3rem); }
+    .lupmk-intro-sub { font-size: 1rem; }
+    .lupmk-section-header { margin-bottom: 2rem; }
+    .lupmk-logros,
+    .lupmk-contenido,
+    .lupmk-diferente,
+    .lupmk-paraquien,
+    .lupmk-experta,
+    .lupmk-cta-final {
+      border-radius: 30px 30px 0 0;
+      padding-top: 4rem;
+    }
+    .lupmk-experta {
+      padding-bottom: 6rem;
+      overflow: visible;
+    }
+    .lupmk-experta-bio { font-size: 0.95rem; }
+    .lupmk-cta-box h2 { font-size: clamp(1.8rem, 7vw, 2.5rem); }
+    .lupmk-container { width: 92%; }
+    .lupmk-logros-right { padding: 1.5rem; }
+  }
+</style>

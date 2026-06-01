@@ -1,79 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import PageHero from "../components/sections/PageHero.astro";
-import ContentSection from "../components/sections/ContentSection.astro";
-import BeneficiosGrid from "../components/sections/BeneficiosGrid.astro";
-import HighlightSection from "../components/sections/HighlightSection.astro";
-import ScrollBreak from "../components/sections/ScrollBreak.astro";
-import FormPlaceholder from "../components/sections/FormPlaceholder.astro";
-
-const modulos = [
-  { title: "Estrategia digital", body: "Modelo de negocio digital, propuesta de valor, OKRs y arquitectura de decisiones." },
-  { title: "Tecnología & datos", body: "Data-driven, IA aplicada, automatización, arquitectura de producto y plataformas." },
-  { title: "Marketing & growth", body: "Adquisición, conversión, retención, performance, branding digital y nuevos canales." },
-  { title: "Liderazgo & cambio", body: "Gestión del cambio, equipos distribuidos, ética digital, gobierno y compliance." },
-];
+import MasterProgramPage from "../components/pages/master-programa/MasterProgramPage.astro";
+import { digitalBusiness } from "../components/pages/master-programa/data";
 ---
-<Layout title="Máster en Digital Business — ESIC Medellín">
-  <PageHero
-    eyebrow="Máster · 11 meses · Modalidad híbrida"
-    title="Máster en<br /><span class='text-brand-teal'>Digital Business</span>"
-    subtitle="En un mundo donde la tecnología cambia cada día, las empresas necesitan líderes que conviertan la transformación digital en resultados medibles."
-    ctas={[
-      { label: "Solicitar Información", href: "#contacto" },
-      { label: "Descargar brochure", href: "/images/wp/2026/03/Brochure-WEB-BUSINESS.pdf", variant: "outline", target: "_blank" },
-    ]}
-    eyebrowColor="text-brand-teal"
-  />
-
-  <BeneficiosGrid
-    z={2}
-    eyebrow="Lo esencial"
-    title="Todo lo que necesitas saber"
-    items={[
-      { value: "11 meses", label: "Duración", color: "teal" },
-      { value: "Híbrido", label: "Presencial + online", color: "blue" },
-      { value: "ESIC España", label: "Doble titulación", color: "orange" },
-      { value: "Empresas", label: "Casos reales con aliados", color: "purple" },
-    ]}
-  />
-
-  <ContentSection
-    z={3}
-    bg="bg-bg-alt"
-    eyebrow="Plan de estudios"
-    eyebrowColor="text-brand-teal-dark"
-    title="Cuatro módulos integrados"
-  >
-    <div class="grid gap-6 md:grid-cols-2 mt-6">
-      {modulos.map((m) => (
-        <article class="bg-white rounded-3xl p-8 shadow-[0_2px_20px_rgba(0,19,63,0.05)] border border-[rgba(0,19,63,0.05)]">
-          <h3 class="font-display text-xl font-extrabold uppercase text-brand-blue-dark mb-3">{m.title}</h3>
-          <div class="w-10 h-[2px] bg-brand-teal-dark mb-4"></div>
-          <p class="text-ink-muted leading-[1.6]">{m.body}</p>
-        </article>
-      ))}
-    </div>
-  </ContentSection>
-
-  <ScrollBreak
-    z={4}
-    eyebrow="Aprende ejecutando"
-    title="Cada módulo cierra con un<br />reto real entregado a una empresa<br />del ecosistema corporativo"
-    cta={{ label: "Conoce ESIC", href: "/quienes-somos/" }}
-  />
-
-  <HighlightSection
-    z={5}
-    color="teal"
-    eyebrow="Inversión en tu futuro"
-    title="Becas de hasta 40%"
-    body="Beneficios por trayectoria, convenio corporativo o por movilidad. Conversa con un asesor para encontrar la opción más adecuada."
-    ctas={[
-      { label: "Aplicar a una beca", href: "/master/becas/" },
-      { label: "Hablar con asesor", href: "#contacto", variant: "outline" },
-    ]}
-  />
-
-  <FormPlaceholder z={6} title="Solicita información del Máster en Digital Business" />
+<Layout
+  title={digitalBusiness.metaTitle}
+  description={digitalBusiness.metaDescription}
+  fullBleed
+>
+  <MasterProgramPage data={digitalBusiness} accordionMode="single" />
 </Layout>

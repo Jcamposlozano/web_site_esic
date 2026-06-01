@@ -1,0 +1,104 @@
+---
+/**
+ * CifrasReconocimiento — "Cifras y Reconocimiento" del contenedor de Másters.
+ *
+ * Réplica fiel del WP (.eh-cifras-section): fondo azul oscuro, dos columnas
+ * (ESIC España / ESIC Medellín) con números como héroes, divisor central,
+ * banderas SVG y CTA tipo pill por columna. Overlap 50px.
+ */
+
+import Container from "../../Container.astro";
+import OverlapSection from "../../OverlapSection.astro";
+
+interface Props {
+  z?: number;
+}
+const { z = 3 } = Astro.props;
+
+const espana = [
+  { num: "TOP 1", desc: "Marketing y Economía Digital" },
+  { num: "62K+", desc: "Alumni de 80+ nacionalidades" },
+  { num: "60", desc: "Años formando profesionales" },
+];
+
+const medellin = [
+  { num: "+3,000", desc: "Participantes de programas a la medida" },
+  { num: "230", desc: "Máster graduados" },
+  { num: "350", desc: "Estudiantes de pregrado activos" },
+];
+---
+<OverlapSection bg="bg-brand-blue-dark" z={z} padding="py-[4.5rem] md:py-20" textColor="text-white" class="overflow-hidden">
+  <Container class="!max-w-[1200px]">
+    <div class="mb-12 md:mb-14">
+      <span class="block font-body text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-white/30 mb-3">
+        Trayectoria &amp; Presencia Global
+      </span>
+      <h2 class="font-display text-[clamp(2.75rem,7vw,5.5rem)] font-extrabold uppercase leading-[0.92] tracking-[-0.02em] text-white">
+        Cifras y<br />Reconocimiento
+      </h2>
+    </div>
+
+    <div class="grid items-start gap-10 md:grid-cols-[1fr_1px_1fr] md:gap-x-16">
+      <!-- ESIC España -->
+      <div class="flex flex-col">
+        <div class="flex items-center gap-2.5 border-b border-white/10 pb-6">
+          <svg viewBox="0 0 30 20" class="h-[15px] w-[22px] flex-shrink-0 overflow-hidden rounded-[2px]">
+            <rect width="30" height="20" fill="#AA151B" />
+            <rect y="5" width="30" height="10" fill="#F1BF00" />
+          </svg>
+          <span class="font-body text-[0.7rem] font-bold uppercase tracking-[0.12em] text-[#7BA8FF]">ESIC España</span>
+        </div>
+        <div class="flex-1">
+          {espana.map((c, i) => (
+            <div class={`py-6 ${i < espana.length - 1 ? "border-b border-white/[0.07]" : ""}`}>
+              <div class="font-display text-[clamp(3.75rem,6vw,6rem)] font-black leading-none tracking-[-0.03em] text-white mb-1.5">
+                {c.num}
+              </div>
+              <div class="text-[0.85rem] leading-snug text-white/45">{c.desc}</div>
+            </div>
+          ))}
+        </div>
+        <a
+          href="https://www.esic.edu"
+          target="_blank"
+          rel="noopener"
+          class="mt-8 inline-flex w-fit items-center gap-2 rounded-full border border-white/[0.18] px-[1.4rem] py-[0.7rem] font-body text-[0.75rem] font-semibold uppercase tracking-[0.07em] text-white/60 no-underline transition-all duration-200 hover:-translate-y-px hover:border-white/40 hover:bg-white/5 hover:text-white"
+        >
+          Conoce ESIC España
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+        </a>
+      </div>
+
+      <div class="hidden self-stretch bg-white/[0.08] md:block" aria-hidden="true"></div>
+
+      <!-- ESIC Medellín -->
+      <div class="flex flex-col">
+        <div class="flex items-center gap-2.5 border-b border-white/10 pb-6">
+          <svg viewBox="0 0 30 20" class="h-[15px] w-[22px] flex-shrink-0 overflow-hidden rounded-[2px]">
+            <rect width="30" height="6.67" fill="#FCD116" />
+            <rect y="6.67" width="30" height="6.67" fill="#003893" />
+            <rect y="13.33" width="30" height="6.67" fill="#CE1126" />
+          </svg>
+          <span class="font-body text-[0.7rem] font-bold uppercase tracking-[0.12em] text-[#FFB740]">ESIC Medellín</span>
+        </div>
+        <div class="flex-1">
+          {medellin.map((c, i) => (
+            <div class={`py-6 ${i < medellin.length - 1 ? "border-b border-white/[0.07]" : ""}`}>
+              <div class="font-display text-[clamp(3.75rem,6vw,6rem)] font-black leading-none tracking-[-0.03em] text-white mb-1.5">
+                {c.num}
+              </div>
+              <div class="text-[0.85rem] leading-snug text-white/45">{c.desc}</div>
+            </div>
+          ))}
+        </div>
+        <a
+          href="#contacto"
+          class="mt-8 inline-flex w-fit items-center gap-2 rounded-full border border-white/[0.18] px-[1.4rem] py-[0.7rem] font-body text-[0.75rem] font-semibold uppercase tracking-[0.07em] text-white/60 no-underline transition-all duration-200 hover:-translate-y-px hover:border-white/40 hover:bg-white/5 hover:text-white"
+        >
+          Conoce ESIC Medellín
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+        </a>
+      </div>
+    </div>
+  </Container>
+</OverlapSection>

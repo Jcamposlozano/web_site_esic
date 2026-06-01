@@ -1,0 +1,62 @@
+---
+/**
+ * BecasHero — hero fotográfico de la página de Becas de Máster (réplica WP).
+ *
+ * Imagen de fondo con overlay negro, eyebrow + título (resalta "40%") +
+ * subtítulo y hasta 2 CTAs. Hero sin overlap (primer bloque). Acento teal.
+ */
+
+import Container from "../../Container.astro";
+
+type CTA = { label: string; href: string; variant: "primary" | "outline" };
+
+interface Props {
+  image: string;
+  eyebrow: string;
+  title: string; // admite HTML para resaltar palabras
+  subtitle: string;
+  ctas?: CTA[];
+}
+
+const { image, eyebrow, title, subtitle, ctas = [] } = Astro.props;
+---
+<section
+  class="relative flex min-h-[70vh] w-full items-center overflow-hidden bg-brand-blue-dark text-white"
+>
+  <img src={image} alt="" class="absolute inset-0 z-0 h-full w-full object-cover object-[center_right]" />
+  <!-- Overlay negro (manual) — gradiente fiel al WP -->
+  <div
+    class="absolute inset-0 z-[1] bg-[linear-gradient(120deg,rgba(0,0,0,0.6),rgba(0,0,0,0.25))]"
+    aria-hidden="true"
+  ></div>
+
+  <Container class="relative z-[2] pb-16 pt-32 md:pt-40 md:pb-20">
+    <div class="flex max-w-[560px] flex-col items-start">
+      <span class="mb-4 block font-display text-[1.1rem] font-semibold uppercase tracking-[0.25em] text-white/85">
+        {eyebrow}
+      </span>
+      <h1
+        class="font-display text-[clamp(2.5rem,6vw,4.5rem)] font-semibold uppercase leading-[0.92] [&_span]:text-brand-teal-dark"
+        set:html={title}
+      ></h1>
+      <p class="mt-4 max-w-[520px] text-[1.15rem] leading-[1.55] text-white/85">{subtitle}</p>
+      {ctas.length > 0 && (
+        <div class="mt-8 flex flex-wrap gap-4">
+          {ctas.slice(0, 2).map((cta) => (
+            <a
+              href={cta.href}
+              class:list={[
+                "inline-flex items-center justify-center gap-2 rounded-full px-7 py-[0.85rem] font-semibold text-[0.95rem] no-underline transition-all hover:-translate-y-0.5",
+                cta.variant === "primary"
+                  ? "bg-brand-teal-dark text-white shadow-[0_16px_35px_rgba(9,207,144,0.25)] hover:bg-[#07B57E]"
+                  : "border border-white/55 bg-white/10 text-white hover:bg-white/20",
+              ]}
+            >
+              {cta.label}
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  </Container>
+</section>

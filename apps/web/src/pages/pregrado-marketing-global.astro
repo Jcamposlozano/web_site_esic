@@ -1,92 +1,102 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import PageHero from "../components/sections/PageHero.astro";
-import ContentSection from "../components/sections/ContentSection.astro";
-import BeneficiosGrid from "../components/sections/BeneficiosGrid.astro";
-import HighlightSection from "../components/sections/HighlightSection.astro";
-import ScrollBreak from "../components/sections/ScrollBreak.astro";
-import FormPlaceholder from "../components/sections/FormPlaceholder.astro";
+import ProgramaPregradoPage from "../components/pages/pregrado/ProgramaPregradoPage.astro";
+import type { PlanYear, Institution } from "../components/pages/pregrado/PlanEstudiosTabs.tsx";
 
-const ejes = [
+const planYears: PlanYear[] = [
   {
-    title: "Marketing estratégico",
-    body: "Investigación de mercados, plan de marketing, branding, comunicación 360° y métricas de impacto.",
+    tab: "Año 1",
+    title: "Currículo de Fundamentos de Carrera - Año 1",
+    items: [
+      { label: "Aldea Global", detail: "Pensamiento Empresarial (Business Environment, Imágenes de la organización, Sistemas de información contable y financiera)" },
+      { label: "Business Intelligence", detail: "Negocios y Mercados (Introducción al BI, Conducta del consumidor, Decisiones estratégicas de mercadeo)" },
+      { label: "Conciencia Organizacional", detail: "Factor Humano en las Organizaciones (Clima y cultura organizacional, Relaciones de colaboración, Humanismo Digital)" },
+      { label: "Prospectiva", detail: "Mercado y Tendencias (Análisis del entorno, Factores de cambio, Validación y escenarios, Estadística aplicada)" },
+      { label: "Laboratorio de Ideas", detail: "Análisis del entorno y creatividad (Autoconocimiento, Proceso creativo, Marketing Social y Digital)" },
+      { label: "Profundización Tecnología", detail: "Liderazgo Mente 2.0, Tecnologías Economía Digital, Arte Digital, Diseño de Producto Digital, Business Intelligence" },
+    ],
   },
   {
-    title: "Mercados internacionales",
-    body: "Estrategia global, comercio exterior, segmentación cultural y posicionamiento en mercados emergentes.",
+    tab: "Año 2",
+    title: "Currículo de Fundamentos de Carrera - Año 2",
+    items: [
+      { label: "Aldea Global", detail: "Business Tools and Techniques (Contexto económico internacional, Negocios internacionales, International Marketing)" },
+      { label: "Business Intelligence", detail: "Negocios y Procesos (Poder del BI, Modelo de madurez, KPI's y análisis de datos, Dirección de ventas)" },
+      { label: "Conciencia Organizacional", detail: "Gestión de relaciones con Stakeholders (Ética y buenas prácticas, Solución de conflictos)" },
+      { label: "Prospectiva", detail: "Simulación y modelación empresarial (Estructuración de modelos, Gestión de riesgos, Planificación y control de ventas)" },
+      { label: "Laboratorio de Ideas", detail: "Innovación y Viabilidad de Proyectos (Gestión de la innovación, Modelación de ideas, Estrategias de Producto y Precio, Marco legal del Marketing)" },
+      { label: "Profundización Tecnología", detail: "Programación e IA, Data Management, Customer Experience, Estrategias de Marketing en Plataformas Digitales, Medios de Comunicación Digital" },
+    ],
+    note: { label: "Summer Camp:", text: "2 semanas de inmersión en Madrid, España (obligatorio)" },
   },
   {
-    title: "Negocios digitales",
-    body: "E-commerce, marketing digital, analítica avanzada, performance, CRM y experiencia del consumidor.",
+    tab: "Año 3",
+    title: "Currículo de Fundamentos de Carrera - Año 3",
+    items: [
+      { label: "Aldea Global", detail: "Multicultural Project (Multiculturalidad, Global Leadership, Transcultural Negotiation, Estrategia empresarial)" },
+      { label: "Business Intelligence", detail: "Negocios y Finanzas (Finanzas de marketing, Administración financiera, Generación de valor, Dirección de marketing)" },
+      { label: "Conciencia Organizacional", detail: "Gobierno Corporativo (Marco jurídico, Estructuras organizacionales, Desarrollo organizacional, Gestión del talento y liderazgo)" },
+      { label: "Prospectiva", detail: "Becoming a Global Manager (Toma de decisiones estratégicas, Digital Advertising / Inbound Marketing, Creatividad publicitaria, Storytelling)" },
+      { label: "Laboratorio de Ideas", detail: "Creación de Empresas (Administración de emprendimientos, Tratamiento jurídico, Recursos frente a crisis, Dirección de empresas y RSE)" },
+    ],
+    note: { label: "Opción:", text: "Alternativa de cursar el año en Campus de Madrid, España" },
   },
   {
-    title: "Liderazgo & gestión",
-    body: "Dirección comercial, gestión de equipos, finanzas para no financieros, ética y sostenibilidad.",
+    tab: "Año 4",
+    title: "Currículo Específico de Fundamentos de la Carrera - Año 4",
+    items: [
+      { label: "Marketing Digital", detail: "Ecosistema del marketing digital, Dirección de comunicación en entornos digitales, Diseño gráfico / Producción audiovisual / Diseño web / Podcasting, SEO & SEM" },
+      { label: "Generación de Estrategias", detail: "Gerencia estratégica del marketing, Análisis situacional del plan de marketing, Global mindset, Global communications" },
+      { label: "Estrategias CX", detail: "CRM, Gestión de la experiencia del cliente, Marketing relacional, Marketing social y sostenibilidad" },
+      { label: "Psicología Marketing", detail: "Segmentación de mercados, Psicología del consumidor, Enfoque sociológico y antropológico, Neuromarketing" },
+      { label: "Proyección Profesional", detail: "Plan de negocio, Plan de fortalecimiento, Práctica empresarial, Misión académica cultural y empresarial, Investigación" },
+    ],
+    note: { label: "Doble Titulación:", text: "Alternativa de cursar en Universidades aliadas a ESIC" },
   },
 ];
+
+const institutions: Institution[] = [
+  {
+    title: "Dirección de<br/>Marketing Global",
+    subtitle: "Título propio español de ESIC University",
+    logo: "/images/wp/2024/08/cropped-logo-esic-web-1.png",
+    logoAlt: "ESIC",
+  },
+  {
+    title: "Profesional en<br/>Administración de Mercadeo",
+    logo: "/images/wp/2024/08/Logo-CEIPA-curvas_logo-CEIPA-gris-01-e1722627736717.png",
+    logoAlt: "CEIPA",
+  },
+];
+
+const priceFeatures = [
+  { text: "4 años de formación" },
+  { text: "Doble titulación internacional" },
+  { text: "Oportunidad de 6 meses o un año en ESIC University en Madrid" },
+  { text: "Acceso a plataformas digitales" },
+  { text: "Formación en liderazgo" },
+];
 ---
-<Layout title="Pregrado en Dirección de Marketing Global — ESIC Medellín">
-  <PageHero
-    eyebrow="Pregrado · 4 años · Doble titulación"
-    title="Dirección de<br /><span class='text-brand-orange'>Marketing Global</span>"
-    subtitle="Forma profesionales capaces de liderar estrategias de marketing en mercados globales, con visión cultural, capacidad analítica y dominio de las herramientas digitales."
-    ctas={[
-      { label: "Solicitar Información", href: "#contacto" },
-      { label: "Conocer becas", href: "/pregrado/becas/", variant: "outline" },
+<Layout
+  title="Pregrado en Dirección de Marketing Global — ESIC Medellín"
+  description="Pregrado en Dirección de Marketing Global en ESIC Medellín. Doble titulación internacional, inmersión en Madrid y enfoque en estrategia comercial y mercados globales."
+  fullBleed
+>
+  <ProgramaPregradoPage
+    heroDesktop="/images/wp/2026/03/banner-direccion-marketing-global-desktop.webp"
+    heroMobile="/images/wp/2026/03/banner-direccion-marketing-global-mobile.webp"
+    heroAlt="Pregrado en Dirección de Marketing Global - ESIC Medellín"
+    exploraBody="Formamos líderes éticos, innovadores y orientados a resultados, listos para impulsar el marketing, los negocios digitales y la innovación aplicada en organizaciones de impacto regional y global."
+    formTitle="Solicita información"
+    testimoniosBody={[
+      "Descubre cómo nuestros estudiantes están transformando el marketing global. Conoce sus historias de éxito y cómo ESIC les ha ayudado a alcanzar sus metas profesionales.",
+      "Formamos profesionales capaces de innovar y liderar en mercados internacionales, con una visión estratégica y orientada a resultados.",
     ]}
-    image="/images/wp/2026/03/banner-direccion-marketing-global-desktop.webp"
-    imageMobile="/images/wp/2026/03/banner-direccion-marketing-global-mobile.webp"
+    videoSrc="/images/wp/2026/02/testimonio-felipe.mp4"
+    price="$29.469.000"
+    priceFeatures={priceFeatures}
+    planYears={planYears}
+    institutions={institutions}
+    brochureHref="/images/wp/2026/03/brochure-WEB-Marketing.pdf"
   />
-
-  <BeneficiosGrid
-    z={2}
-    eyebrow="Lo esencial"
-    title="Todo lo que necesitas saber"
-    items={[
-      { value: "4 años", label: "Duración", color: "orange" },
-      { value: "Medellín", label: "Campus presencial", color: "blue" },
-      { value: "ESIC + CEIPA", label: "Doble titulación", color: "teal" },
-      { value: "Madrid", label: "Inmersión internacional", color: "purple" },
-    ]}
-  />
-
-  <ContentSection
-    z={3}
-    bg="bg-bg-alt"
-    eyebrow="Plan de estudios"
-    eyebrowColor="text-brand-orange"
-    title="Cuatro ejes formativos"
-  >
-    <div class="grid gap-6 md:grid-cols-2 mt-6">
-      {ejes.map((e) => (
-        <article class="bg-white rounded-3xl p-8 shadow-[0_2px_20px_rgba(0,19,63,0.05)] border border-[rgba(0,19,63,0.05)]">
-          <h3 class="font-display text-xl font-extrabold uppercase text-brand-blue-dark mb-3">{e.title}</h3>
-          <div class="w-10 h-[2px] bg-brand-orange mb-4"></div>
-          <p class="text-ink-muted leading-[1.6]">{e.body}</p>
-        </article>
-      ))}
-    </div>
-  </ContentSection>
-
-  <ScrollBreak
-    z={4}
-    eyebrow="Networking corporativo"
-    title="Construyes portafolio,<br />criterio y conexiones reales<br />desde el primer semestre"
-    cta={{ label: "Conoce el campus", href: "/campus/" }}
-  />
-
-  <HighlightSection
-    z={5}
-    color="orange"
-    eyebrow="Inversión en tu futuro"
-    title="Hasta 40% de beca por excelencia académica"
-    body="Aplica desde tu proceso de admisión. Beneficios adicionales para movilidad nacional, hermanos matriculados y antiguos alumnos ESIC."
-    ctas={[
-      { label: "Aplicar a beca", href: "/pregrado/becas/" },
-      { label: "Solicitar info", href: "#contacto", variant: "outline" },
-    ]}
-  />
-
-  <FormPlaceholder z={6} title="Solicita información del Pregrado en Marketing Global" />
 </Layout>
