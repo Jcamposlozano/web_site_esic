@@ -1,0 +1,46 @@
+---
+/**
+ * ContactFormSection — sección con el formulario Zoho real.
+ * Drop-in replacement de FormPlaceholder (misma API: z, bg, title, body).
+ */
+import Container from "../Container.astro";
+import OverlapSection from "../OverlapSection.astro";
+import ContactForm from "../ContactForm.astro";
+
+interface Props {
+  z?: number;
+  bg?: string;
+  title?: string;
+  body?: string;
+  /** prefijo de IDs por si hay más de un form en la misma página */
+  idPrefix?: string;
+}
+
+const {
+  z = 6,
+  bg = "bg-bg-alt",
+  title = "Solicitar Información",
+  body = "Déjanos tus datos y un asesor te contactará para resolver tus dudas sobre admisiones, programas, becas y financiación.",
+  idPrefix = "cf",
+} = Astro.props;
+---
+<OverlapSection bg={bg} z={z} padding="py-16 md:py-20">
+  <Container>
+    <div class="grid gap-8 md:grid-cols-[1fr_1fr] md:items-start">
+      <div>
+        <span class="inline-flex items-center gap-3 text-[0.74rem] font-bold uppercase tracking-[0.22em] text-brand-blue mb-4">
+          <span class="block h-px w-8 bg-current" aria-hidden="true"></span>
+          Contacto
+        </span>
+        <h2 class="font-display text-3xl md:text-5xl font-extrabold uppercase leading-[0.95] text-brand-blue-dark">
+          {title}
+        </h2>
+        <p class="mt-4 text-ink-muted leading-relaxed max-w-[48ch]">{body}</p>
+      </div>
+
+      <div class="rounded-3xl bg-white shadow-[0_2px_20px_rgba(0,19,63,0.07)] border border-[rgba(0,19,63,0.06)] p-7 md:p-9">
+        <ContactForm idPrefix={idPrefix} />
+      </div>
+    </div>
+  </Container>
+</OverlapSection>

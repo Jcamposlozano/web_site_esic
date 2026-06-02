@@ -8,7 +8,7 @@
  *  3. Level Up
  *  4. La Vida en ESIC — 4 cards
  *  5. CTA Asesoría (azul)
- *  + Formulario (FormPlaceholder; el original abre modales Zoho)
+ *  + Formulario (ContactFormSection; el original abre modales Zoho)
  *
  * Reglas: overlap 50px + rounded-t-[50px] con z incremental; hero sin overlap;
  * toda imagen con overlay negro; SVG stroke-based; botones hover translateY(-2px).
@@ -16,7 +16,7 @@
 import Layout from "../layouts/Layout.astro";
 import Container from "../components/Container.astro";
 import OverlapSection from "../components/OverlapSection.astro";
-import FormPlaceholder from "../components/sections/FormPlaceholder.astro";
+import ContactFormSection from "../components/sections/ContactFormSection.astro";
 
 const arrow = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`;
 
@@ -248,7 +248,7 @@ const vida = [
 
     <!-- Formulario (el original abre modales Zoho: general + empresarial) -->
     <div id="contacto">
-      <FormPlaceholder
+      <ContactFormSection
         z={6}
         title="Solicitar Información"
         body="Cuéntanos qué programa te interesa (pregrado, máster, programa ejecutivo, formación empresarial o Level Up) y un asesor te contactará."

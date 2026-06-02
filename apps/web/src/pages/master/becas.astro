@@ -3,6 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import Container from "../../components/Container.astro";
 import OverlapSection from "../../components/OverlapSection.astro";
 import BecasHero from "../../components/pages/master/BecasHero.astro";
+import ContactForm from "../../components/ContactForm.astro";
 
 // Beneficios — íconos SVG stroke-based (manual: sin emojis/glyphs)
 const beneficios = [
@@ -110,14 +111,7 @@ const iconBg = {
             <h3 class="mb-6 font-display text-[2rem] font-semibold uppercase leading-none text-brand-teal-dark">
               Aplica a una<br />beca para<br />Máster
             </h3>
-            <div class="rounded-2xl border-2 border-dashed border-ink-light/30 px-6 py-12 text-center">
-              <div class="mb-2 text-[0.7rem] font-bold uppercase tracking-[0.18em] text-brand-orange">
-                TODO · Pendiente fase CMS / Forms
-              </div>
-              <div class="font-body text-sm text-ink-muted">
-                Formulario Zoho (Aplica a una beca — Máster) se integra cuando definamos el stack de formularios.
-              </div>
-            </div>
+            <ContactForm idPrefix="master-becas" />
           </div>
         </div>
       </Container>

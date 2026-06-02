@@ -1,6 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import LevelUpFormPlaceholder from "../../components/pages/level-up/LevelUpFormPlaceholder.astro";
+import ContactForm from "../../components/ContactForm.astro";
 
 /**
  * Estrategia de Marketing Digital en 8 Horas — Level Up.
@@ -182,7 +182,9 @@ const diferenciaChecks = [
           </div>
 
           <div class="lupmk-intro-right">
-            <LevelUpFormPlaceholder />
+            <div class="rounded-3xl bg-white p-7 md:p-9 shadow-[0_20px_50px_rgba(0,19,63,0.12)]">
+              <ContactForm idPrefix="levelup-mkt" />
+            </div>
           </div>
         </div>
       </div>

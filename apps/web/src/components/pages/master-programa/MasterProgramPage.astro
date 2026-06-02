@@ -16,6 +16,7 @@
  */
 import Container from "../../Container.astro";
 import PlanAccordion from "./PlanAccordion.tsx";
+import ContactForm from "../../ContactForm.astro";
 import { CONTACT, type MasterProgramData } from "./data";
 
 interface Props {
@@ -118,7 +119,7 @@ const TEAL = "#09CF90";
           </div>
         </div>
 
-        {/* Form card → FormPlaceholder (no construimos forms) */}
+        {/* Form card → formulario Zoho real */}
         <div
           class="rounded-3xl bg-white p-8 shadow-[0_20px_60px_rgba(0,19,63,0.12)] md:p-10"
         >
@@ -128,19 +129,7 @@ const TEAL = "#09CF90";
           >
             {data.formTitle}
           </h3>
-          <div
-            class="rounded-2xl border-2 border-dashed border-ink-light/30 px-6 py-12 text-center"
-          >
-            <div
-              class="mb-2 text-[0.7rem] font-bold uppercase tracking-[0.18em] text-brand-orange"
-            >
-              TODO · Pendiente fase CMS / Forms
-            </div>
-            <div class="font-body text-sm text-ink-muted">
-              Formulario Zoho se integra cuando definamos el stack de
-              formularios.
-            </div>
-          </div>
+          <ContactForm idPrefix={slug} />
         </div>
       </div>
     </Container>

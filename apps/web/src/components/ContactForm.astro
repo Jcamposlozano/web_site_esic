@@ -1,0 +1,203 @@
+---
+/**
+ * ContactForm — formulario Zoho real reutilizable (SolicitarInformacinFormulariogeneral110226).
+ *
+ * Réplica fiel del form del footer/Contacto WP: campos exactos, dropdowns
+ * condicionales Pregrado/Máster, autollenado de UTM desde la URL y redirect a
+ * /gracias. Robusto para múltiples instancias: el toggle usa closest('form') +
+ * data-group (sin depender de IDs globales).
+ *
+ * Pasar idPrefix distinto si hubiera más de un form en la misma página.
+ */
+interface Props {
+  idPrefix?: string;
+  class?: string;
+}
+const { idPrefix = "cf", class: className = "" } = Astro.props;
+
+const ZOHO_JS =
+  "https://forms.zohopublic.com/esicmedellin/form/SolicitarInformacinFormulariogeneral110226/formperma/Rdx6HXS1lMff_KC1PKqlg0BhSQNBDaxDsxdDOnsWmEM/js";
+const ZOHO_ACTION =
+  "https://forms.zohopublic.com/esicmedellin/form/SolicitarInformacinFormulariogeneral110226/formperma/Rdx6HXS1lMff_KC1PKqlg0BhSQNBDaxDsxdDOnsWmEM/htmlRecords/submit";
+---
+<div class:list={["esic-zohoform", className]}>
+  <script type="text/javascript" is:inline src={ZOHO_JS}></script>
+  <form
+    action={ZOHO_ACTION}
+    name="esicZohoForm"
+    method="POST"
+    accept-charset="UTF-8"
+    enctype="multipart/form-data"
+    data-esic-zoho-form
+    onsubmit="zf_ValidateAndSubmit(this, event); return false;"
+  >
+    <input type="hidden" name="zf_referrer_name" value="" />
+    <input type="hidden" name="zf_redirect_url" value="https://esic.co/gracias/" />
+    <input type="hidden" name="zc_gad" value="" />
+
+    <div class="esic-form-row">
+      <div class="esic-form-group">
+        <label for={`${idPrefix}_Name_First`}>Nombre <em>*</em></label>
+        <input type="text" id={`${idPrefix}_Name_First`} name="Name_First" maxlength="255" placeholder="Tu nombre" required />
+      </div>
+      <div class="esic-form-group">
+        <label for={`${idPrefix}_Name_Last`}>Apellido</label>
+        <input type="text" id={`${idPrefix}_Name_Last`} name="Name_Last" maxlength="255" placeholder="Tu apellido" />
+      </div>
+    </div>
+
+    <div class="esic-form-group">
+      <label for={`${idPrefix}_Email`}>Correo electrónico <em>*</em></label>
+      <input type="email" id={`${idPrefix}_Email`} name="Email" maxlength="255" placeholder="tu@email.com" required />
+    </div>
+
+    <div class="esic-form-group">
+      <label for={`${idPrefix}_PhoneNumber`}>Teléfono <em>*</em></label>
+      <input type="tel" id={`${idPrefix}_PhoneNumber`} name="PhoneNumber_countrycode" maxlength="20" placeholder="300 123 4567" required />
+    </div>
+
+    <div class="esic-form-group">
+      <label for={`${idPrefix}_Dropdown`}>Tipo de programa <em>*</em></label>
+      <select id={`${idPrefix}_Dropdown`} name="Dropdown" required onchange="esicZohoToggle(this)">
+        <option value="-Select-" disabled selected>-Select-</option>
+        <option value="Pregrado">Pregrado</option>
+        <option value="Máster">Máster</option>
+        <option value="Programa Ejecutivo">Programa Ejecutivo</option>
+        <option value="Empresariales">Empresariales</option>
+        <option value="Level Up">Level Up</option>
+      </select>
+    </div>
+
+    <div class="esic-form-group" data-group="master" style="display:none">
+      <label for={`${idPrefix}_Dropdown2`}>Programa de interés Máster <em>*</em></label>
+      <select id={`${idPrefix}_Dropdown2`} name="Dropdown2">
+        <option value="-Select-" disabled selected>-Select-</option>
+        <option value="Máster Digital Marketing">Máster en Digital Marketing</option>
+        <option value="Máster Digital Business">Máster en Digital Business</option>
+        <option value="Máster Customer Experience Management">Máster en Customer Experience Management</option>
+      </select>
+    </div>
+
+    <div class="esic-form-group" data-group="pregrado" style="display:none">
+      <label for={`${idPrefix}_Dropdown4`}>Programa de interés Pregrado <em>*</em></label>
+      <select id={`${idPrefix}_Dropdown4`} name="Dropdown4">
+        <option value="-Select-" disabled selected>-Select-</option>
+        <option value="Dirección de Marketing Global">Dirección de Marketing Global</option>
+        <option value="Digital Business">Digital Business</option>
+      </select>
+    </div>
+
+    <div class="esic-form-group">
+      <label for={`${idPrefix}_Dropdown3`}>Medio de contacto <em>*</em></label>
+      <select id={`${idPrefix}_Dropdown3`} name="Dropdown3" required>
+        <option value="-Select-" disabled selected>-Select-</option>
+        <option value="WhatsApp">WhatsApp</option>
+        <option value="Correo">Correo</option>
+        <option value="Llamada">Llamada</option>
+      </select>
+    </div>
+
+    <div class="esic-form-checkbox">
+      <input type="checkbox" name="TermsConditions" id={`${idPrefix}-terms`} required />
+      <label for={`${idPrefix}-terms`}>
+        Acepto la <a href="/politicas-de-privacidad/" target="_blank" rel="noopener">autorización de datos personales y términos y condiciones</a> <em>*</em>
+      </label>
+    </div>
+
+    <input type="hidden" name="utm_source" />
+    <input type="hidden" name="utm_medium" />
+    <input type="hidden" name="utm_campaign" />
+    <input type="hidden" name="utm_term" />
+    <input type="hidden" name="utm_content" />
+    <input type="hidden" name="utm_adset_name" />
+    <input type="hidden" name="utm_ad_name" />
+
+    <button type="submit" class="esic-form-submit">Enviar solicitud</button>
+  </form>
+</div>
+
+<script is:inline>
+  // Toggle del dropdown de programa (Pregrado/Máster) — robusto para N formularios.
+  if (typeof window.esicZohoToggle !== "function") {
+    window.esicZohoToggle = function (sel) {
+      var form = sel.closest("form");
+      if (!form) return;
+      var mg = form.querySelector('[data-group="master"]');
+      var pg = form.querySelector('[data-group="pregrado"]');
+      var ms = mg && mg.querySelector("select");
+      var ps = pg && pg.querySelector("select");
+      var showM = sel.value === "Máster";
+      var showP = sel.value === "Pregrado";
+      if (mg) mg.style.display = showM ? "" : "none";
+      if (pg) pg.style.display = showP ? "" : "none";
+      if (ms) { ms.required = showM; if (!showM) ms.value = "-Select-"; }
+      if (ps) { ps.required = showP; if (!showP) ps.value = "-Select-"; }
+    };
+  }
+  // Autollenado de UTM desde la URL (una sola vez por página, cubre todos los forms).
+  if (!window.__esicUtmWired) {
+    window.__esicUtmWired = true;
+    document.addEventListener("DOMContentLoaded", function () {
+      var params = new URLSearchParams(window.location.search);
+      ["utm_source","utm_medium","utm_campaign","utm_term","utm_content","utm_adset_name","utm_ad_name"].forEach(function (p) {
+        var value = params.get(p);
+        if (!value) return;
+        document.querySelectorAll('[name="' + p + '"]').forEach(function (input) { input.value = value; });
+      });
+    });
+  }
+</script>
+
+<style>
+  .esic-zohoform .esic-form-group { margin-bottom: 1.25rem; }
+  .esic-zohoform .esic-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 480px) { .esic-zohoform .esic-form-row { grid-template-columns: 1fr; } }
+  .esic-zohoform label {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-brand-blue-dark);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .esic-zohoform .esic-form-group label em { color: #dc2626; font-style: normal; }
+  .esic-zohoform input,
+  .esic-zohoform select {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 10px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-brand-blue-dark);
+    background: #fff;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+  }
+  .esic-zohoform input:focus,
+  .esic-zohoform select:focus {
+    outline: none;
+    border-color: var(--color-brand-blue);
+    box-shadow: 0 0 0 3px rgba(0, 71, 233, 0.1);
+  }
+  .esic-zohoform .esic-form-checkbox { display: flex; align-items: flex-start; gap: 0.75rem; margin: 1rem 0 1.25rem; }
+  .esic-zohoform .esic-form-checkbox input[type="checkbox"] {
+    width: 18px; min-width: 18px; height: 18px; margin: 0.15rem 0 0; flex-shrink: 0;
+    accent-color: var(--color-brand-blue); cursor: pointer;
+  }
+  .esic-zohoform .esic-form-checkbox label {
+    font-family: var(--font-body); font-size: 0.8rem; font-weight: 400;
+    color: var(--color-ink-muted); line-height: 1.5; cursor: pointer; text-transform: none; letter-spacing: normal;
+  }
+  .esic-zohoform .esic-form-checkbox label em { color: #dc2626; font-style: normal; }
+  .esic-zohoform .esic-form-checkbox label a { color: var(--color-brand-blue); text-decoration: underline; }
+  .esic-zohoform .esic-form-submit {
+    width: 100%; padding: 1rem 2rem; background: var(--color-brand-blue); color: #fff;
+    border: none; border-radius: 10px; font-family: var(--font-body); font-size: 1rem;
+    font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .esic-zohoform .esic-form-submit:hover { background: var(--color-brand-blue-dark); transform: translateY(-1px); box-shadow: 0 12px 30px rgba(0, 19, 63, 0.18); }
+</style>

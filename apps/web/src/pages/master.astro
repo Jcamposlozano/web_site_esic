@@ -3,7 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Container from "../components/Container.astro";
 import OverlapSection from "../components/OverlapSection.astro";
 import HighlightSection from "../components/sections/HighlightSection.astro";
-import FormPlaceholder from "../components/sections/FormPlaceholder.astro";
+import ContactFormSection from "../components/sections/ContactFormSection.astro";
 import HeroBannerMasters from "../components/pages/master/HeroBannerMasters.astro";
 import MastersGrid from "../components/pages/master/MastersGrid.astro";
 import CifrasReconocimiento from "../components/pages/master/CifrasReconocimiento.astro";
@@ -121,9 +121,9 @@ const comparador = [
       ctas={[{ label: "Solicitar información", href: "#formulario", variant: "white" }]}
     />
 
-    <!-- 6. Formulario (Zoho → FormPlaceholder) -->
+    <!-- 6. Formulario (Zoho → ContactFormSection) -->
     <div id="formulario"></div>
-    <FormPlaceholder
+    <ContactFormSection
       z={6}
       bg="bg-bg"
       title="Solicita información"

@@ -10,6 +10,7 @@
  */
 import Container from "../../Container.astro";
 import OverlapSection from "../../OverlapSection.astro";
+import ContactForm from "../../ContactForm.astro";
 import TestimonioVideo from "./TestimonioVideo.tsx";
 import PlanEstudiosTabs, {
   type PlanYear,
@@ -93,13 +94,10 @@ const CheckPath = "M20 6L9 17l-5-5";
           </a>
         </div>
 
-        <!-- Recuadro: en el WP es el form Zoho; aquí placeholder -->
+        <!-- Recuadro: formulario Zoho real -->
         <div class="rounded-3xl bg-white shadow-[0_20px_60px_rgba(0,19,63,0.12)] p-8 md:p-10">
           <h3 class="font-display text-[1.8rem] font-extrabold uppercase leading-none mb-7 text-brand-orange">{formTitle}</h3>
-          <div class="border-2 border-dashed border-ink-light/30 rounded-2xl px-6 py-12 text-center">
-            <div class="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-brand-orange mb-2">TODO · Pendiente fase CMS / Forms</div>
-            <div class="text-ink-muted font-body text-sm">El formulario Zoho de admisiones se integra cuando definamos el stack de formularios.</div>
-          </div>
+          <ContactForm idPrefix="pregrado-prog" />
         </div>
       </div>
     </Container>

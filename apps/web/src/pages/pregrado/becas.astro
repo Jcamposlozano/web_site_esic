@@ -3,7 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import Container from "../../components/Container.astro";
 import OverlapSection from "../../components/OverlapSection.astro";
 import BecasFaq, { type FaqItem } from "../../components/pages/pregrado/BecasFaq.tsx";
-import BecasModal from "../../components/pages/pregrado/BecasModal.tsx";
+import ContactFormSection from "../../components/sections/ContactFormSection.astro";
 
 const becas = [
   {
@@ -71,8 +71,6 @@ const cronograma = [
   description="Becas y ayudas económicas para pregrado en ESIC Medellín: excelencia académica, movilidad nacional, hermanos matriculados y familiares de antiguos alumnos."
   fullBleed
 >
-  <BecasModal client:load />
-
   <main>
     <!-- Hero (imagen de fondo con overlay) -->
     <section class="relative flex items-end overflow-hidden min-h-[88vh]">
@@ -89,13 +87,12 @@ const cronograma = [
         <p class="text-[1.05rem] leading-relaxed text-white/85 max-w-[500px] mb-10">
           ESIC Medellín apoya a estudiantes de nuevo ingreso mediante un plan de becas y ayudas económicas al estudio, fomentando la excelencia y la igualdad de oportunidades.
         </p>
-        <button
-          type="button"
-          data-open-becas-modal
-          class="inline-flex items-center justify-center gap-2 rounded-full px-8 py-3.5 font-bold text-[0.82rem] uppercase tracking-[0.06em] text-white no-underline transition-all hover:-translate-y-0.5 bg-brand-blue hover:bg-[#0038CC] cursor-pointer border-0"
+        <a
+          href="#aplicar-becas"
+          class="inline-flex items-center justify-center gap-2 rounded-full px-8 py-3.5 font-bold text-[0.82rem] uppercase tracking-[0.06em] text-white no-underline transition-all hover:-translate-y-0.5 bg-brand-blue hover:bg-[#0038CC]"
         >
           Aplica a una beca
-        </button>
+        </a>
       </Container>
     </section>
 
@@ -182,13 +179,12 @@ const cronograma = [
             <p class="text-[1.1rem] text-white/85 mt-3 font-medium">Da el primer paso hacia tu futuro en ESIC Medellín.</p>
           </div>
           <div class="flex flex-col items-center md:items-end gap-3 shrink-0">
-            <button
-              type="button"
-              data-open-becas-modal
-              class="inline-flex items-center gap-2 rounded-full px-8 py-3.5 font-bold text-[0.82rem] uppercase tracking-[0.06em] text-brand-orange bg-white hover:bg-[#FFF8F0] transition-all hover:-translate-y-0.5 cursor-pointer border-0"
+            <a
+              href="#aplicar-becas"
+              class="inline-flex items-center gap-2 rounded-full px-8 py-3.5 font-bold text-[0.82rem] uppercase tracking-[0.06em] text-brand-orange bg-white hover:bg-[#FFF8F0] transition-all hover:-translate-y-0.5 no-underline"
             >
               Aplica a una beca &rarr;
-            </button>
+            </a>
             <a
               href="/images/wp/2026/05/Documento_becas_ayudas_economicas_esic_medellin_V2.pdf"
               target="_blank"
@@ -202,6 +198,15 @@ const cronograma = [
         </div>
       </Container>
     </OverlapSection>
+
+    <span id="aplicar-becas" class="block scroll-mt-24"></span>
+    <ContactFormSection
+      z={8}
+      bg="bg-bg-alt"
+      title="Aplica a una beca de Pregrado"
+      body="Diligencia el formulario y un asesor te acompañará en el proceso de aplicación a beca."
+      idPrefix="pregrado-becas"
+    />
   </main>
 
   <style>
@@ -224,12 +229,4 @@ const cronograma = [
       .becas-tl-badge { left: -130px; }
     }
   </style>
-
-  <script is:inline>
-    document.querySelectorAll("[data-open-becas-modal]").forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        window.dispatchEvent(new CustomEvent("open-becas-modal"));
-      });
-    });
-  </script>
 </Layout>
