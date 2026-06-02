@@ -17,7 +17,7 @@ const cards: Card[] = [
     image: "/images/home/rethink/aprender-a-decidir.png",
     tag: "Blog",
     title: "Aprender a decidir: el valor de los casos reales en el aula",
-    href: "/blog/aprender-a-decidir-el-valor-de-los-casos-reales-en-el-aula/",
+    href: "https://esic.co/aprender-a-decidir-el-valor-de-los-casos-reales-en-el-aula/",
     ctaLabel: "Leer",
   },
   {
@@ -25,7 +25,7 @@ const cards: Card[] = [
     image: "/images/home/rethink/formar-criterio-directivo.png",
     tag: "Blog",
     title: "Formar criterio directivo",
-    href: "/blog/formar-criterio-directivo/",
+    href: "https://esic.co/formar-criterio-directivo/",
     ctaLabel: "Leer",
   },
   {
@@ -33,7 +33,7 @@ const cards: Card[] = [
     image: "/images/home/rethink/pagina-web-2026.png",
     tag: "Blog",
     title: "Ser o no ser: el papel de la página web en 2026",
-    href: "/blog/ser-o-no-ser-el-papel-de-la-pagina-web-en-2026/",
+    href: "https://esic.co/ser-o-no-ser-el-papel-de-la-pagina-web-en-2026/",
     ctaLabel: "Leer",
   },
   {
@@ -49,7 +49,7 @@ const cards: Card[] = [
     image: "/images/home/rethink/emprender-sin-startup.png",
     tag: "Blog",
     title: "Emprender sin fundar una startup: el nuevo perfil del profesional emprendedor",
-    href: "/blog/emprender-sin-fundar-una-startup-el-nuevo-perfil-del-profesional-emprendedor/",
+    href: "https://esic.co/emprender-sin-fundar-una-startup-el-nuevo-perfil-del-profesional-emprendedor/",
     ctaLabel: "Leer",
   },
   {
@@ -65,7 +65,7 @@ const cards: Card[] = [
     image: "/images/home/rethink/excelencia-academica.png",
     tag: "Blog",
     title: "Excelencia académica: cuando la educación deja de ser contenido y se convierte en criterio",
-    href: "/blog/excelencia-academica-cuando-la-educacion-deja-de-ser-contenido-y-se-convierte-en-criterio/",
+    href: "https://esic.co/excelencia-academica-cuando-la-educacion-deja-de-ser-contenido-y-se-convierte-en-criterio/",
     ctaLabel: "Leer",
   },
 ];

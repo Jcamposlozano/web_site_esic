@@ -1,0 +1,121 @@
+---
+/**
+ * /politicas-de-privacidad — contenido migrado desde esic.co/politicas-de-privacidad.
+ *
+ * NOTA: el texto íntegro de la política vive en el documento "POLÍTICA PARA EL
+ * TRATAMIENTO DE DATOS PERSONALES" de PRISMA COLOMBIA S.A.S. Esta página reproduce
+ * el contenido publicado en la web. Validar con el documento oficial antes de
+ * producción si se requiere literalidad jurídica exacta.
+ */
+import Layout from "../layouts/Layout.astro";
+import Container from "../components/Container.astro";
+
+const finalidades = [
+  "Dar cumplimiento a las obligaciones contraídas en virtud de la relación contractual.",
+  "Cumplir con las obligaciones legales aplicables.",
+  "Adelantar comunicaciones comerciales sobre nuestros programas y servicios.",
+  "Informar sobre novedades, eventos y actualizaciones institucionales.",
+  "Transferir o transmitir las bases de datos a terceros cuando sea necesario.",
+  "Atender peticiones, quejas, reclamos y solicitudes.",
+  "Registrar el ingreso de visitantes a nuestras instalaciones.",
+];
+
+const derechos = [
+  "Conocer, actualizar y rectificar su información personal.",
+  "Solicitar prueba de la autorización otorgada para el tratamiento.",
+  "Ser informado sobre el uso que se ha dado a sus datos personales.",
+  "Revocar la autorización y/o solicitar la supresión de los datos.",
+  "Presentar quejas ante la autoridad competente por infracciones a la ley.",
+];
+---
+<Layout title="Políticas de Privacidad — ESIC Medellín" description="Políticas de privacidad y tratamiento de datos personales de ESIC Medellín.">
+  <main>
+    <!-- Encabezado -->
+    <section class="relative bg-brand-blue-dark text-white pt-32 pb-20 md:pt-40 md:pb-24">
+      <Container>
+        <span class="inline-flex items-center gap-3 text-[0.74rem] font-bold uppercase tracking-[0.22em] text-brand-teal mb-4">
+          <span class="block h-px w-8 bg-current" aria-hidden="true"></span>
+          Legal
+        </span>
+        <h1 class="font-display font-extrabold uppercase leading-[0.95] text-[clamp(2.5rem,6vw,4.5rem)]">
+          Políticas de<br />Privacidad
+        </h1>
+        <p class="mt-5 max-w-[60ch] text-[1.05rem] leading-[1.6] text-white/85">
+          En ESIC Medellín nos comprometemos a proteger y respetar tu privacidad. Nuestras políticas
+          están diseñadas para asegurar que la información personal que compartes con nosotros se
+          maneje con el máximo cuidado y en conformidad con la ley.
+        </p>
+      </Container>
+    </section>
+
+    <!-- Contenido -->
+    <section class="relative z-[2] -mt-[50px] rounded-t-[50px] bg-white py-16 md:py-20">
+      <Container>
+        <article class="legal-prose max-w-[820px]">
+          <h2>Políticas de privacidad y Habeas Data</h2>
+          <p>
+            <strong>PRISMA COLOMBIA S.A.S.</strong> es responsable del tratamiento de los datos de
+            carácter personal obtenidos de visitantes, proveedores y empleados, conforme a la
+            normativa colombiana vigente en materia de protección de datos personales.
+          </p>
+
+          <h3>Responsable del tratamiento</h3>
+          <ul>
+            <li><strong>Razón social:</strong> PRISMA COLOMBIA S.A.S.</li>
+            <li><strong>Dirección:</strong> CR 20 12 SUR 425 IN 1301</li>
+            <li><strong>Teléfono:</strong> 318 382 1129</li>
+            <li><strong>Correo:</strong> <a href="mailto:service@prisma.education">service@prisma.education</a></li>
+          </ul>
+
+          <h3>Finalidades del tratamiento</h3>
+          <p>Los datos personales recolectados son tratados para las siguientes finalidades:</p>
+          <ol>
+            {finalidades.map((f) => <li>{f}</li>)}
+          </ol>
+
+          <h3>Derechos del titular</h3>
+          <p>Como titular de los datos personales, usted tiene derecho a:</p>
+          <ul>
+            {derechos.map((d) => <li>{d}</li>)}
+          </ul>
+
+          <h3>Política completa</h3>
+          <p>
+            La forma de uso de los datos personales está especificada en la <strong>Política para el
+            Tratamiento de Datos Personales</strong> de PRISMA COLOMBIA S.A.S., disponible en
+            <a href="https://www.esic.co" target="_blank" rel="noopener"> www.esic.co</a>. Para
+            conocer el detalle de la autorización, consulta la página de
+            <a href="/tratamiento-de-datos-personales/"> Tratamiento de Datos Personales</a>.
+          </p>
+        </article>
+      </Container>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .legal-prose { font-family: var(--font-body); color: var(--color-ink); line-height: 1.7; }
+  .legal-prose h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 3vw, 2.25rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--color-brand-blue-dark);
+    margin: 0 0 1.25rem;
+  }
+  .legal-prose h3 {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--color-brand-blue);
+    margin: 2.25rem 0 0.75rem;
+  }
+  .legal-prose p { margin: 0 0 1rem; color: var(--color-ink-muted); }
+  .legal-prose strong { color: var(--color-ink); font-weight: 600; }
+  .legal-prose a { color: var(--color-brand-blue); text-decoration: underline; }
+  .legal-prose ul, .legal-prose ol { margin: 0 0 1rem; padding-left: 1.4rem; color: var(--color-ink-muted); }
+  .legal-prose li { margin-bottom: 0.5rem; }
+  .legal-prose ul { list-style: disc; }
+  .legal-prose ol { list-style: decimal; }
+</style>
