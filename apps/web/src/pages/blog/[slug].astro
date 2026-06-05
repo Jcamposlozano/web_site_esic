@@ -1,0 +1,74 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Container from "../../components/Container.astro";
+import { detailPosts, getPost, formatDate } from "../../lib/posts";
+
+export function getStaticPaths() {
+  // Solo los posts con página propia (no enlaces externos como los podcasts).
+  return detailPosts.map((p) => ({ params: { slug: p.slug } }));
+}
+
+const { slug } = Astro.params;
+const post = getPost(slug!);
+if (!post) {
+  return Astro.redirect("/blog/");
+}
+---
+<Layout
+  title={`${post.seo.metaTitle} | ESIC Medellín`}
+  description={post.seo.metaDescription}
+  image={post.coverUrl ?? "/og-default.jpg"}
+  fullBleed
+>
+  <main>
+    <!-- Encabezado -->
+    <article>
+      <header class="relative bg-brand-blue-dark text-white pt-32 pb-16 md:pt-40 md:pb-20">
+        <Container>
+          <a href="/blog/" class="inline-flex items-center gap-2 text-[0.8rem] uppercase tracking-[0.1em] text-white/70 hover:text-brand-teal transition-colors mb-6 no-underline">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Rethink
+          </a>
+          <div class="max-w-[760px]">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-[0.7rem] font-bold uppercase tracking-[0.16em] text-brand-teal">{post.category === "podcast" ? "Podcast" : "Blog"}</span>
+              {post.publishedAt && <span class="text-[0.74rem] text-white/55">· {formatDate(post.publishedAt)}</span>}
+              {post.author && <span class="text-[0.74rem] text-white/55">· {post.author}</span>}
+            </div>
+            <h1 class="font-display text-4xl md:text-6xl font-extrabold uppercase leading-[0.98]">{post.title}</h1>
+            {post.excerpt && <p class="mt-5 text-[1.1rem] leading-[1.6] text-white/85">{post.excerpt}</p>}
+          </div>
+        </Container>
+      </header>
+
+      <!-- Cuerpo -->
+      <section class="relative z-[2] -mt-[50px] rounded-t-[50px] bg-white pt-14 pb-20 md:pt-16 md:pb-28">
+        <Container>
+          {post.coverUrl && (
+            <img src={post.coverUrl} alt={post.coverAlt} class="w-full max-w-[900px] mx-auto rounded-3xl aspect-[16/9] object-cover mb-12 shadow-[0_20px_60px_rgba(0,19,63,0.12)]" />
+          )}
+          <div class="blog-body max-w-[720px] mx-auto" set:html={post.bodyHtml}></div>
+
+          <div class="max-w-[720px] mx-auto mt-14 pt-8 border-t border-[rgba(0,19,63,0.08)]">
+            <a href="/blog/" class="inline-flex items-center gap-2 rounded-full bg-brand-blue text-white text-[0.8rem] font-bold uppercase tracking-[0.06em] px-6 py-3 hover:bg-brand-blue-dark transition-colors no-underline">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+              Ver más en Rethink
+            </a>
+          </div>
+        </Container>
+      </section>
+    </article>
+  </main>
+</Layout>
+
+<style>
+  .blog-body { font-family: var(--font-body); color: var(--color-ink); line-height: 1.8; font-size: 1.08rem; }
+  .blog-body :global(p) { margin: 0 0 1.25rem; }
+  .blog-body :global(h2) { font-family: var(--font-display); font-size: 1.8rem; font-weight: 800; text-transform: uppercase; color: var(--color-brand-blue-dark); margin: 2.5rem 0 1rem; }
+  .blog-body :global(h3) { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; text-transform: uppercase; color: var(--color-brand-blue); margin: 2rem 0 0.75rem; }
+  .blog-body :global(a) { color: var(--color-brand-blue); text-decoration: underline; }
+  .blog-body :global(ul), .blog-body :global(ol) { margin: 0 0 1.25rem; padding-left: 1.4rem; }
+  .blog-body :global(li) { margin-bottom: 0.5rem; }
+  .blog-body :global(blockquote) { border-left: 3px solid var(--color-brand-teal); padding-left: 1.25rem; font-style: italic; color: var(--color-ink-muted); margin: 0 0 1.25rem; }
+  .blog-body :global(img) { max-width: 100%; border-radius: 1rem; margin: 1.5rem 0; }
+</style>

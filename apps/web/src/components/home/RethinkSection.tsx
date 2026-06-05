@@ -2,73 +2,15 @@ import { useState } from "react";
 
 type Category = "todo" | "blog" | "podcast";
 
-type Card = {
-  category: Exclude<Category, "todo">;
-  image: string;
+export type RethinkCard = {
+  category: "blog" | "podcast";
+  image: string | null;
   tag: string;
   title: string;
   href: string;
+  external: boolean;
   ctaLabel: string;
 };
-
-const cards: Card[] = [
-  {
-    category: "blog",
-    image: "/images/home/rethink/aprender-a-decidir.png",
-    tag: "Blog",
-    title: "Aprender a decidir: el valor de los casos reales en el aula",
-    href: "https://esic.co/aprender-a-decidir-el-valor-de-los-casos-reales-en-el-aula/",
-    ctaLabel: "Leer",
-  },
-  {
-    category: "blog",
-    image: "/images/home/rethink/formar-criterio-directivo.png",
-    tag: "Blog",
-    title: "Formar criterio directivo",
-    href: "https://esic.co/formar-criterio-directivo/",
-    ctaLabel: "Leer",
-  },
-  {
-    category: "blog",
-    image: "/images/home/rethink/pagina-web-2026.png",
-    tag: "Blog",
-    title: "Ser o no ser: el papel de la página web en 2026",
-    href: "https://esic.co/ser-o-no-ser-el-papel-de-la-pagina-web-en-2026/",
-    ctaLabel: "Leer",
-  },
-  {
-    category: "podcast",
-    image: "/images/home/rethink/ep29.jpg",
-    tag: "Podcast · Ep. 29",
-    title: "El Futuro de Nuestra Consciencia con IA con Sebastián Chinkovsky",
-    href: "https://www.youtube.com/watch?v=zS-ibHyImvI",
-    ctaLabel: "Escuchar",
-  },
-  {
-    category: "blog",
-    image: "/images/home/rethink/emprender-sin-startup.png",
-    tag: "Blog",
-    title: "Emprender sin fundar una startup: el nuevo perfil del profesional emprendedor",
-    href: "https://esic.co/emprender-sin-fundar-una-startup-el-nuevo-perfil-del-profesional-emprendedor/",
-    ctaLabel: "Leer",
-  },
-  {
-    category: "podcast",
-    image: "/images/home/rethink/ep28.jpg",
-    tag: "Podcast · Ep. 28",
-    title: "El Futuro de la Política con IA con Federico Hoyos",
-    href: "https://www.youtube.com/watch?v=XFziCxsoUr0&t=1s",
-    ctaLabel: "Escuchar",
-  },
-  {
-    category: "blog",
-    image: "/images/home/rethink/excelencia-academica.png",
-    tag: "Blog",
-    title: "Excelencia académica: cuando la educación deja de ser contenido y se convierte en criterio",
-    href: "https://esic.co/excelencia-academica-cuando-la-educacion-deja-de-ser-contenido-y-se-convierte-en-criterio/",
-    ctaLabel: "Leer",
-  },
-];
 
 const filters: { key: Category; label: string }[] = [
   { key: "todo", label: "Todo" },
@@ -76,7 +18,7 @@ const filters: { key: Category; label: string }[] = [
   { key: "podcast", label: "Podcast" },
 ];
 
-export default function RethinkSection() {
+export default function RethinkSection({ cards = [] }: { cards?: RethinkCard[] }) {
   const [active, setActive] = useState<Category>("todo");
 
   const visible = active === "todo" ? cards : cards.filter((c) => c.category === active);
@@ -116,7 +58,9 @@ export default function RethinkSection() {
             className="rethink-card flex-shrink-0 w-[85%] sm:w-[45%] lg:w-[calc(25%-1rem)] min-w-[280px] bg-white/5 rounded-3xl overflow-hidden snap-start transition-transform duration-300 hover:-translate-y-1"
           >
             <div className="aspect-[16/9] overflow-hidden bg-[#1a1a2e] flex items-center justify-center">
-              <img src={c.image} alt={c.title} loading="lazy" className="w-full h-full object-contain" />
+              {c.image && (
+                <img src={c.image} alt={c.title} loading="lazy" className="w-full h-full object-cover" />
+              )}
             </div>
             <div className="p-6">
               <span
@@ -131,8 +75,8 @@ export default function RethinkSection() {
               </h3>
               <a
                 href={c.href}
-                target="_blank"
-                rel="noopener"
+                target={c.external ? "_blank" : undefined}
+                rel={c.external ? "noopener" : undefined}
                 className="inline-flex items-center rounded-full border border-white/40 text-white text-[0.75rem] font-bold uppercase tracking-[0.06em] px-4 py-2 hover:bg-white hover:text-brand-blue-dark transition-colors no-underline"
               >
                 {c.ctaLabel}

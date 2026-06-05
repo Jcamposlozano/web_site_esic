@@ -1,0 +1,110 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Container from "../../components/Container.astro";
+import { allPosts, postHref, formatDate } from "../../lib/posts";
+
+const posts = allPosts; // ya vienen ordenados por publishedAt desc
+const filters = [
+  { key: "todo", label: "Todo" },
+  { key: "blog", label: "Blog" },
+  { key: "podcast", label: "Podcast" },
+];
+---
+<Layout
+  title="Rethink — Blog & Podcast | ESIC Medellín"
+  description="Ideas, historias y conversaciones que transforman. El blog y podcast de ESIC Medellín."
+  fullBleed
+>
+  <main class="bg-brand-blue-dark">
+    <!-- Hero -->
+    <section class="relative pt-32 pb-16 md:pt-40 md:pb-20 text-white">
+      <Container>
+        <span class="inline-flex items-center gap-3 text-[0.74rem] font-bold uppercase tracking-[0.22em] text-brand-teal mb-4">
+          <span class="block h-px w-8 bg-current" aria-hidden="true"></span>
+          ESIC Medellín
+        </span>
+        <h1 class="font-display text-6xl md:text-8xl font-extrabold uppercase leading-[0.9]">Rethink</h1>
+        <p class="mt-4 text-lg text-white/80 max-w-[52ch]">
+          Ideas, historias y conversaciones que transforman.
+        </p>
+      </Container>
+    </section>
+
+    <!-- Grid -->
+    <section class="relative z-[2] -mt-[20px] rounded-t-[50px] bg-bg pt-14 pb-20 md:pt-16 md:pb-28">
+      <Container>
+        <div class="flex gap-2 mb-10 flex-wrap" id="blog-filters">
+          {filters.map((f, i) => (
+            <button
+              type="button"
+              data-filter={f.key}
+              class:list={[
+                "font-display text-[0.9rem] font-bold uppercase tracking-[0.05em] px-5 py-2 rounded-full border transition-all",
+                i === 0
+                  ? "bg-brand-blue border-brand-blue text-white"
+                  : "bg-transparent border-brand-blue-dark/15 text-ink-muted hover:border-brand-blue hover:text-brand-blue",
+              ]}
+            >
+              {f.label}
+            </button>
+          ))}
+        </div>
+
+        {posts.length === 0 && (
+          <p class="text-ink-muted">Aún no hay publicaciones. Crea una en el panel del CMS y vuelve a generar el sitio.</p>
+        )}
+
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" id="blog-grid">
+          {posts.map((p) => (
+            <article
+              class="blog-card group bg-white rounded-3xl overflow-hidden border border-[rgba(0,19,63,0.06)] shadow-[0_2px_20px_rgba(0,19,63,0.05)] transition-transform hover:-translate-y-1"
+              data-category={p.category}
+            >
+              <a href={postHref(p)} target={p.externalUrl ? "_blank" : undefined} rel={p.externalUrl ? "noopener" : undefined} class="block no-underline">
+                <div class="aspect-[16/9] overflow-hidden bg-bg-alt">
+                  {p.coverUrl && <img src={p.coverUrl} alt={p.coverAlt} loading="lazy" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />}
+                </div>
+                <div class="p-6">
+                  <div class="flex items-center gap-3 mb-3">
+                    <span class:list={["text-[0.68rem] font-bold uppercase tracking-[0.14em]", p.category === "podcast" ? "text-[#7C3AED]" : "text-brand-teal-dark"]}>
+                      {p.category === "podcast" ? "Podcast" : "Blog"}
+                    </span>
+                    {p.publishedAt && <span class="text-[0.72rem] text-ink-light">· {formatDate(p.publishedAt)}</span>}
+                  </div>
+                  <h2 class="font-display text-xl font-extrabold uppercase text-brand-blue-dark leading-tight mb-2">{p.title}</h2>
+                  {p.excerpt && <p class="text-ink-muted text-[0.92rem] leading-relaxed line-clamp-3">{p.excerpt}</p>}
+                  <span class="inline-flex items-center gap-2 mt-4 text-[0.78rem] font-bold uppercase tracking-[0.06em] text-brand-blue">
+                    {p.externalUrl ? "Escuchar" : "Leer"}
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                  </span>
+                </div>
+              </a>
+            </article>
+          ))}
+        </div>
+      </Container>
+    </section>
+  </main>
+
+  <script>
+    const wrap = document.getElementById("blog-filters");
+    const cards = Array.from(document.querySelectorAll<HTMLElement>("#blog-grid .blog-card"));
+    wrap?.addEventListener("click", (e) => {
+      const btn = (e.target as HTMLElement).closest<HTMLButtonElement>("[data-filter]");
+      if (!btn) return;
+      const f = btn.dataset.filter;
+      wrap.querySelectorAll<HTMLButtonElement>("[data-filter]").forEach((b) => {
+        const on = b === btn;
+        b.classList.toggle("bg-brand-blue", on);
+        b.classList.toggle("border-brand-blue", on);
+        b.classList.toggle("text-white", on);
+        b.classList.toggle("bg-transparent", !on);
+        b.classList.toggle("text-ink-muted", !on);
+        b.classList.toggle("border-brand-blue-dark/15", !on);
+      });
+      cards.forEach((c) => {
+        c.style.display = f === "todo" || c.dataset.category === f ? "" : "none";
+      });
+    });
+  </script>
+</Layout>

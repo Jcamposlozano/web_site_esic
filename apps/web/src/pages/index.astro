@@ -10,6 +10,18 @@ import CifrasSection from "../components/home/CifrasSection.astro";
 import HistoriasSection from "../components/home/HistoriasSection.astro";
 import FundadoresMarquee from "../components/home/FundadoresMarquee.astro";
 import RethinkSection from "../components/home/RethinkSection.tsx";
+import { allPosts, postHref } from "../lib/posts";
+
+// Cards del Rethink desde Payload (orden ya viene por publishedAt desc).
+const rethinkCards = allPosts.map((p) => ({
+  category: p.category,
+  image: p.coverUrl,
+  tag: p.category === "podcast" ? "Podcast" : "Blog",
+  title: p.title,
+  href: postHref(p),
+  external: Boolean(p.externalUrl),
+  ctaLabel: p.category === "podcast" ? "Escuchar" : "Leer",
+}));
 ---
 <Layout title="ESIC Medellín — Business & Marketing School" fullBleed>
   <main class="esic-home">
@@ -33,7 +45,7 @@ import RethinkSection from "../components/home/RethinkSection.tsx";
 
     <OverlapSection bg="bg-brand-blue-dark" z={8} padding="py-20 md:py-24" textColor="text-white">
       <Container>
-        <RethinkSection client:load />
+        <RethinkSection client:load cards={rethinkCards} />
       </Container>
     </OverlapSection>
   </main>
