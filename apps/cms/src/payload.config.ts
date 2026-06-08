@@ -16,6 +16,13 @@ const dirname = path.dirname(filename)
 export default buildConfig({
   admin: {
     user: Users.slug,
+    theme: 'light',
+    components: {
+      graphics: {
+        Logo: '@/components/Logo#Logo',
+        Icon: '@/components/Icon#Icon',
+      },
+    },
     meta: {
       titleSuffix: '— ESIC CMS',
     },
