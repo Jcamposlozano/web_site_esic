@@ -412,7 +412,7 @@ export const tree: SitemapNode[] = [
     status: "built",
     sources: ["home", "menu"],
     area: "blog",
-    note: "Gestionado por el CMS (Payload). /blog (índice) + /blog/[slug]. Los posts y portadas se sincronizan a posts.json en el build (scripts/sync-cms.mjs).",
+    note: "Noticias servidas desde S3. /blog (índice) + /blog/[slug]. Las noticias se sincronizan a posts.json en el build (scripts/sync-bucket.mjs); las portadas se sirven por URL pública de S3.",
     children: [
       {
         label: "Aprender a decidir: el valor de los casos reales en el aula",
@@ -420,7 +420,7 @@ export const tree: SitemapNode[] = [
         status: "built",
         sources: ["blog"],
         area: "blog",
-        note: "Página propia generada desde Payload.",
+        note: "Página propia generada desde las noticias de S3.",
       },
       {
         label: "Formar criterio directivo",

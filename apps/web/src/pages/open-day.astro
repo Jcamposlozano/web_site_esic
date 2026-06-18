@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import Container from "../components/Container.astro";
 import ContactFormSection from "../components/sections/ContactFormSection.astro";
+import { asset } from "../lib/assets";
 
 const title = "Open Day — ESIC Medellín | Sábado 30 de mayo de 2026";
 const description =
@@ -73,9 +74,9 @@ const agenda = [
     <!-- HERO -->
     <section class="relative z-[1] block">
       <picture>
-        <source media="(max-width: 767px)" srcset="/images/wp/2026/05/open-day-banner-mobile-scaled.webp" />
+        <source media="(max-width: 767px)" srcset={asset("wp/2026/05/open-day-banner-mobile-scaled.webp")} />
         <img
-          src="/images/wp/2026/05/open-day-banner-desktop-scaled.webp"
+          src={asset("wp/2026/05/open-day-banner-desktop-scaled.webp")}
           alt="Vive el Open Day - ESIC Medellín"
           class="block h-auto w-full"
           fetchpriority="high"

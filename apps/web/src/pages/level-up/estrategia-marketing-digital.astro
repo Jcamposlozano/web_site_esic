@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import ContactForm from "../../components/ContactForm.astro";
+import { asset } from "../../lib/assets";
 
 /**
  * Estrategia de Marketing Digital en 8 Horas — Level Up.
@@ -86,16 +87,16 @@ const diferenciaChecks = [
         <picture>
           <source
             media="(max-width: 768px)"
-            srcset="/images/wp/2026/03/level-up-marketing-landing-mobile-scaled.webp"
+            srcset={asset("wp/2026/03/level-up-marketing-landing-mobile-scaled.webp")}
             type="image/webp"
           />
           <source
             media="(min-width: 769px)"
-            srcset="/images/wp/2026/03/level-up-marketing-landing-desktop-scaled.webp"
+            srcset={asset("wp/2026/03/level-up-marketing-landing-desktop-scaled.webp")}
             type="image/webp"
           />
           <img
-            src="/images/wp/2026/03/level-up-marketing-landing-desktop-scaled.webp"
+            src={asset("wp/2026/03/level-up-marketing-landing-desktop-scaled.webp")}
             alt="Estrategia de Marketing Digital en 8 Horas - Level Up ESIC"
             loading="eager"
             width="1280"
@@ -111,7 +112,7 @@ const diferenciaChecks = [
         <div class="lupmk-intro-content">
           <div class="lupmk-intro-left">
             <img
-              src="/images/wp/2026/03/logo-level-up-scaled.png"
+              src={asset("wp/2026/03/logo-level-up-scaled.png")}
               alt="Level Up by ESIC"
               class="lupmk-intro-logo"
               width="288"

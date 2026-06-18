@@ -8,30 +8,31 @@ import HeroBannerMasters from "../components/pages/master/HeroBannerMasters.astr
 import MastersGrid from "../components/pages/master/MastersGrid.astro";
 import CifrasReconocimiento from "../components/pages/master/CifrasReconocimiento.astro";
 import ComparadorGrid from "../components/pages/master/ComparadorGrid.astro";
+import { asset } from "../lib/assets";
 
 const masters = [
   {
     href: "/master-digital-business",
     title: "Máster en Digital Business",
     duration: "11 meses · Modalidad híbrida",
-    imageDesktop: "/images/wp/2026/02/master_db.webp",
-    imageMobile: "/images/wp/2026/02/mobile_master_db.webp",
+    imageDesktop: asset("wp/2026/02/master_db.webp"),
+    imageMobile: asset("wp/2026/02/mobile_master_db.webp"),
     position: "85%",
   },
   {
     href: "/master-customer-experience",
     title: "Máster en Customer Experience Management",
     duration: "11 meses · Modalidad híbrida",
-    imageDesktop: "/images/wp/2026/02/master_cx.webp",
-    imageMobile: "/images/wp/2026/02/mobile_master_cx.webp",
+    imageDesktop: asset("wp/2026/02/master_cx.webp"),
+    imageMobile: asset("wp/2026/02/mobile_master_cx.webp"),
     position: "70%",
   },
   {
     href: "/master-digital-marketing",
     title: "Máster en Digital Marketing",
     duration: "11 meses · Modalidad híbrida",
-    imageDesktop: "/images/wp/2026/02/master_dm.webp",
-    imageMobile: "/images/wp/2026/02/mobile_master_dm.webp",
+    imageDesktop: asset("wp/2026/02/master_dm.webp"),
+    imageMobile: asset("wp/2026/02/mobile_master_dm.webp"),
     position: "85%",
   },
 ];
@@ -63,8 +64,8 @@ const comparador = [
     <!-- 1. Hero — Banner Másters -->
     <HeroBannerMasters
       href="#programas"
-      imageDesktop="/images/wp/2026/05/global-management-program-master-desktop-scaled.webp"
-      imageMobile="/images/wp/2026/05/global-management-program-master-mobile-scaled.webp"
+      imageDesktop={asset("wp/2026/05/global-management-program-master-desktop-scaled.webp")}
+      imageMobile={asset("wp/2026/05/global-management-program-master-mobile-scaled.webp")}
       alt="Programas de Máster ESIC Medellín"
       ctaLabel="Ver programas"
     />

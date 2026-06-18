@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Container from "../components/Container.astro";
 import OverlapSection from "../components/OverlapSection.astro";
 import ContactFormSection from "../components/sections/ContactFormSection.astro";
+import { asset } from "../lib/assets";
 
 const ArrowRightPath = "M5 12h14M12 5l7 7-7 7";
 const ArrowDownPath = "M12 5v14M5 12l7 7 7-7";
@@ -13,15 +14,15 @@ const pregrados = [
     href: "/pregrado-marketing-global/",
     title: "Dirección de Marketing Global",
     duration: "4 años · Doble titulación",
-    image: "/images/wp/2026/02/pregrado_mkt_global_.webp",
-    imageMobile: "/images/wp/2026/02/mobile_pregrado_mkt_global_.webp",
+    image: asset("wp/2026/02/pregrado_mkt_global_.webp"),
+    imageMobile: asset("wp/2026/02/mobile_pregrado_mkt_global_.webp"),
   },
   {
     href: "/pregrado-digital-business/",
     title: "Digital Business",
     duration: "4 años · Doble titulación",
-    image: "/images/wp/2026/02/pregrado_digital_business.webp",
-    imageMobile: "/images/wp/2026/02/mobile_pregrado_digital_business.webp",
+    image: asset("wp/2026/02/pregrado_digital_business.webp"),
+    imageMobile: asset("wp/2026/02/mobile_pregrado_digital_business.webp"),
   },
 ];
 
@@ -87,10 +88,10 @@ const cifrasMedellin = [
     <section class="relative w-full overflow-hidden leading-none">
       <a href="#programas" aria-label="Ver programas de pregrado" class="block no-underline">
         <picture class="block w-full">
-          <source media="(max-width: 768px)" srcset="/images/wp/2026/03/banner-esic-vertical-scaled.webp" type="image/webp" />
-          <source media="(min-width: 769px)" srcset="/images/wp/2026/03/banner-general-pregrado-desktop.webp" type="image/webp" />
+          <source media="(max-width: 768px)" srcset={asset("wp/2026/03/banner-esic-vertical-scaled.webp")} type="image/webp" />
+          <source media="(min-width: 769px)" srcset={asset("wp/2026/03/banner-general-pregrado-desktop.webp")} type="image/webp" />
           <img
-            src="/images/wp/2026/03/banner-general-pregrado-desktop.webp"
+            src={asset("wp/2026/03/banner-general-pregrado-desktop.webp")}
             alt="Programas de Pregrado ESIC - Inscripciones abiertas"
             class="w-full h-auto block object-cover object-center"
             loading="eager"

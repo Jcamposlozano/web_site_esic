@@ -1,6 +1,6 @@
 /**
- * Capa de datos del blog. Lee el JSON generado por scripts/sync-cms.mjs
- * (que trae los posts publicados de Payload). Sin red en build.
+ * Capa de datos del blog. Lee el JSON generado por scripts/sync-bucket.mjs
+ * (que trae las noticias publicadas desde S3). Sin red en build.
  */
 import data from "../data/posts.json";
 

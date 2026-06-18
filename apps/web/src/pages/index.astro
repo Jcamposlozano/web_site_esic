@@ -12,7 +12,7 @@ import FundadoresMarquee from "../components/home/FundadoresMarquee.astro";
 import RethinkSection from "../components/home/RethinkSection.tsx";
 import { allPosts, postHref } from "../lib/posts";
 
-// Cards del Rethink desde Payload (orden ya viene por publishedAt desc).
+// Cards del Rethink desde las noticias de S3 (orden ya viene por publishedAt desc).
 const rethinkCards = allPosts.map((p) => ({
   category: p.category,
   image: p.coverUrl,

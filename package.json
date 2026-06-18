@@ -2,7 +2,7 @@
   "name": "esic-react-app",
   "version": "0.0.1",
   "private": true,
-  "description": "Monorepo for ESIC Medellin website migration to Astro + React + Payload CMS",
+  "description": "Monorepo for ESIC Medellin website migration to Astro + React (noticias vía S3)",
   "scripts": {
     "dev": "pnpm --filter web dev",
     "build": "pnpm --filter web build",

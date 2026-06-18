@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import Container from "../components/Container.astro";
 import AlianzasGrid from "../components/pages/eventos/AlianzasGrid.tsx";
+import { asset } from "../lib/assets";
 
 const title = "Alianzas — Beneficios para la comunidad ESIC Medellín";
 const description =
@@ -34,10 +35,10 @@ const steps = [
     <section class="relative block overflow-hidden bg-bg leading-[0]">
       <a href="#alianzas-grid" aria-label="Ver alianzas ESIC" class="block cursor-pointer">
         <picture>
-          <source media="(max-width: 768px)" srcset="/images/wp/2026/05/BANNER-ALIANZAS-02-scaled.webp" type="image/webp" />
-          <source srcset="/images/wp/2026/05/BANNER-ALIANZAS-01.webp" type="image/webp" />
+          <source media="(max-width: 768px)" srcset={asset("wp/2026/05/BANNER-ALIANZAS-02-scaled.webp")} type="image/webp" />
+          <source srcset={asset("wp/2026/05/BANNER-ALIANZAS-01.webp")} type="image/webp" />
           <img
-            src="/images/wp/2026/05/BANNER-ALIANZAS-01.webp"
+            src={asset("wp/2026/05/BANNER-ALIANZAS-01.webp")}
             alt="Banner alianzas ESIC"
             class="block h-auto w-full align-bottom"
             fetchpriority="high"

@@ -3,13 +3,14 @@ import Layout from "../layouts/Layout.astro";
 import Container from "../components/Container.astro";
 import HatsuHeroVideo from "../components/pages/eventos/HatsuHeroVideo.tsx";
 import HatsuShowcase from "../components/pages/eventos/HatsuShowcase.tsx";
+import { asset } from "../lib/assets";
 
 const title = "Think Different. Think Hatsu — Desafío ESIC × Hatsu";
 const description =
   "El Desafío Junior Empresarial reunió a estudiantes de colegio para crear su propia versión del universo Hatsu. Conoce la galería de videos de los participantes.";
 
-const HERO_PHOTO = "/images/wp/2026/03/hatsu-hero-grupo-scaled.webp";
-const HERO_VIDEO = "/images/wp/2026/03/DJE-HATSU-VIDEO-CAMPANA.mp4";
+const HERO_PHOTO = asset("wp/2026/03/hatsu-hero-grupo-scaled.webp");
+const HERO_VIDEO = asset("wp/2026/03/DJE-HATSU-VIDEO-CAMPANA.mp4");
 ---
 <Layout title={title} description={description} fullBleed>
   <main class="esic-hatsu bg-[#0A0A0A] text-white">

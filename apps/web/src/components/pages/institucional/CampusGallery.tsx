@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
+import { asset } from "../../../lib/assets";
 
-const BASE = "/images/wp/2026/04";
+const BASE = asset("wp/2026/04");
 
 type Area = {
   key: string;

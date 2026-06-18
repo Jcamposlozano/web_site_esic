@@ -1,6 +1,7 @@
 ---
 import Container from "../Container.astro";
 import OverlapSection from "../OverlapSection.astro";
+import { asset } from "../../lib/assets";
 
 interface Props {
   z?: number;
@@ -8,12 +9,12 @@ interface Props {
 const { z = 7 } = Astro.props;
 
 const logos = [
-  { src: "/images/home/fundadores/grupo-bios.webp", alt: "Grupo Bios" },
-  { src: "/images/home/fundadores/bancolombia.webp", alt: "Bancolombia" },
-  { src: "/images/home/fundadores/crystal.webp", alt: "Crystal" },
-  { src: "/images/home/fundadores/telefonica.webp", alt: "Telefónica" },
-  { src: "/images/home/fundadores/accenture.webp", alt: "Accenture" },
-  { src: "/images/home/fundadores/postobon.webp", alt: "Postobón" },
+  { src: asset("home/fundadores/grupo-bios.webp"), alt: "Grupo Bios" },
+  { src: asset("home/fundadores/bancolombia.webp"), alt: "Bancolombia" },
+  { src: asset("home/fundadores/crystal.webp"), alt: "Crystal" },
+  { src: asset("home/fundadores/telefonica.webp"), alt: "Telefónica" },
+  { src: asset("home/fundadores/accenture.webp"), alt: "Accenture" },
+  { src: asset("home/fundadores/postobon.webp"), alt: "Postobón" },
 ];
 
 // Duplicate for seamless loop

@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { asset } from "../lib/assets";
 
 /**
  * Level Up — página índice (réplica fiel de level-up-elementor.html).
@@ -33,7 +34,7 @@ const niveles = [
       <div class="elup-container">
         <div class="elup-hero-content">
           <img
-            src="/images/wp/2026/03/logo-level-up-scaled.png"
+            src={asset("wp/2026/03/logo-level-up-scaled.png")}
             alt="Level Up by ESIC"
             class="elup-hero-logo"
             width="320"
@@ -81,12 +82,6 @@ const niveles = [
             <h2>¿Listo para tu<br />próximo Level Up?</h2>
             <p>Reserva tu cupo y recibe información de fechas, ponentes y temáticas.</p>
           </div>
-          <a
-            class="elup-btn elup-btn-dark"
-            href="/level-up/estrategia-marketing-digital"
-          >
-            Quiero inscribirme →
-          </a>
         </div>
       </div>
     </section>

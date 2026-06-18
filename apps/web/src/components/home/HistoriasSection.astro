@@ -1,6 +1,7 @@
 ---
 import Container from "../Container.astro";
 import OverlapSection from "../OverlapSection.astro";
+import { asset } from "../../lib/assets";
 
 interface Props {
   z?: number;
@@ -37,7 +38,7 @@ const { z = 6 } = Astro.props;
       <!-- Video destacado -->
       <div class="rounded-3xl overflow-hidden h-[480px] relative shadow-[0_8px_40px_rgba(0,19,63,0.14)] bg-black order-first lg:order-none">
         <video
-          src="/videos/home/testimonio-master.mp4"
+          src={asset("videos/home/testimonio-master.mp4")}
           playsinline
           controls
           preload="metadata"

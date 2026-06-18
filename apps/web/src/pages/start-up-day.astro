@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Container from "../components/Container.astro";
+import { asset } from "../lib/assets";
 
 const title = "Start Up Day 2026 — ESIC Medellín | Impulsa tus ideas";
 const description =
@@ -95,9 +96,9 @@ const asesoriaItems = [
         aria-label="Inscríbete al Start Up Day 2026"
       >
         <picture>
-          <source media="(max-width: 768px)" srcset="/images/wp/2026/05/BANNER-02-scaled.webp" />
+          <source media="(max-width: 768px)" srcset={asset("wp/2026/05/BANNER-02-scaled.webp")} />
           <img
-            src="/images/wp/2026/05/BANNER-01-scaled.webp"
+            src={asset("wp/2026/05/BANNER-01-scaled.webp")}
             alt="Start Up Day 2026 - ESIC Medellín. Impulsa tus ideas, conecta con oportunidades. 27 de mayo de 2026. Campus ESIC Medellín."
             class="mx-auto block h-auto w-full"
             fetchpriority="high"

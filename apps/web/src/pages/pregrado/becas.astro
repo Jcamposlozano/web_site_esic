@@ -4,6 +4,7 @@ import Container from "../../components/Container.astro";
 import OverlapSection from "../../components/OverlapSection.astro";
 import BecasFaq, { type FaqItem } from "../../components/pages/pregrado/BecasFaq.tsx";
 import ContactFormSection from "../../components/sections/ContactFormSection.astro";
+import { asset } from "../../lib/assets";
 
 const becas = [
   {
@@ -75,7 +76,7 @@ const cronograma = [
     <!-- Hero (imagen de fondo con overlay) -->
     <section class="relative flex items-end overflow-hidden min-h-[88vh]">
       <img
-        src="/images/wp/2025/12/vida-universitaria-estudiantes-esic-campus-medellin.png"
+        src={asset("wp/2025/12/vida-universitaria-estudiantes-esic-campus-medellin.png")}
         alt=""
         class="absolute inset-0 w-full h-full object-cover object-center z-0"
       />
@@ -137,7 +138,7 @@ const cronograma = [
           </div>
           <div class="min-h-[260px] md:min-h-[380px]">
             <img
-              src="/images/wp/2025/09/DSC01730_resultado-scaled.jpg"
+              src={asset("wp/2025/09/DSC01730_resultado-scaled.jpg")}
               alt="Estudiantes ESIC Medellín"
               class="w-full h-full object-cover object-center"
             />
@@ -186,7 +187,7 @@ const cronograma = [
               Aplica a una beca &rarr;
             </a>
             <a
-              href="/images/wp/2026/05/Documento_becas_ayudas_economicas_esic_medellin_V2.pdf"
+              href={asset("wp/2026/05/Documento_becas_ayudas_economicas_esic_medellin_V2.pdf")}
               target="_blank"
               rel="noopener"
               class="inline-flex items-center gap-2 rounded-full px-6 py-3 font-bold text-[0.78rem] uppercase tracking-[0.06em] text-white bg-transparent border-2 border-white/45 hover:border-white transition-all no-underline"

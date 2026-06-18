@@ -2,8 +2,9 @@
 import Layout from "../layouts/Layout.astro";
 import Container from "../components/Container.astro";
 import CifrasSection from "../components/home/CifrasSection.astro";
+import { asset } from "../lib/assets";
 
-const IMG = "/images/wp/2026/04";
+const IMG = asset("wp/2026/04");
 
 const valores = [
   {
@@ -61,7 +62,7 @@ const fundadores = [
   <section class="relative w-full overflow-hidden leading-[0]">
     <a href="#manifiesto" aria-label="Ver más sobre ESIC" class="block">
       <picture class="block w-full">
-        <source media="(max-width: 768px)" srcset="/images/wp/2026/03/banner-mobile-1-scaled.webp" type="image/webp" />
+        <source media="(max-width: 768px)" srcset={asset("wp/2026/03/banner-mobile-1-scaled.webp")} type="image/webp" />
         <source srcset={`${IMG}/BANNER-IV-QUIEN-17-scaled.webp`} type="image/webp" />
         <img
           src={`${IMG}/BANNER-IV-QUIEN-17-scaled.webp`}

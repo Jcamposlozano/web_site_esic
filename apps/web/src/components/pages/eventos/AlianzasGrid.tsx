@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { asset } from "../../../lib/assets";
 
 /* ─────────────────────────────────────────────
    DATA — réplica verbatim del HTML de WordPress.
@@ -37,7 +38,7 @@ const BG: Record<string, string> = {
   "ali-bg-servicios": "linear-gradient(135deg, #00133F 0%, #0047E9 100%)",
 };
 
-const WP = "/images/wp/2026/05";
+const WP = asset("wp/2026/05");
 
 const ALIANZAS: Alianza[] = [
   {

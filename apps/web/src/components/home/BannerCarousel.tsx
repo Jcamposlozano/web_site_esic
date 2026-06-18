@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { asset } from "../../lib/assets";
 
 type Slide = {
   href: string;
@@ -13,40 +14,40 @@ const slides: Slide[] = [
   {
     href: "/open-day/",
     alt: "Open Day ESIC Medellín",
-    mobile: "/images/home/banner/open-day-mobile.webp",
-    desktop: "/images/home/banner/open-day-desktop.webp",
+    mobile: asset("home/banner/open-day-mobile.webp"),
+    desktop: asset("home/banner/open-day-desktop.webp"),
     priority: true,
   },
   {
     href: "/pregrado/",
     alt: "Empieza tu carrera en el mundo real - Pregrados ESIC",
-    mobile: "/images/home/banner/pregrados-mobile.webp",
-    desktop: "/images/home/banner/pregrados-desktop.webp",
+    mobile: asset("home/banner/pregrados-mobile.webp"),
+    desktop: asset("home/banner/pregrados-desktop.webp"),
   },
   {
     href: "/campus/",
     alt: "Un campus diseñado para formar líderes en Medellín - ESIC",
-    mobile: "/images/home/banner/campus-mobile.webp",
-    desktop: "/images/home/banner/campus-desktop.webp",
+    mobile: asset("home/banner/campus-mobile.webp"),
+    desktop: asset("home/banner/campus-desktop.webp"),
   },
   {
     href: "/master/",
     alt: "Donde las empresas forman a sus líderes - Másters ESIC",
-    mobile: "/images/home/banner/master-mobile.webp",
-    desktop: "/images/home/banner/master-desktop.webp",
+    mobile: asset("home/banner/master-mobile.webp"),
+    desktop: asset("home/banner/master-desktop.webp"),
   },
   {
     href: "https://forms.zohopublic.com/esicmedellin/form/InscripcionesPasantas/formperma/_OGwsRPwnka1ZLXJBqSMVtl-yE_Mk7E8V14gtDRfkag",
     target: "_blank",
     alt: "Vive una semana como estudiante de ESIC - Pasantías",
-    mobile: "/images/home/banner/pasantias-mobile.webp",
-    desktop: "/images/home/banner/pasantias-desktop.webp",
+    mobile: asset("home/banner/pasantias-mobile.webp"),
+    desktop: asset("home/banner/pasantias-desktop.webp"),
   },
   {
     href: "/quienes-somos/",
     alt: "Aquí se forman los líderes digitales - ESIC",
-    mobile: "/images/home/banner/marca-mobile.webp",
-    desktop: "/images/home/banner/marca-desktop.webp",
+    mobile: asset("home/banner/marca-mobile.webp"),
+    desktop: asset("home/banner/marca-desktop.webp"),
   },
 ];
 

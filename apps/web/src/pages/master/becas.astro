@@ -4,6 +4,7 @@ import Container from "../../components/Container.astro";
 import OverlapSection from "../../components/OverlapSection.astro";
 import BecasHero from "../../components/pages/master/BecasHero.astro";
 import ContactForm from "../../components/ContactForm.astro";
+import { asset } from "../../lib/assets";
 
 // Beneficios — íconos SVG stroke-based (manual: sin emojis/glyphs)
 const beneficios = [
@@ -53,7 +54,7 @@ const iconBg = {
   <main>
     <!-- 1. Hero -->
     <BecasHero
-      image="/images/master/DSC02270_resultado.webp"
+      image={asset("master/DSC02270_resultado.webp")}
       eyebrow="Becas ESIC Medellín"
       title="Becas de hasta <span>40%</span>"
       subtitle="Impulsa tu carrera con apoyo económico en nuestros programas de máster. Conecta con la red ESIC y acelera tu crecimiento profesional."

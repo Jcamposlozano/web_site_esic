@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Container from "../components/Container.astro";
+import { asset } from "../lib/assets";
 
 type Member = { name: string; role: string; photo?: string; featured?: boolean };
 type Area = { title: string; count: string; members: Member[] };
@@ -10,38 +11,38 @@ const areas: Area[] = [
     title: "Dirección",
     count: "06 líderes",
     members: [
-      { name: "Juan Esteban Jaramillo", role: "Presidente", photo: "/images/wp/2024/08/JUAN-scaled-1-812x1024.jpg", featured: true },
-      { name: "Sara Velásquez", role: "Directora Académica Corporate", photo: "/images/wp/2025/07/Sara-V-812x1024.jpg" },
-      { name: "Yurani Sánchez", role: "Directora Académica Pregrados", photo: "/images/wp/2024/08/YURA-2-scaled-1-812x1024.jpg" },
-      { name: "Juan Manuel Jiménez", role: "Director Growth & Corporate", photo: "/images/wp/2024/08/JUAN-M-2-812x1024.jpg" },
-      { name: "Daniela Upegui", role: "Directora de Marketing", photo: "/images/wp/2025/07/DANIELA-U2-812x1024.jpg" },
-      { name: "Marta Ramírez", role: "Directora Financiera y Administrativa", photo: "/images/wp/2025/12/MARTA-812x1024.jpg" },
+      { name: "Juan Esteban Jaramillo", role: "Presidente", photo: asset("wp/2024/08/JUAN-scaled-1-812x1024.jpg"), featured: true },
+      { name: "Sara Velásquez", role: "Directora Académica Corporate", photo: asset("wp/2025/07/Sara-V-812x1024.jpg") },
+      { name: "Yurani Sánchez", role: "Directora Académica Pregrados", photo: asset("wp/2024/08/YURA-2-scaled-1-812x1024.jpg") },
+      { name: "Juan Manuel Jiménez", role: "Director Growth & Corporate", photo: asset("wp/2024/08/JUAN-M-2-812x1024.jpg") },
+      { name: "Daniela Upegui", role: "Directora de Marketing", photo: asset("wp/2025/07/DANIELA-U2-812x1024.jpg") },
+      { name: "Marta Ramírez", role: "Directora Financiera y Administrativa", photo: asset("wp/2025/12/MARTA-812x1024.jpg") },
     ],
   },
   {
     title: "Académica & Pregrados",
     count: "03 integrantes",
     members: [
-      { name: "Eliana Monsalve", role: "Líder Pregrados", photo: "/images/wp/2024/08/ELIANA-2-scaled-1-812x1024.jpg" },
-      { name: "Tatiana Serna", role: "Analista Pregrados", photo: "/images/wp/2024/08/tatiana-scaled-1-812x1024.jpg" },
-      { name: "Alejandra Londoño", role: "Student Service Pregrado", photo: "/images/wp/2026/02/ALEJA.jpg-812x1024.jpeg" },
+      { name: "Eliana Monsalve", role: "Líder Pregrados", photo: asset("wp/2024/08/ELIANA-2-scaled-1-812x1024.jpg") },
+      { name: "Tatiana Serna", role: "Analista Pregrados", photo: asset("wp/2024/08/tatiana-scaled-1-812x1024.jpg") },
+      { name: "Alejandra Londoño", role: "Student Service Pregrado", photo: asset("wp/2026/02/ALEJA.jpg-812x1024.jpeg") },
     ],
   },
   {
     title: "Corporate",
     count: "02 integrantes",
     members: [
-      { name: "Stephany Aldana", role: "Analista Corporate", photo: "/images/wp/2025/06/ESTEFANI-ALDANA-812x1024.jpg" },
-      { name: "Carolina Soto", role: "Student Service Corporate", photo: "/images/wp/2026/02/CARO.jpg-812x1024.jpeg" },
+      { name: "Stephany Aldana", role: "Analista Corporate", photo: asset("wp/2025/06/ESTEFANI-ALDANA-812x1024.jpg") },
+      { name: "Carolina Soto", role: "Student Service Corporate", photo: asset("wp/2026/02/CARO.jpg-812x1024.jpeg") },
     ],
   },
   {
     title: "Marketing & Diseño",
     count: "03 integrantes",
     members: [
-      { name: "Sergio Vaquero", role: "Diseño Audiovisual", photo: "/images/wp/2024/08/checho-scaled-1-812x1024.jpg" },
-      { name: "Valeria Velásquez", role: "Community Manager", photo: "/images/wp/2025/07/VALERIA-812x1024.jpg" },
-      { name: "Jerónimo Martínez", role: "UI/UX", photo: "/images/wp/2025/09/Diseno-sin-titulo-37-796x1024.png" },
+      { name: "Sergio Vaquero", role: "Diseño Audiovisual", photo: asset("wp/2024/08/checho-scaled-1-812x1024.jpg") },
+      { name: "Valeria Velásquez", role: "Community Manager", photo: asset("wp/2025/07/VALERIA-812x1024.jpg") },
+      { name: "Jerónimo Martínez", role: "UI/UX", photo: asset("wp/2025/09/Diseno-sin-titulo-37-796x1024.png") },
     ],
   },
   {
@@ -50,17 +51,17 @@ const areas: Area[] = [
     members: [
       { name: "Jonathan Lozano", role: "Líder Fábrica de Inteligencia Artificial", featured: true },
       { name: "Samuel", role: "Fábrica de Inteligencia Artificial" },
-      { name: "Jerónimo Martínez", role: "UI/UX · Fábrica de IA", photo: "/images/wp/2025/09/Diseno-sin-titulo-37-796x1024.png" },
+      { name: "Jerónimo Martínez", role: "UI/UX · Fábrica de IA", photo: asset("wp/2025/09/Diseno-sin-titulo-37-796x1024.png") },
     ],
   },
   {
     title: "Administrativa & Operaciones",
     count: "04 integrantes",
     members: [
-      { name: "Daniela Hernández", role: "Analista Admin y Contable", photo: "/images/wp/2024/08/DANIELA-scaled-1-812x1024.jpg" },
-      { name: "Leidy Ochoa", role: "Auxiliar Contable", photo: "/images/wp/2025/06/Leidy-812x1024.jpg" },
-      { name: "Zoraida Restrepo", role: "Servicios Generales", photo: "/images/wp/2025/06/zora-812x1024.jpg" },
-      { name: "Johan Vélez", role: "Servicios Generales", photo: "/images/wp/2025/06/jhoa-812x1024.jpg" },
+      { name: "Daniela Hernández", role: "Analista Admin y Contable", photo: asset("wp/2024/08/DANIELA-scaled-1-812x1024.jpg") },
+      { name: "Leidy Ochoa", role: "Auxiliar Contable", photo: asset("wp/2025/06/Leidy-812x1024.jpg") },
+      { name: "Zoraida Restrepo", role: "Servicios Generales", photo: asset("wp/2025/06/zora-812x1024.jpg") },
+      { name: "Johan Vélez", role: "Servicios Generales", photo: asset("wp/2025/06/jhoa-812x1024.jpg") },
     ],
   },
 ];
@@ -78,7 +79,7 @@ const personIcon = `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.2" stro
   >
     <img
       class="absolute inset-0 w-full h-full object-cover -z-20"
-      src="/images/wp/2024/08/JUAN-scaled-1-1624x2048.jpg"
+      src={asset("wp/2024/08/JUAN-scaled-1-1624x2048.jpg")}
       alt="Equipo ESIC Medellín"
     />
     <div

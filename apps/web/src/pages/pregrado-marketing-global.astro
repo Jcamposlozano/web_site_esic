@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import ProgramaPregradoPage from "../components/pages/pregrado/ProgramaPregradoPage.astro";
 import type { PlanYear, Institution } from "../components/pages/pregrado/PlanEstudiosTabs.tsx";
+import { asset } from "../lib/assets";
 
 const planYears: PlanYear[] = [
   {
@@ -59,12 +60,12 @@ const institutions: Institution[] = [
   {
     title: "Dirección de<br/>Marketing Global",
     subtitle: "Título propio español de ESIC University",
-    logo: "/images/wp/2024/08/cropped-logo-esic-web-1.png",
+    logo: asset("wp/2024/08/cropped-logo-esic-web-1.png"),
     logoAlt: "ESIC",
   },
   {
     title: "Profesional en<br/>Administración de Mercadeo",
-    logo: "/images/wp/2024/08/Logo-CEIPA-curvas_logo-CEIPA-gris-01-e1722627736717.png",
+    logo: asset("wp/2024/08/Logo-CEIPA-curvas_logo-CEIPA-gris-01-e1722627736717.png"),
     logoAlt: "CEIPA",
   },
 ];
@@ -83,8 +84,8 @@ const priceFeatures = [
   fullBleed
 >
   <ProgramaPregradoPage
-    heroDesktop="/images/wp/2026/03/banner-direccion-marketing-global-desktop.webp"
-    heroMobile="/images/wp/2026/03/banner-direccion-marketing-global-mobile.webp"
+    heroDesktop={asset("wp/2026/03/banner-direccion-marketing-global-desktop.webp")}
+    heroMobile={asset("wp/2026/03/banner-direccion-marketing-global-mobile.webp")}
     heroAlt="Pregrado en Dirección de Marketing Global - ESIC Medellín"
     exploraBody="Formamos líderes éticos, innovadores y orientados a resultados, listos para impulsar el marketing, los negocios digitales y la innovación aplicada en organizaciones de impacto regional y global."
     formTitle="Solicita información"
@@ -92,11 +93,11 @@ const priceFeatures = [
       "Descubre cómo nuestros estudiantes están transformando el marketing global. Conoce sus historias de éxito y cómo ESIC les ha ayudado a alcanzar sus metas profesionales.",
       "Formamos profesionales capaces de innovar y liderar en mercados internacionales, con una visión estratégica y orientada a resultados.",
     ]}
-    videoSrc="/images/wp/2026/02/testimonio-felipe.mp4"
+    videoSrc={asset("wp/2026/02/testimonio-felipe.mp4")}
     price="$29.469.000"
     priceFeatures={priceFeatures}
     planYears={planYears}
     institutions={institutions}
-    brochureHref="/images/wp/2026/03/brochure-WEB-Marketing.pdf"
+    brochureHref={asset("wp/2026/03/brochure-WEB-Marketing.pdf")}
   />
 </Layout>

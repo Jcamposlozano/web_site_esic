@@ -9,6 +9,7 @@
  */
 import Layout from "../layouts/Layout.astro";
 import ExecutiveProgramBody from "../components/pages/programas/ExecutiveProgramBody.astro";
+import { asset } from "../lib/assets";
 ---
 <Layout
   title="Executive Program: Digital Business Transformation — ESIC Medellín"
@@ -20,7 +21,7 @@ import ExecutiveProgramBody from "../components/pages/programas/ExecutiveProgram
     <section class="exec__hero">
       <div class="exec__hero-bg">
         <img
-          src="/images/wp/2025/12/trabajo-en-equipo-estudiantes-esic-proyecto-digital.png"
+          src={asset("wp/2025/12/trabajo-en-equipo-estudiantes-esic-proyecto-digital.png")}
           alt="Executive Program ESIC"
         />
       </div>
@@ -32,13 +33,13 @@ import ExecutiveProgramBody from "../components/pages/programas/ExecutiveProgram
           <div class="exec__hero-partners">
             <span>Programa cocreado por:</span>
             <div class="exec__partner-logo">
-              <img src="/images/wp/2026/02/logo-esic.png" alt="ESIC" />
+              <img src={asset("wp/2026/02/logo-esic.png")} alt="ESIC" />
             </div>
             <div class="exec__partner-logo">
-              <img src="/images/wp/2026/02/logo-prestigio.png" alt="Prestigio" />
+              <img src={asset("wp/2026/02/logo-prestigio.png")} alt="Prestigio" />
             </div>
             <div class="exec__partner-logo exec__partner-accenture">
-              <img src="/images/wp/2026/02/logo-accenture.png" alt="Accenture" />
+              <img src={asset("wp/2026/02/logo-accenture.png")} alt="Accenture" />
             </div>
           </div>
         </div>

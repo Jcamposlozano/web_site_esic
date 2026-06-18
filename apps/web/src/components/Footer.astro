@@ -10,6 +10,8 @@
  * El popup de contacto del WP (form Zoho) se reemplaza por un enlace a /contacto
  * (página dedicada) según el alcance vigente: los forms reales van en fase posterior.
  */
+import { asset } from "../lib/assets";
+
 const year = new Date().getFullYear();
 
 const arrow = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4 flex-shrink-0"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`;
@@ -76,7 +78,7 @@ const legal = [
       <!-- Info -->
       <div class="flex flex-col gap-6">
         <img
-          src="/images/wp/2026/02/CEIPA-Y-ESIC-a.png"
+          src={asset("wp/2026/02/CEIPA-Y-ESIC-a.png")}
           alt="CEIPA y ESIC"
           class="h-[50px] w-auto self-start shrink-0 max-md:h-10"
           width="734"

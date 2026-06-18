@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import Container from "../components/Container.astro";
 import EmprendimientosGrid from "../components/pages/eventos/EmprendimientosGrid.tsx";
+import { asset } from "../lib/assets";
 
 const title = "Emprendimientos — Comunidad ESIC Medellín";
 const description =
@@ -12,7 +13,7 @@ const description =
     <!-- HERO -->
     <section class="relative flex min-h-[70vh] items-end overflow-hidden bg-brand-blue-dark pb-32 pt-36 md:pb-[8rem]">
       <img
-        src="/images/wp/2026/04/areas-comunes-03.webp"
+        src={asset("wp/2026/04/areas-comunes-03.webp")}
         alt=""
         class="absolute inset-0 z-0 h-full w-full object-cover"
         fetchpriority="high"

@@ -2,6 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import Container from "../../components/Container.astro";
 import { detailPosts, getPost, formatDate } from "../../lib/posts";
+import { asset } from "../../lib/assets";
 
 export function getStaticPaths() {
   // Solo los posts con página propia (no enlaces externos como los podcasts).
@@ -17,7 +18,7 @@ if (!post) {
 <Layout
   title={`${post.seo.metaTitle} | ESIC Medellín`}
   description={post.seo.metaDescription}
-  image={post.coverUrl ?? "/og-default.jpg"}
+  image={post.coverUrl ?? asset("og/og-default.jpg")}
   fullBleed
 >
   <main>

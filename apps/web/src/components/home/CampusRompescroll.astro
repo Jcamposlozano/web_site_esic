@@ -1,6 +1,7 @@
 ---
 import Container from "../Container.astro";
 import OverlapSection from "../OverlapSection.astro";
+import { asset } from "../../lib/assets";
 
 interface Props {
   z?: number;
@@ -8,9 +9,9 @@ interface Props {
 const { z = 4 } = Astro.props;
 
 const images = [
-  { src: "/images/home/campus/lounge-rethink.webp", alt: "Campus ESIC Medellín - Lounge Rethink" },
-  { src: "/images/home/campus/areas-comunes-03.webp", alt: "Campus ESIC Medellín - Áreas comunes" },
-  { src: "/images/home/campus/areas-comunes-16.webp", alt: "Campus ESIC Medellín - Áreas comunes" },
+  { src: asset("home/campus/lounge-rethink.webp"), alt: "Campus ESIC Medellín - Lounge Rethink" },
+  { src: asset("home/campus/areas-comunes-03.webp"), alt: "Campus ESIC Medellín - Áreas comunes" },
+  { src: asset("home/campus/areas-comunes-16.webp"), alt: "Campus ESIC Medellín - Áreas comunes" },
 ];
 ---
 <OverlapSection bg="bg-white" z={z} padding="py-16 md:py-20">

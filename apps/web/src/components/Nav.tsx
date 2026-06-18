@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { asset } from "../lib/assets";
 
 type MenuItem =
   | { type: "link"; label: string; href: string; external?: boolean }
@@ -120,7 +121,7 @@ export default function Nav() {
       >
         <a href="/" className="flex items-center shrink-0" aria-label="ESIC Medellín — Inicio">
           <img
-            src="/images/brand/logo-esic.png"
+            src={asset("brand/logo-esic.png")}
             alt="ESIC Business & Marketing School"
             className="h-10 max-md:h-[34px] w-auto mix-blend-multiply"
           />

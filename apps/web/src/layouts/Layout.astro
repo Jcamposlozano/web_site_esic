@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import Nav from "../components/Nav.tsx";
 import Footer from "../components/Footer.astro";
+import { asset } from "../lib/assets";
 
 interface Props {
   title: string;
@@ -20,7 +21,7 @@ interface Props {
 const {
   title,
   description = "ESIC Business &amp; Marketing School Medell&iacute;n — pregrados, m&aacute;ster y educaci&oacute;n ejecutiva.",
-  image = "/og-default.jpg",
+  image = asset("og/og-default.jpg"),
   fullBleed = false,
   hideFooter = false,
 } = Astro.props;
@@ -45,7 +46,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
     <meta property="og:image" content={new URL(image, Astro.site).toString()} />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={asset("favicon.svg")} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

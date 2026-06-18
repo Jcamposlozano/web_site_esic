@@ -10,6 +10,7 @@
  * Fuente: esic-redesign-wordpress/master/{digital-business,customer-experience,
  * digital-marketing}-elementor.html
  */
+import { asset } from "../../../lib/assets";
 
 export interface PlanModule {
   /** "01", "02"... */
@@ -98,8 +99,8 @@ export const digitalBusiness: MasterProgramData = {
   metaDescription:
     "Máster en Digital Business de ESIC Medellín. 11 meses, modalidad híbrida, inmersión en Madrid y título privado de ESIC España.",
   hero: {
-    desktop: "/images/wp/2026/05/master-digital-business-desktop-scaled.webp",
-    mobile: "/images/wp/2026/05/master-digital-business-mobile-scaled.webp",
+    desktop: asset("wp/2026/05/master-digital-business-desktop-scaled.webp"),
+    mobile: asset("wp/2026/05/master-digital-business-mobile-scaled.webp"),
     alt: "Master Digital Business - ESIC",
   },
   intro: {
@@ -147,7 +148,7 @@ export const digitalBusiness: MasterProgramData = {
     heading: "PLAN DE ESTUDIOS",
     subtitle:
       "5 módulos diseñados para transformar tu visión estratégica en negocios digitales.",
-    brochureUrl: "/images/wp/2026/05/Brochure-Master-DB-2016-Mff.pdf",
+    brochureUrl: asset("wp/2026/05/Brochure-Master-DB-2016-Mff.pdf"),
     modules: [
       {
         num: "01",
@@ -240,9 +241,9 @@ export const customerExperience: MasterProgramData = {
     "Máster en Customer Experience Management de ESIC Medellín. 11 meses, modalidad híbrida, inmersión en Madrid y título privado de ESIC España.",
   hero: {
     desktop:
-      "/images/wp/2026/05/master-customer-experience-management-mayo-2027-desktop-scaled.webp",
+      asset("wp/2026/05/master-customer-experience-management-mayo-2027-desktop-scaled.webp"),
     mobile:
-      "/images/wp/2026/05/master-customer-experience-management-mayo-2027-mobile-scaled.webp",
+      asset("wp/2026/05/master-customer-experience-management-mayo-2027-mobile-scaled.webp"),
     alt: "Máster Customer Experience Management ESIC",
   },
   intro: {
@@ -290,7 +291,7 @@ export const customerExperience: MasterProgramData = {
     heading: "PLAN DE ESTUDIOS",
     subtitle:
       "5 módulos diseñados para transformar tu visión estratégica en experiencia del cliente.",
-    brochureUrl: "/images/wp/2026/05/Brochure-CX-2026-Mff.pdf",
+    brochureUrl: asset("wp/2026/05/Brochure-CX-2026-Mff.pdf"),
     modules: [
       {
         num: "01",
@@ -383,8 +384,8 @@ export const digitalMarketing: MasterProgramData = {
   metaDescription:
     "Máster en Digital Marketing de ESIC Medellín. 11 meses, modalidad híbrida, inmersión en Madrid y título privado de ESIC España.",
   hero: {
-    desktop: "/images/wp/2026/05/master-digital-marketing-desktop-scaled.webp",
-    mobile: "/images/wp/2026/05/master-digital-marketing-mobile-scaled.webp",
+    desktop: asset("wp/2026/05/master-digital-marketing-desktop-scaled.webp"),
+    mobile: asset("wp/2026/05/master-digital-marketing-mobile-scaled.webp"),
     alt: "Máster Digital Marketing ESIC",
   },
   intro: {
@@ -430,7 +431,7 @@ export const digitalMarketing: MasterProgramData = {
   plan: {
     heading: "PLAN DE ESTUDIOS",
     // El original de Digital Marketing no trae subtítulo en el plan.
-    brochureUrl: "/images/wp/2026/05/Folleto-MDM_FULL_2025_2ff.pdf",
+    brochureUrl: asset("wp/2026/05/Folleto-MDM_FULL_2025_2ff.pdf"),
     modules: [
       {
         num: "01",

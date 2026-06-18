@@ -17,6 +17,7 @@ import Layout from "../layouts/Layout.astro";
 import Container from "../components/Container.astro";
 import OverlapSection from "../components/OverlapSection.astro";
 import ContactFormSection from "../components/sections/ContactFormSection.astro";
+import { asset } from "../lib/assets";
 
 const arrow = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`;
 
@@ -28,8 +29,8 @@ const categorias = [
     sub: "4 años · Doble titulación Colombia/España",
     cta: "VER PROGRAMAS",
     titleColor: "#FF9600",
-    image: "/images/wp/2026/02/pregrado_mkt_global_.webp",
-    imageMobile: "/images/wp/2026/02/mobile_pregrado_mkt_global_.webp",
+    image: asset("wp/2026/02/pregrado_mkt_global_.webp"),
+    imageMobile: asset("wp/2026/02/mobile_pregrado_mkt_global_.webp"),
   },
   {
     href: "/master/",
@@ -37,8 +38,8 @@ const categorias = [
     sub: "11 meses · Modalidad híbrida",
     cta: "VER PROGRAMAS",
     titleColor: "#09CF90",
-    image: "/images/wp/2026/02/master_dm.webp",
-    imageMobile: "/images/wp/2026/02/mobile_master_dm.webp",
+    image: asset("wp/2026/02/master_dm.webp"),
+    imageMobile: asset("wp/2026/02/mobile_master_dm.webp"),
   },
   {
     href: "/digital-business-transformation/",
@@ -46,8 +47,8 @@ const categorias = [
     sub: "4 meses · Liderazgo y transformación",
     cta: "VER PROGRAMA",
     titleColor: "#C09C2E",
-    image: "/images/wp/2026/02/ep.webp",
-    imageMobile: "/images/wp/2026/02/ep-m.webp",
+    image: asset("wp/2026/02/ep.webp"),
+    imageMobile: asset("wp/2026/02/ep-m.webp"),
   },
   {
     href: "#contacto",
@@ -55,8 +56,8 @@ const categorias = [
     sub: "Formaciones a la medida para empresas",
     cta: "CONTÁCTANOS",
     titleColor: "#0047E9",
-    image: "/images/wp/2026/04/Empresarial.webp",
-    imageMobile: "/images/wp/2026/04/Empresarial-M.webp",
+    image: asset("wp/2026/04/Empresarial.webp"),
+    imageMobile: asset("wp/2026/04/Empresarial-M.webp"),
   },
 ];
 
@@ -65,25 +66,25 @@ const vida = [
   {
     title: "Aulas",
     body: "Espacios diseñados para el trabajo práctico",
-    image: "/images/wp/2026/02/aulas.webp",
+    image: asset("wp/2026/02/aulas.webp"),
     alt: "Aulas ESIC",
   },
   {
     title: "Cowork y Networking",
     body: "Conecta con personas que están construyendo",
-    image: "/images/wp/2026/02/cowork.webp",
+    image: asset("wp/2026/02/cowork.webp"),
     alt: "Cowork y Networking ESIC",
   },
   {
     title: "Eventos y Conferencias",
     body: "Eventos que te mantienen actualizado con lo que está pasando en los negocios, marketing y tecnología",
-    image: "/images/wp/2026/02/eventos.webp",
+    image: asset("wp/2026/02/eventos.webp"),
     alt: "Eventos ESIC",
   },
   {
     title: "Campus Medellín",
     body: "Vive la experiencia ESIC en el Alto de las Palmas (Medellín)",
-    image: "/images/wp/2026/04/campus-exterior-01.webp",
+    image: asset("wp/2026/04/campus-exterior-01.webp"),
     alt: "Campus Medellín ESIC",
   },
 ];
@@ -169,7 +170,7 @@ const vida = [
             <div>
               <div class="mb-6 flex flex-wrap items-center gap-1">
                 <img
-                  src="/images/wp/2026/03/logo-level-up-scaled.png"
+                  src={asset("wp/2026/03/logo-level-up-scaled.png")}
                   alt="Level Up by ESIC"
                   class="h-8 md:h-[50px] w-auto max-w-[200px]"
                 />
@@ -187,7 +188,7 @@ const vida = [
 
             <div class="esic-prog__levelup-visual relative hidden min-h-[300px] overflow-hidden rounded-[20px] lg:block">
               <img
-                src="/images/wp/2026/03/level-up.png"
+                src={asset("wp/2026/03/level-up.png")}
                 alt="Level Up by ESIC"
                 class="absolute inset-0 h-full w-full object-cover object-center"
               />
@@ -258,14 +259,14 @@ const vida = [
   </main>
 </Layout>
 
-<style>
+<style define:vars={{ heroImg: `url('${asset("wp/2026/04/campus-exterior-01.webp")}')` }}>
   /* Hero con overlay diagonal (réplica del gradiente del original) */
   .esic-prog__hero {
     min-height: 85vh;
     background-image:
       linear-gradient(90deg, rgba(0,0,0,0.97) 0%, rgba(0,0,0,0.80) 45%, rgba(0,0,0,0.35) 75%, rgba(0,0,0,0) 100%),
       linear-gradient(to top, rgba(0,0,0,0.70) 0%, transparent 40%),
-      url('/images/wp/2026/04/campus-exterior-01.webp');
+      var(--heroImg);
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -276,7 +277,7 @@ const vida = [
       background-image:
         linear-gradient(180deg, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.78) 50%, rgba(0,0,0,0.60) 100%),
         linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 35%),
-        url('/images/wp/2026/04/campus-exterior-01.webp');
+        var(--heroImg);
     }
   }
 

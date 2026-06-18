@@ -15,6 +15,7 @@
  * El acento de Executive es AZUL (#0047E9); la metodología usa dorado (#C09C2E)
  * tal como en el original. Los estilos son scoped (Astro) — markup 1:1.
  */
+import { asset } from "../../../lib/assets";
 ---
 <!-- Stats Bar -->
 <div class="exec__container" style="position:relative; z-index:12;">
@@ -193,13 +194,13 @@
     <h2>Programa cocreado por</h2>
     <div class="exec__logos-row">
       <div class="exec__logo-item exec__logo-esic">
-        <img src="/images/wp/2024/08/cropped-logo-esic-web-1.png" alt="ESIC" />
+        <img src={asset("wp/2024/08/cropped-logo-esic-web-1.png")} alt="ESIC" />
       </div>
       <div class="exec__logo-item exec__logo-prestigio">
-        <img src="/images/wp/2026/02/logo-prestigio.png" alt="Prestigio" />
+        <img src={asset("wp/2026/02/logo-prestigio.png")} alt="Prestigio" />
       </div>
       <div class="exec__logo-item exec__logo-accenture">
-        <img src="/images/wp/2026/02/logo-accenture.png" alt="Accenture" />
+        <img src={asset("wp/2026/02/logo-accenture.png")} alt="Accenture" />
       </div>
     </div>
   </div>
