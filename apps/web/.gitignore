@@ -3,6 +3,10 @@ dist/
 # generated types
 .astro/
 
+# Assets pesados: se sirven desde S3 (ver src/lib/assets.ts), no van al repo
+public/images/
+public/videos/
+
 # dependencies
 node_modules/
 
