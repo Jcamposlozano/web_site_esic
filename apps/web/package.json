@@ -11,6 +11,7 @@
     "dev": "astro dev",
     "prebuild": "node scripts/sync-bucket.mjs",
     "build": "astro build",
+    "postbuild": "node scripts/clean-dist.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "test": "node --test",

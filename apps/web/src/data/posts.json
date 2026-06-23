@@ -1,22 +1,5 @@
 [
   {
-    "id": "d019dd02-d0f0-46c1-a4b6-1582ace4d713",
-    "title": "Teste FAI",
-    "slug": "teste-fai",
-    "category": "Noticias",
-    "author": "Jonathan Campos",
-    "excerpt": "eee",
-    "publishedAt": "2026-06-22T23:28:41.338Z",
-    "externalUrl": "https://d1s0dg38umawxa.cloudfront.net/",
-    "coverUrl": "https://prisma-fai-admin.s3.us-east-2.amazonaws.com/src/esic-website/assets/imagenes/teste-fai-4583864b.png",
-    "coverAlt": "Gregorio Fernando III",
-    "bodyHtml": "<p>Hola mundo</p>",
-    "seo": {
-      "metaTitle": "ee",
-      "metaDescription": "ee"
-    }
-  },
-  {
     "id": "aprender-a-decidir-el-valor-de-los-casos-reales-en-el-aula",
     "title": "Aprender a decidir: el valor de los casos reales en el aula",
     "slug": "aprender-a-decidir-el-valor-de-los-casos-reales-en-el-aula",
