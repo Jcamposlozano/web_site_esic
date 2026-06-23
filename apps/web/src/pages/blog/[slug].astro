@@ -23,7 +23,7 @@ if (!post) {
 >
   <main>
     <!-- Encabezado -->
-    <article>
+    <article data-slug={post.slug}>
       <header class="relative bg-brand-blue-dark text-white pt-32 pb-16 md:pt-40 md:pb-20">
         <Container>
           <a href="/blog/" class="inline-flex items-center gap-2 text-[0.8rem] uppercase tracking-[0.1em] text-white/70 hover:text-brand-teal transition-colors mb-6 no-underline">
@@ -32,12 +32,12 @@ if (!post) {
           </a>
           <div class="max-w-[760px]">
             <div class="flex items-center gap-3 mb-4">
-              <span class="text-[0.7rem] font-bold uppercase tracking-[0.16em] text-brand-teal">{post.category === "podcast" ? "Podcast" : "Blog"}</span>
-              {post.publishedAt && <span class="text-[0.74rem] text-white/55">· {formatDate(post.publishedAt)}</span>}
-              {post.author && <span class="text-[0.74rem] text-white/55">· {post.author}</span>}
+              <span id="post-category" class="text-[0.7rem] font-bold uppercase tracking-[0.16em] text-brand-teal">{post.category === "podcast" ? "Podcast" : "Blog"}</span>
+              <span id="post-date" class="text-[0.74rem] text-white/55">{post.publishedAt ? `· ${formatDate(post.publishedAt)}` : ""}</span>
+              <span id="post-author" class="text-[0.74rem] text-white/55">{post.author ? `· ${post.author}` : ""}</span>
             </div>
-            <h1 class="font-display text-4xl md:text-6xl font-extrabold uppercase leading-[0.98]">{post.title}</h1>
-            {post.excerpt && <p class="mt-5 text-[1.1rem] leading-[1.6] text-white/85">{post.excerpt}</p>}
+            <h1 id="post-title" class="font-display text-4xl md:text-6xl font-extrabold uppercase leading-[0.98]">{post.title}</h1>
+            <p id="post-excerpt" class:list={["mt-5 text-[1.1rem] leading-[1.6] text-white/85", !post.excerpt && "hidden"]}>{post.excerpt}</p>
           </div>
         </Container>
       </header>
@@ -45,10 +45,12 @@ if (!post) {
       <!-- Cuerpo -->
       <section class="relative z-[2] -mt-[50px] rounded-t-[50px] bg-white pt-14 pb-20 md:pt-16 md:pb-28">
         <Container>
-          {post.coverUrl && (
-            <img src={post.coverUrl} alt={post.coverAlt} class="w-full max-w-[900px] mx-auto rounded-3xl aspect-[16/9] object-cover mb-12 shadow-[0_20px_60px_rgba(0,19,63,0.12)]" />
-          )}
-          <div class="blog-body max-w-[720px] mx-auto" set:html={post.bodyHtml}></div>
+          <div id="post-cover">
+            {post.coverUrl && (
+              <img src={post.coverUrl} alt={post.coverAlt} class="w-full max-w-[900px] mx-auto rounded-3xl aspect-[16/9] object-cover mb-12 shadow-[0_20px_60px_rgba(0,19,63,0.12)]" />
+            )}
+          </div>
+          <div id="post-body" class="blog-body max-w-[720px] mx-auto" set:html={post.bodyHtml}></div>
 
           <div class="max-w-[720px] mx-auto mt-14 pt-8 border-t border-[rgba(0,19,63,0.08)]">
             <a href="/blog/" class="inline-flex items-center gap-2 rounded-full bg-brand-blue text-white text-[0.8rem] font-bold uppercase tracking-[0.06em] px-6 py-3 hover:bg-brand-blue-dark transition-colors no-underline">
@@ -60,6 +62,48 @@ if (!post) {
       </section>
     </article>
   </main>
+
+  <script>
+    import { fetchLivePosts } from "../../lib/noticias-client";
+    import { formatDate } from "../../lib/noticias-map.mjs";
+
+    // Mejora progresiva: refresca este post con el JSON vivo del bucket.
+    const article = document.querySelector<HTMLElement>("article[data-slug]");
+    const slug = article?.dataset.slug;
+    if (slug) {
+      fetchLivePosts().then((posts) => {
+        const post = posts?.find((p) => p.slug === slug);
+        if (!post) return; // no está en el JSON vivo → conserva el render del build
+
+        const set = (id: string, text: string) => {
+          const el = document.getElementById(id);
+          if (el) el.textContent = text;
+        };
+        set("post-category", post.category === "podcast" ? "Podcast" : "Blog");
+        set("post-date", post.publishedAt ? `· ${formatDate(post.publishedAt)}` : "");
+        set("post-author", post.author ? `· ${post.author}` : "");
+        set("post-title", post.title);
+
+        const excerpt = document.getElementById("post-excerpt");
+        if (excerpt) {
+          excerpt.textContent = post.excerpt ?? "";
+          excerpt.classList.toggle("hidden", !post.excerpt);
+        }
+
+        const cover = document.getElementById("post-cover");
+        if (cover) {
+          cover.innerHTML = post.coverUrl
+            ? `<img src="${post.coverUrl}" alt="${(post.coverAlt ?? "").replace(/"/g, "&quot;")}" class="w-full max-w-[900px] mx-auto rounded-3xl aspect-[16/9] object-cover mb-12 shadow-[0_20px_60px_rgba(0,19,63,0.12)]" />`
+            : "";
+        }
+
+        const body = document.getElementById("post-body");
+        if (body) body.innerHTML = post.bodyHtml ?? "";
+
+        if (post.seo?.metaTitle) document.title = `${post.seo.metaTitle} | ESIC Medellín`;
+      });
+    }
+  </script>
 </Layout>
 
 <style>

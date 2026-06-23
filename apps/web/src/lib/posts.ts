@@ -3,6 +3,7 @@
  * (que trae las noticias publicadas desde S3). Sin red en build.
  */
 import data from "../data/posts.json";
+import { formatDate as fmtDate, postHref as hrefOf } from "./noticias-map.mjs";
 
 export interface Post {
   id: string | number;
@@ -30,18 +31,9 @@ export function getPost(slug: string): Post | undefined {
 
 /** Destino de la tarjeta: página propia o enlace externo. */
 export function postHref(p: Post): string {
-  return p.externalUrl ?? `/blog/${p.slug}/`;
+  return hrefOf(p);
 }
 
 export function formatDate(iso: string | null): string {
-  if (!iso) return "";
-  try {
-    return new Date(iso).toLocaleDateString("es-CO", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-  } catch {
-    return "";
-  }
+  return fmtDate(iso);
 }

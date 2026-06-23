@@ -87,12 +87,64 @@ const filters = [
   </main>
 
   <script>
+    import { fetchLivePosts } from "../../lib/noticias-client";
+    import { formatDate, postHref } from "../../lib/noticias-map.mjs";
+    import type { Post } from "../../lib/posts";
+
+    const grid = document.getElementById("blog-grid");
     const wrap = document.getElementById("blog-filters");
-    const cards = Array.from(document.querySelectorAll<HTMLElement>("#blog-grid .blog-card"));
+    let currentFilter = "todo";
+
+    const esc = (s: string) =>
+      String(s ?? "").replace(/[&<>"]/g, (c) =>
+        ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]!,
+      );
+
+    function cardHtml(p: Post): string {
+      const isPodcast = p.category === "podcast";
+      const ext = p.externalUrl
+        ? ` target="_blank" rel="noopener"`
+        : "";
+      const cover = p.coverUrl
+        ? `<img src="${esc(p.coverUrl)}" alt="${esc(p.coverAlt)}" loading="lazy" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />`
+        : "";
+      const date = p.publishedAt
+        ? `<span class="text-[0.72rem] text-ink-light">· ${esc(formatDate(p.publishedAt))}</span>`
+        : "";
+      const excerpt = p.excerpt
+        ? `<p class="text-ink-muted text-[0.92rem] leading-relaxed line-clamp-3">${esc(p.excerpt)}</p>`
+        : "";
+      return `<article class="blog-card group bg-white rounded-3xl overflow-hidden border border-[rgba(0,19,63,0.06)] shadow-[0_2px_20px_rgba(0,19,63,0.05)] transition-transform hover:-translate-y-1" data-category="${esc(p.category)}">
+        <a href="${esc(postHref(p))}"${ext} class="block no-underline">
+          <div class="aspect-[16/9] overflow-hidden bg-bg-alt">${cover}</div>
+          <div class="p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="text-[0.68rem] font-bold uppercase tracking-[0.14em] ${isPodcast ? "text-[#7C3AED]" : "text-brand-teal-dark"}">${isPodcast ? "Podcast" : "Blog"}</span>
+              ${date}
+            </div>
+            <h2 class="font-display text-xl font-extrabold uppercase text-brand-blue-dark leading-tight mb-2">${esc(p.title)}</h2>
+            ${excerpt}
+            <span class="inline-flex items-center gap-2 mt-4 text-[0.78rem] font-bold uppercase tracking-[0.06em] text-brand-blue">
+              ${p.externalUrl ? "Escuchar" : "Leer"}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </div>
+        </a>
+      </article>`;
+    }
+
+    function applyFilter() {
+      grid?.querySelectorAll<HTMLElement>(".blog-card").forEach((c) => {
+        c.style.display =
+          currentFilter === "todo" || c.dataset.category === currentFilter ? "" : "none";
+      });
+    }
+
+    // Filtros (delegación: funcionan también tras re-pintar el grid en vivo).
     wrap?.addEventListener("click", (e) => {
       const btn = (e.target as HTMLElement).closest<HTMLButtonElement>("[data-filter]");
       if (!btn) return;
-      const f = btn.dataset.filter;
+      currentFilter = btn.dataset.filter ?? "todo";
       wrap.querySelectorAll<HTMLButtonElement>("[data-filter]").forEach((b) => {
         const on = b === btn;
         b.classList.toggle("bg-brand-blue", on);
@@ -102,9 +154,14 @@ const filters = [
         b.classList.toggle("text-ink-muted", !on);
         b.classList.toggle("border-brand-blue-dark/15", !on);
       });
-      cards.forEach((c) => {
-        c.style.display = f === "todo" || c.dataset.category === f ? "" : "none";
-      });
+      applyFilter();
+    });
+
+    // Mejora progresiva: refresca el grid con el JSON vivo del bucket.
+    fetchLivePosts().then((posts) => {
+      if (!posts || !grid) return; // ante fallo, conserva el render del build
+      grid.innerHTML = posts.map(cardHtml).join("");
+      applyFilter();
     });
   </script>
 </Layout>
