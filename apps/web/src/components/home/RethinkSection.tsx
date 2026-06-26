@@ -1,4 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { fetchLivePosts } from "../../lib/noticias-client";
+import { postHref } from "../../lib/noticias-map.mjs";
+import type { Post } from "../../lib/posts";
 
 type Category = "todo" | "blog" | "podcast";
 
@@ -12,6 +15,19 @@ export type RethinkCard = {
   ctaLabel: string;
 };
 
+/** Misma transformación Post -> RethinkCard que usa index.astro en el build. */
+function toCard(p: Post): RethinkCard {
+  return {
+    category: p.category,
+    image: p.coverUrl,
+    tag: p.category === "podcast" ? "Podcast" : "Blog",
+    title: p.title,
+    href: postHref(p),
+    external: Boolean(p.externalUrl),
+    ctaLabel: p.category === "podcast" ? "Escuchar" : "Leer",
+  };
+}
+
 const filters: { key: Category; label: string }[] = [
   { key: "todo", label: "Todo" },
   { key: "blog", label: "Blog" },
@@ -20,8 +36,18 @@ const filters: { key: Category; label: string }[] = [
 
 export default function RethinkSection({ cards = [] }: { cards?: RethinkCard[] }) {
   const [active, setActive] = useState<Category>("todo");
+  // Arranca con las cards del build (SEO) y, al cargar, refresca con el JSON
+  // vivo del bucket. Si el fetch falla, conserva las del build como fallback.
+  const [liveCards, setLiveCards] = useState<RethinkCard[]>(cards);
 
-  const visible = active === "todo" ? cards : cards.filter((c) => c.category === active);
+  useEffect(() => {
+    fetchLivePosts().then((posts) => {
+      if (posts && posts.length) setLiveCards(posts.map(toCard));
+    });
+  }, []);
+
+  const visible =
+    active === "todo" ? liveCards : liveCards.filter((c) => c.category === active);
 
   return (
     <>
