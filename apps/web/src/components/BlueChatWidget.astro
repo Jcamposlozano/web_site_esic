@@ -1,6 +1,6 @@
 ---
 /**
- * BlueChatWidget — burbuja de chat flotante (abajo-izquierda) que embebe a Blue,
+ * BlueChatWidget — burbuja de chat flotante (abajo-derecha) que embebe a Blue,
  * el agente del Portal Agentes, dentro de un iframe.
  *
  * - El iframe carga de forma diferida: su src solo se asigna al abrir por primera
@@ -10,11 +10,11 @@
 const BLUE_URL = "https://d1s0dg38umawxa.cloudfront.net/esic/student_services";
 ---
 
-<div id="blue-widget" class="fixed left-4 bottom-4 z-[60] flex flex-col items-start gap-3">
+<div id="blue-widget" class="fixed right-4 bottom-4 z-[60] flex flex-col items-end gap-3">
   <!-- Panel del chat -->
   <div
     id="blue-panel"
-    class="hidden origin-bottom-left overflow-hidden rounded-2xl bg-white shadow-2xl ring-1 ring-black/10"
+    class="hidden origin-bottom-right overflow-hidden rounded-2xl bg-white shadow-2xl ring-1 ring-black/10"
     style="width: min(384px, calc(100vw - 2rem)); height: min(600px, calc(100vh - 7rem));"
   >
     <iframe
@@ -53,38 +53,11 @@ const BLUE_URL = "https://d1s0dg38umawxa.cloudfront.net/esic/student_services";
   const iconOpen = document.getElementById("blue-icon-open");
   const iconClose = document.getElementById("blue-icon-close");
 
-  // Origen del iframe de Blue (para postMessage seguro).
-  const blueOrigin = iframe ? new URL(iframe.dataset.src || "", location.href).origin : "";
-  let panelOpen = false;
-
-  // Reenvía la posición del cursor (de toda la página) al iframe para que Blue
-  // la siga. Coords normalizadas [-1,1] relativas al centro del panel de Blue,
-  // así el modelo "mira" hacia donde está el mouse en la web. Throttle a 1 frame.
-  let aimRaf = 0;
-  let lastEvent: MouseEvent | null = null;
-  const forwardPointer = (e: MouseEvent) => {
-    if (!panelOpen || !iframe) return;
-    lastEvent = e;
-    if (aimRaf) return;
-    aimRaf = requestAnimationFrame(() => {
-      aimRaf = 0;
-      if (!lastEvent) return;
-      const r = panel!.getBoundingClientRect();
-      const cx = r.left + r.width / 2;
-      const cy = r.top + r.height / 2;
-      const nx = Math.max(-1, Math.min(1, (lastEvent.clientX - cx) / (window.innerWidth / 2)));
-      const ny = Math.max(-1, Math.min(1, (lastEvent.clientY - cy) / (window.innerHeight / 2)));
-      iframe.contentWindow?.postMessage({ type: "blue:pointer", nx, ny }, blueOrigin);
-    });
-  };
-
   if (toggle && panel && iframe) {
     toggle.addEventListener("click", () => {
       const isOpen = !panel.classList.contains("hidden");
       if (isOpen) {
         panel.classList.add("hidden");
-        panelOpen = false;
-        window.removeEventListener("mousemove", forwardPointer);
         toggle.setAttribute("aria-expanded", "false");
         toggle.setAttribute("aria-label", "Abrir chat con Blue");
         iconOpen?.classList.remove("hidden");
@@ -93,8 +66,6 @@ const BLUE_URL = "https://d1s0dg38umawxa.cloudfront.net/esic/student_services";
         // Carga diferida: asigna el src la primera vez que se abre.
         if (!iframe.src && iframe.dataset.src) iframe.src = iframe.dataset.src;
         panel.classList.remove("hidden");
-        panelOpen = true;
-        window.addEventListener("mousemove", forwardPointer);
         toggle.setAttribute("aria-expanded", "true");
         toggle.setAttribute("aria-label", "Cerrar chat con Blue");
         iconOpen?.classList.add("hidden");
