@@ -2,10 +2,9 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "web",
-      "cwd": "apps/web",
-      "runtimeExecutable": "node",
-      "runtimeArgs": ["node_modules/astro/bin/astro.mjs", "dev"],
+      "name": "esic-web-preview",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--dir", "/Users/jero/Downloads/Programacion/esic-react-app", "preview"],
       "port": 4321
     }
   ]

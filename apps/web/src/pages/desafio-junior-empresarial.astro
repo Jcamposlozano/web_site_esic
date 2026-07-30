@@ -13,24 +13,32 @@ const FORM_ACTION =
 const AB_LOGO = asset("dje/action-black-logo-white.svg");
 const HERO_PHOTO = asset("dje/hero-action-black.webp");
 
+const HEADLINE = "El mejor gimnasio del mundo busca a los próximos líderes de ESIC".split(" ");
+// Palabras 5..10 ("busca a los próximos líderes") van en azul
+const isBlue = (i: number) => i >= 5 && i <= 9;
+
+const MARQUEE = [
+  "El mejor gimnasio del mundo",
+  "La escuela #1 de marketing y negocios digitales",
+  "Un solo reto, una beca real",
+  "12 de septiembre · Campus ESIC",
+];
+
 const steps = [
   {
     num: "01",
     title: "Arma tu equipo",
     body: "Solo o con hasta 4 integrantes. ¿No tienes con quién? Desde ESIC te ayudamos a armar tu equipo.",
-    icon: `<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>`,
   },
   {
     num: "02",
     title: "Resuelve el reto real",
     body: "Un caso real de Action Black, el mejor gimnasio del mundo. Ideas, estrategia y ejecución en un solo día.",
-    icon: `<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>`,
   },
   {
     num: "03",
     title: "Gánate la beca",
-    body: "1er puesto: beca del 50%. 2do puesto: beca del 20%. Para el primer año de pregrado en ESIC, para cada integrante.",
-    icon: `<path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>`,
+    body: "1er puesto: beca del 50%. 2do puesto: beca del 20%. Para el primer año de pregrado, para cada integrante.",
   },
 ];
 
@@ -69,9 +77,8 @@ const arrowIcon = `<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 
 ---
 <Layout title={title} description={description} fullBleed>
   <main class="esic-dje bg-[#0A0A0A] text-white">
-    <!-- ── HERO ── -->
+    <!-- ── HERO — tipografía cinética ── -->
     <section class="dje-hero relative isolate flex min-h-[92vh] items-center overflow-hidden bg-[#0A0A0A]">
-      <!-- Foto de fondo -->
       <div class="absolute inset-0 z-0">
         <img
           src={HERO_PHOTO}
@@ -85,34 +92,31 @@ const arrowIcon = `<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 
 
       <Container class="relative z-[2] max-w-[1140px]">
         <div class="flex flex-col items-start py-32 md:py-36">
-          <!-- Kicker -->
-          <span class="mb-5 inline-block rounded-full border border-[#FF9600] px-4 py-[0.45rem] text-[0.72rem] font-bold uppercase tracking-[0.24em] text-[#FF9600]">
-            Desafío Junior Empresarial
+          <span class="dje-kicker mb-6">
+            <em class="text-[#FF9600] not-italic font-extrabold">[</em>&nbsp; Desafío Junior Empresarial &nbsp;<em class="text-[#FF9600] not-italic font-extrabold">]</em>
           </span>
 
-          <!-- Lockup -->
           <div class="mb-7 flex items-center gap-4">
             <span class="font-display text-[1.35rem] font-extrabold uppercase tracking-[0.02em] text-white">ESIC</span>
             <span class="text-[1.1rem] font-light text-white/50">×</span>
             <img src={AB_LOGO} alt="Action Black" class="h-9 w-auto" loading="eager" />
           </div>
 
-          <h1 class="mb-6 max-w-[820px] font-display text-[clamp(3.4rem,8vw,7.5rem)] font-extrabold uppercase leading-[0.94] tracking-[-0.01em]">
-            El mejor gimnasio del mundo <span class="text-[#0047E9]">busca a los próximos líderes</span> de ESIC
+          <h1 class="dje-kinetic mb-6 max-w-[820px] font-display text-[clamp(3.4rem,8vw,7.5rem)] font-extrabold uppercase leading-[0.94] tracking-[-0.01em]">
+            {HEADLINE.map((w, i) => (
+              <span class={isBlue(i) ? "text-[#5B8AFF]" : ""} style={`animation-delay:${i * 0.1}s`}>{w}&nbsp;</span>
+            ))}
           </h1>
 
           <p class="mb-4 max-w-[560px] text-[clamp(1rem,1.6vw,1.15rem)] leading-[1.7] text-white/[0.72]">
             Desafío Junior Empresarial × Action Black. Arma tu equipo, resuelve el reto y gánate una beca real.
           </p>
 
-          <p class="mb-8 text-[0.85rem] font-bold uppercase tracking-[0.14em] text-[#FF9600]">
-            Hecho para ti, que todavía estás en el colegio
-          </p>
+          <p class="mb-9 dje-kicker-line">Hecho para ti, que todavía estás en el colegio</p>
 
-          <!-- Badges -->
-          <div class="mb-10 flex flex-wrap gap-3">
-            <span class="rounded-full bg-white/[0.08] px-5 py-[0.6rem] text-[0.82rem] font-bold uppercase tracking-[0.1em] text-white backdrop-blur-sm">12 sep · 8am–1pm</span>
-            <span class="rounded-full bg-white/[0.08] px-5 py-[0.6rem] text-[0.82rem] font-bold uppercase tracking-[0.1em] text-white backdrop-blur-sm">Becas del 50% y 20%</span>
+          <div class="mb-10 flex flex-wrap gap-x-8 gap-y-3">
+            <span class="dje-datum">12 sep · 8am–1pm</span>
+            <span class="dje-datum">Becas del 50% y 20%</span>
           </div>
 
           <a
@@ -126,11 +130,11 @@ const arrowIcon = `<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 
       </Container>
     </section>
 
-    <!-- ── QUÉ ES ── -->
+    <!-- ── QUÉ ES — borde luminoso ── -->
     <section class="relative z-[2] -mt-[50px] rounded-t-[50px] bg-[#111214] py-20 md:py-24">
       <Container class="max-w-[1100px]">
-        <div class="mx-auto max-w-[760px] text-center">
-          <span class="mb-3.5 inline-block text-[0.78rem] font-bold uppercase tracking-[0.18em] text-[#FF9600]">¿Qué es el desafío?</span>
+        <div class="dje-reveal mx-auto max-w-[760px] text-center">
+          <span class="dje-kicker-line mx-auto mb-4 justify-center">¿Qué es el desafío?</span>
           <h2 class="mb-6 font-display text-[clamp(2.4rem,5.5vw,4rem)] font-extrabold uppercase leading-[1] text-white">
             El reto de negocios más real antes de la universidad
           </h2>
@@ -141,29 +145,25 @@ const arrowIcon = `<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 
           </p>
         </div>
 
-        <!-- Pasos -->
-        <div class="mt-14 grid grid-cols-1 gap-5 md:grid-cols-3">
-          {steps.map((s) => (
-            <div class="dje-card flex flex-col gap-4 rounded-[22px] border border-white/[0.08] bg-white/[0.03] p-8 transition-all">
-              <div class="flex items-center justify-between">
-                <div class="grid h-12 w-12 place-items-center rounded-[12px] bg-[rgba(0,71,233,0.18)] text-[#5B8AFF]">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6" set:html={s.icon} />
-                </div>
-                <span class="font-display text-[2rem] font-extrabold text-white/[0.14]">{s.num}</span>
+        <div class="dje-reveal mt-14 grid grid-cols-1 gap-5 md:grid-cols-3">
+          {steps.map((s, i) => (
+            <div class="dje-mb-card" style={`animation-delay:-${i}s`}>
+              <div class="dje-mb-inner flex h-full flex-col gap-3 p-7">
+                <span class="font-display text-[1.8rem] font-extrabold text-white/[0.16]">{s.num}</span>
+                <h3 class="font-display text-[1.6rem] font-extrabold uppercase leading-[1.05] text-white">{s.title}</h3>
+                <p class="text-[0.98rem] leading-[1.6] text-white/[0.62]">{s.body}</p>
               </div>
-              <h3 class="font-display text-[1.6rem] font-extrabold uppercase leading-[1.05] text-white">{s.title}</h3>
-              <p class="text-[0.98rem] leading-[1.6] text-white/[0.62]">{s.body}</p>
             </div>
           ))}
         </div>
       </Container>
     </section>
 
-    <!-- ── PREMIOS ── -->
+    <!-- ── PREMIOS — contador animado ── -->
     <section class="relative z-[3] -mt-[50px] rounded-t-[50px] bg-[#0A0A0A] py-20 md:py-24">
       <Container class="max-w-[1100px]">
-        <div class="mb-12 text-center">
-          <span class="mb-3.5 inline-block text-[0.78rem] font-bold uppercase tracking-[0.18em] text-[#FF9600]">Premios</span>
+        <div class="dje-reveal mb-12 text-center">
+          <span class="dje-kicker-line mx-auto mb-4 justify-center">Premios</span>
           <h2 class="font-display text-[clamp(2.4rem,5.5vw,4rem)] font-extrabold uppercase leading-[1] text-white">
             Becas reales para tu primer año
           </h2>
@@ -173,19 +173,17 @@ const arrowIcon = `<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 
           </p>
         </div>
 
-        <div class="mx-auto grid max-w-[900px] grid-cols-1 gap-6 md:grid-cols-2">
-          <!-- 1er puesto -->
-          <div class="dje-card relative overflow-hidden rounded-[24px] border border-[rgba(0,71,233,0.5)] bg-[linear-gradient(150deg,rgba(0,71,233,0.22)_0%,rgba(10,10,10,0.4)_60%)] p-9 transition-all">
+        <div class="dje-reveal mx-auto grid max-w-[900px] grid-cols-1 gap-6 md:grid-cols-2">
+          <div class="relative overflow-hidden rounded-[24px] border border-[rgba(0,71,233,0.5)] bg-[linear-gradient(150deg,rgba(0,71,233,0.22)_0%,rgba(10,10,10,0.4)_60%)] p-9">
             <span class="mb-2 block text-[0.78rem] font-bold uppercase tracking-[0.2em] text-[#5B8AFF]">1er puesto</span>
-            <div class="mb-3 font-display text-[clamp(4.5rem,9vw,6.5rem)] font-extrabold leading-none text-white">50<span class="text-[#0047E9]">%</span></div>
+            <div class="mb-3 font-display text-[clamp(4.5rem,9vw,6.5rem)] font-extrabold leading-none text-white"><span class="dje-tick" data-to="50">0</span><span class="text-[#0047E9]">%</span></div>
             <p class="text-[1rem] leading-[1.6] text-white/[0.72]">
               Beca del 50% para el primer año de pregrado en ESIC, para <strong class="text-white">cada integrante</strong> del equipo ganador.
             </p>
           </div>
-          <!-- 2do puesto -->
-          <div class="dje-card relative overflow-hidden rounded-[24px] border border-[rgba(255,150,0,0.45)] bg-[linear-gradient(150deg,rgba(255,150,0,0.16)_0%,rgba(10,10,10,0.4)_60%)] p-9 transition-all">
+          <div class="relative overflow-hidden rounded-[24px] border border-[rgba(255,150,0,0.45)] bg-[linear-gradient(150deg,rgba(255,150,0,0.16)_0%,rgba(10,10,10,0.4)_60%)] p-9">
             <span class="mb-2 block text-[0.78rem] font-bold uppercase tracking-[0.2em] text-[#FF9600]">2do puesto</span>
-            <div class="mb-3 font-display text-[clamp(4.5rem,9vw,6.5rem)] font-extrabold leading-none text-white">20<span class="text-[#FF9600]">%</span></div>
+            <div class="mb-3 font-display text-[clamp(4.5rem,9vw,6.5rem)] font-extrabold leading-none text-white"><span class="dje-tick" data-to="20">0</span><span class="text-[#FF9600]">%</span></div>
             <p class="text-[1rem] leading-[1.6] text-white/[0.72]">
               Beca del 20% para el primer año de pregrado en ESIC, para <strong class="text-white">cada integrante</strong> del equipo.
             </p>
@@ -194,11 +192,11 @@ const arrowIcon = `<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 
       </Container>
     </section>
 
-    <!-- ── FECHA Y LUGAR ── -->
+    <!-- ── FECHA Y LUGAR — countdown ── -->
     <section class="relative z-[4] -mt-[50px] rounded-t-[50px] bg-[#111214] py-20 md:py-24">
       <Container class="max-w-[1100px]">
-        <div class="mb-12 text-center">
-          <span class="mb-3.5 inline-block text-[0.78rem] font-bold uppercase tracking-[0.18em] text-[#FF9600]">Fecha y lugar</span>
+        <div class="dje-reveal mb-12 text-center">
+          <span class="dje-kicker-line mx-auto mb-4 justify-center">Fecha y lugar</span>
           <h2 class="font-display text-[clamp(2.4rem,5.5vw,4rem)] font-extrabold uppercase leading-[1] text-white">
             Una jornada completa
           </h2>
@@ -207,9 +205,18 @@ const arrowIcon = `<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 
           </p>
         </div>
 
-        <div class="mx-auto grid max-w-[980px] grid-cols-1 gap-[1.1rem] min-[520px]:grid-cols-2 md:grid-cols-4">
+        <div class="dje-reveal mx-auto mb-12 flex max-w-[640px] items-stretch justify-center gap-3.5 md:gap-4" id="dje-cd" data-target="2026-09-12T08:00:00-05:00">
+          {["Días", "Horas", "Min", "Seg"].map((l) => (
+            <div class="min-w-[86px] flex-1 rounded-[16px] border border-white/[0.12] bg-white/[0.05] px-2 py-4 text-center md:min-w-[104px]">
+              <div class="dje-cd-n font-display text-[clamp(2.4rem,5vw,3.2rem)] font-extrabold leading-none text-white">—</div>
+              <div class="mt-1.5 text-[0.7rem] font-bold uppercase tracking-[0.18em] text-white/[0.5]">{l}</div>
+            </div>
+          ))}
+        </div>
+
+        <div class="dje-reveal mx-auto grid max-w-[980px] grid-cols-1 gap-[1.1rem] min-[520px]:grid-cols-2 md:grid-cols-4">
           {infoItems.map((it) => (
-            <div class="dje-card rounded-[18px] border border-white/[0.08] bg-white/[0.03] p-6 transition-all">
+            <div class="rounded-[18px] border border-white/[0.08] bg-white/[0.03] p-6 transition-all hover:-translate-y-1 hover:border-white/[0.18]">
               <div class="mb-4 grid h-11 w-11 place-items-center rounded-[11px] bg-[rgba(255,150,0,0.14)] text-[#FF9600]">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-[22px] w-[22px]" set:html={it.icon} />
               </div>
@@ -221,19 +228,31 @@ const arrowIcon = `<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 
       </Container>
     </section>
 
-    <!-- ── QUIÉN PUEDE PARTICIPAR ── -->
-    <section class="relative z-[5] -mt-[50px] rounded-t-[50px] bg-[#0A0A0A] py-20 md:py-24">
+    <!-- ── QUIÉN PARTICIPA — marquee ── -->
+    <section class="relative z-[5] -mt-[50px] overflow-hidden rounded-t-[50px] bg-[#0A0A0A] py-20 md:py-24">
       <Container class="max-w-[1100px]">
-        <div class="mb-12 text-center">
-          <span class="mb-3.5 inline-block text-[0.78rem] font-bold uppercase tracking-[0.18em] text-[#FF9600]">¿Quién puede participar?</span>
+        <div class="dje-reveal mb-10 text-center">
+          <span class="dje-kicker-line mx-auto mb-4 justify-center">¿Quién puede participar?</span>
           <h2 class="font-display text-[clamp(2.4rem,5.5vw,4rem)] font-extrabold uppercase leading-[1] text-white">
-            Solo para los del uniforme
+            Hecho para los que vienen del colegio
           </h2>
         </div>
+      </Container>
 
-        <div class="mx-auto grid max-w-[820px] grid-cols-1 gap-[1rem] md:grid-cols-2">
+      <div class="dje-marquee mb-12 py-2" aria-hidden="true">
+        <div class="dje-mq">
+          {[0, 1].map(() =>
+            MARQUEE.map((f, i) => (
+              <span class={i % 2 === 1 ? "dje-mq-fill" : ""}>{f}</span>
+            ))
+          )}
+        </div>
+      </div>
+
+      <Container class="max-w-[1100px]">
+        <div class="dje-reveal mx-auto grid max-w-[820px] grid-cols-1 gap-[1rem] md:grid-cols-2">
           {requisitos.map((r) => (
-            <div class="dje-card flex items-start gap-4 rounded-[16px] border border-white/[0.08] bg-white/[0.03] p-[1.4rem_1.5rem] transition-all">
+            <div class="flex items-start gap-4 rounded-[16px] border border-white/[0.08] bg-white/[0.03] p-[1.4rem_1.5rem] transition-all hover:-translate-y-1 hover:border-white/[0.18]">
               <span class="mt-[0.1rem] grid h-8 w-8 flex-none place-items-center rounded-full bg-[rgba(0,71,233,0.18)] text-[#5B8AFF]">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" set:html={checkIcon} />
               </span>
@@ -244,21 +263,32 @@ const arrowIcon = `<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 
       </Container>
     </section>
 
-    <!-- ── INSCRIPCIÓN ── -->
+    <!-- ── INSCRIPCIÓN — split con countdown ── -->
     <section id="inscripcion" class="relative z-[6] -mt-[50px] rounded-t-[50px] bg-[#0047E9] py-20 md:py-24">
-      <Container class="max-w-[1100px]">
-        <div class="mb-10 text-center">
-          <span class="mb-3.5 inline-block text-[0.78rem] font-bold uppercase tracking-[0.18em] text-white/[0.75]">Inscripciones abiertas</span>
-          <h2 class="font-display text-[clamp(2.4rem,5.5vw,4rem)] font-extrabold uppercase leading-[1] text-white">
-            Postúlate antes de que se llenen los cupos
-          </h2>
-          <p class="mx-auto mt-3 max-w-[560px] text-[1.05rem] leading-[1.65] text-white/[0.85]">
-            Diligencia el formulario y te confirmaremos tu participación por correo y WhatsApp. Cupos limitados.
-          </p>
-        </div>
+      <Container class="max-w-[1140px]">
+        <div class="grid grid-cols-1 items-start gap-12 lg:grid-cols-[1fr_1.15fr]">
+          <!-- Columna premio + countdown -->
+          <div class="dje-reveal flex flex-col gap-6 lg:sticky lg:top-28">
+            <span class="dje-kicker-line !text-white/[0.85]" style="--kline: rgba(255,255,255,0.85);">Inscripciones abiertas</span>
+            <h2 class="font-display text-[clamp(2.8rem,5.5vw,4.6rem)] font-extrabold uppercase leading-[0.96] text-white">
+              Gánate el <span class="text-[#FF9600]">50%</span> de tu primer año
+            </h2>
+            <p class="max-w-[440px] text-[1.05rem] leading-[1.65] text-white/[0.85]">
+              Diligencia el formulario y te confirmaremos tu participación por correo y WhatsApp. Cupos limitados.
+            </p>
+            <div class="flex gap-2.5" id="dje-cd-mini" data-target="2026-09-12T08:00:00-05:00">
+              {["Días", "Hrs", "Min"].map((l) => (
+                <div class="min-w-[74px] rounded-[12px] border border-white/[0.25] bg-white/[0.1] px-3 py-2.5 text-center">
+                  <div class="dje-cd-n font-display text-[1.7rem] font-extrabold leading-none text-white">—</div>
+                  <div class="mt-0.5 text-[0.6rem] font-bold uppercase tracking-[0.14em] text-white/[0.6]">{l}</div>
+                </div>
+              ))}
+            </div>
+            <p class="text-[0.85rem] font-bold uppercase tracking-[0.12em] text-white/[0.65]">12 de septiembre · Campus ESIC Medellín</p>
+          </div>
 
-        <!-- Formulario Zoho (nativo, estilizado) -->
-        <div class="dje-form mx-auto max-w-[720px] rounded-[24px] bg-white p-8 shadow-[0_24px_60px_rgba(0,19,63,0.35)] md:p-10">
+          <!-- Formulario -->
+          <div class="dje-reveal rounded-[24px] bg-white p-8 shadow-[0_24px_60px_rgba(0,19,63,0.35)] md:p-10">
           <form
             action={FORM_ACTION}
             name="form"
@@ -368,33 +398,180 @@ const arrowIcon = `<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-[18px] w-[18px]" set:html={arrowIcon} />
             </button>
           </form>
+          </div>
         </div>
-
-        <script is:inline>
-          // Autollenar UTM desde la URL (mismo patrón del formulario global)
-          (function () {
-            var params = new URLSearchParams(window.location.search);
-            var form = document.getElementById("dje-form");
-            if (!form) return;
-            ["utm_source","utm_medium","utm_campaign","utm_term","utm_content","utm_adset_name","utm_ad_name"].forEach(function (k) {
-              var v = params.get(k);
-              if (v) {
-                var input = form.querySelector('input[name="' + k + '"]');
-                if (input) input.value = v;
-              }
-            });
-          })();
-        </script>
       </Container>
     </section>
   </main>
 </Layout>
 
+<script is:inline>
+  (function () {
+    var params = new URLSearchParams(window.location.search);
+    var form = document.getElementById("dje-form");
+    if (form) {
+      ["utm_source","utm_medium","utm_campaign","utm_term","utm_content","utm_adset_name","utm_ad_name"].forEach(function (k) {
+        var v = params.get(k);
+        if (v) {
+          var input = form.querySelector('input[name="' + k + '"]');
+          if (input) input.value = v;
+        }
+      });
+    }
+
+    function tickCountdown(el) {
+      var target = new Date(el.dataset.target).getTime();
+      var cells = el.querySelectorAll(".dje-cd-n");
+      function upd() {
+        var d = Math.max(0, target - Date.now()) / 1000;
+        var vals = [Math.floor(d / 86400), Math.floor(d / 3600 % 24), Math.floor(d / 60 % 60), Math.floor(d % 60)];
+        cells.forEach(function (c, i) {
+          c.textContent = i === 0 ? String(vals[0]) : String(vals[i]).padStart(2, "0");
+        });
+      }
+      upd();
+      setInterval(upd, 1000);
+    }
+    document.querySelectorAll("#dje-cd, #dje-cd-mini").forEach(tickCountdown);
+
+    var ticked = false;
+    var tickObs = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting || ticked) return;
+        ticked = true;
+        document.querySelectorAll(".dje-tick").forEach(function (el) {
+          var to = +el.dataset.to;
+          var t0 = performance.now();
+          function step(t) {
+            var p = Math.min((t - t0) / 1400, 1);
+            el.textContent = Math.round(to * (1 - Math.pow(1 - p, 3)));
+            if (p < 1) requestAnimationFrame(step);
+          }
+          requestAnimationFrame(step);
+        });
+      });
+    }, { threshold: 0.4 });
+    var firstTick = document.querySelector(".dje-tick");
+    if (firstTick) tickObs.observe(firstTick.closest("section") || firstTick);
+
+    var revObs = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add("dje-in"); revObs.unobserve(e.target); }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll(".dje-reveal").forEach(function (el) { revObs.observe(el); });
+  })();
+</script>
+
 <style>
-  .esic-dje .dje-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(255, 255, 255, 0.18);
+  .dje-kicker {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #fff;
   }
+  .dje-kicker-line {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: #ff9600;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  .dje-kicker-line::before {
+    content: "";
+    width: 34px;
+    height: 2px;
+    background: var(--kline, #ff9600);
+  }
+  .dje-datum {
+    font-family: var(--font-display);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 1.35rem;
+    letter-spacing: 0.03em;
+    color: #fff;
+    border-bottom: 2px solid #ff9600;
+    padding-bottom: 2px;
+  }
+
+  .dje-kinetic span {
+    display: inline-block;
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(18px);
+    animation: dje-kin 0.7s forwards;
+  }
+  @keyframes dje-kin {
+    to { opacity: 1; filter: blur(0); transform: none; }
+  }
+
+  @property --dje-a {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
+  .dje-mb-card {
+    position: relative;
+    border-radius: 18px;
+    padding: 2px;
+    background: conic-gradient(from var(--dje-a, 0deg), rgba(255,255,255,0.07) 0 300deg, #0047e9 330deg, #ff9600 350deg, rgba(255,255,255,0.07) 360deg);
+    animation: dje-spin 3.4s linear infinite;
+  }
+  @keyframes dje-spin {
+    to { --dje-a: 360deg; }
+  }
+  .dje-mb-inner {
+    background: #16171a;
+    border-radius: 16px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .dje-mb-card { animation: none; }
+    .dje-kinetic span { animation-duration: 0.01s; }
+  }
+
+  .dje-marquee { overflow: hidden; }
+  .dje-mq {
+    display: flex;
+    gap: 44px;
+    width: max-content;
+    white-space: nowrap;
+    animation: dje-mq 26s linear infinite;
+  }
+  .dje-mq span {
+    font-family: var(--font-display);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: clamp(1.9rem, 4vw, 2.8rem);
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.45);
+  }
+  .dje-mq span.dje-mq-fill {
+    color: #ff9600;
+    -webkit-text-stroke: 0;
+  }
+  @keyframes dje-mq {
+    to { transform: translateX(-50%); }
+  }
+
+  .dje-reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .dje-reveal.dje-in {
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .dje-reveal { opacity: 1; transform: none; transition: none; }
+    .dje-mq { animation-duration: 60s; }
+  }
+
   .esic-dje .dje-input {
     width: 100%;
     border: 1.5px solid rgba(0, 19, 63, 0.16);
