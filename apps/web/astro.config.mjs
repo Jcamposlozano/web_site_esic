@@ -16,6 +16,12 @@ export default defineConfig({
     format: 'directory',
   },
   trailingSlash: 'ignore',
+  // El QR impreso del DJE × Action Black apunta a la URL de la edición Hatsu;
+  // ambas rutas cortas llevan a la landing vigente del desafío.
+  redirects: {
+    '/desafio-junior-empresarial-hatsu': '/desafio-junior-empresarial',
+    '/dje': '/desafio-junior-empresarial',
+  },
   integrations: [
     react(),
     sitemap({

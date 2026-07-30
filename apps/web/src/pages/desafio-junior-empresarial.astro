@@ -1,0 +1,279 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Container from "../components/Container.astro";
+import { asset } from "../lib/assets";
+
+const title = "Desafío Junior Empresarial × Action Black — ESIC Medellín";
+const description =
+  "El mejor gimnasio del mundo busca a los próximos líderes de ESIC. Arma tu equipo, resuelve el reto real de Action Black y gánate una beca de hasta el 50% para tu primer año. 12 de septiembre, campus ESIC Medellín.";
+
+// TODO: reemplazar por el formulario Zoho definitivo de esta edición
+const FORM_URL = "#inscripcion";
+
+const AB_LOGO = asset("dje/action-black-logo-white.svg");
+const HERO_PHOTO = asset("dje/hero-action-black.webp");
+
+const steps = [
+  {
+    num: "01",
+    title: "Arma tu equipo",
+    body: "Solo o con hasta 4 integrantes. ¿No tienes con quién? Desde ESIC te ayudamos a armar tu equipo.",
+    icon: `<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>`,
+  },
+  {
+    num: "02",
+    title: "Resuelve el reto real",
+    body: "Un caso real de Action Black, el mejor gimnasio del mundo. Ideas, estrategia y ejecución en un solo día.",
+    icon: `<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>`,
+  },
+  {
+    num: "03",
+    title: "Gánate la beca",
+    body: "1er puesto: beca del 50%. 2do puesto: beca del 20%. Para el primer año de pregrado en ESIC, para cada integrante.",
+    icon: `<path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>`,
+  },
+];
+
+const infoItems = [
+  {
+    label: "Fecha",
+    value: "Viernes 12 de septiembre",
+    icon: `<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>`,
+  },
+  {
+    label: "Horario",
+    value: "8:00 a.m. — 1:00 p.m.",
+    icon: `<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>`,
+  },
+  {
+    label: "Lugar",
+    value: "Campus ESIC Medellín · Mall La Reserva",
+    icon: `<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>`,
+  },
+  {
+    label: "Experiencia",
+    value: "Action Black en vivo dentro del campus",
+    icon: `<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>`,
+  },
+];
+
+const requisitos = [
+  "Exclusivo para estudiantes de colegio de los grados 10, 11 y 12",
+  "Participa solo o en equipos de máximo 4 personas",
+  "Si no tienes equipo, desde ESIC te lo armamos",
+  "No aplica para estudiantes de pregrado, posgrado ni programas ejecutivos",
+];
+
+const checkIcon = `<polyline points="20 6 9 17 4 12"/>`;
+const arrowIcon = `<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>`;
+---
+<Layout title={title} description={description} fullBleed>
+  <main class="esic-dje bg-[#0A0A0A] text-white">
+    <!-- ── HERO ── -->
+    <section class="dje-hero relative isolate flex min-h-[92vh] items-center overflow-hidden bg-[#0A0A0A]">
+      <!-- Foto de fondo -->
+      <div class="absolute inset-0 z-0">
+        <img
+          src={HERO_PHOTO}
+          alt="Entrenamiento en Action Black"
+          class="h-full w-full object-cover object-center"
+          loading="eager"
+          fetchpriority="high"
+        />
+        <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.72)_0%,rgba(0,0,0,0.55)_45%,rgba(10,10,10,0.96)_100%)]"></div>
+      </div>
+
+      <Container class="relative z-[2] max-w-[1140px]">
+        <div class="flex flex-col items-start py-32 md:py-36">
+          <!-- Kicker -->
+          <span class="mb-5 inline-block rounded-full border border-[#FF9600] px-4 py-[0.45rem] text-[0.72rem] font-bold uppercase tracking-[0.24em] text-[#FF9600]">
+            Desafío Junior Empresarial
+          </span>
+
+          <!-- Lockup -->
+          <div class="mb-7 flex items-center gap-4">
+            <span class="font-display text-[1.35rem] font-extrabold uppercase tracking-[0.02em] text-white">ESIC</span>
+            <span class="text-[1.1rem] font-light text-white/50">×</span>
+            <img src={AB_LOGO} alt="Action Black" class="h-9 w-auto" loading="eager" />
+          </div>
+
+          <h1 class="mb-6 max-w-[820px] font-display text-[clamp(3.4rem,8vw,7.5rem)] font-extrabold uppercase leading-[0.94] tracking-[-0.01em]">
+            El mejor gimnasio del mundo <span class="text-[#0047E9]">busca a los próximos líderes</span> de ESIC
+          </h1>
+
+          <p class="mb-4 max-w-[560px] text-[clamp(1rem,1.6vw,1.15rem)] leading-[1.7] text-white/[0.72]">
+            Desafío Junior Empresarial × Action Black. Arma tu equipo, resuelve el reto y gánate una beca real.
+          </p>
+
+          <p class="mb-8 text-[0.85rem] font-bold uppercase tracking-[0.14em] text-[#FF9600]">
+            Hecho para ti, que todavía estás en el colegio
+          </p>
+
+          <!-- Badges -->
+          <div class="mb-10 flex flex-wrap gap-3">
+            <span class="rounded-full bg-white/[0.08] px-5 py-[0.6rem] text-[0.82rem] font-bold uppercase tracking-[0.1em] text-white backdrop-blur-sm">12 sep · 8am–1pm</span>
+            <span class="rounded-full bg-white/[0.08] px-5 py-[0.6rem] text-[0.82rem] font-bold uppercase tracking-[0.1em] text-white backdrop-blur-sm">Becas del 50% y 20%</span>
+          </div>
+
+          <a
+            href="#inscripcion"
+            class="inline-flex items-center justify-center gap-2.5 rounded-full border-2 border-[#0047E9] bg-[#0047E9] px-[2.6rem] py-[1.15rem] text-[0.9rem] font-bold uppercase tracking-[0.08em] text-white no-underline transition-all hover:-translate-y-0.5 hover:border-[#0038B8] hover:bg-[#0038B8]"
+          >
+            Postúlate ahora
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-[18px] w-[18px]" set:html={arrowIcon} />
+          </a>
+        </div>
+      </Container>
+    </section>
+
+    <!-- ── QUÉ ES ── -->
+    <section class="relative z-[2] -mt-[50px] rounded-t-[50px] bg-[#111214] py-20 md:py-24">
+      <Container class="max-w-[1100px]">
+        <div class="mx-auto max-w-[760px] text-center">
+          <span class="mb-3.5 inline-block text-[0.78rem] font-bold uppercase tracking-[0.18em] text-[#FF9600]">¿Qué es el desafío?</span>
+          <h2 class="mb-6 font-display text-[clamp(2.4rem,5.5vw,4rem)] font-extrabold uppercase leading-[1] text-white">
+            El reto de negocios más real antes de la universidad
+          </h2>
+          <p class="text-[clamp(1rem,1.5vw,1.12rem)] leading-[1.8] text-white/[0.68]">
+            El Desafío Junior Empresarial es el reto de negocios más real que vas a vivir antes de la universidad.
+            Esta vez lo pone <strong class="text-white">Action Black, el mejor gimnasio del mundo</strong>: tú y tu
+            equipo van a resolver un caso real de una marca real. Si no tienes equipo, desde ESIC te ayudamos a armarlo.
+          </p>
+        </div>
+
+        <!-- Pasos -->
+        <div class="mt-14 grid grid-cols-1 gap-5 md:grid-cols-3">
+          {steps.map((s) => (
+            <div class="dje-card flex flex-col gap-4 rounded-[22px] border border-white/[0.08] bg-white/[0.03] p-8 transition-all">
+              <div class="flex items-center justify-between">
+                <div class="grid h-12 w-12 place-items-center rounded-[12px] bg-[rgba(0,71,233,0.18)] text-[#5B8AFF]">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6" set:html={s.icon} />
+                </div>
+                <span class="font-display text-[2rem] font-extrabold text-white/[0.14]">{s.num}</span>
+              </div>
+              <h3 class="font-display text-[1.6rem] font-extrabold uppercase leading-[1.05] text-white">{s.title}</h3>
+              <p class="text-[0.98rem] leading-[1.6] text-white/[0.62]">{s.body}</p>
+            </div>
+          ))}
+        </div>
+      </Container>
+    </section>
+
+    <!-- ── PREMIOS ── -->
+    <section class="relative z-[3] -mt-[50px] rounded-t-[50px] bg-[#0A0A0A] py-20 md:py-24">
+      <Container class="max-w-[1100px]">
+        <div class="mb-12 text-center">
+          <span class="mb-3.5 inline-block text-[0.78rem] font-bold uppercase tracking-[0.18em] text-[#FF9600]">Premios</span>
+          <h2 class="font-display text-[clamp(2.4rem,5.5vw,4rem)] font-extrabold uppercase leading-[1] text-white">
+            Becas reales para tu primer año
+          </h2>
+          <p class="mx-auto mt-3 max-w-[620px] text-[1.02rem] leading-[1.65] text-white/[0.62]">
+            Aplican para el primer año en los pregrados en doble titulación de ESIC Medellín:
+            Digital Business y Dirección de Marketing Global.
+          </p>
+        </div>
+
+        <div class="mx-auto grid max-w-[900px] grid-cols-1 gap-6 md:grid-cols-2">
+          <!-- 1er puesto -->
+          <div class="dje-card relative overflow-hidden rounded-[24px] border border-[rgba(0,71,233,0.5)] bg-[linear-gradient(150deg,rgba(0,71,233,0.22)_0%,rgba(10,10,10,0.4)_60%)] p-9 transition-all">
+            <span class="mb-2 block text-[0.78rem] font-bold uppercase tracking-[0.2em] text-[#5B8AFF]">1er puesto</span>
+            <div class="mb-3 font-display text-[clamp(4.5rem,9vw,6.5rem)] font-extrabold leading-none text-white">50<span class="text-[#0047E9]">%</span></div>
+            <p class="text-[1rem] leading-[1.6] text-white/[0.72]">
+              Beca del 50% para el primer año de pregrado en ESIC, para <strong class="text-white">cada integrante</strong> del equipo ganador.
+            </p>
+          </div>
+          <!-- 2do puesto -->
+          <div class="dje-card relative overflow-hidden rounded-[24px] border border-[rgba(255,150,0,0.45)] bg-[linear-gradient(150deg,rgba(255,150,0,0.16)_0%,rgba(10,10,10,0.4)_60%)] p-9 transition-all">
+            <span class="mb-2 block text-[0.78rem] font-bold uppercase tracking-[0.2em] text-[#FF9600]">2do puesto</span>
+            <div class="mb-3 font-display text-[clamp(4.5rem,9vw,6.5rem)] font-extrabold leading-none text-white">20<span class="text-[#FF9600]">%</span></div>
+            <p class="text-[1rem] leading-[1.6] text-white/[0.72]">
+              Beca del 20% para el primer año de pregrado en ESIC, para <strong class="text-white">cada integrante</strong> del equipo.
+            </p>
+          </div>
+        </div>
+      </Container>
+    </section>
+
+    <!-- ── FECHA Y LUGAR ── -->
+    <section class="relative z-[4] -mt-[50px] rounded-t-[50px] bg-[#111214] py-20 md:py-24">
+      <Container class="max-w-[1100px]">
+        <div class="mb-12 text-center">
+          <span class="mb-3.5 inline-block text-[0.78rem] font-bold uppercase tracking-[0.18em] text-[#FF9600]">Fecha y lugar</span>
+          <h2 class="font-display text-[clamp(2.4rem,5.5vw,4rem)] font-extrabold uppercase leading-[1] text-white">
+            Una jornada completa
+          </h2>
+          <p class="mx-auto mt-3 max-w-[620px] text-[1.02rem] leading-[1.65] text-white/[0.62]">
+            Con una experiencia de marca de Action Black en vivo dentro del campus: zona de activación, música y energía.
+          </p>
+        </div>
+
+        <div class="mx-auto grid max-w-[980px] grid-cols-1 gap-[1.1rem] min-[520px]:grid-cols-2 md:grid-cols-4">
+          {infoItems.map((it) => (
+            <div class="dje-card rounded-[18px] border border-white/[0.08] bg-white/[0.03] p-6 transition-all">
+              <div class="mb-4 grid h-11 w-11 place-items-center rounded-[11px] bg-[rgba(255,150,0,0.14)] text-[#FF9600]">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-[22px] w-[22px]" set:html={it.icon} />
+              </div>
+              <span class="mb-1 block text-[0.72rem] font-bold uppercase tracking-[0.16em] text-white/[0.45]">{it.label}</span>
+              <p class="font-display text-[1.25rem] font-bold uppercase leading-[1.15] text-white">{it.value}</p>
+            </div>
+          ))}
+        </div>
+      </Container>
+    </section>
+
+    <!-- ── QUIÉN PUEDE PARTICIPAR ── -->
+    <section class="relative z-[5] -mt-[50px] rounded-t-[50px] bg-[#0A0A0A] py-20 md:py-24">
+      <Container class="max-w-[1100px]">
+        <div class="mb-12 text-center">
+          <span class="mb-3.5 inline-block text-[0.78rem] font-bold uppercase tracking-[0.18em] text-[#FF9600]">¿Quién puede participar?</span>
+          <h2 class="font-display text-[clamp(2.4rem,5.5vw,4rem)] font-extrabold uppercase leading-[1] text-white">
+            Solo para los del uniforme
+          </h2>
+        </div>
+
+        <div class="mx-auto grid max-w-[820px] grid-cols-1 gap-[1rem] md:grid-cols-2">
+          {requisitos.map((r) => (
+            <div class="dje-card flex items-start gap-4 rounded-[16px] border border-white/[0.08] bg-white/[0.03] p-[1.4rem_1.5rem] transition-all">
+              <span class="mt-[0.1rem] grid h-8 w-8 flex-none place-items-center rounded-full bg-[rgba(0,71,233,0.18)] text-[#5B8AFF]">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" set:html={checkIcon} />
+              </span>
+              <p class="pt-[0.2rem] text-[1rem] font-medium leading-[1.5] text-white/[0.85]">{r}</p>
+            </div>
+          ))}
+        </div>
+      </Container>
+    </section>
+
+    <!-- ── INSCRIPCIÓN ── -->
+    <section id="inscripcion" class="relative z-[6] -mt-[50px] rounded-t-[50px] bg-[#0047E9] py-20 md:py-24">
+      <Container class="max-w-[1100px]">
+        <div class="mb-10 text-center">
+          <span class="mb-3.5 inline-block text-[0.78rem] font-bold uppercase tracking-[0.18em] text-white/[0.75]">Inscripciones abiertas</span>
+          <h2 class="font-display text-[clamp(2.4rem,5.5vw,4rem)] font-extrabold uppercase leading-[1] text-white">
+            Postúlate antes de que se llenen los cupos
+          </h2>
+          <p class="mx-auto mt-3 max-w-[560px] text-[1.05rem] leading-[1.65] text-white/[0.85]">
+            Diligencia el formulario y te confirmaremos tu participación por correo y WhatsApp. Cupos limitados.
+          </p>
+        </div>
+
+        <!-- Formulario Zoho embebido -->
+        <div class="dje-form mx-auto max-w-[760px] overflow-hidden rounded-[24px] bg-white shadow-[0_24px_60px_rgba(0,19,63,0.35)]">
+          <iframe
+            src={FORM_URL}
+            title="Formulario de inscripción — Desafío Junior Empresarial × Action Black"
+            class="block h-[720px] w-full border-0"
+            loading="lazy"
+          ></iframe>
+        </div>
+      </Container>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .esic-dje .dje-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.18);
+  }
+</style>
