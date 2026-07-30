@@ -7,8 +7,8 @@ const title = "Desafío Junior Empresarial × Action Black — ESIC Medellín";
 const description =
   "El mejor gimnasio del mundo busca a los próximos líderes de ESIC. Arma tu equipo, resuelve el reto real de Action Black y gánate una beca de hasta el 50% para tu primer año. 12 de septiembre, campus ESIC Medellín.";
 
-// TODO: reemplazar por el formulario Zoho definitivo de esta edición
-const FORM_URL = "#inscripcion";
+const FORM_ACTION =
+  "https://forms.zohopublic.com/esicmedellin/form/RegistrateenelDesafioJuniorEmpresarialESIC/formperma/NiOec1N0j5twOPruyoIuTLyE1n2AnU6OxgcnlCZu9cc/htmlRecords/submit";
 
 const AB_LOGO = asset("dje/action-black-logo-white.svg");
 const HERO_PHOTO = asset("dje/hero-action-black.webp");
@@ -257,15 +257,134 @@ const arrowIcon = `<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 
           </p>
         </div>
 
-        <!-- Formulario Zoho embebido -->
-        <div class="dje-form mx-auto max-w-[760px] overflow-hidden rounded-[24px] bg-white shadow-[0_24px_60px_rgba(0,19,63,0.35)]">
-          <iframe
-            src={FORM_URL}
-            title="Formulario de inscripción — Desafío Junior Empresarial × Action Black"
-            class="block h-[720px] w-full border-0"
-            loading="lazy"
-          ></iframe>
+        <!-- Formulario Zoho (nativo, estilizado) -->
+        <div class="dje-form mx-auto max-w-[720px] rounded-[24px] bg-white p-8 shadow-[0_24px_60px_rgba(0,19,63,0.35)] md:p-10">
+          <form
+            action={FORM_ACTION}
+            name="form"
+            id="dje-form"
+            method="POST"
+            accept-charset="UTF-8"
+            enctype="multipart/form-data"
+            class="flex flex-col gap-5"
+          >
+            <input type="hidden" name="zf_referrer_name" value="" />
+            <input type="hidden" name="zf_redirect_url" value="https://esic.co/gracias/" />
+            <input type="hidden" name="zc_gad" value="" />
+            <input type="hidden" name="utm_source" value="" />
+            <input type="hidden" name="utm_medium" value="" />
+            <input type="hidden" name="utm_campaign" value="" />
+            <input type="hidden" name="utm_term" value="" />
+            <input type="hidden" name="utm_content" value="" />
+            <input type="hidden" name="utm_adset_name" value="" />
+            <input type="hidden" name="utm_ad_name" value="" />
+
+            <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+              <div class="flex flex-col gap-1.5">
+                <label for="dje-nombre" class="text-[0.82rem] font-bold uppercase tracking-[0.08em] text-brand-blue-dark">Nombre <em class="text-[#E5484D] not-italic">*</em></label>
+                <input id="dje-nombre" type="text" maxlength="255" name="Name_First" required class="dje-input" placeholder="Tu nombre" />
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label for="dje-apellidos" class="text-[0.82rem] font-bold uppercase tracking-[0.08em] text-brand-blue-dark">Apellidos <em class="text-[#E5484D] not-italic">*</em></label>
+                <input id="dje-apellidos" type="text" maxlength="255" name="Name_Last" required class="dje-input" placeholder="Tus apellidos" />
+              </div>
+            </div>
+
+            <div class="flex flex-col gap-1.5">
+              <label for="dje-email" class="text-[0.82rem] font-bold uppercase tracking-[0.08em] text-brand-blue-dark">Correo electrónico <em class="text-[#E5484D] not-italic">*</em></label>
+              <input id="dje-email" type="email" maxlength="255" name="Email" required class="dje-input" placeholder="tucorreo@ejemplo.com" />
+            </div>
+
+            <div class="grid grid-cols-[110px_1fr] gap-4">
+              <div class="flex flex-col gap-1.5">
+                <label for="dje-codigo" class="text-[0.82rem] font-bold uppercase tracking-[0.08em] text-brand-blue-dark">Código</label>
+                <input id="dje-codigo" type="text" name="PhoneNumber_countrycodeval" maxlength="10" value="+57" class="dje-input" />
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label for="dje-telefono" class="text-[0.82rem] font-bold uppercase tracking-[0.08em] text-brand-blue-dark">Móvil o teléfono <em class="text-[#E5484D] not-italic">*</em></label>
+                <input id="dje-telefono" type="tel" name="PhoneNumber_countrycode" maxlength="20" required class="dje-input" placeholder="300 000 0000" />
+              </div>
+            </div>
+
+            <div class="flex flex-col gap-1.5">
+              <label for="dje-colegio" class="text-[0.82rem] font-bold uppercase tracking-[0.08em] text-brand-blue-dark">Institución educativa <em class="text-[#E5484D] not-italic">*</em></label>
+              <input id="dje-colegio" type="text" name="SingleLine4" maxlength="255" required class="dje-input" placeholder="Nombre de tu colegio" />
+            </div>
+
+            <div class="grid grid-cols-1 gap-5 md:grid-cols-3">
+              <div class="flex flex-col gap-1.5">
+                <label for="dje-grado" class="text-[0.82rem] font-bold uppercase tracking-[0.08em] text-brand-blue-dark">Grado <em class="text-[#E5484D] not-italic">*</em></label>
+                <select id="dje-grado" name="Dropdown" required class="dje-input">
+                  <option value="" selected disabled>Selecciona</option>
+                  <option value="Decimo">Décimo</option>
+                  <option value="Once">Once</option>
+                  <option value="Doce">Doce</option>
+                  <option value="Recién graduado">Recién graduado</option>
+                </select>
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label for="dje-programa" class="text-[0.82rem] font-bold uppercase tracking-[0.08em] text-brand-blue-dark">Programa de interés <em class="text-[#E5484D] not-italic">*</em></label>
+                <select id="dje-programa" name="Dropdown1" required class="dje-input">
+                  <option value="" selected disabled>Selecciona</option>
+                  <option value="Digital Buisiness">Digital Business</option>
+                  <option value="Dirección de Marketing Global">Dirección de Marketing Global</option>
+                </select>
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label for="dje-periodo" class="text-[0.82rem] font-bold uppercase tracking-[0.08em] text-brand-blue-dark">Periodo de interés <em class="text-[#E5484D] not-italic">*</em></label>
+                <select id="dje-periodo" name="Dropdown2" required class="dje-input">
+                  <option value="" selected disabled>Selecciona</option>
+                  <option value="2026-2">2026-2</option>
+                  <option value="2027-1">2027-1</option>
+                  <option value="2027-2">2027-2</option>
+                  <option value="2028-1">2028-1</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="mt-1 flex flex-col gap-3">
+              <label class="flex items-start gap-3 text-[0.88rem] leading-[1.5] text-ink-muted">
+                <input type="checkbox" name="DecisionBox2" required class="dje-check" />
+                <span>
+                  Acepto el <a href="https://esic.co/politicas-de-privacidad/" target="_blank" rel="noopener" class="font-semibold text-brand-blue underline">tratamiento de datos personales</a>
+                  por parte de ESIC Business &amp; Marketing School Campus Medellín – Prisma Colombia. <em class="text-[#E5484D] not-italic">*</em>
+                </span>
+              </label>
+              <label class="flex items-start gap-3 text-[0.88rem] leading-[1.5] text-ink-muted">
+                <input type="checkbox" name="DecisionBox" class="dje-check" />
+                <span>Deseo mantenerme informado a través de email y teléfono sobre novedades formativas, por ESIC Business &amp; Marketing School Campus Medellín.</span>
+              </label>
+              <label class="flex items-start gap-3 text-[0.88rem] leading-[1.5] text-ink-muted">
+                <input type="checkbox" name="DecisionBox1" class="dje-check" />
+                <span>Acepto que el emisor conozca si abro sus emails, desde qué dispositivos y cuándo, así como si interactúo con ellos, con la única finalidad de que pueda mejorar sus acciones comerciales.</span>
+              </label>
+            </div>
+
+            <button
+              type="submit"
+              class="mt-2 inline-flex items-center justify-center gap-2.5 rounded-full border-2 border-brand-blue bg-brand-blue px-[2.6rem] py-[1.15rem] text-[0.9rem] font-bold uppercase tracking-[0.08em] text-white transition-all hover:-translate-y-0.5 hover:border-brand-blue-dark hover:bg-brand-blue-dark"
+            >
+              Postularme al desafío
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-[18px] w-[18px]" set:html={arrowIcon} />
+            </button>
+          </form>
         </div>
+
+        <script is:inline>
+          // Autollenar UTM desde la URL (mismo patrón del formulario global)
+          (function () {
+            var params = new URLSearchParams(window.location.search);
+            var form = document.getElementById("dje-form");
+            if (!form) return;
+            ["utm_source","utm_medium","utm_campaign","utm_term","utm_content","utm_adset_name","utm_ad_name"].forEach(function (k) {
+              var v = params.get(k);
+              if (v) {
+                var input = form.querySelector('input[name="' + k + '"]');
+                if (input) input.value = v;
+              }
+            });
+          })();
+        </script>
       </Container>
     </section>
   </main>
@@ -275,5 +394,27 @@ const arrowIcon = `<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 
   .esic-dje .dje-card:hover {
     transform: translateY(-4px);
     border-color: rgba(255, 255, 255, 0.18);
+  }
+  .esic-dje .dje-input {
+    width: 100%;
+    border: 1.5px solid rgba(0, 19, 63, 0.16);
+    border-radius: 12px;
+    padding: 0.85rem 1rem;
+    font-size: 0.98rem;
+    color: var(--color-brand-blue-dark, #00133f);
+    background: #fff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .esic-dje .dje-input:focus {
+    outline: none;
+    border-color: var(--color-brand-blue, #0047e9);
+    box-shadow: 0 0 0 3px rgba(0, 71, 233, 0.14);
+  }
+  .esic-dje .dje-check {
+    margin-top: 0.2rem;
+    height: 1.05rem;
+    width: 1.05rem;
+    flex: none;
+    accent-color: var(--color-brand-blue, #0047e9);
   }
 </style>
