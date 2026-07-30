@@ -1,0 +1,130 @@
+{
+  "noticias": [
+    {
+      "id": "aprender-a-decidir-el-valor-de-los-casos-reales-en-el-aula",
+      "slug": "aprender-a-decidir-el-valor-de-los-casos-reales-en-el-aula",
+      "title": "Aprender a decidir: el valor de los casos reales en el aula",
+      "category": "blog",
+      "status": "published",
+      "author": "ESIC Medellín",
+      "excerpt": "Por qué el método del caso forma criterio: decidir con información incompleta, defender supuestos y aprender del error.",
+      "publishedAt": "2026-05-19T15:00:00.000Z",
+      "externalUrl": null,
+      "coverUrl": "https://prisma-fai-admin.s3.us-east-2.amazonaws.com/src/esic-website/imagenes/aprender-a-decidir-el-valor-de-los-casos-reales-en-el-aula.png",
+      "coverAlt": "Aprender a decidir: el valor de los casos reales en el aula",
+      "bodyHtml": "<p>En ESIC creemos que aprender a decidir es la competencia que más diferencia a un profesional. No basta con conocer la teoría: hay que ejercitarse en tomar decisiones con información incompleta, bajo presión y con consecuencias.</p><p>El método del caso pone al estudiante frente a situaciones reales de empresa. Allí no hay una única respuesta correcta; hay decisiones que se justifican, supuestos que se defienden y resultados que se evalúan con evidencia.</p><p>Esa práctica repetida construye criterio. Y el criterio, más que cualquier contenido, es lo que sostiene una carrera profesional a largo plazo.</p>",
+      "seo": {
+        "metaTitle": "Aprender a decidir: el valor de los casos reales en el aula",
+        "metaDescription": "Por qué el método del caso forma criterio: decidir con información incompleta, defender supuestos y aprender del error."
+      }
+    },
+    {
+      "id": "formar-criterio-directivo",
+      "slug": "formar-criterio-directivo",
+      "title": "Formar criterio directivo",
+      "category": "blog",
+      "status": "published",
+      "author": "ESIC Medellín",
+      "excerpt": "El criterio directivo no se memoriza: se entrena. Cómo lo desarrollamos en nuestros programas.",
+      "publishedAt": "2026-04-13T19:00:00.000Z",
+      "externalUrl": null,
+      "coverUrl": "https://prisma-fai-admin.s3.us-east-2.amazonaws.com/src/esic-website/imagenes/formar-criterio-directivo.png",
+      "coverAlt": "Formar criterio directivo",
+      "bodyHtml": "<p>El criterio directivo es la capacidad de leer un contexto, priorizar y decidir con responsabilidad sobre recursos y personas. No se transmite en una clase magistral; se entrena con práctica deliberada.</p><p>Por eso integramos retos reales, mentoría y trabajo por proyectos: para que cada participante ejercite el juicio que necesitará al frente de un equipo o de una organización.</p>",
+      "seo": {
+        "metaTitle": "Formar criterio directivo",
+        "metaDescription": "El criterio directivo no se memoriza: se entrena. Cómo lo desarrollamos en nuestros programas."
+      }
+    },
+    {
+      "id": "ser-o-no-ser-el-papel-de-la-pagina-web-en-2026",
+      "slug": "ser-o-no-ser-el-papel-de-la-pagina-web-en-2026",
+      "title": "Ser o no ser: el papel de la página web en 2026",
+      "category": "blog",
+      "status": "published",
+      "author": "ESIC Medellín",
+      "excerpt": "En plena era de plataformas e IA, ¿sigue siendo relevante el sitio web propio? Spoiler: más que nunca.",
+      "publishedAt": "2026-03-15T18:00:00.000Z",
+      "externalUrl": null,
+      "coverUrl": "https://prisma-fai-admin.s3.us-east-2.amazonaws.com/src/esic-website/imagenes/ser-o-no-ser-el-papel-de-la-pagina-web-en-2026.png",
+      "coverAlt": "Ser o no ser: el papel de la página web en 2026",
+      "bodyHtml": "<p>Con el auge de las plataformas y la inteligencia artificial, muchas marcas se preguntan si su página web sigue siendo necesaria. La respuesta es sí: el sitio propio es el único activo digital que controlas por completo.</p><p>Es tu casa en internet: donde defines la narrativa, mides el comportamiento real de tu audiencia y construyes relaciones que no dependen del algoritmo de un tercero.</p>",
+      "seo": {
+        "metaTitle": "Ser o no ser: el papel de la página web en 2026",
+        "metaDescription": "En plena era de plataformas e IA, ¿sigue siendo relevante el sitio web propio? Spoiler: más que nunca."
+      }
+    },
+    {
+      "id": "emprender-sin-fundar-una-startup-el-nuevo-perfil-del-profesional-emprendedor",
+      "slug": "emprender-sin-fundar-una-startup-el-nuevo-perfil-del-profesional-emprendedor",
+      "title": "Emprender sin fundar una startup: el nuevo perfil del profesional emprendedor",
+      "category": "blog",
+      "status": "published",
+      "author": "ESIC Medellín",
+      "excerpt": "Emprender ya no es solo crear empresa. Es una forma de trabajar: con iniciativa, criterio y ejecución.",
+      "publishedAt": "2026-02-16T16:00:00.000Z",
+      "externalUrl": null,
+      "coverUrl": "https://prisma-fai-admin.s3.us-east-2.amazonaws.com/src/esic-website/imagenes/emprender-sin-fundar-una-startup-el-nuevo-perfil-del-profesional-emprendedor.png",
+      "coverAlt": "Emprender sin fundar una startup: el nuevo perfil del profesional emprendedor",
+      "bodyHtml": "<p>Durante años, emprender fue sinónimo de fundar una startup. Hoy el concepto es más amplio: emprender es una manera de trabajar, dentro o fuera de una empresa.</p><p>El profesional emprendedor detecta oportunidades, asume responsabilidad sobre resultados y ejecuta con criterio. Esa mentalidad es la que más valoran las organizaciones que lideran la economía digital.</p>",
+      "seo": {
+        "metaTitle": "Emprender sin fundar una startup: el nuevo perfil del profesional emprendedor",
+        "metaDescription": "Emprender ya no es solo crear empresa. Es una forma de trabajar: con iniciativa, criterio y ejecución."
+      }
+    },
+    {
+      "id": "excelencia-academica-cuando-la-educacion-deja-de-ser-contenido-y-se-convierte-en-criterio",
+      "slug": "excelencia-academica-cuando-la-educacion-deja-de-ser-contenido-y-se-convierte-en-criterio",
+      "title": "Excelencia académica: cuando la educación deja de ser contenido y se convierte en criterio",
+      "category": "blog",
+      "status": "published",
+      "author": "ESIC Medellín",
+      "excerpt": "La excelencia no se mide por cuánto contenido transmites, sino por el criterio que despiertas.",
+      "publishedAt": "2026-02-10T16:00:00.000Z",
+      "externalUrl": null,
+      "coverUrl": "https://prisma-fai-admin.s3.us-east-2.amazonaws.com/src/esic-website/imagenes/excelencia-academica-cuando-la-educacion-deja-de-ser-contenido-y-se-convierte-en-criterio.png",
+      "coverAlt": "Excelencia académica: cuando la educación deja de ser contenido y se convierte en criterio",
+      "bodyHtml": "<p>La educación que se limita a transmitir contenido se vuelve obsoleta el día en que ese contenido cambia. La que forma criterio, en cambio, prepara para un mundo que no para de transformarse.</p><p>Nuestra apuesta por la excelencia académica pasa por ahí: menos memorización, más juicio; menos respuestas cerradas, más preguntas bien formuladas.</p>",
+      "seo": {
+        "metaTitle": "Excelencia académica: cuando la educación deja de ser contenido y se convierte en criterio",
+        "metaDescription": "La excelencia no se mide por cuánto contenido transmites, sino por el criterio que despiertas."
+      }
+    },
+    {
+      "id": "rethink-podcast-ep-29-el-futuro-de-nuestra-consciencia-con-ia-con-sebastian-chinkovsky",
+      "slug": "rethink-podcast-ep-29-el-futuro-de-nuestra-consciencia-con-ia-con-sebastian-chinkovsky",
+      "title": "Rethink Podcast Ep. 29: El Futuro de Nuestra Consciencia con IA con Sebastián Chinkovsky",
+      "category": "podcast",
+      "status": "published",
+      "author": "Rethink Podcast",
+      "excerpt": "Conversamos con Sebastián Chinkovsky sobre IA, consciencia y el futuro de la mente humana.",
+      "publishedAt": "2025-09-01T16:00:00.000Z",
+      "externalUrl": "https://www.youtube.com/watch?v=zS-ibHyImvI",
+      "coverUrl": "https://prisma-fai-admin.s3.us-east-2.amazonaws.com/src/esic-website/imagenes/rethink-podcast-ep-29-el-futuro-de-nuestra-consciencia-con-ia-con-sebastian-chinkovsky.jpg",
+      "coverAlt": "Rethink Podcast Ep. 29: El Futuro de Nuestra Consciencia con IA con Sebastián Chinkovsky",
+      "bodyHtml": "",
+      "seo": {
+        "metaTitle": "Rethink Podcast Ep. 29: El Futuro de Nuestra Consciencia con IA con Sebastián Chinkovsky",
+        "metaDescription": "Conversamos con Sebastián Chinkovsky sobre IA, consciencia y el futuro de la mente humana."
+      }
+    },
+    {
+      "id": "rethink-podcast-ep-28-el-futuro-de-la-politica-con-ia-con-federico-hoyos",
+      "slug": "rethink-podcast-ep-28-el-futuro-de-la-politica-con-ia-con-federico-hoyos",
+      "title": "Rethink Podcast Ep. 28: El Futuro de la Política con IA con Federico Hoyos",
+      "category": "podcast",
+      "status": "published",
+      "author": "Rethink Podcast",
+      "excerpt": "Federico Hoyos analiza el impacto de la inteligencia artificial en la política y la democracia.",
+      "publishedAt": "2025-08-01T16:00:00.000Z",
+      "externalUrl": "https://www.youtube.com/watch?v=XFziCxsoUr0",
+      "coverUrl": "https://prisma-fai-admin.s3.us-east-2.amazonaws.com/src/esic-website/imagenes/rethink-podcast-ep-28-el-futuro-de-la-politica-con-ia-con-federico-hoyos.jpg",
+      "coverAlt": "Rethink Podcast Ep. 28: El Futuro de la Política con IA con Federico Hoyos",
+      "bodyHtml": "",
+      "seo": {
+        "metaTitle": "Rethink Podcast Ep. 28: El Futuro de la Política con IA con Federico Hoyos",
+        "metaDescription": "Federico Hoyos analiza el impacto de la inteligencia artificial en la política y la democracia."
+      }
+    }
+  ]
+}

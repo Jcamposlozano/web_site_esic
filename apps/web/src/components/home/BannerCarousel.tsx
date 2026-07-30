@@ -12,42 +12,42 @@ type Slide = {
 
 const slides: Slide[] = [
   {
-    href: "/open-day/",
-    alt: "Open Day ESIC Medellín",
-    mobile: asset("home/banner/open-day-mobile.webp"),
-    desktop: asset("home/banner/open-day-desktop.webp"),
+    href: "/quienes-somos/",
+    alt: "Aniversario ESIC Medellín — Escuela de negocios con visión global",
+    mobile: asset("home/banner/aniversario-mobile.webp"),
+    desktop: asset("home/banner/aniversario-desktop.webp"),
     priority: true,
   },
   {
+    href: "/curso-claude",
+    alt: "Level Up con Claude — Domina la IA en 3 sesiones — ESIC Medellín",
+    mobile: asset("home/banner/level-up-claude-mobile.webp"),
+    desktop: asset("home/banner/level-up-claude-desktop.webp"),
+  },
+  {
     href: "/pregrado/",
-    alt: "Empieza tu carrera en el mundo real - Pregrados ESIC",
+    alt: "Elige una carrera con visión de futuro — Pregrados ESIC",
     mobile: asset("home/banner/pregrados-mobile.webp"),
     desktop: asset("home/banner/pregrados-desktop.webp"),
   },
   {
-    href: "/campus/",
-    alt: "Un campus diseñado para formar líderes en Medellín - ESIC",
-    mobile: asset("home/banner/campus-mobile.webp"),
-    desktop: asset("home/banner/campus-desktop.webp"),
+    href: "/quienes-somos/",
+    alt: "Medellín tiene una escuela de negocios con visión global — ESIC",
+    mobile: asset("home/banner/marca-mobile.webp"),
+    desktop: asset("home/banner/marca-desktop.webp"),
   },
   {
     href: "/master/",
-    alt: "Donde las empresas forman a sus líderes - Másters ESIC",
+    alt: "Convierte la transformación digital en ventaja empresarial — Másters ESIC",
     mobile: asset("home/banner/master-mobile.webp"),
     desktop: asset("home/banner/master-desktop.webp"),
   },
   {
     href: "https://forms.zohopublic.com/esicmedellin/form/InscripcionesPasantas/formperma/_OGwsRPwnka1ZLXJBqSMVtl-yE_Mk7E8V14gtDRfkag",
     target: "_blank",
-    alt: "Vive una semana como estudiante de ESIC - Pasantías",
+    alt: "Antes de elegir tu carrera, vive la experiencia — Pasantías ESIC",
     mobile: asset("home/banner/pasantias-mobile.webp"),
     desktop: asset("home/banner/pasantias-desktop.webp"),
-  },
-  {
-    href: "/quienes-somos/",
-    alt: "Aquí se forman los líderes digitales - ESIC",
-    mobile: asset("home/banner/marca-mobile.webp"),
-    desktop: asset("home/banner/marca-desktop.webp"),
   },
 ];
 

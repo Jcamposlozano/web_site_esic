@@ -36,6 +36,7 @@ const BG: Record<string, string> = {
   "ali-bg-gastro": "linear-gradient(135deg, #1F1206 0%, #4A1E0A 100%)",
   "ali-bg-cultura": "linear-gradient(135deg, #061730 0%, #0A2A55 100%)",
   "ali-bg-servicios": "linear-gradient(135deg, #00133F 0%, #0047E9 100%)",
+  "ali-bg-moda": "linear-gradient(135deg, #1A0E0E 0%, #4A1420 100%)",
 };
 
 const WP = asset("wp/2026/05");
@@ -206,6 +207,27 @@ const ALIANZAS: Alianza[] = [
     urlLabel: "Escribir por WhatsApp",
     urlType: "wpp",
   },
+  {
+    key: "rifle",
+    cat: "Moda",
+    catKey: "moda",
+    bg: "ali-bg-moda",
+    logo: `${asset("wp/2026/07")}/rifle.webp`,
+    name: "RIFLE",
+    cardPerk: "20% OFF",
+    cardMeta: "Prendas textiles seleccionadas · código ESIC20 online",
+    perk: "20% de descuento en prendas textiles seleccionadas",
+    desc: "Recibe 20% de descuento en prendas textiles seleccionadas. Aplica en las tiendas físicas RIFLE del país, en la tienda online www.rifle.com.co y el canal de WhatsApp 3225183789. No aplica en las referencias identificadas con etiqueta de \"precio especial\" y puntas de precio. Descuento personal e intransferible para los estudiantes, egresados y colaboradores de la Escuela De Negocios ESIC. Para acceder al beneficio en tiendas físicas y canal de WhatsApp se deberá presentar el documento de identificación y el carnet de estudiante, egresado o empleado al momento del pago. En tienda online el descuento aplica al momento de pago con el código ESIC20. Descuento no acumulable con otras promociones o campañas vigentes en tienda ni redimible en dinero. En caso de cambio o garantía, se reconocerá el valor pagado por la(s) prenda(s). No aplica para la compra de bonos regalo. Aplica para cualquier medio de pago. El establecimiento de comercio es responsable por la calidad e idoneidad de los productos.",
+    details: [
+      { label: "Vigencia", value: "18 may – 18 nov 2026" },
+      { label: "Canales", value: "Tiendas físicas · rifle.com.co · WhatsApp 3225183789" },
+      { label: "Código online", value: "ESIC20" },
+      { label: "Activación", value: "Documento de identidad + carné ESIC" },
+    ],
+    url: "https://www.rifle.com.co",
+    urlLabel: "Visitar tienda online",
+    urlType: "web",
+  },
 ];
 
 const FILTERS = [
@@ -214,6 +236,7 @@ const FILTERS = [
   { key: "gastronomia", label: "Gastronomía" },
   { key: "cultura", label: "Cultura y libros" },
   { key: "servicios", label: "Servicios y viaje" },
+  { key: "moda", label: "Moda" },
 ];
 
 /* Iconos SVG por etiqueta de detalle (stroke-based, autocontenidos). */
@@ -276,7 +299,14 @@ const DETAIL_ICONS: Record<string, ReactNode> = {
       <path d="M8 22h8M12 18v4" />
     </>
   ),
+  Canales: (
+    <>
+      <rect x="3" y="4" width="18" height="14" rx="2" />
+      <path d="M8 22h8M12 18v4" />
+    </>
+  ),
   Código: <path d="M16 18l6-6-6-6M8 6l-6 6 6 6" />,
+  "Código online": <path d="M16 18l6-6-6-6M8 6l-6 6 6 6" />,
   Contacto: (
     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.33 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" />
   ),

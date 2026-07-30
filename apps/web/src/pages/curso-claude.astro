@@ -1,0 +1,385 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Container from "../components/Container.astro";
+import { asset } from "../lib/assets";
+
+/**
+ * Level Up con Claude — Domina Claude en 3 sesiones.
+ * Réplica de https://esic.co/curso-claude/ con el design system del repo
+ * (overlap de secciones -50px + rounded-t, tokens de marca, Sofia Sans display).
+ *
+ * Acento coral tipo Claude (#D97757) como color propio de la landing,
+ * siguiendo el precedente de level-up/estrategia-marketing-digital (morado).
+ */
+
+const title = "Level Up con Claude — Domina Claude en 3 sesiones | ESIC Medellín";
+const description =
+  "De consumir IA a crear con ella. Domina los 4 pilares de Claude (Chat, Cowork, Design y Code) en 3 sábados presenciales en el Campus ESIC Medellín y sal con tu negocio publicado. Inversión: $1.200.000 COP.";
+
+const WOMPI_URL = "https://checkout.wompi.co/l/RCCkA3";
+
+const infoCards = [
+  {
+    label: "Fechas",
+    value: "22 · 29 AGO",
+    extra: "5 SEP",
+    icon: `<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>`,
+  },
+  {
+    label: "Horario",
+    value: "8:00 a 12:00",
+    extra: "3 sábados",
+    icon: `<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>`,
+  },
+  {
+    label: "Modalidad",
+    value: "Presencial",
+    extra: "Campus Medellín",
+    icon: `<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>`,
+  },
+  {
+    label: "Te llevas",
+    value: "Tu negocio",
+    extra: "publicado",
+    icon: `<path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>`,
+  },
+];
+
+const pilares = [
+  {
+    name: "Chat",
+    session: "Sesión 01",
+    body: "Prompting efectivo, contexto e investigación de mercado. Aprendes a hacer las preguntas correctas.",
+    icon: `<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>`,
+  },
+  {
+    name: "Cowork",
+    session: "Sesión 02",
+    body: "Colabora con agentes en tareas y flujos de trabajo reales para acelerar tu proyecto.",
+    icon: `<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>`,
+  },
+  {
+    name: "Design",
+    session: "Sesión 02",
+    body: "Identidad visual y manual de marca reutilizable a partir de tu concepto.",
+    icon: `<circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>`,
+  },
+  {
+    name: "Code",
+    session: "Sesión 03",
+    body: "Publica tu sitio con base de datos real — sin escribir una sola línea de código.",
+    icon: `<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>`,
+  },
+];
+
+const sesiones = [
+  {
+    n: "01",
+    day: "Día 1",
+    date: "22 AGO",
+    pilar: "Claude Chat",
+    tema: "Contexto y prompting",
+    items: [
+      "Fundamentos de Claude y buen contexto",
+      "Prompting efectivo para resultados reales",
+      "Investigación de mercado del sector café",
+    ],
+  },
+  {
+    n: "02",
+    day: "Día 2",
+    date: "29 AGO",
+    pilar: "Claude Cowork",
+    tema: "Competencia y marca",
+    items: [
+      "Análisis de competencia con IA",
+      "Concepto y posicionamiento de marca",
+      "Diseño de identidad y manual reutilizable",
+    ],
+  },
+  {
+    n: "03",
+    day: "Día 3",
+    date: "5 SEP",
+    pilar: "Claude Code",
+    tema: "Construcción y despliegue",
+    items: [
+      "Sitio web conectado a base de datos",
+      "Tienda de café funcional",
+      "Publicación y puesta en marcha",
+    ],
+  },
+];
+
+const entregables = [
+  {
+    title: "Tienda publicada",
+    body: "Tu tienda funcional y en línea, con base de datos real.",
+    icon: `<path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/><path d="M22 7v3a2 2 0 0 1-2 2v0a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 16 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 12 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 8 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 4 12v0a2 2 0 0 1-2-2V7"/>`,
+  },
+  {
+    title: "Manual de marca",
+    body: "Identidad reutilizable: logo, colores, tono y lineamientos.",
+    icon: `<path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/>`,
+  },
+  {
+    title: "Kit de prompts",
+    body: "Prompts y herramientas personalizadas para seguir creando.",
+    icon: `<polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/>`,
+  },
+];
+---
+<Layout title={title} description={description} fullBleed>
+  <main class="esic-curso-claude bg-bg">
+    <!-- ═══ HERO BANNER ═══ -->
+    <section class="relative z-[1] block overflow-hidden bg-[#0B0B0C] pb-[50px] pt-[88px] leading-[0] md:pt-0">
+      <a href="#inscripcion" aria-label="Separa tu cupo en Level Up con Claude" class="block">
+        <picture>
+          <source media="(max-width: 767px)" srcset={asset("wp/2026/07/level-up-hero-mobile.webp")} type="image/webp" />
+          <img
+            src={asset("wp/2026/07/level-up-hero-desktop.webp")}
+            alt="Level Up con Claude — Domina Claude en 3 sesiones · ESIC Medellín"
+            class="-mb-[7%] block h-auto w-full align-bottom"
+            fetchpriority="high"
+            width="2400"
+            height="1095"
+          />
+        </picture>
+      </a>
+    </section>
+
+    <!-- ═══ INTRO / PRECIO ═══ -->
+    <section class="relative z-[2] -mt-[50px] rounded-t-[50px] bg-brand-blue-dark pb-24 pt-16 text-white md:pt-20">
+      <Container class="max-w-[1100px]">
+        <div class="grid grid-cols-1 items-center gap-10 md:grid-cols-[1.2fr_0.8fr]">
+          <div>
+            <span class="mb-4 inline-flex items-center gap-3 text-[0.74rem] font-bold uppercase tracking-[0.22em] text-[#D97757]">
+              <span class="block h-px w-8 bg-current" aria-hidden="true"></span>
+              Level Up by ESIC · De consumir IA a crear con ella
+            </span>
+            <h1 class="font-display text-[clamp(2.6rem,6vw,4.4rem)] font-extrabold uppercase leading-[0.95]">
+              Level Up con <span class="text-[#D97757]">Claude</span>
+            </h1>
+            <p class="mt-3 font-display text-[clamp(1.4rem,3vw,2rem)] font-bold uppercase leading-[1.05] text-white/90">
+              Domina Claude en 3 sesiones · ESIC Medellín
+            </p>
+            <p class="mt-5 max-w-[54ch] text-[1.05rem] leading-[1.6] text-white/75">
+              No aprendes una herramienta suelta: dominas el ecosistema completo de Claude
+              para investigar, colaborar, diseñar y publicar. Tres sesiones, cuatro pilares,
+              un negocio real lanzado.
+            </p>
+            <p class="mt-6 text-[1.1rem] font-bold text-white/70">
+              <span class="font-display text-[2.2rem] font-extrabold tracking-[0.01em] text-[#D97757]">$1.200.000</span>
+              <span class="ml-2 uppercase tracking-[0.06em]">COP · Cupos limitados</span>
+            </p>
+            <div class="mt-8 flex flex-wrap gap-3">
+              <a
+                href="#inscripcion"
+                class="inline-flex items-center justify-center gap-2 rounded-full bg-[#D97757] px-8 py-3.5 text-[0.9rem] font-bold uppercase tracking-[0.05em] text-white no-underline transition-all hover:-translate-y-0.5 hover:bg-[#c25f3f]"
+              >
+                Separa tu cupo →
+              </a>
+              <a
+                href="#programa"
+                class="inline-flex items-center justify-center gap-2 rounded-full border border-white/60 bg-transparent px-8 py-3.5 text-[0.9rem] font-bold uppercase tracking-[0.05em] text-white no-underline transition-all hover:-translate-y-0.5 hover:bg-white hover:text-brand-blue-dark"
+              >
+                Ver el programa
+              </a>
+            </div>
+          </div>
+          <div class="mx-auto hidden max-w-[320px] md:block">
+            <img
+              src={asset("wp/2026/07/mascota-claude.webp")}
+              alt="Mascota de Claude"
+              class="block h-auto w-full"
+              loading="lazy"
+              width="640"
+              height="640"
+            />
+          </div>
+        </div>
+
+        <!-- Info cards -->
+        <div class="mt-14 grid grid-cols-2 gap-4 md:grid-cols-4">
+          {infoCards.map((card) => (
+            <div class="rounded-[18px] border border-white/15 bg-white/[0.06] p-6">
+              <div class="mb-3 grid h-[42px] w-[42px] place-items-center rounded-[12px] bg-[rgba(217,119,87,0.18)] text-[#E89B82]">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-[20px] w-[20px]" set:html={card.icon} />
+              </div>
+              <div class="mb-1 text-[0.7rem] font-bold uppercase tracking-[0.14em] text-white/50">{card.label}</div>
+              <div class="font-display text-[1.35rem] font-bold uppercase leading-[1.1] tracking-[0.01em] text-white">{card.value}</div>
+              <div class="text-[0.88rem] leading-[1.4] text-white/65">{card.extra}</div>
+            </div>
+          ))}
+        </div>
+      </Container>
+    </section>
+
+    <!-- ═══ LOS 4 PILARES ═══ -->
+    <section class="relative z-[3] -mt-[50px] rounded-t-[50px] bg-bg py-20 md:py-24">
+      <Container class="max-w-[1100px]">
+        <div class="mb-12 text-center">
+          <span class="mb-3.5 inline-block text-[0.78rem] font-bold uppercase tracking-[0.18em] text-[#c25f3f]">
+            De consumir IA a crear con ella
+          </span>
+          <h2 class="font-display text-[clamp(2.2rem,5.5vw,3.6rem)] font-extrabold uppercase text-brand-blue-dark">
+            Los <span class="text-[#D97757]">4 pilares</span> de Claude
+          </h2>
+          <p class="mx-auto mt-3 max-w-[640px] text-[1.05rem] leading-[1.6] text-ink-muted">
+            No aprendes una herramienta suelta: dominas el ecosistema completo de Claude para
+            investigar, colaborar, diseñar y publicar. Tres sesiones, cuatro pilares, un negocio real lanzado.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {pilares.map((p) => (
+            <article class="cc-card rounded-[18px] border border-[rgba(0,19,63,0.12)] bg-white p-7 transition-all">
+              <div class="mb-4 grid h-[46px] w-[46px] place-items-center rounded-[12px] bg-[rgba(217,119,87,0.12)] text-[#c25f3f]">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-[22px] w-[22px]" set:html={p.icon} />
+              </div>
+              <h3 class="font-display text-[1.5rem] font-extrabold uppercase tracking-[0.01em] text-brand-blue-dark">{p.name}</h3>
+              <p class="mt-2 text-[0.93rem] leading-[1.55] text-ink-muted">{p.body}</p>
+              <span class="mt-4 inline-block rounded-full bg-[rgba(0,19,63,0.06)] px-3 py-1 text-[0.7rem] font-bold uppercase tracking-[0.12em] text-brand-blue-dark">{p.session}</span>
+            </article>
+          ))}
+        </div>
+      </Container>
+    </section>
+
+    <!-- ═══ CTA INTERMEDIO ═══ -->
+    <section class="relative z-[4] -mt-[50px] rounded-t-[50px] bg-white py-20 md:py-24">
+      <Container class="max-w-[1100px]">
+        <div class="rounded-[32px] bg-gradient-to-br from-[#D97757] to-[#b34f30] px-7 py-14 text-center text-white md:px-14">
+          <h2 class="font-display text-[clamp(2rem,4.5vw,3.2rem)] font-extrabold uppercase leading-[1]">
+            Deja de mirar la IA<br />y <span class="text-[#2A1205]">empieza a construir</span>
+          </h2>
+          <p class="mx-auto mt-4 max-w-[520px] text-[1.02rem] leading-[1.6] text-white/90">
+            Cupos limitados. Asegura tu lugar y sal con tu negocio publicado.
+          </p>
+          <p class="mt-6 font-display text-[2.6rem] font-extrabold leading-none">
+            $1.200.000 <span class="text-[1.1rem] font-bold uppercase tracking-[0.08em] text-white/80">COP</span>
+          </p>
+          <a
+            href="#inscripcion"
+            class="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-brand-blue-dark px-9 py-4 text-[0.9rem] font-bold uppercase tracking-[0.05em] text-white no-underline transition-all hover:-translate-y-0.5 hover:bg-[#001a5c]"
+          >
+            Separa tu cupo →
+          </a>
+        </div>
+      </Container>
+    </section>
+
+    <!-- ═══ PROGRAMA ═══ -->
+    <section id="programa" class="relative z-[5] -mt-[50px] rounded-t-[50px] bg-bg py-20 md:py-24">
+      <Container class="max-w-[1100px]">
+        <div class="mb-12 text-center">
+          <span class="mb-3.5 inline-block text-[0.78rem] font-bold uppercase tracking-[0.18em] text-[#c25f3f]">
+            Programa · 2026
+          </span>
+          <h2 class="font-display text-[clamp(2.2rem,5.5vw,3.6rem)] font-extrabold uppercase text-brand-blue-dark">
+            Construye tu tienda en <span class="text-[#D97757]">3 sesiones</span>
+          </h2>
+          <p class="mx-auto mt-3 max-w-[640px] text-[1.05rem] leading-[1.6] text-ink-muted">
+            Presencial en Medellín. Cada sesión suma una capa hasta tener tu marca de café
+            publicada y funcionando.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-5 md:grid-cols-3">
+          {sesiones.map((s) => (
+            <article class="cc-card flex flex-col rounded-[18px] border border-[rgba(0,19,63,0.12)] bg-white p-7 transition-all">
+              <div class="mb-5 flex items-center justify-between">
+                <span class="font-display text-[2.6rem] font-extrabold leading-none text-[rgba(0,19,63,0.14)]">{s.n}</span>
+                <span class="rounded-full bg-[rgba(217,119,87,0.12)] px-3.5 py-1.5 text-[0.72rem] font-bold uppercase tracking-[0.1em] text-[#c25f3f]">
+                  {s.day} · {s.date}
+                </span>
+              </div>
+              <h3 class="font-display text-[1.5rem] font-extrabold uppercase leading-[1.05] text-brand-blue-dark">{s.pilar}</h3>
+              <p class="mt-1 text-[0.92rem] font-bold uppercase tracking-[0.06em] text-ink-light">{s.tema}</p>
+              <ul class="mt-4 flex flex-col gap-2.5">
+                {s.items.map((item) => (
+                  <li class="flex items-start gap-2.5 text-[0.95rem] leading-[1.5] text-ink-muted">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="mt-[3px] h-4 w-4 flex-none text-[#D97757]">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </Container>
+    </section>
+
+    <!-- ═══ ENTREGABLES ═══ -->
+    <section class="relative z-[6] -mt-[50px] rounded-t-[50px] bg-white py-20 md:py-24">
+      <Container class="max-w-[1100px]">
+        <div class="mb-12 text-center">
+          <span class="mb-3.5 inline-block text-[0.78rem] font-bold uppercase tracking-[0.18em] text-[#c25f3f]">
+            Te llevas resultados, no solo apuntes
+          </span>
+          <h2 class="font-display text-[clamp(2.2rem,5.5vw,3.6rem)] font-extrabold uppercase text-brand-blue-dark">
+            Lo que <span class="text-[#D97757]">sales construyendo</span>
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 gap-5 md:grid-cols-3">
+          {entregables.map((e) => (
+            <article class="cc-card rounded-[18px] border border-[rgba(0,19,63,0.12)] bg-bg p-8 text-center transition-all">
+              <div class="mx-auto mb-4 grid h-[52px] w-[52px] place-items-center rounded-full bg-[rgba(217,119,87,0.12)] text-[#c25f3f]">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6" set:html={e.icon} />
+              </div>
+              <h3 class="font-display text-[1.35rem] font-extrabold uppercase text-brand-blue-dark">{e.title}</h3>
+              <p class="mt-2 text-[0.95rem] leading-[1.55] text-ink-muted">{e.body}</p>
+            </article>
+          ))}
+        </div>
+      </Container>
+    </section>
+
+    <!-- ═══ INSCRIPCIÓN / PAGO ═══ -->
+    <section id="inscripcion" class="relative z-[7] -mt-[50px] rounded-t-[50px] bg-brand-blue-dark py-20 text-white md:py-24">
+      <Container class="max-w-[760px]">
+        <div class="rounded-[24px] border border-white/15 bg-white/[0.06] p-8 text-center md:p-12">
+          <span class="mb-3.5 inline-block text-[0.78rem] font-bold uppercase tracking-[0.18em] text-[#E89B82]">
+            Inscríbete al Level Up
+          </span>
+          <h2 class="font-display text-[clamp(2rem,5vw,3rem)] font-extrabold uppercase leading-[1]">
+            Separa tu cupo hoy
+          </h2>
+          <p class="mx-auto mt-4 max-w-[46ch] text-[1.02rem] leading-[1.6] text-white/75">
+            Completa tu inscripción y continúa al pago seguro con Wompi.
+            Al confirmar el pago tu lugar queda asegurado.
+          </p>
+          <p class="mt-7 text-[1.05rem] font-bold text-white/70">
+            Inversión:
+            <span class="ml-1 font-display text-[2.4rem] font-extrabold tracking-[0.01em] text-[#D97757]">$1.200.000</span>
+            <span class="ml-1 uppercase tracking-[0.06em]">COP</span>
+          </p>
+          <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <a
+              href={WOMPI_URL}
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center justify-center gap-2 rounded-full bg-[#D97757] px-9 py-4 text-[0.9rem] font-bold uppercase tracking-[0.05em] text-white no-underline transition-all hover:-translate-y-0.5 hover:bg-[#c25f3f]"
+            >
+              Continuar al pago →
+            </a>
+          </div>
+          <p class="mt-5 text-[0.85rem] text-white/55">
+            Inversión: $1.200.000 COP · Pago seguro con Wompi
+          </p>
+        </div>
+      </Container>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .cc-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(217, 119, 87, 0.55);
+    box-shadow: 0 12px 30px rgba(0, 19, 63, 0.08);
+  }
+</style>

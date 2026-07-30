@@ -1,0 +1,536 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+/**
+ * Ruleta ESIC — Feria de Empleo.
+ * Réplica de https://esic.co/ruleta-feria-empelo/ (el slug vivo tiene el typo
+ * "empelo"; aquí se corrige a "ruleta-feria-empleo").
+ *
+ * Ruleta interactiva de premios (descuentos y sorpresas ESIC) tipo kiosco:
+ * girar con botón, modal de resultado con confetti y reintentar.
+ * Los 8 segmentos y sus mensajes replican los de la página viva.
+ */
+
+const title = "Ruleta ESIC — Feria de Empleo | Gira la ruleta y gana";
+const description =
+  "Gira la ruleta de ESIC en la Feria de Empleo y gana descuentos y sorpresas. Presiona GIRAR y descubre tu premio.";
+---
+<Layout title={title} description={description} hideFooter>
+  <main class="rfe-main">
+    <div class="rfe-top">
+      <span class="rfe-kicker">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 2v4" /><path d="M12 18v4" /><path d="m4.9 4.9 2.9 2.9" /><path d="m16.2 16.2 2.9 2.9" />
+          <path d="M2 12h4" /><path d="M18 12h4" /><path d="m4.9 19.1 2.9-2.9" /><path d="m16.2 7.8 2.9-2.9" />
+        </svg>
+        Feria de Empleo · ESIC
+      </span>
+      <h1 class="rfe-title">Gira la ruleta<br /><span>y gana</span></h1>
+      <p class="rfe-sub">
+        Presiona <strong>GIRAR</strong> y descubre tu premio en descuentos y sorpresas ESIC.
+      </p>
+    </div>
+
+    <div class="rfe-stage">
+      <svg class="rfe-pointer" width="52" height="46" viewBox="0 0 52 46" aria-hidden="true">
+        <path d="M26 46 4 6a4 4 0 0 1 3.5-6h37A4 4 0 0 1 48 6z" fill="#00133F" />
+        <path d="M26 38 10.5 9.5A1.5 1.5 0 0 1 11.8 7h28.4a1.5 1.5 0 0 1 1.3 2.5z" fill="#0AE4C3" />
+      </svg>
+      <div class="rfe-wheel-wrap">
+        <svg id="rfe-wheel" viewBox="0 0 600 600" role="img" aria-label="Ruleta de premios ESIC"></svg>
+        <div class="rfe-hub" aria-hidden="true">
+          <span class="rfe-hub-logo">ESIC</span>
+          <span class="rfe-hub-sub">Feria de Empleo</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="rfe-controls">
+      <button id="rfe-spin" class="rfe-spin-btn" type="button">Girar</button>
+      <span class="rfe-hint">Un giro por persona · Reclama tu premio en el stand ESIC</span>
+    </div>
+
+    <!-- Modal resultado -->
+    <div id="rfe-overlay" class="rfe-overlay" role="dialog" aria-modal="true" aria-labelledby="rfe-result-title">
+      <div id="rfe-card" class="rfe-card">
+        <div id="rfe-badge" class="rfe-badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#00133F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+        </div>
+        <h2 id="rfe-result-title"></h2>
+        <p id="rfe-result-prize" class="rfe-prize"></p>
+        <p id="rfe-result-msg"></p>
+        <button id="rfe-again" class="rfe-again-btn" type="button">Volver a girar</button>
+      </div>
+    </div>
+    <div id="rfe-confetti" class="rfe-confetti" aria-hidden="true"></div>
+  </main>
+</Layout>
+
+<script>
+  // Segmentos reales de la ruleta viva (orden horario desde arriba).
+  // win:true => premio ganador (confetti + mensaje de felicitación).
+  type Segment = {
+    label: string;
+    type: "text" | "pct";
+    win: boolean;
+    color: string;
+    text: string;
+    title: string;
+    prize: string;
+    msg: string;
+  };
+
+  const SEGMENTS: Segment[] = [
+    { label: "OBSEQUIO\nSORPRESA", type: "text", win: true, color: "#0F2A54", text: "#FFFFFF",
+      title: "¡Te ganaste un", prize: "OBSEQUIO SORPRESA", msg: "Acércate al stand de ESIC para reclamar tu obsequio." },
+    { label: "15%", type: "pct", win: true, color: "#EDA02B", text: "#0F2A54",
+      title: "¡Felicidades! Ganaste", prize: "15%", msg: "15% de descuento en tu programa ESIC. Reclámalo en el stand." },
+    { label: "¡UPS!\nNO FUE\nESTA VEZ", type: "text", win: false, color: "#E37E3D", text: "#FFFFFF",
+      title: "¡Ups!", prize: "", msg: "No fue esta vez… ¡pero pasa por el stand y hablemos de tu futuro!" },
+    { label: "5%", type: "pct", win: true, color: "#17A589", text: "#FFFFFF",
+      title: "¡Felicidades! Ganaste", prize: "5%", msg: "5% de descuento en tu programa ESIC. Reclámalo en el stand." },
+    { label: "¡UPS!\nNO FUE\nESTA VEZ", type: "text", win: false, color: "#0E1B3D", text: "#FFFFFF",
+      title: "¡Ups!", prize: "", msg: "No fue esta vez… ¡pero pasa por el stand y hablemos de tu futuro!" },
+    { label: "10%", type: "pct", win: true, color: "#B08C39", text: "#FFFFFF",
+      title: "¡Felicidades! Ganaste", prize: "10%", msg: "10% de descuento en tu programa ESIC. Reclámalo en el stand." },
+    { label: "VUELVE A\nINTENTARLO", type: "text", win: false, color: "#2C64A8", text: "#FFFFFF",
+      title: "¡Casi!", prize: "", msg: "Vuelve a intentarlo… ¡la suerte puede cambiar!" },
+    { label: "5%", type: "pct", win: true, color: "#F1EEE4", text: "#0F2A54",
+      title: "¡Felicidades! Ganaste", prize: "5%", msg: "5% de descuento en tu programa ESIC. Reclámalo en el stand." },
+  ];
+
+  // Pesos relativos (misma longitud que SEGMENTS). Todos en 1 = aleatorio puro.
+  const PESOS = [1, 1, 1, 1, 1, 1, 1, 1];
+
+  const NS = "http://www.w3.org/2000/svg";
+  const wheel = document.getElementById("rfe-wheel") as unknown as SVGSVGElement;
+  const spinBtn = document.getElementById("rfe-spin") as HTMLButtonElement;
+  const againBtn = document.getElementById("rfe-again") as HTMLButtonElement;
+  const overlay = document.getElementById("rfe-overlay")!;
+  const card = document.getElementById("rfe-card")!;
+  const resultTitle = document.getElementById("rfe-result-title")!;
+  const resultPrize = document.getElementById("rfe-result-prize")!;
+  const resultMsg = document.getElementById("rfe-result-msg")!;
+  const confettiBox = document.getElementById("rfe-confetti")!;
+
+  const CX = 300, CY = 300, R = 300;
+  const N = SEGMENTS.length;
+  const SEG = 360 / N;
+
+  // Ángulo en grados desde arriba (12h), sentido horario -> punto (x, y).
+  function pt(angleDeg: number, radius: number): [number, number] {
+    const a = ((angleDeg - 90) * Math.PI) / 180;
+    return [CX + radius * Math.cos(a), CY + radius * Math.sin(a)];
+  }
+
+  // ── Construcción de la ruleta (SVG) ──
+  SEGMENTS.forEach((s, i) => {
+    const start = i * SEG;
+    const end = (i + 1) * SEG;
+    const [x1, y1] = pt(start, R);
+    const [x2, y2] = pt(end, R);
+
+    const path = document.createElementNS(NS, "path");
+    path.setAttribute("d", `M${CX} ${CY} L${x1} ${y1} A${R} ${R} 0 0 1 ${x2} ${y2} Z`);
+    path.setAttribute("fill", s.color);
+    path.setAttribute("stroke", "#ffffff");
+    path.setAttribute("stroke-width", "2");
+    wheel.appendChild(path);
+
+    const mid = start + SEG / 2;
+    const g = document.createElementNS(NS, "g");
+    g.setAttribute("transform", `rotate(${mid} ${CX} ${CY})`);
+
+    const t = document.createElementNS(NS, "text");
+    t.setAttribute("text-anchor", "middle");
+    t.setAttribute("fill", s.text);
+    t.setAttribute("x", String(CX));
+
+    if (s.type === "pct") {
+      t.setAttribute("class", "rfe-seg-pct");
+      t.setAttribute("y", String(CY - R * 0.6));
+      t.setAttribute("font-size", "78");
+      t.textContent = s.label;
+    } else {
+      t.setAttribute("class", "rfe-seg-text");
+      t.setAttribute("font-size", "30");
+      const baseY = CY - R * 0.74;
+      s.label.split("\n").forEach((line, li) => {
+        const ts = document.createElementNS(NS, "tspan");
+        ts.setAttribute("x", String(CX));
+        ts.setAttribute("y", String(baseY + li * 33));
+        ts.textContent = line;
+        t.appendChild(ts);
+      });
+    }
+    g.appendChild(t);
+    wheel.appendChild(g);
+  });
+
+  // ── Selección ponderada ──
+  function pickIndex(): number {
+    const total = PESOS.reduce((a, b) => a + b, 0);
+    let r = Math.random() * total;
+    for (let i = 0; i < PESOS.length; i++) {
+      r -= PESOS[i];
+      if (r <= 0) return i;
+    }
+    return PESOS.length - 1;
+  }
+
+  // ── Giro ──
+  let rotation = 0;
+  let spinning = false;
+
+  function spin() {
+    if (spinning) return;
+    spinning = true;
+    spinBtn.disabled = true;
+
+    const idx = pickIndex();
+    const seg = SEGMENTS[idx];
+
+    // Ángulo del centro del segmento (desde arriba). Para dejarlo bajo el
+    // puntero, la ruleta debe rotar hasta que ese centro quede en 0°.
+    const midAngle = idx * SEG + SEG / 2;
+    const jitter = (Math.random() - 0.5) * SEG * 0.6;
+    const turns = 5 + Math.floor(Math.random() * 3); // 5-7 vueltas completas
+    const current = ((rotation % 360) + 360) % 360;
+    rotation += turns * 360 + ((360 - midAngle - jitter - current + 720) % 360);
+
+    wheel.style.transform = `rotate(${rotation}deg)`;
+
+    window.setTimeout(() => {
+      showResult(seg);
+      spinning = false;
+    }, 6200);
+  }
+
+  function showResult(seg: Segment) {
+    resultTitle.textContent = seg.title;
+    resultPrize.textContent = seg.prize;
+    resultPrize.style.display = seg.prize ? "" : "none";
+    resultMsg.textContent = seg.msg;
+    card.classList.toggle("rfe-lose", !seg.win);
+    overlay.classList.add("rfe-show");
+    if (seg.win) confetti();
+  }
+
+  function confetti() {
+    const colors = ["#0047E9", "#0AE4C3", "#EDA02B", "#00133F", "#E37E3D", "#ffffff"];
+    confettiBox.innerHTML = "";
+    for (let i = 0; i < 90; i++) {
+      const piece = document.createElement("i");
+      piece.style.left = `${Math.random() * 100}vw`;
+      piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+      piece.style.animationDuration = `${2.2 + Math.random() * 2.2}s`;
+      piece.style.animationDelay = `${Math.random() * 0.6}s`;
+      piece.style.transform = `rotate(${Math.random() * 360}deg)`;
+      confettiBox.appendChild(piece);
+    }
+    window.setTimeout(() => (confettiBox.innerHTML = ""), 5200);
+  }
+
+  function reset() {
+    overlay.classList.remove("rfe-show");
+    spinBtn.disabled = false;
+  }
+
+  spinBtn.addEventListener("click", spin);
+  againBtn.addEventListener("click", reset);
+</script>
+
+<style>
+  .rfe-main {
+    min-height: calc(100vh - 96px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 16px 56px;
+    overflow-x: hidden;
+    user-select: none;
+    background: radial-gradient(1200px 700px at 50% -10%, #ffffff 0%, var(--color-bg) 55%, #efece4 100%);
+    color: var(--color-brand-blue-dark);
+  }
+
+  /* ── Header ── */
+  .rfe-top {
+    text-align: center;
+    margin-bottom: 6px;
+    max-width: 900px;
+  }
+  .rfe-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-size: clamp(11px, 1.6vw, 14px);
+    color: var(--color-brand-blue);
+    background: rgba(0, 71, 233, 0.08);
+    padding: 8px 16px;
+    border-radius: 100px;
+    margin-bottom: 14px;
+  }
+  .rfe-kicker svg { width: 16px; height: 16px; }
+  .rfe-title {
+    font-family: var(--font-display);
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 0.92;
+    font-size: clamp(34px, 7vw, 68px);
+    margin: 0 0 6px;
+    letter-spacing: 0.01em;
+  }
+  .rfe-title span { color: var(--color-brand-blue); }
+  .rfe-sub {
+    font-size: clamp(14px, 2.2vw, 19px);
+    opacity: 0.72;
+    margin: 0 auto;
+    max-width: 560px;
+    font-weight: 500;
+  }
+
+  /* ── Stage / ruleta ── */
+  .rfe-stage {
+    position: relative;
+    width: min(88vw, 560px);
+    aspect-ratio: 1 / 1;
+    margin: 22px auto 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .rfe-pointer {
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 6;
+    filter: drop-shadow(0 6px 10px rgba(0, 19, 63, 0.35));
+    pointer-events: none;
+  }
+  .rfe-wheel-wrap {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    box-shadow:
+      0 30px 60px -18px rgba(0, 19, 63, 0.45),
+      0 0 0 12px #fff,
+      0 0 0 17px rgba(0, 19, 63, 0.1);
+    position: relative;
+  }
+  #rfe-wheel {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: 50%;
+    transform: rotate(0deg);
+    transition: transform 6s cubic-bezier(0.12, 0.66, 0.12, 1);
+    will-change: transform;
+  }
+  #rfe-wheel :global(.rfe-seg-text) {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: 0.02em;
+  }
+  #rfe-wheel :global(.rfe-seg-pct) {
+    font-family: var(--font-display);
+    font-weight: 900;
+  }
+  .rfe-hub {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 23%;
+    height: 23%;
+    border-radius: 50%;
+    background: #fff;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 0 5px var(--color-brand-blue-dark), 0 8px 18px rgba(0, 19, 63, 0.35);
+    text-align: center;
+    line-height: 1;
+    pointer-events: none;
+  }
+  .rfe-hub-logo {
+    font-family: var(--font-display);
+    font-weight: 900;
+    color: var(--color-brand-blue-dark);
+    font-size: clamp(22px, 5.4vw, 40px);
+    letter-spacing: 0.02em;
+  }
+  .rfe-hub-sub {
+    font-size: clamp(6px, 1.35vw, 9px);
+    font-weight: 700;
+    color: var(--color-brand-blue-dark);
+    letter-spacing: 0.02em;
+    margin-top: 2px;
+    opacity: 0.9;
+  }
+
+  /* ── Controles ── */
+  .rfe-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 14px;
+  }
+  .rfe-spin-btn {
+    appearance: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: clamp(22px, 4.2vw, 34px);
+    color: #fff;
+    background: var(--color-brand-blue);
+    padding: 16px 54px;
+    border-radius: 100px;
+    box-shadow: 0 14px 28px -8px rgba(0, 71, 233, 0.6);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  }
+  .rfe-spin-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 34px -8px rgba(0, 71, 233, 0.65);
+  }
+  .rfe-spin-btn:active { transform: translateY(0); }
+  .rfe-spin-btn:disabled {
+    background: #9aa6bf;
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+    opacity: 0.8;
+  }
+  .rfe-hint {
+    font-size: 13px;
+    opacity: 0.6;
+    font-weight: 500;
+  }
+
+  /* ── Modal resultado ── */
+  .rfe-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    background: rgba(0, 19, 63, 0.55);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  .rfe-overlay.rfe-show {
+    opacity: 1;
+    visibility: visible;
+  }
+  .rfe-card {
+    background: #fff;
+    border-radius: 34px;
+    max-width: 440px;
+    width: 100%;
+    padding: 40px 30px 32px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 40px 80px -20px rgba(0, 19, 63, 0.6);
+    transform: scale(0.85) translateY(16px);
+    transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.2, 1.2);
+  }
+  .rfe-overlay.rfe-show .rfe-card {
+    transform: scale(1) translateY(0);
+  }
+  .rfe-badge {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    margin: 0 auto 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-brand-teal);
+  }
+  .rfe-badge svg { width: 46px; height: 46px; }
+  .rfe-card.rfe-lose .rfe-badge { background: #e6eaf2; }
+  .rfe-card h2 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: clamp(26px, 6vw, 38px);
+    margin: 0 0 4px;
+    color: var(--color-brand-blue-dark);
+    line-height: 0.95;
+  }
+  .rfe-prize {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(46px, 13vw, 84px);
+    line-height: 0.9;
+    margin: 6px 0 8px;
+    color: var(--color-brand-blue);
+    text-transform: uppercase;
+  }
+  .rfe-card p:not(.rfe-prize) {
+    font-size: 16px;
+    opacity: 0.72;
+    margin: 6px 0 24px;
+    line-height: 1.45;
+    font-weight: 500;
+  }
+  .rfe-again-btn {
+    appearance: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-weight: 800;
+    font-size: 17px;
+    color: #fff;
+    background: var(--color-brand-blue-dark);
+    padding: 15px 40px;
+    border-radius: 100px;
+    letter-spacing: 0.02em;
+    transition: transform 0.15s ease;
+  }
+  .rfe-again-btn:hover { transform: translateY(-2px); }
+
+  /* ── Confetti ── */
+  .rfe-confetti {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 59;
+    overflow: hidden;
+  }
+  .rfe-confetti :global(i) {
+    position: absolute;
+    top: -20px;
+    width: 10px;
+    height: 16px;
+    border-radius: 2px;
+    opacity: 0.95;
+    animation: rfe-fall linear forwards;
+  }
+  @keyframes rfe-fall {
+    to {
+      transform: translateY(110vh) rotate(720deg);
+      opacity: 0.9;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .rfe-spin-btn { padding: 15px 44px; }
+    .rfe-hub-sub { display: none; }
+  }
+</style>
