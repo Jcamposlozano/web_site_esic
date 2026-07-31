@@ -19,7 +19,10 @@ const items: MenuItem[] = [
   {
     type: "dropdown",
     label: "Level Up",
-    children: [{ label: "Conoce Level Up", href: "/level-up/" }],
+    children: [
+      { label: "Conoce Level Up", href: "/level-up/" },
+      { label: "Domina Claude", href: "/curso-claude/" },
+    ],
   },
   {
     type: "dropdown",
