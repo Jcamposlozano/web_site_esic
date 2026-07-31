@@ -40,6 +40,7 @@ const BG: Record<string, string> = {
 };
 
 const WP = asset("wp/2026/05");
+const WP7 = asset("wp/2026/07");
 
 const ALIANZAS: Alianza[] = [
   {
@@ -47,8 +48,7 @@ const ALIANZAS: Alianza[] = [
     cat: "Bienestar y deporte",
     catKey: "bienestar",
     bg: "ali-bg-bienestar",
-    logo: `${WP}/action-black-1.webp`,
-    logoRound: true,
+    logo: `${WP7}/action-black-full.webp`,
     name: "Action Black",
     cardPerk: "$219.900 / mes",
     cardMeta: "Plan Prime Corporativo · sin inscripción",
@@ -62,12 +62,30 @@ const ALIANZAS: Alianza[] = [
     ],
   },
   {
+    key: "aira",
+    cat: "Bienestar y deporte",
+    catKey: "bienestar",
+    bg: "ali-bg-bienestar",
+    logo: `${WP7}/aira.webp`,
+    name: "AIRA",
+    cardPerk: "15% OFF",
+    cardMeta: "Planes de Pilates Reformer",
+    perk: "15% de descuento en planes de Pilates Reformer",
+    desc: "Beneficio exclusivo para estudiantes, egresados, profesores y administrativos de ESIC. Disfruta de un 15% de descuento en cualquiera de los planes de Pilates Reformer. Para acceder al beneficio es indispensable presentar el carné institucional vigente al momento de la compra. Los paquetes están sujetos a la vigencia establecida para cada plan y las cancelaciones o reprogramaciones de clases deberán realizarse con mínimo 8 horas de anticipación para evitar el descuento de la clase. Válido hasta el 31 de diciembre de 2026.",
+    details: [
+      { label: "Vigencia", value: "Hasta 31 dic 2026" },
+      { label: "Aplica a", value: "Todos los planes de Pilates Reformer" },
+      { label: "Activación", value: "Presentando carné institucional vigente" },
+      { label: "Restricción", value: "Cancelaciones con mínimo 8 h de anticipación" },
+    ],
+  },
+  {
     key: "shibuya",
     cat: "Gastronomía",
     catKey: "gastronomia",
     bg: "ali-bg-gastro",
-    logo: `${WP}/shibuya.webp`,
-    logoRound: true,
+    logo: `${WP7}/shibuya-full.webp`,
+    logoInvert: true,
     name: "Restaurante Shibuya",
     cardPerk: "20% OFF",
     cardMeta: "Robata & Sushi · Mall Indiana, Local 174",
@@ -87,8 +105,7 @@ const ALIANZAS: Alianza[] = [
     cat: "Cultura y libros",
     catKey: "cultura",
     bg: "ali-bg-cultura",
-    logo: `${WP}/kcao.webp`,
-    logoRound: true,
+    logo: `${WP7}/kcao-full.webp`,
     name: "Kcao Coworking & Café",
     cardPerk: "15% OFF",
     cardMeta: "Libros Editorial Planeta · Mall Indiana 175",
@@ -330,6 +347,7 @@ const ArrowCardCta = () => (
 );
 
 function LogoImg({ a, variant }: { a: Alianza; variant: "card" | "modal" }) {
+  const [failed, setFailed] = useState(false);
   const base =
     variant === "card"
       ? a.logoRound
@@ -343,7 +361,19 @@ function LogoImg({ a, variant }: { a: Alianza; variant: "card" | "modal" }) {
         filter: `brightness(0) invert(1) drop-shadow(0 ${variant === "card" ? "4px 18px" : "8px 30px"} rgba(0,0,0,${variant === "card" ? "0.45" : "0.55"}))`,
       }
     : undefined;
-  return <img src={a.logo} alt={a.name} className={base} style={invertStyle} />;
+  if (failed) {
+    // Fallback tipográfico mientras llega el logo del aliado
+    return (
+      <span
+        className={`relative z-[2] font-display font-extrabold uppercase text-white [text-shadow:0_4px_18px_rgba(0,0,0,0.5)] ${
+          variant === "card" ? "text-[2.6rem]" : "text-[3.6rem]"
+        }`}
+      >
+        {a.name}
+      </span>
+    );
+  }
+  return <img src={a.logo} alt={a.name} className={base} style={invertStyle} onError={() => setFailed(true)} />;
 }
 
 export default function AlianzasGrid() {
