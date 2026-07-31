@@ -218,15 +218,15 @@ const checkIcon = `<polyline points="20 6 9 17 4 12"/>`;
           investigar, colaborar, diseñar y publicar. Tres sesiones, cuatro pilares, un negocio real lanzado.
         </p>
 
-        <div class="mt-11 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {pilares.map((p) => (
-            <article class="cc-reveal cc-card rounded-[18px] bg-white p-7 shadow-[0_10px_30px_rgba(0,19,63,0.07)] transition-all">
-              <div class="mb-4 grid h-[46px] w-[46px] place-items-center rounded-[12px] bg-[rgba(217,119,87,0.12)] text-[#c25f3f]">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-[22px] w-[22px]" set:html={p.icon} />
+        <div class="mt-11 grid grid-cols-2 gap-3 md:gap-5 lg:grid-cols-4">
+          {pilares.map((p, i) => (
+            <article class="cc-reveal cc-card cc-pil rounded-[18px] bg-white p-4 shadow-[0_10px_30px_rgba(0,19,63,0.07)] transition-all md:p-7" style={`--pd:${i * 0.65}s`}>
+              <div class="mb-3 grid h-[42px] w-[42px] place-items-center rounded-[12px] bg-[linear-gradient(135deg,#D97757,#FF7A2F)] text-white shadow-[0_8px_20px_rgba(217,119,87,0.35)] md:mb-4 md:h-[46px] md:w-[46px]">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-[20px] w-[20px] md:h-[22px] md:w-[22px]" set:html={p.icon} />
               </div>
-              <h3 class="font-display text-[1.5rem] font-extrabold uppercase tracking-[0.01em] text-[#00133F]">{p.name}</h3>
-              <p class="mt-2 text-[0.93rem] leading-[1.55] text-[rgba(0,19,63,0.66)]">{p.body}</p>
-              <span class="mt-4 inline-block rounded-full bg-[rgba(0,19,63,0.06)] px-3 py-1 text-[0.7rem] font-bold uppercase tracking-[0.12em] text-[#00133F]">{p.session}</span>
+              <h3 class="font-display text-[1.3rem] font-extrabold uppercase tracking-[0.01em] text-[#00133F] md:text-[1.5rem]">{p.name}</h3>
+              <p class="mt-1.5 text-[0.84rem] leading-[1.5] text-[rgba(0,19,63,0.66)] md:mt-2 md:text-[0.93rem]">{p.body}</p>
+              <span class="mt-3 inline-block rounded-full bg-[rgba(0,19,63,0.06)] px-3 py-1 text-[0.66rem] font-bold uppercase tracking-[0.12em] text-[#00133F] md:mt-4 md:text-[0.7rem]">{p.session}</span>
             </article>
           ))}
         </div>
@@ -551,8 +551,30 @@ const checkIcon = `<polyline points="20 6 9 17 4 12"/>`;
     45% { transform: translateX(130%); }
     100% { transform: translateX(130%); }
   }
+  .cc-pil {
+    position: relative;
+  }
+  .cc-pil::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 18px;
+    border: 2px solid transparent;
+    background: linear-gradient(135deg, rgba(217, 119, 87, 0.55), rgba(255, 122, 47, 0.22)) border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    animation: cc-pulse 2.6s ease-in-out infinite;
+    animation-delay: var(--pd, 0s);
+    pointer-events: none;
+  }
+  @keyframes cc-pulse {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+  }
   @media (prefers-reduced-motion: reduce) {
-    .cc-stats::before, .cc-sparkle::before, .cc-gradtext, .cc-shine::after { animation: none; }
+    .cc-stats::before, .cc-sparkle::before, .cc-gradtext, .cc-shine::after, .cc-pil::after { animation: none; }
   }
   .cc-ses:hover {
     transform: translateY(-4px);
