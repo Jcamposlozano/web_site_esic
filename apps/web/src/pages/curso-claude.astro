@@ -231,7 +231,7 @@ const checkIcon = `<polyline points="20 6 9 17 4 12"/>`;
           ))}
         </div>
 
-        <div class="cc-reveal relative z-[6] mx-auto -mb-[110px] mt-10 w-[290px]">
+        <div class="cc-reveal relative z-[6] mx-auto -mb-[110px] mt-10 w-[290px]" id="cc-mascot-wrap">
           <img
             src={asset("wp/2026/07/mascota-claude.webp")}
             alt="Mascota de Claude saludando"
@@ -335,13 +335,13 @@ const checkIcon = `<polyline points="20 6 9 17 4 12"/>`;
         <div class="cc-reveal">
           <span class="cc-kicker justify-center">Inscríbete al Level Up</span>
           <h2 class="font-display text-[clamp(2.8rem,7vw,5rem)] font-extrabold uppercase leading-[0.9] text-white">
-            Tu cupo te <span class="text-[#D97757]">está esperando</span>
+            Tu cupo te <span class="cc-gradtext">está esperando</span>
           </h2>
           <p class="mx-auto mt-6 max-w-[520px] text-[1.1rem] leading-[1.7] text-[rgba(244,237,228,0.74)]">
             Cupos limitados · 22, 29 ago y 5 sep · Presencial en Campus ESIC Medellín.
             Completa tu inscripción y continúa al pago seguro con Wompi.
           </p>
-          <p class="mb-6 mt-8 inline-flex items-baseline gap-2">
+          <p class="relative mb-6 mt-8 inline-flex items-baseline gap-2" id="cc-price-final">
             <b class="font-display text-[3rem] font-extrabold leading-none text-white">$1.200.000</b>
             <span class="text-[0.8rem] font-semibold uppercase tracking-[0.1em] text-[#D97757]">COP</span>
           </p>
@@ -350,7 +350,7 @@ const checkIcon = `<polyline points="20 6 9 17 4 12"/>`;
               href={WOMPI_URL}
               target="_blank"
               rel="noopener"
-              class="inline-flex items-center justify-center gap-2 rounded-full bg-[#D97757] px-9 py-4 text-[0.9rem] font-bold uppercase tracking-[0.05em] text-[#1a0e08] no-underline shadow-[0_10px_34px_rgba(217,119,87,0.34)] transition-all hover:-translate-y-0.5 hover:bg-[#E88C6D]"
+              class="cc-shine inline-flex items-center justify-center gap-2 rounded-full bg-[#D97757] px-9 py-4 text-[0.9rem] font-bold uppercase tracking-[0.05em] text-[#1a0e08] no-underline shadow-[0_10px_34px_rgba(217,119,87,0.34)] transition-all hover:-translate-y-0.5 hover:bg-[#E88C6D]"
             >
               Separa tu cupo →
             </a>
@@ -383,16 +383,73 @@ const checkIcon = `<polyline points="20 6 9 17 4 12"/>`;
     } else {
       reveals.forEach(function (el) { el.classList.add("cc-in"); });
     }
+
+    var fine = window.matchMedia("(pointer: fine)").matches;
+    var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // Tutores: spotlight que sigue el cursor
+    if (fine) {
+      document.querySelectorAll(".esic-curso-claude .cc-tutor").forEach(function (c) {
+        c.addEventListener("mousemove", function (e) {
+          var r = c.getBoundingClientRect();
+          c.style.setProperty("--sx", ((e.clientX - r.left) / r.width) * 100 + "%");
+          c.style.setProperty("--sy", ((e.clientY - r.top) / r.height) * 100 + "%");
+        });
+      });
+    }
+
+    // Mascota: parallax al mouse dentro de la seccion de pilares
+    var wrap = document.getElementById("cc-mascot-wrap");
+    if (wrap && fine && !reduced) {
+      var eco = wrap.closest("section");
+      eco.addEventListener("mousemove", function (e) {
+        var r = eco.getBoundingClientRect();
+        var dx = (e.clientX - r.left) / r.width - 0.5;
+        var dy = (e.clientY - r.top) / r.height - 0.5;
+        wrap.style.transform = "translate(" + dx * 26 + "px, " + dy * 14 + "px) rotate(" + dx * 4 + "deg)";
+      });
+      eco.addEventListener("mouseleave", function () { wrap.style.transform = ""; });
+      wrap.style.transition = "transform 0.25s ease-out";
+    }
+
+    // Cierre: sparkles alrededor del precio
+    var price = document.getElementById("cc-price-final");
+    if (price && !reduced) {
+      for (var i = 0; i < 10; i++) {
+        var s = document.createElement("span");
+        s.className = "cc-sparkle";
+        s.style.left = (-8 + Math.random() * 116) + "%";
+        s.style.top = (-30 + Math.random() * 160) + "%";
+        s.style.animationDelay = Math.random() * 2 + "s";
+        s.style.transform = "scale(" + (0.5 + Math.random()) + ")";
+        price.appendChild(s);
+      }
+    }
   })();
 </script>
 
 <style>
   .cc-stats {
-    background:
-      radial-gradient(ellipse at 15% 60%, rgba(255, 122, 47, 0.16), transparent 55%),
-      radial-gradient(ellipse at 85% 60%, rgba(217, 119, 87, 0.11), transparent 55%),
-      #0a0a0a;
+    background: #0a0a0a;
     box-shadow: 0 -30px 60px rgba(0, 0, 0, 0.45);
+    overflow: hidden;
+  }
+  .cc-stats::before {
+    content: "";
+    position: absolute;
+    inset: -45%;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 42% 34% at 28% 58%, rgba(255, 122, 47, 0.38), transparent 68%),
+      radial-gradient(ellipse 38% 32% at 72% 42%, rgba(217, 119, 87, 0.32), transparent 68%),
+      radial-gradient(ellipse 30% 26% at 50% 75%, rgba(232, 140, 109, 0.2), transparent 70%);
+    filter: blur(34px);
+    animation: cc-aurora 7s ease-in-out infinite alternate;
+  }
+  @keyframes cc-aurora {
+    0% { transform: translateX(-7%) translateY(-2%) rotate(-5deg) scale(1); }
+    50% { transform: translateX(3%) translateY(2%) rotate(2deg) scale(1.08); }
+    100% { transform: translateX(7%) translateY(-1%) rotate(5deg) scale(1); }
   }
   .cc-stat-border {
     border-left: 1px solid rgba(244, 237, 228, 0.14);
@@ -432,6 +489,70 @@ const checkIcon = `<polyline points="20 6 9 17 4 12"/>`;
   .cc-tutor:hover {
     transform: translateY(-4px);
     box-shadow: 0 16px 40px rgba(20, 18, 16, 0.14);
+  }
+  .cc-tutor {
+    position: relative;
+    overflow: hidden;
+  }
+  .cc-tutor::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(300px circle at var(--sx, 50%) var(--sy, 50%), rgba(217, 119, 87, 0.16), transparent 65%);
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .cc-tutor:hover::after {
+    opacity: 1;
+  }
+  .cc-sparkle {
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    pointer-events: none;
+  }
+  .cc-sparkle::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #d97757;
+    clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+    animation: cc-sp 1.9s ease-in-out infinite;
+  }
+  @keyframes cc-sp {
+    0%, 100% { transform: scale(0); opacity: 0; }
+    50% { transform: scale(1); opacity: 1; }
+  }
+  .cc-gradtext {
+    background: linear-gradient(90deg, #d97757, #ff7a2f, #f4ede4, #d97757);
+    background-size: 240% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: cc-gt 4.2s linear infinite;
+  }
+  @keyframes cc-gt {
+    to { background-position: 240% 0; }
+  }
+  .cc-shine {
+    position: relative;
+    overflow: hidden;
+  }
+  .cc-shine::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.45) 50%, transparent 70%);
+    transform: translateX(-130%);
+    animation: cc-shl 2.8s infinite;
+  }
+  @keyframes cc-shl {
+    45% { transform: translateX(130%); }
+    100% { transform: translateX(130%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cc-stats::before, .cc-sparkle::before, .cc-gradtext, .cc-shine::after { animation: none; }
   }
   .cc-ses:hover {
     transform: translateY(-4px);
