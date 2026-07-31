@@ -3,6 +3,7 @@ import "../styles/global.css";
 import Nav from "../components/Nav.tsx";
 import Footer from "../components/Footer.astro";
 import BlueChatWidget from "../components/BlueChatWidget.astro";
+import WhatsAppFloat from "../components/WhatsAppFloat.astro";
 import { asset } from "../lib/assets";
 
 interface Props {
@@ -74,5 +75,6 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
     <slot />
     {!hideFooter && <Footer />}
     {!hideFooter && <BlueChatWidget />}
+    {!hideFooter && <WhatsAppFloat />}
   </body>
 </html>
