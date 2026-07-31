@@ -1,22 +1,5 @@
 [
   {
-    "id": "e221a803-8738-4514-a276-6984111414bf",
-    "title": "DEMO",
-    "slug": "demo",
-    "category": "Noticias",
-    "author": "DEMO",
-    "excerpt": "DEMO",
-    "publishedAt": "2026-07-30T21:03:02.525Z",
-    "externalUrl": null,
-    "coverUrl": null,
-    "coverAlt": "DEMO",
-    "bodyHtml": "<p>PRUEBA</p>",
-    "seo": {
-      "metaTitle": "DEMO",
-      "metaDescription": "DEMO"
-    }
-  },
-  {
     "id": "aprender-a-decidir-el-valor-de-los-casos-reales-en-el-aula",
     "title": "Aprender a decidir: el valor de los casos reales en el aula",
     "slug": "aprender-a-decidir-el-valor-de-los-casos-reales-en-el-aula",
