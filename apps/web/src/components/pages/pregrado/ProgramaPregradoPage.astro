@@ -12,6 +12,7 @@ import Container from "../../Container.astro";
 import OverlapSection from "../../OverlapSection.astro";
 import ContactForm from "../../ContactForm.astro";
 import TestimonioVideo from "./TestimonioVideo.tsx";
+import FechasAdmisionSection from "./FechasAdmisionSection.astro";
 import PlanEstudiosTabs, {
   type PlanYear,
   type Institution,
@@ -238,4 +239,7 @@ const CheckPath = "M20 6L9 17l-5-5";
       </div>
     </Container>
   </OverlapSection>
+
+  <!-- 7. Fechas clave de admisión (cohorte enero 2027) -->
+  <FechasAdmisionSection bg="bg-white" z={7} />
 </main>

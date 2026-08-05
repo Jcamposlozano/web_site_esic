@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Container from "../components/Container.astro";
 import OverlapSection from "../components/OverlapSection.astro";
 import ContactFormSection from "../components/sections/ContactFormSection.astro";
+import FechasAdmisionSection from "../components/pages/pregrado/FechasAdmisionSection.astro";
 import { asset } from "../lib/assets";
 
 const ArrowRightPath = "M5 12h14M12 5l7 7-7 7";
@@ -227,8 +228,11 @@ const cifrasMedellin = [
       </Container>
     </OverlapSection>
 
-    <!-- 5. Highlight (única sección highlight — naranja) -->
-    <OverlapSection bg="bg-brand-orange-alt" textColor="text-white" z={5} padding="py-20 md:py-28">
+    <!-- 5. Fechas clave de admisión (cohorte enero 2027) -->
+    <FechasAdmisionSection bg="bg-bg" z={5} />
+
+    <!-- 6. Highlight (única sección highlight — naranja) -->
+    <OverlapSection bg="bg-brand-orange-alt" textColor="text-white" z={6} padding="py-20 md:py-28">
       <Container>
         <div class="max-w-[650px] mx-auto text-center">
           <span class="inline-flex items-center gap-3 text-[0.9rem] font-display font-extrabold uppercase tracking-[0.2em] text-white">
@@ -249,8 +253,8 @@ const cifrasMedellin = [
       </Container>
     </OverlapSection>
 
-    <!-- 6. Cifras y Reconocimiento (dark navy) -->
-    <OverlapSection bg="bg-brand-blue-dark" textColor="text-white" z={6} padding="py-[4.5rem] md:py-20">
+    <!-- 7. Cifras y Reconocimiento (dark navy) -->
+    <OverlapSection bg="bg-brand-blue-dark" textColor="text-white" z={7} padding="py-[4.5rem] md:py-20">
       <Container>
         <div class="mb-14">
           <span class="block font-body text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-white/30 mb-3">Trayectoria &amp; Presencia Global</span>
@@ -310,10 +314,10 @@ const cifrasMedellin = [
       </Container>
     </OverlapSection>
 
-    <!-- 7. Formulario (placeholder) -->
+    <!-- 8. Formulario (placeholder) -->
     <div id="formulario">
       <ContactFormSection
-        z={7}
+        z={8}
         bg="bg-bg"
         title="Solicita información"
         body="Completa el formulario y un asesor se pondrá en contacto contigo para guiarte en el proceso. 315 647 0299 · analista.comercial@esic.co"
