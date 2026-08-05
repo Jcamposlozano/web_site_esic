@@ -11,18 +11,20 @@
  */
 import Layout from "../layouts/Layout.astro";
 import ExecutiveProgramBody from "../components/pages/programas/ExecutiveProgramBody.astro";
+import { asset } from "../lib/assets";
 
 /**
- * El banner propio del Executive Program se sirve desde `public/` y NO desde
- * el bucket de assets: no había credenciales de AWS a mano para subirlo a
- * `prisma-fai-admin`. Cuando se suba, cambiar estas dos constantes por
- * asset("wp/2026/08/banner-executive-...") y borrar los .webp de
- * public/banners/. Ver design/executive-banner/README.md.
+ * Banner propio del Executive Program (antes se usaba, por error, el del
+ * Pregrado en Digital Business). Vive en el bucket de assets como el resto:
+ * `prisma-fai-admin` → src/esic-website/assets/wp/2026/08/.
+ * Ver design/executive-banner/README.md.
  */
-const EXEC_BANNER_DESKTOP =
-  "/banners/banner-executive-digital-business-transformation-desktop.webp";
-const EXEC_BANNER_MOBILE =
-  "/banners/banner-executive-digital-business-transformation-mobile.webp";
+const EXEC_BANNER_DESKTOP = asset(
+  "wp/2026/08/banner-executive-digital-business-transformation-desktop.webp",
+);
+const EXEC_BANNER_MOBILE = asset(
+  "wp/2026/08/banner-executive-digital-business-transformation-mobile.webp",
+);
 ---
 <Layout
   title="Digital Business Transformation — Executive Program — ESIC Medellín"

@@ -1,7 +1,8 @@
 # Banner Executive Program — Digital Business Transformation
 
-**Estado: EN PAUSA, pendiente de aprobación.** El banner está terminado pero
-todavía NO se aplicó a la página. Cuando lo aprueben, ver "Cómo publicarlo".
+**Estado: aplicado.** La página ya apunta al banner nuevo en el bucket de
+assets. **Falta subir los dos `.webp` de `subir-a-s3/`** — hasta que estén
+arriba, el hero de `/digital-business-transformation/` sale roto (403).
 
 ## Por qué existe
 
@@ -33,13 +34,25 @@ python3 build_banner.py
 El script espera la foto en `~/Downloads/esic-executive-hero.png`; si no está,
 apuntar `PHOTO` a `foto-ia-ejecutivo.png`.
 
-## Cómo publicarlo (cuando se apruebe)
+## Publicación
 
-1. Convertir a webp desktop + mobile.
-2. Subir a `prisma-fai-admin` bajo `src/esic-website/assets/wp/2026/08/`.
-3. Apuntar las tres referencias en `apps/web/src/pages/digital-business-transformation.astro`
-   (líneas 26-29) al nuevo asset.
-4. `astro build`, subir `dist/` al bucket `esic-web-site`, invalidar CloudFront `/*`.
+Los `.webp` listos están en `subir-a-s3/`. Van al bucket de assets:
+
+- Bucket: `prisma-fai-admin` (us-east-2, cuenta dev 092443462435)
+- Keys:
+  - `src/esic-website/assets/wp/2026/08/banner-executive-digital-business-transformation-desktop.webp`
+  - `src/esic-website/assets/wp/2026/08/banner-executive-digital-business-transformation-mobile.webp`
+
+Con el AWS CLI:
+
+```bash
+aws s3 cp subir-a-s3/ s3://prisma-fai-admin/src/esic-website/assets/wp/2026/08/ \
+  --recursive --exclude "*" --include "banner-executive-*.webp" \
+  --content-type image/webp
+```
+
+Después: subir el contenido de `apps/web/dist/` a la raíz de `esic-web-site` e
+invalidar CloudFront `/*`.
 
 ## Decisiones de diseño
 
