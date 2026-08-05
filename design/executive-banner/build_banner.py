@@ -137,3 +137,93 @@ paste_logo(os.path.join(HERE, "logo-prestigio.png"), sep_x + 74, LOGO_Y + 30, 90
 
 canvas.save(OUT, quality=95)
 print(f"OK -> {OUT}  {canvas.size}")
+
+# ============================================================ version mobile
+# Mismo lenguaje visual en vertical (2048x2900, el ratio del banner mobile
+# actual de Digital Business): titular arriba, foto abajo, logos al pie.
+MW, MH = 2048, 2900
+m = Image.new("RGB", (MW, MH), NAVY)
+md = ImageDraw.Draw(m)
+
+MP_X, MP_Y, MP_W, MP_H = 300, 1320, 1448, 1180
+
+
+def draw_center(d, text, font, y, cx, fill=WHITE, tracking=0):
+    if tracking == 0:
+        w = d.textlength(text, font=font)
+        d.text((cx - w / 2, y), text, font=font, fill=fill)
+        return
+    total = sum(d.textlength(c, font=font) + tracking for c in text) - tracking
+    x = cx - total / 2
+    for c in text:
+        d.text((x, y), c, font=font, fill=fill)
+        x += d.textlength(c, font=font) + tracking
+
+
+mf_head = fit("", FONT_BOLD, 300, HEAD_WEIGHT)
+mf_sub = fit("", FONT_LIGHT, 108, SUB_WEIGHT)
+mf_meta = fit("", FONT_LIGHT, 66, SUB_WEIGHT)
+
+CX = MW // 2
+draw_center(md, "EXECUTIVE", mf_head, 300, CX)
+draw_center(md, "PROGRAMS", mf_head, 300 + 244, CX)
+draw_center(md, "DIGITAL BUSINESS", mf_sub, 884, CX)
+draw_center(md, "TRANSFORMATION", mf_sub, 1002, CX)
+draw_center(md, "4 MESES  ·  MADRID  ·  2026", mf_meta, 1150, CX, tracking=8)
+
+mphoto = Image.open(PHOTO).convert("RGB")
+sw, sh = mphoto.size
+ch = int(sw / (MP_W / MP_H))
+ct = int((sh - ch) * 0.12)
+mphoto = mphoto.crop((0, ct, sw, ct + ch)).resize((MP_W, MP_H), Image.LANCZOS)
+m.paste(mphoto, (MP_X, MP_Y))
+
+MBAR = int(MP_H * 0.054)
+MSTUB_W = int(MP_W * 0.095)
+MSTUB_H = int(MP_H * 0.061)
+MOVER = int(MP_W * 0.36)
+# En vertical el corchete se saldría del lienzo por la izquierda: se ancla a un
+# margen fijo y la barra se acorta, en vez de recortarse contra el borde.
+mbx = 130
+MBR_W = MP_X + MOVER - mbx
+mby = MP_Y + int(MP_H * 0.05)
+md.rectangle([mbx, mby, mbx + MBR_W, mby + MBAR], fill=GOLD)
+md.rectangle([mbx, mby + MBAR, mbx + MSTUB_W, mby + MBAR + MSTUB_H], fill=GOLD)
+mby1 = MP_Y + MP_H - int(MP_H * 0.02)
+md.rectangle([mbx, mby1 - MBAR, mbx + MBR_W, mby1], fill=GOLD)
+md.rectangle(
+    [mbx + MBR_W - MSTUB_W, mby1 - MBAR - MSTUB_H, mbx + MBR_W, mby1 - MBAR], fill=GOLD
+)
+
+
+def paste_logo_on(img, path, x, y, height):
+    logo = Image.open(path).convert("RGBA")
+    logo = logo.crop(logo.getchannel("A").getbbox())
+    w = int(logo.width * height / logo.height)
+    logo = logo.resize((w, height), Image.LANCZOS)
+    white = Image.new("RGBA", logo.size, WHITE + (0,))
+    white.putalpha(logo.getchannel("A"))
+    img.paste(white, (x, y), white)
+    return w
+
+
+ML_H = 175
+esic_path = os.path.join(HERE, "logo-esic.png")
+prest_path = os.path.join(HERE, "logo-prestigio.png")
+_e = Image.open(esic_path)
+_e = _e.crop(_e.convert("RGBA").getchannel("A").getbbox())
+ew = int(_e.width * ML_H / _e.height)
+_p = Image.open(prest_path)
+_p = _p.crop(_p.convert("RGBA").getchannel("A").getbbox())
+pw = int(_p.width * (ML_H * 0.6) / _p.height)
+total = ew + 90 + 6 + 90 + pw
+lx = CX - total // 2
+ly = 2620
+paste_logo_on(m, esic_path, lx, ly, ML_H)
+sx = lx + ew + 90
+md.rectangle([sx, ly + 12, sx + 6, ly + ML_H - 12], fill=WHITE)
+paste_logo_on(m, prest_path, sx + 96, ly + int(ML_H * 0.2), int(ML_H * 0.6))
+
+OUT_M = os.path.join(HERE, "banner-executive-digital-business-transformation-mobile.png")
+m.save(OUT_M, quality=95)
+print(f"OK -> {OUT_M}  {m.size}")
