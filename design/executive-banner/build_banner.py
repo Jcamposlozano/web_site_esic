@@ -99,17 +99,18 @@ SUB_WEIGHT = os.environ.get("SUB_WEIGHT")
 
 f_head = fit("", FONT_BOLD, 230, HEAD_WEIGHT)
 f_sub = fit("", FONT_LIGHT, 86, SUB_WEIGHT)
-f_meta = fit("", FONT_LIGHT, 52, SUB_WEIGHT)
 
-TOP = 215
+# Solo titular + subtitulo. Sin la linea de claims (meses / Madrid / año).
+TOP = 250
 draw_right("EXECUTIVE", f_head, TOP)
 draw_right("PROGRAMS", f_head, TOP + 186)
 draw_right("DIGITAL BUSINESS TRANSFORMATION", f_sub, TOP + 186 + 270)
-draw_right("4 MESES  ·  MADRID  ·  2026", f_meta, TOP + 186 + 270 + 116, tracking=6)
 
 # --------------------------------------------------------------------- logos
-LOGO_Y = 900
-LOGO_H = 150
+# Holgura abajo: la barra de stats de la pagina monta sobre el borde inferior
+# del banner, asi que los logos no pueden quedar pegados al filo.
+LOGO_Y = 855
+LOGO_H = 140
 
 
 def paste_logo(path, x, y, height):
@@ -145,7 +146,7 @@ MW, MH = 2048, 2900
 m = Image.new("RGB", (MW, MH), NAVY)
 md = ImageDraw.Draw(m)
 
-MP_X, MP_Y, MP_W, MP_H = 300, 1320, 1448, 1180
+MP_X, MP_Y, MP_W, MP_H = 300, 1300, 1448, 1150
 
 
 def draw_center(d, text, font, y, cx, fill=WHITE, tracking=0):
@@ -162,14 +163,12 @@ def draw_center(d, text, font, y, cx, fill=WHITE, tracking=0):
 
 mf_head = fit("", FONT_BOLD, 300, HEAD_WEIGHT)
 mf_sub = fit("", FONT_LIGHT, 108, SUB_WEIGHT)
-mf_meta = fit("", FONT_LIGHT, 66, SUB_WEIGHT)
 
 CX = MW // 2
-draw_center(md, "EXECUTIVE", mf_head, 300, CX)
-draw_center(md, "PROGRAMS", mf_head, 300 + 244, CX)
-draw_center(md, "DIGITAL BUSINESS", mf_sub, 884, CX)
-draw_center(md, "TRANSFORMATION", mf_sub, 1002, CX)
-draw_center(md, "4 MESES  ·  MADRID  ·  2026", mf_meta, 1150, CX, tracking=8)
+draw_center(md, "EXECUTIVE", mf_head, 330, CX)
+draw_center(md, "PROGRAMS", mf_head, 330 + 244, CX)
+draw_center(md, "DIGITAL BUSINESS", mf_sub, 924, CX)
+draw_center(md, "TRANSFORMATION", mf_sub, 1042, CX)
 
 mphoto = Image.open(PHOTO).convert("RGB")
 sw, sh = mphoto.size
@@ -207,7 +206,7 @@ def paste_logo_on(img, path, x, y, height):
     return w
 
 
-ML_H = 175
+ML_H = 165
 esic_path = os.path.join(HERE, "logo-esic.png")
 prest_path = os.path.join(HERE, "logo-prestigio.png")
 _e = Image.open(esic_path)
@@ -218,7 +217,7 @@ _p = _p.crop(_p.convert("RGBA").getchannel("A").getbbox())
 pw = int(_p.width * (ML_H * 0.6) / _p.height)
 total = ew + 90 + 6 + 90 + pw
 lx = CX - total // 2
-ly = 2620
+ly = 2570
 paste_logo_on(m, esic_path, lx, ly, ML_H)
 sx = lx + ew + 90
 md.rectangle([sx, ly + 12, sx + 6, ly + ML_H - 12], fill=WHITE)
