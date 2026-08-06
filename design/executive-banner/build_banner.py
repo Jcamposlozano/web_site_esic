@@ -113,28 +113,43 @@ LOGO_Y = 855
 LOGO_H = 140
 
 
-def paste_logo(path, x, y, height):
-    """Recorta al contenido, fuerza el logo a blanco sólido y lo pega por alpha.
+def load_logo(path, height):
+    """Recorta al contenido, escala y fuerza el logo a blanco sólido.
 
-    El logo-prestigio.png de S3 viene en verde petróleo (0,60,79), no en blanco:
-    sin forzar el color desaparece sobre el azul marino.
+    Ninguno de los tres viene en blanco: Prestigio está en verde petróleo
+    (0,60,79) y Accenture en negro con la flecha morada (161,0,255). Sin
+    forzar el color desaparecen o desentonan sobre el azul marino.
     """
     logo = Image.open(path).convert("RGBA")
-    bbox = logo.getchannel("A").getbbox()
-    logo = logo.crop(bbox)
-    w = int(logo.width * height / logo.height)
+    logo = logo.crop(logo.getchannel("A").getbbox())
+    w = max(1, int(logo.width * height / logo.height))
     logo = logo.resize((w, height), Image.LANCZOS)
-    alpha = logo.getchannel("A")
     white = Image.new("RGBA", logo.size, WHITE + (0,))
-    white.putalpha(alpha)
-    canvas.paste(white, (x, y), white)
-    return w
+    white.putalpha(logo.getchannel("A"))
+    return white
 
 
-esic_w = paste_logo(os.path.join(HERE, "logo-esic.png"), 200, LOGO_Y, LOGO_H)
-sep_x = 200 + esic_w + 70
-draw.rectangle([sep_x, LOGO_Y + 10, sep_x + 4, LOGO_Y + LOGO_H - 10], fill=WHITE)
-paste_logo(os.path.join(HERE, "logo-prestigio.png"), sep_x + 74, LOGO_Y + 30, 90)
+def draw_logo_row(img, d, items, x_left, y_center, pad, sep_h):
+    """Fila de logos separados por una regla vertical, centrados en y_center.
+
+    items: [(nombre_archivo, alto_en_px)] — cada logo lleva su propio alto
+    porque las proporciones de los tres wordmarks son muy distintas.
+    """
+    logos = [load_logo(os.path.join(HERE, n), h) for n, h in items]
+    x = x_left
+    for i, logo in enumerate(logos):
+        if i:
+            d.rectangle(
+                [x, y_center - sep_h // 2, x + 6, y_center + sep_h // 2], fill=WHITE
+            )
+            x += 6 + pad
+        img.paste(logo, (x, y_center - logo.height // 2), logo)
+        x += logo.width + pad
+    return x - pad
+
+
+DESKTOP_LOGOS = [("logo-esic.png", 140), ("logo-prestigio.png", 90), ("logo-accenture.png", 64)]
+draw_logo_row(canvas, draw, DESKTOP_LOGOS, 200, LOGO_Y + LOGO_H // 2, 55, 120)
 
 canvas.save(OUT, quality=95)
 print(f"OK -> {OUT}  {canvas.size}")
@@ -195,33 +210,17 @@ md.rectangle(
 )
 
 
-def paste_logo_on(img, path, x, y, height):
-    logo = Image.open(path).convert("RGBA")
-    logo = logo.crop(logo.getchannel("A").getbbox())
-    w = int(logo.width * height / logo.height)
-    logo = logo.resize((w, height), Image.LANCZOS)
-    white = Image.new("RGBA", logo.size, WHITE + (0,))
-    white.putalpha(logo.getchannel("A"))
-    img.paste(white, (x, y), white)
-    return w
+MOBILE_LOGOS = [
+    ("logo-esic.png", 190),
+    ("logo-prestigio.png", 116),
+    ("logo-accenture.png", 82),
+]
+MPAD, MSEP_H = 62, 150
 
-
-ML_H = 165
-esic_path = os.path.join(HERE, "logo-esic.png")
-prest_path = os.path.join(HERE, "logo-prestigio.png")
-_e = Image.open(esic_path)
-_e = _e.crop(_e.convert("RGBA").getchannel("A").getbbox())
-ew = int(_e.width * ML_H / _e.height)
-_p = Image.open(prest_path)
-_p = _p.crop(_p.convert("RGBA").getchannel("A").getbbox())
-pw = int(_p.width * (ML_H * 0.6) / _p.height)
-total = ew + 90 + 6 + 90 + pw
-lx = CX - total // 2
-ly = 2570
-paste_logo_on(m, esic_path, lx, ly, ML_H)
-sx = lx + ew + 90
-md.rectangle([sx, ly + 12, sx + 6, ly + ML_H - 12], fill=WHITE)
-paste_logo_on(m, prest_path, sx + 96, ly + int(ML_H * 0.2), int(ML_H * 0.6))
+# Ancho total de la fila para poder centrarla en el lienzo.
+_widths = [load_logo(os.path.join(HERE, n), h).width for n, h in MOBILE_LOGOS]
+row_w = sum(_widths) + (len(_widths) - 1) * (6 + 2 * MPAD)
+draw_logo_row(m, md, MOBILE_LOGOS, CX - row_w // 2, 2660, MPAD, MSEP_H)
 
 OUT_M = os.path.join(HERE, "banner-executive-digital-business-transformation-mobile.png")
 m.save(OUT_M, quality=95)
