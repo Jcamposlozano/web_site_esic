@@ -30,10 +30,10 @@ const { withForm = false } = Astro.props;
 /**
  * Brochure oficial del programa.
  * Fuente: SharePoint Marketing → DISEÑO/Brochure/CORPORATE/EP 2026/
- * "2026 Executive Program.pdf". Como el resto de PDFs del sitio, se sirve
- * desde el bucket de assets (pendiente de subir, ver design/executive-banner/README.md).
+ * "2026 Executive Program.pdf". Ya está subido al bucket de assets con ese
+ * mismo nombre (con espacios, de ahí el %20).
  */
-const BROCHURE_URL = asset("wp/2026/08/2026-Executive-Program.pdf");
+const BROCHURE_URL = asset("wp/2026/08/2026%20Executive%20Program.pdf");
 ---
 <!-- Stats Bar -->
 <div class="exec__container" style="position:relative; z-index:12;">
