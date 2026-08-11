@@ -10,12 +10,30 @@
  *  - Estructura del Programa (3 módulos + highlight Madrid)
  *  - Cocreadores (ESIC · Prestigio · Accenture)
  *  - Metodología (círculos dorados + DMLA + categorías + barra internacional)
- *  - Quote CTA (Juan Manuel Jiménez)
+ *  - CTA final: quote de Juan Manuel Jiménez + (opcional) formulario de captura
  *
  * El acento de Executive es AZUL (#0047E9); la metodología usa dorado (#C09C2E)
  * tal como en el original. Los estilos son scoped (Astro) — markup 1:1.
+ *
+ * withForm: convierte el CTA de cierre en la estructura de las demás páginas
+ * (copy a la izquierda + tarjeta con formulario a la derecha) y añade la
+ * descarga del brochure. La quote y el celular de JuanMa se conservan al lado.
  */
 import { asset } from "../../../lib/assets";
+import ExecutiveContactForm from "./ExecutiveContactForm.astro";
+
+interface Props {
+  withForm?: boolean;
+}
+const { withForm = false } = Astro.props;
+
+/**
+ * Brochure oficial del programa.
+ * Fuente: SharePoint Marketing → DISEÑO/Brochure/CORPORATE/EP 2026/
+ * "2026 Executive Program.pdf". Como el resto de PDFs del sitio, se sirve
+ * desde el bucket de assets (pendiente de subir, ver design/executive-banner/README.md).
+ */
+const BROCHURE_URL = asset("wp/2026/08/2026-Executive-Program.pdf");
 ---
 <!-- Stats Bar -->
 <div class="exec__container" style="position:relative; z-index:12;">
@@ -101,7 +119,7 @@ import { asset } from "../../../lib/assets";
           </svg>
         </div>
         <h3>Fechas</h3>
-        <p>Inicio: martes 2 de junio 2026<br />Fin: viernes 2 de octubre 2026</p>
+        <p><strong>Inicio:</strong> martes 2 de junio 2026<br /><strong>Fin:</strong> viernes 2 de octubre 2026</p>
       </div>
       <div class="exec__info-col">
         <div class="exec__info-col-icon">
@@ -111,8 +129,8 @@ import { asset } from "../../../lib/assets";
             <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
           </svg>
         </div>
-        <h3>Inmersión Internacional</h3>
-        <p>Madrid – 4 días<br />Sep 29 a Oct 2, 2026</p>
+        <h3>Inmersión internacional</h3>
+        <p><strong>Madrid — 4 días</strong><br />29 de septiembre a 2 de octubre 2026</p>
       </div>
       <div class="exec__info-col">
         <div class="exec__info-col-icon">
@@ -122,9 +140,9 @@ import { asset } from "../../../lib/assets";
           </svg>
         </div>
         <h3>Duración</h3>
-        <p>4 meses · 2h/semana<br />Jueves 7:00–9:00am<br />2 sesiones presenciales</p>
+        <p><strong>4 meses · 2h por semana</strong><br />Jueves de 7:00 a 9:00 a.m.<br />2 sesiones presenciales</p>
       </div>
-      <div class="exec__info-col">
+      <div class="exec__info-col exec__info-col--precio">
         <div class="exec__info-col-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="12" y1="1" x2="12" y2="23"/>
@@ -133,7 +151,7 @@ import { asset } from "../../../lib/assets";
         </div>
         <h3>Inversión</h3>
         <div class="exec__precio">$30.345.000</div>
-        <p class="exec__nota">IVA incluido. *No incluye tiquetes ni hospedaje en Madrid</p>
+        <p class="exec__nota">IVA incluido. No incluye tiquetes ni hospedaje en Madrid.</p>
       </div>
     </div>
   </div>
@@ -194,7 +212,7 @@ import { asset } from "../../../lib/assets";
     <h2>Programa cocreado por</h2>
     <div class="exec__logos-row">
       <div class="exec__logo-item exec__logo-esic">
-        <img src={asset("wp/2024/08/cropped-logo-esic-web-1.png")} alt="ESIC" />
+        <img src={asset("wp/2026/02/logo-esic.png")} alt="ESIC Business &amp; Marketing School" />
       </div>
       <div class="exec__logo-item exec__logo-prestigio">
         <img src={asset("wp/2026/02/logo-prestigio.png")} alt="Prestigio" />
@@ -261,14 +279,50 @@ import { asset } from "../../../lib/assets";
   </div>
 </section>
 
-<!-- Quote CTA -->
+<!-- CTA de cierre: quote + (opcional) formulario de captura -->
 <section class="exec__quote-cta exec__overlap" id="contacto">
   <div class="exec__container">
-    <blockquote>"ES MOMENTO DE TRANSFORMAR,<br /><em>no de adaptarse.</em><br />Tú marcas la diferencia"</blockquote>
-    <div class="exec__quote-divider"></div>
-    <h3>JUAN MANUEL JIMÉNEZ</h3>
-    <p class="exec__cargo">Director Comercial ESIC Medellín</p>
-    <a class="exec__telefono" href="tel:+573042364804">+57 304 2364804</a>
+    {withForm ? (
+      <div class="exec__cta-grid">
+        <div class="exec__cta-copy">
+          <blockquote>"ES MOMENTO DE TRANSFORMAR,<br /><em>no de adaptarse.</em><br />Tú marcas la diferencia"</blockquote>
+          <div class="exec__quote-divider"></div>
+          <h3>JUAN MANUEL JIMÉNEZ</h3>
+          <p class="exec__cargo">Director Comercial ESIC Medellín</p>
+          <a class="exec__telefono" href="tel:+573042364804">+57 304 2364804</a>
+
+          <a
+            class="exec__brochure"
+            href={BROCHURE_URL}
+            target="_blank"
+            rel="noopener"
+            download
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            Descargar brochure
+          </a>
+        </div>
+
+        <div class="exec__cta-card">
+          <span class="exec__cta-kicker">Solicita información</span>
+          <h4>Déjanos tus datos</h4>
+          <p class="exec__cta-lead">Un asesor te contacta con el detalle del programa, fechas, formas de pago y la inmersión en Madrid.</p>
+          <ExecutiveContactForm idPrefix="exec-dbt" />
+        </div>
+      </div>
+    ) : (
+      <div class="exec__cta-copy exec__cta-copy--solo">
+        <blockquote>"ES MOMENTO DE TRANSFORMAR,<br /><em>no de adaptarse.</em><br />Tú marcas la diferencia"</blockquote>
+        <div class="exec__quote-divider"></div>
+        <h3>JUAN MANUEL JIMÉNEZ</h3>
+        <p class="exec__cargo">Director Comercial ESIC Medellín</p>
+        <a class="exec__telefono" href="tel:+573042364804">+57 304 2364804</a>
+      </div>
+    )}
   </div>
 </section>
 
@@ -392,39 +446,69 @@ import { asset } from "../../../lib/assets";
     text-align: center;
     margin-bottom: 3rem;
   }
+  /* Tarjetas en vez de 4 columnas suelta: cada dato queda contenido, con la
+     misma altura y el mismo ritmo vertical (antes se leía desalineado). */
   .exec__info-row {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
+    gap: 1.25rem;
+    align-items: stretch;
   }
-  .exec__info-col { text-align: center; }
-  .exec__info-col-icon { color: #fff; margin-bottom: 1rem; }
-  .exec__info-col-icon svg { width: 32px; height: 32px; stroke: #fff; }
+  .exec__info-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+    padding: 2rem 1.5rem;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.16);
+  }
+  .exec__info-col-icon {
+    width: 52px;
+    height: 52px;
+    display: grid;
+    place-items: center;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.12);
+    color: #fff;
+    margin-bottom: 1.1rem;
+  }
+  .exec__info-col-icon svg { width: 26px; height: 26px; stroke: #fff; }
   .exec__info-col h3 {
     font-family: "Sofia Sans Extra Condensed", sans-serif;
-    font-size: 1.05rem;
-    font-weight: 700;
+    font-size: 1.35rem;
+    font-weight: 800;
     text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 1.1;
     color: #fff;
-    margin-bottom: 0.5rem;
+    margin: 0 0 0.85rem;
+    padding-bottom: 0.85rem;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    width: 100%;
   }
   .exec__info-col p {
-    font-size: 0.88rem;
-    line-height: 1.6;
-    color: rgba(255,255,255,0.85);
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.82);
+    margin: 0;
   }
+  .exec__info-col p strong { color: #fff; font-weight: 600; }
   .exec__info-col .exec__precio {
     font-family: "Sofia Sans Extra Condensed", sans-serif;
-    font-size: 2rem;
+    font-size: 2.4rem;
     font-weight: 800;
     color: #0AE4C3;
     line-height: 1;
+    margin-bottom: 0.6rem;
   }
   .exec__info-col .exec__nota {
-    font-size: 0.78rem;
-    color: rgba(255,255,255,0.65);
-    font-style: italic;
-    margin-top: 0.4rem;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: rgba(255,255,255,0.62);
+    margin-top: auto;
   }
 
   /* ── Estructura ── */
@@ -542,19 +626,29 @@ import { asset } from "../../../lib/assets";
     letter-spacing: 0.1em;
     margin-bottom: 2.5rem;
   }
+  /* Los tres logos vienen del mismo lienzo (800×350) con la marca centrada, así
+     que a igual altura de lienzo quedan alineados y a la misma escala óptica.
+     Se pintan en negro sólido: los originales son azul, verde petróleo y negro
+     con flecha morada, y juntos en blanco desentonaban. */
   .exec__logos-row {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 8rem;
+    gap: clamp(2rem, 6vw, 5rem);
     flex-wrap: wrap;
   }
   .exec__logo-item { display: flex; align-items: center; justify-content: center; }
-  .exec__logo-item img { object-fit: contain; transition: all 0.3s; }
-  .exec__logo-item img:hover { transform: scale(1.05); }
-  .exec__logo-esic img { height: 63px; }
-  .exec__logo-prestigio img { height: 54px; }
-  .exec__logo-accenture img { height: 45px; }
+  .exec__logo-item img {
+    height: 84px;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(0) saturate(0);
+    opacity: 0.88;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .exec__logo-item img:hover { opacity: 1; transform: translateY(-2px); }
+  /* Accenture ocupa más alto de lienzo (lleva la flecha encima del wordmark). */
+  .exec__logo-accenture img { height: 78px; }
 
   /* ── Metodología ── */
   .exec__metodologia {
@@ -736,7 +830,7 @@ import { asset } from "../../../lib/assets";
     z-index: 1;
   }
 
-  /* ── Quote CTA ── */
+  /* ── CTA de cierre ── */
   .exec__quote-cta {
     padding: 6rem 0;
     background: #00133F;
@@ -744,6 +838,21 @@ import { asset } from "../../../lib/assets";
     text-align: center;
     z-index: 7;
   }
+  /* Con formulario: copy a la izquierda, tarjeta blanca a la derecha (misma
+     estructura que el resto de páginas de programa). */
+  .exec__cta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3.5rem;
+    align-items: center;
+    text-align: left;
+  }
+  .exec__cta-grid .exec__cta-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .exec__cta-copy--solo { text-align: center; }
   .exec__quote-cta blockquote {
     font-family: "Sofia Sans Extra Condensed", sans-serif;
     font-size: clamp(1.8rem, 4vw, 3rem);
@@ -752,6 +861,67 @@ import { asset } from "../../../lib/assets";
     line-height: 0.95;
     max-width: 650px;
     margin: 0 auto 2.5rem;
+  }
+  .exec__cta-grid blockquote,
+  .exec__cta-grid .exec__quote-divider { margin-left: 0; }
+
+  /* Brochure */
+  .exec__brochure {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 1.8rem;
+    padding: 0.85rem 1.6rem;
+    border: 2px solid rgba(255,255,255,0.45);
+    border-radius: 50px;
+    font-family: "DM Sans", sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #fff;
+    text-decoration: none;
+    transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+  }
+  .exec__brochure svg { width: 16px; height: 16px; }
+  .exec__brochure:hover {
+    border-color: #fff;
+    background: rgba(255,255,255,0.08);
+    transform: translateY(-2px);
+  }
+
+  /* Tarjeta del formulario */
+  .exec__cta-card {
+    background: #fff;
+    border-radius: 24px;
+    padding: 2.5rem;
+    text-align: left;
+    box-shadow: 0 24px 70px rgba(0,0,0,0.28);
+  }
+  .exec__cta-kicker {
+    display: block;
+    font-family: "DM Sans", sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: #0047E9;
+    margin-bottom: 0.6rem;
+  }
+  .exec__cta-card h4 {
+    font-family: "Sofia Sans Extra Condensed", sans-serif;
+    font-size: 2.1rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1;
+    color: #00133F;
+    margin: 0 0 0.6rem;
+  }
+  .exec__cta-lead {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: #5F6B7A;
+    margin: 0 0 1.8rem;
   }
   .exec__quote-cta blockquote em { font-style: normal; color: #0AE4C3; }
   .exec__quote-divider {
@@ -781,6 +951,7 @@ import { asset } from "../../../lib/assets";
     .exec__stats-bar { grid-template-columns: repeat(2, 1fr); }
     .exec__proposito-grid { grid-template-columns: 1fr; gap: 2rem; }
     .exec__info-row { grid-template-columns: repeat(2, 1fr); }
+    .exec__cta-grid { grid-template-columns: 1fr; gap: 2.5rem; }
     .exec__modulos-grid { grid-template-columns: 1fr; }
     .exec__metodologia-circle { width: 110px; height: 110px; }
     .exec__metodologia-plus { font-size: 2rem; }
@@ -797,12 +968,16 @@ import { asset } from "../../../lib/assets";
     .exec__estructura { padding: 3rem 0; }
     .exec__cocreadores { padding: 3rem 0; }
     .exec__quote-cta { padding: 3rem 0; }
-    .exec__info-col .exec__precio { font-size: 1.4rem; }
+    .exec__cta-card { padding: 1.6rem; border-radius: 18px; }
+    .exec__cta-card h4 { font-size: 1.7rem; }
+    .exec__info-col { padding: 1.5rem 1.1rem; border-radius: 16px; }
+    .exec__info-col h3 { font-size: 1.15rem; }
+    .exec__info-col p { font-size: 0.88rem; }
+    .exec__info-col .exec__precio { font-size: 1.7rem; }
     .exec__modulo-col li { flex-wrap: wrap; }
-    .exec__logos-row { gap: 3rem; flex-direction: column; }
-    .exec__logo-esic img { height: 49px; }
-    .exec__logo-prestigio img { height: 42px; }
-    .exec__logo-accenture img { height: 35px; }
+    .exec__logos-row { gap: 2rem; flex-direction: column; }
+    .exec__logo-item img { height: 66px; }
+    .exec__logo-accenture img { height: 61px; }
     .exec__metodologia { overflow: hidden; }
     .exec__metodologia-circles { padding: 3rem 1.5rem 2rem; }
     .exec__metodologia-circles-container { flex-direction: column; gap: 1.5rem; }

@@ -1,8 +1,15 @@
 # Banner Executive Program — Digital Business Transformation
 
-**Estado: aplicado.** La página ya apunta al banner nuevo en el bucket de
-assets. **Falta subir los dos `.webp` de `subir-a-s3/`** — hasta que estén
-arriba, el hero de `/digital-business-transformation/` sale roto (403).
+**Estado: pendiente de subir.** La página ya apunta a las keys correctas, pero
+en S3 está una versión vieja del 5 de agosto de 2026: dice "EXECUTIVE
+**PROGRAMS**" (plural) y le falta el logo de **Accenture**. Los `.webp` de
+`subir-a-s3/` ya traen el titular en singular y los tres logos; mientras no se
+suban, el hero en vivo sigue mostrando la versión incompleta.
+
+Además falta subir el brochure del programa (lo enlaza el CTA de la página):
+
+- Origen: SharePoint Marketing → `DISEÑO/Brochure/CORPORATE/EP 2026/2026 Executive Program.pdf`
+- Destino: `src/esic-website/assets/wp/2026/08/2026-Executive-Program.pdf`
 
 ## Por qué existe
 

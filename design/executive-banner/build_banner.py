@@ -18,7 +18,11 @@ GOLD = (160, 141, 74)
 WHITE = (255, 255, 255)
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-PHOTO = os.path.expanduser("~/Downloads/esic-executive-hero.png")
+PHOTO = os.environ.get("PHOTO") or os.path.expanduser(
+    "~/Downloads/esic-executive-hero.png"
+)
+if not os.path.isabs(PHOTO):
+    PHOTO = os.path.join(HERE, PHOTO)
 OUT = os.path.join(HERE, "banner-executive-digital-business-transformation-desktop.png")
 
 # Fuentes: se pasan por env para poder cambiar entre la de marca (Sofia Sans
@@ -103,7 +107,9 @@ f_sub = fit("", FONT_LIGHT, 86, SUB_WEIGHT)
 # Solo titular + subtitulo. Sin la linea de claims (meses / Madrid / año).
 TOP = 250
 draw_right("EXECUTIVE", f_head, TOP)
-draw_right("PROGRAMS", f_head, TOP + 186)
+# Singular: es UN programa (Digital Business Transformation), no la oferta
+# completa de executive programs.
+draw_right("PROGRAM", f_head, TOP + 186)
 draw_right("DIGITAL BUSINESS TRANSFORMATION", f_sub, TOP + 186 + 270)
 
 # --------------------------------------------------------------------- logos
@@ -181,7 +187,7 @@ mf_sub = fit("", FONT_LIGHT, 108, SUB_WEIGHT)
 
 CX = MW // 2
 draw_center(md, "EXECUTIVE", mf_head, 330, CX)
-draw_center(md, "PROGRAMS", mf_head, 330 + 244, CX)
+draw_center(md, "PROGRAM", mf_head, 330 + 244, CX)
 draw_center(md, "DIGITAL BUSINESS", mf_sub, 924, CX)
 draw_center(md, "TRANSFORMATION", mf_sub, 1042, CX)
 

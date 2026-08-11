@@ -27,33 +27,50 @@ const EXEC_BANNER_MOBILE = asset(
 );
 ---
 <Layout
-  title="Digital Business Transformation — Executive Program — ESIC Medellín"
-  description="Executive Program Digital Business Transformation 2026. 4 meses, inmersión en Madrid, cocreado por ESIC, Prestigio y Accenture."
+  title="Executive Program en Digital Business Transformation — ESIC Medellín"
+  description="Executive Program en Digital Business Transformation 2026: 4 meses, 2h por semana, inmersión de 4 días en Madrid. Cocreado por ESIC, Prestigio y Accenture."
   fullBleed
 >
   <main class="exec-program-widget">
     <!-- Hero Banner -->
     <section class="exec__hero-banner">
-      <a href="#contacto" aria-label="Más información sobre Digital Business Transformation">
+      <!-- El titular vive dentro del banner (imagen), así que el h1 de la
+           página va aquí para SEO y lectores de pantalla. -->
+      <h1 class="exec__sr-title">
+        Executive Program en Digital Business Transformation — ESIC Medellín
+      </h1>
+      <a href="#contacto" aria-label="Solicitar información del Executive Program en Digital Business Transformation">
         <picture>
           <source media="(max-width: 768px)" srcset={EXEC_BANNER_MOBILE} type="image/webp" />
           <source media="(min-width: 769px)" srcset={EXEC_BANNER_DESKTOP} type="image/webp" />
           <img
             src={EXEC_BANNER_DESKTOP}
-            alt="Digital Business Transformation - Executive Program ESIC"
+            alt="Executive Program en Digital Business Transformation — ESIC, Prestigio y Accenture"
             loading="eager"
           />
         </picture>
       </a>
     </section>
 
-    <ExecutiveProgramBody />
+    <ExecutiveProgramBody withForm />
   </main>
 </Layout>
 
 <style>
   .exec-program-widget { color: #0B132B; }
   .exec__hero-banner { position: relative; width: 100%; }
+  .exec__sr-title {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
   .exec__hero-banner a { display: block; width: 100%; }
   .exec__hero-banner img { width: 100%; height: auto; display: block; }
 </style>

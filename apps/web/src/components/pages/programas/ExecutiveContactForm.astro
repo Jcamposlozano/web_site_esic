@@ -1,0 +1,220 @@
+---
+/**
+ * ExecutiveContactForm — formulario de captura del Executive Program
+ * "Digital Business Transformation".
+ *
+ * Usa el mismo formulario Zoho general del sitio
+ * (SolicitarInformacinFormulariogeneral110226) pero con el programa FIJO: la
+ * página es de un solo programa, así que en vez de mostrarle al usuario los
+ * selects de "Tipo de programa" / "Programa de interés" se envían en hidden.
+ *
+ *   Dropdown  = "Programa Ejecutivo"
+ *   Dropdown2 = "Programa ejecutivo en Digital Transformation"
+ *
+ * ⚠ Pendiente de confirmar con Alejandra Quintero (CRM): que ese valor exacto
+ * exista en la automatización de Dropdown2 y que enrute a la campaña del EP.
+ * Si el texto de la opción cambia en Zoho, hay que cambiarlo aquí igual.
+ *
+ * Sin `zf_ValidateAndSubmit`: la validación es HTML5 (`required`) y el POST va
+ * directo a htmlRecords/submit, como en el resto de formularios nuevos.
+ */
+interface Props {
+  idPrefix?: string;
+}
+const { idPrefix = "exec" } = Astro.props;
+
+const ZOHO_ACTION =
+  "https://forms.zohopublic.com/esicmedellin/form/SolicitarInformacinFormulariogeneral110226/formperma/Rdx6HXS1lMff_KC1PKqlg0BhSQNBDaxDsxdDOnsWmEM/htmlRecords/submit";
+
+/** Valores fijos del programa (ver nota CRM arriba). */
+const TIPO_PROGRAMA = "Programa Ejecutivo";
+const PROGRAMA_INTERES = "Programa ejecutivo en Digital Transformation";
+---
+<form
+  class="execf"
+  action={ZOHO_ACTION}
+  name="esicZohoFormExec"
+  method="POST"
+  accept-charset="UTF-8"
+  enctype="multipart/form-data"
+>
+  <input type="hidden" name="zf_referrer_name" value="" />
+  <input type="hidden" name="zf_redirect_url" value="https://esic.co/gracias/" />
+  <input type="hidden" name="zc_gad" value="" />
+
+  <!-- Programa fijo: esta página es solo del Executive Program DBT -->
+  <input type="hidden" name="Dropdown" value={TIPO_PROGRAMA} />
+  <input type="hidden" name="Dropdown2" value={PROGRAMA_INTERES} />
+
+  <div class="execf__row">
+    <div class="execf__group">
+      <label for={`${idPrefix}_Name_First`}>Nombre <em>*</em></label>
+      <input
+        type="text"
+        id={`${idPrefix}_Name_First`}
+        name="Name_First"
+        maxlength="255"
+        placeholder="Tu nombre"
+        autocomplete="given-name"
+        required
+      />
+    </div>
+    <div class="execf__group">
+      <label for={`${idPrefix}_Name_Last`}>Apellido</label>
+      <input
+        type="text"
+        id={`${idPrefix}_Name_Last`}
+        name="Name_Last"
+        maxlength="255"
+        placeholder="Tu apellido"
+        autocomplete="family-name"
+      />
+    </div>
+  </div>
+
+  <div class="execf__group">
+    <label for={`${idPrefix}_Email`}>Correo electrónico <em>*</em></label>
+    <input
+      type="email"
+      id={`${idPrefix}_Email`}
+      name="Email"
+      maxlength="255"
+      placeholder="tu@email.com"
+      autocomplete="email"
+      required
+    />
+  </div>
+
+  <div class="execf__row">
+    <div class="execf__group">
+      <label for={`${idPrefix}_PhoneNumber`}>Teléfono <em>*</em></label>
+      <input
+        type="tel"
+        id={`${idPrefix}_PhoneNumber`}
+        name="PhoneNumber_countrycode"
+        maxlength="20"
+        placeholder="300 123 4567"
+        autocomplete="tel"
+        required
+      />
+    </div>
+    <div class="execf__group">
+      <label for={`${idPrefix}_Dropdown3`}>Medio de contacto <em>*</em></label>
+      <select id={`${idPrefix}_Dropdown3`} name="Dropdown3" required>
+        <option value="" disabled selected>Elige una opción</option>
+        <option value="WhatsApp">WhatsApp</option>
+        <option value="Correo">Correo</option>
+        <option value="Llamada">Llamada</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="execf__check">
+    <input type="checkbox" name="TermsConditions" id={`${idPrefix}-terms`} required />
+    <label for={`${idPrefix}-terms`}>
+      Acepto la
+      <a href="https://esic.co/politicas-de-privacidad/" target="_blank" rel="noopener">
+        autorización de datos personales y términos y condiciones
+      </a>
+      <em>*</em>
+    </label>
+  </div>
+
+  <input type="hidden" name="utm_source" />
+  <input type="hidden" name="utm_medium" />
+  <input type="hidden" name="utm_campaign" />
+  <input type="hidden" name="utm_term" />
+  <input type="hidden" name="utm_content" />
+  <input type="hidden" name="utm_adset_name" />
+  <input type="hidden" name="utm_ad_name" />
+
+  <button type="submit" class="execf__submit">Quiero más información</button>
+</form>
+
+<script is:inline>
+  // Autollenado de UTM desde la URL (compartido con ContactForm: mismo guard).
+  if (!window.__esicUtmWired) {
+    window.__esicUtmWired = true;
+    document.addEventListener("DOMContentLoaded", function () {
+      var params = new URLSearchParams(window.location.search);
+      ["utm_source","utm_medium","utm_campaign","utm_term","utm_content","utm_adset_name","utm_ad_name"].forEach(function (p) {
+        var value = params.get(p);
+        if (!value) return;
+        document.querySelectorAll('[name="' + p + '"]').forEach(function (input) { input.value = value; });
+      });
+    });
+  }
+</script>
+
+<style>
+  .execf__group { margin-bottom: 1.1rem; }
+  .execf__row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 560px) { .execf__row { grid-template-columns: 1fr; } }
+
+  .execf label {
+    display: block;
+    font-family: "DM Sans", sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #00133F;
+    margin-bottom: 0.45rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .execf__group label em { color: #dc2626; font-style: normal; }
+
+  .execf input[type="text"],
+  .execf input[type="email"],
+  .execf input[type="tel"],
+  .execf select {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border: 1.5px solid #e2e2e2;
+    border-radius: 10px;
+    font-family: "DM Sans", sans-serif;
+    font-size: 1rem;
+    color: #00133F;
+    background: #fff;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .execf input:focus,
+  .execf select:focus {
+    outline: none;
+    border-color: #0047E9;
+    box-shadow: 0 0 0 3px rgba(0, 71, 233, 0.12);
+  }
+
+  .execf__check { display: flex; align-items: flex-start; gap: 0.7rem; margin: 0.4rem 0 1.2rem; }
+  .execf__check input[type="checkbox"] {
+    width: 18px; min-width: 18px; height: 18px; margin: 0.15rem 0 0;
+    accent-color: #0047E9; cursor: pointer;
+  }
+  .execf__check label {
+    font-size: 0.78rem; font-weight: 400; color: #5F6B7A; line-height: 1.5;
+    text-transform: none; letter-spacing: normal; cursor: pointer; margin: 0;
+  }
+  .execf__check label em { color: #dc2626; font-style: normal; }
+  .execf__check a { color: #0047E9; text-decoration: underline; }
+
+  .execf__submit {
+    width: 100%;
+    padding: 1rem 2rem;
+    background: #0047E9;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-family: "DM Sans", sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .execf__submit:hover {
+    background: #00133F;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(0, 19, 63, 0.2);
+  }
+</style>

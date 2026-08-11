@@ -63,7 +63,7 @@ const data: Record<TabKey, Programa[]> = {
   executive: [
     {
       href: "/digital-business-transformation",
-      title: "Executive Program",
+      title: "Digital Business Transformation",
       duration: "4 meses · Liderazgo y transformación digital",
       image: asset("home/programas/executive-program.webp"),
       imageMobile: asset("home/programas/executive-program-mobile.webp"),
@@ -75,7 +75,7 @@ const data: Record<TabKey, Programa[]> = {
 const tabs: { key: TabKey; label: string }[] = [
   { key: "pregrados", label: "Pregrados" },
   { key: "master", label: "Máster" },
-  { key: "executive", label: "Executive Programs" },
+  { key: "executive", label: "Executive Program" },
 ];
 
 const FlagColombia = () => (
