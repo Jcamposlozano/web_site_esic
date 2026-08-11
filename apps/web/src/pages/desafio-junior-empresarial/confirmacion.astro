@@ -1,0 +1,53 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Container from "../../components/Container.astro";
+
+const title = "¡Ya estás inscrito! — Desafío Junior Empresarial con Action Black | ESIC Medellín";
+const description =
+  "Tu inscripción al Desafío Junior Empresarial con Action Black quedó registrada. Revisa el correo electrónico que registraste, allí encontrarás todos los detalles.";
+---
+<Layout title={title} description={description}>
+  <main class="bg-bg">
+    <Container class="flex min-h-[80vh] flex-col items-center justify-center gap-8 py-24 text-center">
+      <span class="eg-label inline-flex items-center gap-2 text-[0.8rem] font-semibold uppercase tracking-[0.14em] text-brand-blue">
+        Inscripción confirmada
+      </span>
+
+      <h1 class="font-display text-[clamp(5rem,10vw,9rem)] font-bold uppercase leading-[0.9] tracking-[-0.01em] text-brand-blue-dark">
+        ¡Ya estás<br /><span class="text-brand-blue">inscrito!</span>
+      </h1>
+
+      <div class="h-[2px] w-10 bg-brand-teal"></div>
+
+      <p class="max-w-[520px] text-[1.15rem] font-semibold leading-[1.5] text-brand-blue-dark">
+        Desafío Junior Empresarial con Action Black
+      </p>
+
+      <p class="max-w-[460px] text-[1.05rem] leading-[1.7] text-ink-muted">
+        Te invitamos a revisar el correo electrónico que registraste. Allí encontrarás todos los detalles.
+      </p>
+
+      <a
+        href="/"
+        class="inline-flex items-center gap-2.5 rounded-full bg-brand-blue px-7 py-3.5 text-[0.85rem] font-semibold uppercase tracking-[0.1em] text-white no-underline transition-all hover:-translate-y-0.5 hover:bg-[#0037B4]"
+      >
+        Volver al inicio
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5">
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
+      </a>
+    </Container>
+  </main>
+</Layout>
+
+<style>
+  .eg-label::before,
+  .eg-label::after {
+    content: "";
+    display: block;
+    width: 32px;
+    height: 1.5px;
+    background: var(--color-brand-blue);
+    opacity: 0.4;
+  }
+</style>
