@@ -292,9 +292,9 @@ MPAD, MSEP_H = 62, 150
 # Ancho total de la fila para poder centrarla en el lienzo.
 _widths = [load_logo(os.path.join(HERE, n), h).width for n, h in MOBILE_LOGOS]
 row_w = sum(_widths) + (len(_widths) - 1) * (6 + 2 * MPAD)
-# 2600 y no 2660: la barra blanca de stats monta sobre el borde inferior del
+# 2490 y no 2660: la barra blanca de stats monta sobre el borde inferior del
 # banner y los logos quedaban casi pegados a ella en mobile.
-draw_logo_row(m, md, MOBILE_LOGOS, CX - row_w // 2, 2600, MPAD, MSEP_H)
+draw_logo_row(m, md, MOBILE_LOGOS, CX - row_w // 2, 2490, MPAD, MSEP_H)
 
 OUT_M = os.path.join(HERE, "banner-executive-digital-business-transformation-mobile.png")
 m.save(OUT_M, quality=95)
