@@ -14,8 +14,28 @@ from PIL import Image, ImageDraw, ImageFont
 
 W, H = 2560, 1168
 NAVY = (11, 31, 75)
-GOLD = (160, 141, 74)
 WHITE = (255, 255, 255)
+
+# ── Corchetes (MANUAL DE MARCA ESIC, cap. 05, pág. 29-34) ──────────────────
+# Reglas que aplican aquí:
+#  · El corchete SUPERIOR es el "doble": relleno con degradado + la misma forma
+#    en línea hueca desplazada. Va arriba a la IZQUIERDA.
+#  · El corchete INFERIOR es SOLO la línea hueca, girada 180°, abajo a la
+#    DERECHA. Invertir esa posición es uso incorrecto (pág. 34).
+#  · Sobre fondo azul la línea va en blanco.
+#  · Degradado según target. Para "Executive Programs": dorado si se comunica
+#    bajo Corporate Education (target empresas), cyan si es bajo Business
+#    School. Se elige con CORCHETE=dorado|cyan.
+#  · Prohibido deformar, rotar o tapar el texto o al sujeto (pág. 34).
+# Degradados muestreados del propio manual (pág. 30).
+GRADIENTS = {
+    "dorado": ((133, 117, 80), (180, 149, 53)),
+    "cyan": ((0, 71, 233), (0, 200, 255)),
+}
+CORCHETE = os.environ.get("CORCHETE", "dorado")
+if CORCHETE not in GRADIENTS:
+    sys.exit(f"CORCHETE debe ser uno de {list(GRADIENTS)}")
+GRAD_FROM, GRAD_TO = GRADIENTS[CORCHETE]
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 PHOTO = os.environ.get("PHOTO") or os.path.expanduser(
@@ -36,6 +56,45 @@ if not FONT_BOLD or not os.path.exists(FONT_BOLD):
 canvas = Image.new("RGB", (W, H), NAVY)
 draw = ImageDraw.Draw(canvas)
 
+
+def _linear_gradient(size, c0, c1):
+    """Degradado horizontal c0 → c1."""
+    w, h = size
+    row = Image.new("RGB", (w, 1))
+    for x in range(w):
+        t = x / max(1, w - 1)
+        row.putpixel((x, 0), tuple(int(c0[i] + (c1[i] - c0[i]) * t) for i in range(3)))
+    return row.resize((w, h), Image.BILINEAR)
+
+
+def corchete(img, x, y, bar_len, thick, *, filled, flip=False, line=WHITE):
+    """Dibuja un corchete del manual en (x, y).
+
+    Forma: barra horizontal + pata que baja en el extremo izquierdo. Con
+    `filled` se pinta el "doble" (degradado + línea hueca desplazada); sin él,
+    solo la línea hueca. `flip` lo gira 180° para el corchete inferior.
+    """
+    L, T = bar_len, thick
+    off = max(2, T // 3)                     # desplazamiento línea ↔ relleno
+    stroke = max(2, round(T * 0.085))        # grosor de la línea hueca
+    poly = [(0, 0), (L, 0), (L, T), (T, T), (T, 2 * T), (0, 2 * T)]
+
+    layer = Image.new("RGBA", (L + off, 2 * T + off), (0, 0, 0, 0))
+    if filled:
+        shape = Image.new("L", (L, 2 * T), 0)
+        ImageDraw.Draw(shape).polygon(poly, fill=255)
+        grad = _linear_gradient((L, 2 * T), GRAD_FROM, GRAD_TO).convert("RGBA")
+        grad.putalpha(shape)
+        layer.paste(grad, (off, off), grad)
+
+    ImageDraw.Draw(layer).line(
+        [*poly, poly[0]], fill=line, width=stroke, joint="curve"
+    )
+
+    if flip:
+        layer = layer.rotate(180)
+    img.paste(layer, (x, y), layer)
+
 # ---------------------------------------------------------------- panel foto
 PANEL_X, PANEL_Y, PANEL_W, PANEL_H = 1560, 96, 800, 976
 
@@ -49,28 +108,29 @@ photo = photo.crop((0, crop_top, src_w, crop_top + crop_h)).resize(
 )
 canvas.paste(photo, (PANEL_X, PANEL_Y))
 
-# ----------------------------------------------------------- corchetes oro
-# En el original NO son barras rectas: son un escalon en "Gamma" (barra
-# horizontal + pata vertical en un extremo) y van POR ENCIMA de la foto,
-# cruzando el borde del panel. El de abajo es el mismo girado 180 grados.
-# Proporciones tomadas de la referencia, relativas al panel de la foto.
-BAR_H = int(PANEL_H * 0.054)      # grosor de la barra horizontal
-STUB_W = int(PANEL_W * 0.095)     # ancho de la pata vertical
-STUB_H = int(PANEL_H * 0.061)     # alto de la pata vertical
-BR_W = int(PANEL_W * 0.62)        # largo total de la barra
-OVER = int(PANEL_W * 0.36)        # cuanto invade la foto por la derecha
+# ------------------------------------------------------------- corchetes
+# Ventana = el panel de la foto. Superior doble arriba a la izquierda (sobre el
+# fondo de la foto, lejos de la cara) e inferior en línea hueca abajo a la
+# derecha, como en los ejemplos del manual.
+BAR_T = int(PANEL_H * 0.052)
+BAR_L = int(PANEL_W * 0.60)
 
-# Superior: barra + pata bajando por la IZQUIERDA
-bx0 = PANEL_X + OVER - BR_W
-by0 = PANEL_Y + int(PANEL_H * 0.05)
-draw.rectangle([bx0, by0, bx0 + BR_W, by0 + BAR_H], fill=GOLD)
-draw.rectangle([bx0, by0 + BAR_H, bx0 + STUB_W, by0 + BAR_H + STUB_H], fill=GOLD)
-
-# Inferior: mismo escalon girado 180 grados (pata subiendo por la DERECHA)
-by1 = PANEL_Y + PANEL_H - int(PANEL_H * 0.02)
-draw.rectangle([bx0, by1 - BAR_H, bx0 + BR_W, by1], fill=GOLD)
-draw.rectangle(
-    [bx0 + BR_W - STUB_W, by1 - BAR_H - STUB_H, bx0 + BR_W, by1 - BAR_H], fill=GOLD
+corchete(
+    canvas,
+    PANEL_X - int(BAR_L * 0.30),
+    PANEL_Y + int(PANEL_H * 0.04),
+    BAR_L,
+    BAR_T,
+    filled=True,
+)
+corchete(
+    canvas,
+    PANEL_X + PANEL_W - BAR_L + int(BAR_L * 0.24),
+    PANEL_Y + PANEL_H - 2 * BAR_T - int(PANEL_H * 0.05),
+    BAR_L,
+    BAR_T,
+    filled=False,
+    flip=True,
 )
 
 # --------------------------------------------------------------------- texto
@@ -198,24 +258,28 @@ ct = int((sh - ch) * 0.12)
 mphoto = mphoto.crop((0, ct, sw, ct + ch)).resize((MP_W, MP_H), Image.LANCZOS)
 m.paste(mphoto, (MP_X, MP_Y))
 
-# En vertical el escalón de desktop no funciona: anclado a un margen fijo, la
-# pata quedaba flotando sobre el azul y la barra cruzaba la foto por encima de
-# la cara (se leía como dos barras atravesando la imagen, no como un marco).
-# En mobile se dibujan dos corchetes en "L" POR FUERA de la foto, abrazando la
-# esquina superior izquierda y la inferior derecha.
-MBAR = int(MP_H * 0.054)          # grosor
-MH_LEN = int(MP_W * 0.42)         # brazo horizontal
-MV_LEN = int(MP_H * 0.26)         # brazo vertical
+# Mismos corchetes del manual, adaptados a la ventana vertical: la barra se
+# acorta para que ni el doble ni la línea hueca lleguen a la cara del sujeto.
+MBAR_T = int(MP_H * 0.075)
+MBAR_L = int(MP_W * 0.52)
 
-# Superior izquierda
-mx0, my0 = MP_X - MBAR, MP_Y - MBAR
-md.rectangle([mx0, my0, mx0 + MH_LEN, my0 + MBAR], fill=GOLD)
-md.rectangle([mx0, my0, mx0 + MBAR, my0 + MV_LEN], fill=GOLD)
-
-# Inferior derecha (misma L girada 180°)
-mx1, my1 = MP_X + MP_W + MBAR, MP_Y + MP_H + MBAR
-md.rectangle([mx1 - MH_LEN, my1 - MBAR, mx1, my1], fill=GOLD)
-md.rectangle([mx1 - MBAR, my1 - MV_LEN, mx1, my1], fill=GOLD)
+corchete(
+    m,
+    MP_X - int(MBAR_L * 0.22),
+    MP_Y + int(MP_H * 0.05),
+    MBAR_L,
+    MBAR_T,
+    filled=True,
+)
+corchete(
+    m,
+    MP_X + MP_W - MBAR_L + int(MBAR_L * 0.22),
+    MP_Y + MP_H - 2 * MBAR_T - int(MP_H * 0.06),
+    MBAR_L,
+    MBAR_T,
+    filled=False,
+    flip=True,
+)
 
 
 MOBILE_LOGOS = [
