@@ -62,7 +62,7 @@ const data: Record<TabKey, Programa[]> = {
   ],
   executive: [
     {
-      href: "/digital-business-transformation",
+      href: "/executive-program",
       title: "Executive Program",
       duration: "4 meses · Liderazgo y transformación",
       image: asset("home/programas/executive-program.webp"),

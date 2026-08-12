@@ -194,7 +194,7 @@ export const tree: SitemapNode[] = [
         children: [
           {
             label: "Digital Business Transformation",
-            href: "/digital-business-transformation/",
+            href: "/executive-program/",
             status: "built",
             sources: ["home"],
             area: "executive",

@@ -21,10 +21,12 @@ export default defineConfig({
   redirects: {
     '/desafio-junior-empresarial-hatsu': '/desafio-junior-empresarial',
     '/dje': '/desafio-junior-empresarial',
-    // /executive-programs era un duplicado del mismo programa (Digital Business
-    // Transformation), sin enlaces internos y compitiendo en buscadores con la
-    // página oficial. Se elimina y se redirige.
-    '/executive-programs': '/digital-business-transformation',
+    // El Executive Program vive en /executive-program. /digital-business-
+    // transformation fue su URL anterior (la que circuló por WhatsApp y quedó
+    // indexada) y /executive-programs era una página duplicada, ya eliminada:
+    // ambas redirigen a la oficial.
+    '/digital-business-transformation': '/executive-program',
+    '/executive-programs': '/executive-program',
   },
   integrations: [
     react(),

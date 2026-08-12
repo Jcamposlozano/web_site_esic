@@ -198,22 +198,24 @@ ct = int((sh - ch) * 0.12)
 mphoto = mphoto.crop((0, ct, sw, ct + ch)).resize((MP_W, MP_H), Image.LANCZOS)
 m.paste(mphoto, (MP_X, MP_Y))
 
-MBAR = int(MP_H * 0.054)
-MSTUB_W = int(MP_W * 0.095)
-MSTUB_H = int(MP_H * 0.061)
-MOVER = int(MP_W * 0.36)
-# En vertical el corchete se saldría del lienzo por la izquierda: se ancla a un
-# margen fijo y la barra se acorta, en vez de recortarse contra el borde.
-mbx = 130
-MBR_W = MP_X + MOVER - mbx
-mby = MP_Y + int(MP_H * 0.05)
-md.rectangle([mbx, mby, mbx + MBR_W, mby + MBAR], fill=GOLD)
-md.rectangle([mbx, mby + MBAR, mbx + MSTUB_W, mby + MBAR + MSTUB_H], fill=GOLD)
-mby1 = MP_Y + MP_H - int(MP_H * 0.02)
-md.rectangle([mbx, mby1 - MBAR, mbx + MBR_W, mby1], fill=GOLD)
-md.rectangle(
-    [mbx + MBR_W - MSTUB_W, mby1 - MBAR - MSTUB_H, mbx + MBR_W, mby1 - MBAR], fill=GOLD
-)
+# En vertical el escalón de desktop no funciona: anclado a un margen fijo, la
+# pata quedaba flotando sobre el azul y la barra cruzaba la foto por encima de
+# la cara (se leía como dos barras atravesando la imagen, no como un marco).
+# En mobile se dibujan dos corchetes en "L" POR FUERA de la foto, abrazando la
+# esquina superior izquierda y la inferior derecha.
+MBAR = int(MP_H * 0.054)          # grosor
+MH_LEN = int(MP_W * 0.42)         # brazo horizontal
+MV_LEN = int(MP_H * 0.26)         # brazo vertical
+
+# Superior izquierda
+mx0, my0 = MP_X - MBAR, MP_Y - MBAR
+md.rectangle([mx0, my0, mx0 + MH_LEN, my0 + MBAR], fill=GOLD)
+md.rectangle([mx0, my0, mx0 + MBAR, my0 + MV_LEN], fill=GOLD)
+
+# Inferior derecha (misma L girada 180°)
+mx1, my1 = MP_X + MP_W + MBAR, MP_Y + MP_H + MBAR
+md.rectangle([mx1 - MH_LEN, my1 - MBAR, mx1, my1], fill=GOLD)
+md.rectangle([mx1 - MBAR, my1 - MV_LEN, mx1, my1], fill=GOLD)
 
 
 MOBILE_LOGOS = [
@@ -226,7 +228,9 @@ MPAD, MSEP_H = 62, 150
 # Ancho total de la fila para poder centrarla en el lienzo.
 _widths = [load_logo(os.path.join(HERE, n), h).width for n, h in MOBILE_LOGOS]
 row_w = sum(_widths) + (len(_widths) - 1) * (6 + 2 * MPAD)
-draw_logo_row(m, md, MOBILE_LOGOS, CX - row_w // 2, 2660, MPAD, MSEP_H)
+# 2600 y no 2660: la barra blanca de stats monta sobre el borde inferior del
+# banner y los logos quedaban casi pegados a ella en mobile.
+draw_logo_row(m, md, MOBILE_LOGOS, CX - row_w // 2, 2600, MPAD, MSEP_H)
 
 OUT_M = os.path.join(HERE, "banner-executive-digital-business-transformation-mobile.png")
 m.save(OUT_M, quality=95)
