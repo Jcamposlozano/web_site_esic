@@ -1,19 +1,25 @@
 ---
 /**
- * ExecutiveContactForm — formulario de captura del Executive Program
- * "Digital Business Transformation".
+ * ExecutiveContactForm — formulario de captura de los programas ejecutivos.
  *
- * Usa el mismo formulario Zoho general del sitio
- * (SolicitarInformacinFormulariogeneral110226) pero con el programa FIJO: la
- * página es de un solo programa, así que en vez de mostrarle al usuario los
- * selects de "Tipo de programa" / "Programa de interés" se envían en hidden.
+ * Formulario Zoho EXCLUSIVO del Executive Program, creado por Alejandra
+ * Quintero (CRM) el 12/08/2026: "Corporate - Formulario Interés Executive
+ * 120826" (CorporateFormularioIntersExecutive120826). Ya está integrado con el
+ * CRM; antes esta página usaba el formulario general del sitio.
  *
- *   Dropdown  = "Programa Ejecutivo"
- *   Dropdown2 = "Programa ejecutivo en Digital Transformation"
+ * Campos tal como los definió el CRM — no renombrar los `name`, o los valores
+ * llegan vacíos:
+ *   Name_First / Name_Last     Nombre y apellido
+ *   PhoneNumber_countrycode    Teléfono
+ *   Email                      Correo electrónico CORPORATIVO
+ *   SingleLine8                Nombre de empresa
+ *   SingleLine9                Cargo
+ *   Dropdown3                  Medio de contacto
+ *   DecisionBox                Términos y condiciones (ojo: no es TermsConditions)
+ *   utm_*                      7 parámetros, autollenados desde la URL
  *
- * ⚠ Pendiente de confirmar con Alejandra Quintero (CRM): que ese valor exacto
- * exista en la automatización de Dropdown2 y que enrute a la campaña del EP.
- * Si el texto de la opción cambia en Zoho, hay que cambiarlo aquí igual.
+ * Este formulario no lleva campo de programa: el formulario en sí identifica
+ * al Executive Program en el CRM.
  *
  * Sin `zf_ValidateAndSubmit`: la validación es HTML5 (`required`) y el POST va
  * directo a htmlRecords/submit, como en el resto de formularios nuevos.
@@ -24,11 +30,7 @@ interface Props {
 const { idPrefix = "exec" } = Astro.props;
 
 const ZOHO_ACTION =
-  "https://forms.zohopublic.com/esicmedellin/form/SolicitarInformacinFormulariogeneral110226/formperma/Rdx6HXS1lMff_KC1PKqlg0BhSQNBDaxDsxdDOnsWmEM/htmlRecords/submit";
-
-/** Valores fijos del programa (ver nota CRM arriba). */
-const TIPO_PROGRAMA = "Programa Ejecutivo";
-const PROGRAMA_INTERES = "Programa ejecutivo en Digital Transformation";
+  "https://forms.zohopublic.com/esicmedellin/form/CorporateFormularioIntersExecutive120826/formperma/Ypt5I2W--Pu_cP556hhlt7E01Fg8Ms4lUxihaNeJGm0/htmlRecords/submit";
 ---
 <form
   class="execf"
@@ -41,10 +43,6 @@ const PROGRAMA_INTERES = "Programa ejecutivo en Digital Transformation";
   <input type="hidden" name="zf_referrer_name" value="" />
   <input type="hidden" name="zf_redirect_url" value="https://esic.co/gracias/" />
   <input type="hidden" name="zc_gad" value="" />
-
-  <!-- Programa fijo: esta página es solo del Executive Program DBT -->
-  <input type="hidden" name="Dropdown" value={TIPO_PROGRAMA} />
-  <input type="hidden" name="Dropdown2" value={PROGRAMA_INTERES} />
 
   <div class="execf__row">
     <div class="execf__group">
@@ -60,7 +58,7 @@ const PROGRAMA_INTERES = "Programa ejecutivo en Digital Transformation";
       />
     </div>
     <div class="execf__group">
-      <label for={`${idPrefix}_Name_Last`}>Apellido</label>
+      <label for={`${idPrefix}_Name_Last`}>Apellido <em>*</em></label>
       <input
         type="text"
         id={`${idPrefix}_Name_Last`}
@@ -68,21 +66,47 @@ const PROGRAMA_INTERES = "Programa ejecutivo en Digital Transformation";
         maxlength="255"
         placeholder="Tu apellido"
         autocomplete="family-name"
+        required
       />
     </div>
   </div>
 
   <div class="execf__group">
-    <label for={`${idPrefix}_Email`}>Correo electrónico <em>*</em></label>
+    <label for={`${idPrefix}_Email`}>Correo electrónico corporativo <em>*</em></label>
     <input
       type="email"
       id={`${idPrefix}_Email`}
       name="Email"
       maxlength="255"
-      placeholder="tu@email.com"
+      placeholder="nombre@tuempresa.com"
       autocomplete="email"
       required
     />
+  </div>
+
+  <div class="execf__row">
+    <div class="execf__group">
+      <label for={`${idPrefix}_Empresa`}>Nombre de empresa</label>
+      <input
+        type="text"
+        id={`${idPrefix}_Empresa`}
+        name="SingleLine8"
+        maxlength="255"
+        placeholder="Tu empresa"
+        autocomplete="organization"
+      />
+    </div>
+    <div class="execf__group">
+      <label for={`${idPrefix}_Cargo`}>Cargo</label>
+      <input
+        type="text"
+        id={`${idPrefix}_Cargo`}
+        name="SingleLine9"
+        maxlength="255"
+        placeholder="Tu cargo"
+        autocomplete="organization-title"
+      />
+    </div>
   </div>
 
   <div class="execf__row">
@@ -110,7 +134,8 @@ const PROGRAMA_INTERES = "Programa ejecutivo en Digital Transformation";
   </div>
 
   <div class="execf__check">
-    <input type="checkbox" name="TermsConditions" id={`${idPrefix}-terms`} required />
+    <!-- El campo de términos de este formulario se llama DecisionBox -->
+    <input type="checkbox" name="DecisionBox" id={`${idPrefix}-terms`} required />
     <label for={`${idPrefix}-terms`}>
       Acepto la
       <a href="https://esic.co/politicas-de-privacidad/" target="_blank" rel="noopener">

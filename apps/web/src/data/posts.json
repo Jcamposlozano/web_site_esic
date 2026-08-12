@@ -1,5 +1,22 @@
 [
   {
+    "id": "128b8b35-c7df-4d39-b297-a0125ea004da",
+    "title": "DJE",
+    "slug": "dje",
+    "category": "Noticias",
+    "author": "DEMO",
+    "excerpt": "DEMO",
+    "publishedAt": "2026-08-03T14:08:35.274Z",
+    "externalUrl": null,
+    "coverUrl": "https://prisma-fai-admin.s3.us-east-2.amazonaws.com/src/esic-website/assets/dje-184f1819.png",
+    "coverAlt": "DJE",
+    "bodyHtml": "<p>DEMODEMODEMODEMODEMO</p>",
+    "seo": {
+      "metaTitle": "DJE",
+      "metaDescription": "DEMO"
+    }
+  },
+  {
     "id": "aprender-a-decidir-el-valor-de-los-casos-reales-en-el-aula",
     "title": "Aprender a decidir: el valor de los casos reales en el aula",
     "slug": "aprender-a-decidir-el-valor-de-los-casos-reales-en-el-aula",
