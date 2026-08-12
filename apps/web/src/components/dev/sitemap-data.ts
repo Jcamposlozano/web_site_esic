@@ -187,19 +187,11 @@ export const tree: SitemapNode[] = [
         ],
       },
       {
-        label: "EXECUTIVE PROGRAMS",
+        label: "EXECUTIVE PROGRAM",
         status: "pending",
         sources: ["home"],
         area: "executive",
         children: [
-          {
-            label: "Executive Programs (índice)",
-            href: "/executive-programs/",
-            status: "built",
-            sources: [],
-            area: "executive",
-            wpFile: "executive-programs/index.html",
-          },
           {
             label: "Digital Business Transformation",
             href: "/digital-business-transformation/",
