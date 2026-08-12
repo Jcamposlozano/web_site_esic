@@ -8,8 +8,6 @@ type Slide = {
   mobile: string;
   desktop: string;
   priority?: boolean;
-  /** Sello SOLD OUT sobre el banner (programa sin cupos). */
-  soldOut?: { word: string; sub: string };
 };
 
 const slides: Slide[] = [
@@ -20,16 +18,10 @@ const slides: Slide[] = [
     desktop: asset("home/banner/aniversario-desktop.webp"),
     priority: true,
   },
-  {
-    href: "/curso-claude",
-    alt: "Level Up con Claude — Cupos agotados. Déjanos tus datos para la próxima edición — ESIC Medellín",
-    mobile: asset("home/banner/level-up-claude-mobile.webp"),
-    desktop: asset("home/banner/level-up-claude-desktop.webp"),
-    soldOut: {
-      word: "Sold out",
-      sub: "Cupos agotados · Déjanos tus datos para la próxima edición",
-    },
-  },
+  // El slide del Level Up con Claude salió del carrusel: la edición de
+  // agosto/septiembre 2026 quedó SOLD OUT. Para reactivarlo cuando haya nuevas
+  // fechas, volver a añadirlo aquí apuntando a /curso-claude con las imágenes
+  // home/banner/level-up-claude-{mobile,desktop}.webp.
   {
     href: "/pregrado/",
     alt: "Elige una carrera con visión de futuro — Pregrados ESIC",
@@ -165,15 +157,6 @@ export default function BannerCarousel() {
                 className="block w-full h-auto pointer-events-none select-none"
               />
             </picture>
-
-            {slide.soldOut && (
-              <div className="eh-soldout-veil absolute inset-0 grid place-items-center pointer-events-none">
-                <div className="eh-soldout-stamp text-center">
-                  <span className="eh-soldout-word">{slide.soldOut.word}</span>
-                  <span className="eh-soldout-sub">{slide.soldOut.sub}</span>
-                </div>
-              </div>
-            )}
           </div>
         ))}
       </div>
@@ -207,68 +190,6 @@ export default function BannerCarousel() {
           transition: none;
         }
         .eh-banner-slide { padding-top: 0; }
-
-        /* Sello SOLD OUT sobre el slide (mismo lenguaje que la landing):
-           caja compacta, roja, a la derecha. El degradado extra de abajo apaga
-           el "Separa tu cupo" que viene quemado en la imagen del banner. */
-        /* Abajo a la derecha: es justo donde la imagen trae quemado el botón
-           "Separa tu cupo", así que el sello lo reemplaza. */
-        .eh-soldout-veil {
-          place-items: end end;
-          padding-right: clamp(1rem, 4vw, 4.5rem);
-          padding-bottom: clamp(1rem, 4%, 3rem);
-          background:
-            linear-gradient(160deg, transparent 50%, rgba(10, 10, 12, 0.55) 100%),
-            linear-gradient(180deg, transparent 60%, rgba(10, 10, 12, 0.7) 90%, rgba(10, 10, 12, 0.88) 100%);
-        }
-        .eh-soldout-stamp {
-          max-width: min(46%, 340px);
-          padding: clamp(0.6rem, 1.2vw, 0.95rem) clamp(0.9rem, 1.8vw, 1.5rem);
-          border: 2px solid #d63c1e;
-          border-radius: 12px;
-          background: rgba(10, 10, 12, 0.72);
-          transform: rotate(-4deg);
-          box-shadow: 0 12px 34px rgba(0, 0, 0, 0.45);
-        }
-        .eh-soldout-word {
-          display: block;
-          font-family: var(--font-display, inherit);
-          font-weight: 800;
-          text-transform: uppercase;
-          letter-spacing: 0.08em;
-          font-size: clamp(1.05rem, 2vw, 1.7rem);
-          line-height: 1;
-          color: #ff5a37;
-        }
-        .eh-soldout-sub {
-          display: block;
-          margin-top: 0.42em;
-          font-size: clamp(0.5rem, 0.78vw, 0.68rem);
-          font-weight: 600;
-          text-transform: uppercase;
-          letter-spacing: 0.1em;
-          line-height: 1.45;
-          color: rgba(244, 237, 228, 0.82);
-        }
-        /* En móvil el banner es vertical y trae el botón quemado abajo: el
-           sello va abajo a la derecha, justo sobre esa zona. */
-        @media (max-width: 768px) {
-          .eh-soldout-veil {
-            place-items: end end;
-            padding-right: 5%;
-            padding-bottom: 88px;
-            background: linear-gradient(180deg, transparent 50%, rgba(10, 10, 12, 0.82) 82%, rgba(10, 10, 12, 0.94) 100%);
-          }
-          .eh-soldout-stamp {
-            max-width: 78%;
-          }
-          .eh-soldout-word {
-            font-size: 1.15rem;
-          }
-          .eh-soldout-sub {
-            font-size: 0.55rem;
-          }
-        }
       `}</style>
     </section>
   );

@@ -34,6 +34,17 @@ const { withForm = false } = Astro.props;
  * mismo nombre (con espacios, de ahí el %20).
  */
 const BROCHURE_URL = asset("wp/2026/08/2026%20Executive%20Program.pdf");
+
+/**
+ * Franja "Información General" (fechas / inmersión / duración / inversión).
+ *
+ * APAGADA a pedido de Comercial (12/08/2026): todavía no se saben las fechas de
+ * la nueva cohorte y la franja gira alrededor de ellas. Para volver a prenderla
+ * cuando haya fechas: poner `true` y actualizar los datos de la sección.
+ *
+ * La inversión, Madrid y los 4 meses siguen visibles en la barra de stats.
+ */
+const SHOW_INFO_GENERAL = false;
 ---
 <!-- Stats Bar -->
 <div class="exec__container" style="position:relative; z-index:12;">
@@ -105,6 +116,7 @@ const BROCHURE_URL = asset("wp/2026/08/2026%20Executive%20Program.pdf");
 </section>
 
 <!-- Información General -->
+{SHOW_INFO_GENERAL && (
 <section class="exec__info exec__overlap">
   <div class="exec__container">
     <h2>INFORMACIÓN GENERAL</h2>
@@ -156,9 +168,13 @@ const BROCHURE_URL = asset("wp/2026/08/2026%20Executive%20Program.pdf");
     </div>
   </div>
 </section>
+)}
 
-<!-- Estructura del Programa -->
-<section class="exec__estructura exec__overlap">
+<!-- Estructura del Programa.
+     Sin la franja azul de Información General, Propósito y Estructura quedarían
+     los dos en crema y el escalonado de secciones no se vería: se alternan los
+     fondos (Estructura en blanco, Cocreadores en crema). -->
+<section class:list={["exec__estructura", "exec__overlap", !SHOW_INFO_GENERAL && "exec__estructura--alt"]}>
   <div class="exec__container">
     <h2>ESTRUCTURA DEL PROGRAMA</h2>
     <div class="exec__modulos-grid">
@@ -166,12 +182,13 @@ const BROCHURE_URL = asset("wp/2026/08/2026%20Executive%20Program.pdf");
       <div class="exec__modulo-col">
         <span class="exec__modulo-badge">Junio</span>
         <h3>Liderazgo</h3>
+        <!-- Sin fechas por sesión: la cohorte 2026 ya cerró y no hay fechas nuevas -->
         <ul>
-          <li>KICKOFF <span class="exec__badge-p">Presencial</span> <span class="exec__fecha">Jun 2</span></li>
-          <li>Los cambios sociales I <span class="exec__fecha">Jun 4</span></li>
-          <li>Los cambios sociales II <span class="exec__fecha">Jun 11</span></li>
-          <li>Cultura Digital <span class="exec__fecha">Jun 18</span></li>
-          <li>Liderazgo <span class="exec__badge-p">Presencial</span> <span class="exec__fecha">Jun 25</span></li>
+          <li>KICKOFF <span class="exec__badge-p">Presencial</span></li>
+          <li>Los cambios sociales I</li>
+          <li>Los cambios sociales II</li>
+          <li>Cultura Digital</li>
+          <li>Liderazgo <span class="exec__badge-p">Presencial</span></li>
         </ul>
       </div>
       <!-- Tecnologías Emergentes -->
@@ -179,12 +196,12 @@ const BROCHURE_URL = asset("wp/2026/08/2026%20Executive%20Program.pdf");
         <span class="exec__modulo-badge">Julio – Agosto</span>
         <h3>Tecnologías Emergentes</h3>
         <ul>
-          <li>Peer mentoring <span class="exec__fecha">Jul 16</span></li>
-          <li>Caso con protagonista <span class="exec__fecha">Jul 23</span></li>
-          <li>IoT <span class="exec__fecha">Jul 30</span></li>
-          <li>Ciberseguridad <span class="exec__fecha">Ago 6</span></li>
-          <li>Blockchain <span class="exec__fecha">Ago 13</span></li>
-          <li>Workshop IA <span class="exec__badge-p">Presencial</span> <span class="exec__fecha">Ago 20</span></li>
+          <li>Peer mentoring</li>
+          <li>Caso con protagonista</li>
+          <li>IoT</li>
+          <li>Ciberseguridad</li>
+          <li>Blockchain</li>
+          <li>Workshop IA <span class="exec__badge-p">Presencial</span></li>
         </ul>
       </div>
       <!-- Innovación -->
@@ -192,10 +209,10 @@ const BROCHURE_URL = asset("wp/2026/08/2026%20Executive%20Program.pdf");
         <span class="exec__modulo-badge">Septiembre – Octubre</span>
         <h3>Innovación</h3>
         <ul>
-          <li>Caso con protagonista <span class="exec__fecha">Sep 3</span></li>
-          <li>Innovación I <span class="exec__fecha">Sep 10</span></li>
-          <li>Innovación II <span class="exec__fecha">Sep 17</span></li>
-          <li>Caso con protagonista <span class="exec__fecha">Sep 24</span></li>
+          <li>Caso con protagonista</li>
+          <li>Innovación I</li>
+          <li>Innovación II</li>
+          <li>Caso con protagonista</li>
         </ul>
       </div>
     </div>
@@ -207,7 +224,7 @@ const BROCHURE_URL = asset("wp/2026/08/2026%20Executive%20Program.pdf");
 </section>
 
 <!-- Cocreadores -->
-<section class="exec__cocreadores exec__overlap">
+<section class:list={["exec__cocreadores", "exec__overlap", !SHOW_INFO_GENERAL && "exec__cocreadores--alt"]}>
   <div class="exec__container">
     <h2>Programa cocreado por</h2>
     <div class="exec__logos-row">
@@ -527,6 +544,15 @@ const BROCHURE_URL = asset("wp/2026/08/2026%20Executive%20Program.pdf");
     text-align: center;
     margin-bottom: 3rem;
   }
+  /* Fondos alternos cuando no hay franja de Información General */
+  section.exec__estructura--alt { background: #fff; }
+  section.exec__estructura--alt .exec__modulo-col {
+    background: #F5F3EF;
+    border: 1px solid rgba(0,19,63,0.06);
+  }
+  /* section.* para ganarle al bloque .exec__cocreadores, que va más abajo */
+  section.exec__cocreadores--alt { background: #F5F3EF; }
+
   .exec__modulos-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
