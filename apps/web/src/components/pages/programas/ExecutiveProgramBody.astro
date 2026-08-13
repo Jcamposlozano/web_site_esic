@@ -47,6 +47,13 @@ const BROCHURE_URL = asset("wp/2026/08/2026%20Executive%20Program.pdf");
 const SHOW_INFO_GENERAL = false;
 
 /**
+ * Sección "Metodología" (círculos + DMLA + tipos de sesión).
+ * APAGADA a pedido de Comercial (13/08/2026). Para volver a mostrarla, poner
+ * `true`: el markup y los estilos siguen aquí.
+ */
+const SHOW_METODOLOGIA = false;
+
+/**
  * Claustro internacional. Las fotos vienen del documento de Marketing
  * ("Revisión LANDING ExP.docx"): retrato circular en blanco y negro con la
  * bandera del país incrustada, recortado a PNG con fondo transparente.
@@ -333,6 +340,7 @@ const DOCENTES = [
 </section>
 
 <!-- Metodología -->
+{SHOW_METODOLOGIA && (
 <section class="exec__metodologia exec__overlap">
   <div class="exec__metodologia-header">
     <h2>METODOLOGÍA:</h2>
@@ -379,9 +387,10 @@ const DOCENTES = [
   <!-- La barra de Experiencia Internacional que iba aquí se unificó con la
        sección propia (arriba): antes el bloque estaba repetido. -->
 </section>
+)}
 
 <!-- Docentes internacionales -->
-<section class="exec__docentes exec__overlap">
+<section class:list={["exec__docentes", "exec__overlap", !SHOW_METODOLOGIA && "exec__docentes--alt"]}>
   <div class="exec__container">
     <span class="exec__docentes-kicker">Claustro</span>
     <h2>DOCENTES INTERNACIONALES</h2>
@@ -856,6 +865,9 @@ const DOCENTES = [
   }
 
   /* ── Docentes internacionales ── */
+  /* Sin la Metodología (azul oscuro) antes, Cocreadores y Docentes quedarían
+     los dos en crema y se perdería el escalonado: Docentes pasa a blanco. */
+  section.exec__docentes--alt { background: #fff; }
   .exec__docentes {
     padding: 5rem 0 6rem;
     background: #F5F3EF;
