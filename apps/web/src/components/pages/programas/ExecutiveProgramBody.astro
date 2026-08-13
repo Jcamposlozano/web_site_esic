@@ -30,10 +30,16 @@ const { withForm = false } = Astro.props;
 /**
  * Brochure oficial del programa.
  * Fuente: SharePoint Marketing → DISEÑO/Brochure/CORPORATE/EP 2026/
- * "2026 Executive Program.pdf". Ya está subido al bucket de assets con ese
- * mismo nombre (con espacios, de ahí el %20).
+ * "2026 Executive Program.pdf". Está subido al bucket de assets con ese mismo
+ * nombre (con espacios, de ahí el %20).
+ *
+ * BOTÓN APAGADO a pedido de Comercial (13/08/2026): el PDF que hay publicado
+ * es el de la versión anterior del programa y todavía no está actualizado al
+ * nuevo enfoque (Human AI-First Leadership). Para volver a mostrarlo: subir el
+ * PDF nuevo con ese mismo nombre y poner `true`.
  */
 const BROCHURE_URL = asset("wp/2026/08/2026%20Executive%20Program.pdf");
+const SHOW_BROCHURE = false;
 
 /**
  * Franja "Información General" (fechas / inmersión / duración / inversión).
@@ -418,6 +424,7 @@ const DOCENTES = [
           <p class="exec__cargo">Director Comercial ESIC Medellín</p>
           <a class="exec__telefono" href="tel:+573042364804">+57 304 2364804</a>
 
+          {SHOW_BROCHURE && (
           <a
             class="exec__brochure"
             href={BROCHURE_URL}
@@ -432,6 +439,7 @@ const DOCENTES = [
             </svg>
             Descargar brochure
           </a>
+          )}
         </div>
 
         <div class="exec__cta-card">
