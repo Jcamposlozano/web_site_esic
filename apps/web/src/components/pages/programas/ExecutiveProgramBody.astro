@@ -246,7 +246,7 @@ const DOCENTES = [
         </svg>
       </div>
       <div>
-        <span class="exec__kickoff-tag">Transversal <span class="exec__badge-p">Presencial</span></span>
+        <span class="exec__kickoff-tag"><span class="exec__badge-p">Presencial</span></span>
         <h3>Kick-off</h3>
       </div>
     </div>
@@ -302,7 +302,6 @@ const DOCENTES = [
           <div class="exec__stripe-yellow"></div>
           <div class="exec__stripe-red"></div>
         </div>
-        <span class="exec__intl-kicker">Transversal al programa</span>
         <h2>EXPERIENCIA INTERNACIONAL</h2>
       </div>
       <ul class="exec__intl-list">
@@ -524,6 +523,8 @@ const DOCENTES = [
   }
   /* El ícono va en caja chica y sin fondo sólido: antes el cuadro azul pesaba
      más que el propio nombre del pilar. */
+  /* Sin borde lateral: con las esquinas redondeadas dejaba una media luna azul
+     colgando en el borde de la pastilla. */
   .exec__pilar {
     display: flex;
     align-items: center;
@@ -531,7 +532,6 @@ const DOCENTES = [
     padding: 1rem 1.4rem;
     background: #fff;
     border-radius: 14px;
-    border-left: 4px solid #0047E9;
   }
   .exec__pilar-icon {
     width: 26px;
@@ -986,8 +986,11 @@ const DOCENTES = [
   .exec__logo-accenture img { height: 78px; }
 
   /* ── Metodología ── */
+  /* padding-bottom: la barra de categorías quedó siendo el último bloque de la
+     sección (antes iba la de Experiencia Internacional) y el overlap de -50px
+     de la sección siguiente se la comía. */
   .exec__metodologia {
-    padding: 0;
+    padding: 0 0 6rem;
     background: #00133F;
     position: relative;
     z-index: 7;

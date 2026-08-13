@@ -138,21 +138,35 @@ def overlay_navy(img, base=0.40, peak=0.94, flat=0.30, split=0.70):
     return Image.alpha_composite(img.convert("RGBA"), ov)
 
 
-photo = Image.open(PHOTO).convert("RGB")
-canvas = overlay_navy(cover(photo, (W, H), focus_y=0.42)).convert("RGB")
+# La foto va contenida (no a sangre) y con márgenes de seguridad arriba y abajo:
+# el menú flotante del sitio monta sobre los ~150px superiores del banner y la
+# barra blanca de stats sobre los ~110px inferiores, así que a sangre los
+# corchetes quedaban tapados por ambos.
+SAFE_TOP, SAFE_BOTTOM = 215, 165
+PANEL_X, PANEL_W = 1080, 1360
+PANEL_Y, PANEL_H = SAFE_TOP, H - SAFE_TOP - SAFE_BOTTOM
+
+canvas = Image.new("RGB", (W, H), NAVY)
 draw = ImageDraw.Draw(canvas)
+panel = overlay_navy(
+    cover(Image.open(PHOTO).convert("RGB"), (PANEL_W, PANEL_H), focus_y=0.45),
+    base=0.26,
+    peak=0.26,
+).convert("RGB")
+canvas.paste(panel, (PANEL_X, PANEL_Y))
 
 # ------------------------------------------------------------- corchetes
-# Ahora la "ventana" del manual es el banner completo: corchete doble arriba a
-# la izquierda (por encima del titular) y línea hueca abajo a la derecha.
-BAR_T = int(H * 0.048)
-BAR_L = int(W * 0.20)
+# Enmarcan la ventana: el doble monta sobre la esquina superior izquierda y la
+# línea hueca sobre la inferior derecha, igual que en el banner mobile.
+BAR_T = int(PANEL_H * 0.062)
+BAR_L = int(PANEL_W * 0.44)
+BR_OUT = int(BAR_T * 0.8)       # cuánto sobresale del borde de la foto
 
-corchete(canvas, 90, 78, BAR_L, BAR_T, filled=True)
+corchete(canvas, PANEL_X - BR_OUT, PANEL_Y - BR_OUT, BAR_L, BAR_T, filled=True)
 corchete(
     canvas,
-    W - BAR_L - 90,
-    H - 2 * BAR_T - 78,
+    PANEL_X + PANEL_W - BAR_L + BR_OUT,
+    PANEL_Y + PANEL_H - 2 * BAR_T + BR_OUT,
     BAR_L,
     BAR_T,
     filled=False,
@@ -160,7 +174,7 @@ corchete(
 )
 
 # --------------------------------------------------------------------- texto
-RIGHT = 1330  # el bloque de texto va alineado a la derecha
+RIGHT = 990   # el bloque de texto va alineado a la derecha, junto a la ventana
 
 
 def fit(text, font_path, size, variation=None):
@@ -191,7 +205,7 @@ f_head = fit("", FONT_BOLD, 230, HEAD_WEIGHT)
 f_sub = fit("", FONT_LIGHT, 86, SUB_WEIGHT)
 
 # Solo titular + subtitulo. Sin la linea de claims (meses / Madrid / año).
-TOP = 250
+TOP = 270
 draw_right("EXECUTIVE", f_head, TOP)
 # Singular: es UN programa (Digital Business Transformation), no la oferta
 # completa de executive programs.
@@ -201,7 +215,7 @@ draw_right("HUMAN AI-FIRST LEADERSHIP", f_sub, TOP + 186 + 270)
 # --------------------------------------------------------------------- logos
 # Holgura abajo: la barra de stats de la pagina monta sobre el borde inferior
 # del banner, asi que los logos no pueden quedar pegados al filo.
-LOGO_Y = 855
+LOGO_Y = 870
 LOGO_H = 140
 
 
