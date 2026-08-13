@@ -205,19 +205,19 @@ f_head = fit("", FONT_BOLD, 200, HEAD_WEIGHT)
 f_sub = fit("", FONT_LIGHT, 86, SUB_WEIGHT)
 
 # Solo titular + subtitulo. Sin la linea de claims (meses / Madrid / año).
-TOP = 250
+TOP = 210
 draw_right("EXECUTIVE", f_head, TOP)
 # Singular: es UN programa (Digital Business Transformation), no la oferta
 # completa de executive programs.
 draw_right("PROGRAM", f_head, TOP + 162)
 draw_right("HUMAN AI-FIRST LEADERSHIP", f_sub, TOP + 397)
+# Entre el subtitulo y los logos queda libre la banda 755-870: ahi cae el CTA.
 
 # --------------------------------------------------------------------- logos
 # Holgura abajo: la barra de stats de la pagina monta sobre el borde inferior
 # del banner, asi que los logos no pueden quedar pegados al filo.
-# Banda libre 740-860 entre el subtitulo y los logos: ahi va el CTA en HTML.
-LOGO_Y = 890
-LOGO_H = 140
+LOGO_Y = 935
+LOGO_H = 120
 
 
 def load_logo(path, height):
@@ -255,8 +255,8 @@ def draw_logo_row(img, d, items, x_left, y_center, pad, sep_h):
     return x - pad
 
 
-DESKTOP_LOGOS = [("logo-esic.png", 140), ("logo-prestigio.png", 90), ("logo-accenture.png", 64)]
-draw_logo_row(canvas, draw, DESKTOP_LOGOS, 200, LOGO_Y + LOGO_H // 2, 55, 120)
+DESKTOP_LOGOS = [("logo-esic.png", 120), ("logo-prestigio.png", 78), ("logo-accenture.png", 56)]
+draw_logo_row(canvas, draw, DESKTOP_LOGOS, 200, LOGO_Y + LOGO_H // 2, 48, 104)
 
 canvas.save(OUT, quality=95)
 print(f"OK -> {OUT}  {canvas.size}")
@@ -270,7 +270,7 @@ md = ImageDraw.Draw(m)
 
 # La foto de grupo es muy ancha: en vertical va como banda a todo el ancho
 # (menos un margen), no como panel estrecho, o se perdería medio grupo.
-MP_X, MP_Y, MP_W, MP_H = 90, 1480, MW - 180, 1140
+MP_X, MP_Y, MP_W, MP_H = 90, 1560, MW - 180, 1120
 
 
 def draw_center(d, text, font, y, cx, fill=WHITE, tracking=0):
@@ -341,7 +341,7 @@ _widths = [load_logo(os.path.join(HERE, n), h).width for n, h in MOBILE_LOGOS]
 row_w = sum(_widths) + (len(_widths) - 1) * (6 + 2 * MPAD)
 # 2490 y no 2660: la barra blanca de stats monta sobre el borde inferior del
 # banner y los logos quedaban casi pegados a ella en mobile.
-draw_logo_row(m, md, MOBILE_LOGOS, CX - row_w // 2, 2800, MPAD, MSEP_H)
+draw_logo_row(m, md, MOBILE_LOGOS, CX - row_w // 2, 2860, MPAD, MSEP_H)
 
 OUT_M = os.path.join(HERE, "banner-executive-human-ai-first-leadership-mobile.png")
 m.save(OUT_M, quality=95)
