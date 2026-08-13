@@ -53,6 +53,12 @@ const EXEC_BANNER_MOBILE = asset(
           />
         </picture>
       </a>
+
+      <!-- CTA sobre el banner. Va en HTML y no dibujado en la imagen para que
+           sea un enlace real (accesible y editable sin regenerar el banner).
+           Se posiciona en porcentaje sobre el hueco que el banner deja libre
+           entre el subtítulo y los logos, así que acompaña al escalar. -->
+      <a href="#contacto" class="exec__hero-cta">Inscríbete ahora</a>
     </section>
 
     <ExecutiveProgramBody withForm />
@@ -62,6 +68,48 @@ const EXEC_BANNER_MOBILE = asset(
 <style>
   .exec-program-widget { color: #0B132B; }
   .exec__hero-banner { position: relative; width: 100%; }
+
+  /* Dorado del programa (el mismo de la metodología y los corchetes), con
+     texto azul oscuro: sobre dorado el blanco no da contraste. */
+  .exec__hero-cta {
+    position: absolute;
+    left: 7.81%;              /* alineado con el borde izquierdo de los logos */
+    top: 63.4%;               /* banda libre entre el subtítulo y los logos */
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.95em 2.1em;
+    border-radius: 50px;
+    background: #C09C2E;
+    color: #00133F;
+    font-family: "DM Sans", sans-serif;
+    font-size: clamp(0.72rem, 1.1vw, 0.95rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    line-height: 1;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .exec__hero-cta:hover {
+    background: #D4AE3C;
+    transform: translateY(-2px);
+    box-shadow: 0 16px 38px rgba(0, 0, 0, 0.34);
+  }
+  @media (max-width: 768px) {
+    /* En vertical el banner centra todo: el CTA va centrado en el hueco que
+       queda entre el subtítulo y la foto. */
+    .exec__hero-cta {
+      left: 50%;
+      transform: translateX(-50%);
+      top: 39.5%;
+      font-size: clamp(0.78rem, 3.3vw, 1rem);
+      padding: 0.9em 1.9em;
+    }
+    .exec__hero-cta:hover { transform: translateX(-50%) translateY(-2px); }
+  }
   .exec__sr-title {
     position: absolute;
     width: 1px;
