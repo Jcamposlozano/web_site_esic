@@ -287,23 +287,26 @@ mphoto = overlay_navy(
 ).convert("RGB")
 m.paste(mphoto, (MP_X, MP_Y))
 
-# Mismos corchetes del manual, adaptados a la ventana vertical: la barra se
-# acorta para que ni el doble ni la línea hueca lleguen a la cara del sujeto.
+# Los corchetes ENMARCAN la foto: montan sobre las esquinas (superior izquierda
+# y inferior derecha) y sobresalen hacia el azul, de modo que la imagen queda
+# dentro de la ventana. Antes iban por dentro y se leían pegados encima de la
+# foto, no como marco.
 MBAR_T = int(MP_H * 0.062)
-MBAR_L = int(MP_W * 0.34)
+MBAR_L = int(MP_W * 0.40)
+MBR_OUT = int(MBAR_T * 0.8)     # cuánto sobresale del borde de la foto
 
 corchete(
     m,
-    MP_X + 40,
-    MP_Y + 45,
+    MP_X - MBR_OUT,
+    MP_Y - MBR_OUT,
     MBAR_L,
     MBAR_T,
     filled=True,
 )
 corchete(
     m,
-    MP_X + MP_W - MBAR_L - 40,
-    MP_Y + MP_H - 2 * MBAR_T - 45,
+    MP_X + MP_W - MBAR_L + MBR_OUT,
+    MP_Y + MP_H - 2 * MBAR_T + MBR_OUT,
     MBAR_L,
     MBAR_T,
     filled=False,
