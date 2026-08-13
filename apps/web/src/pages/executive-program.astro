@@ -1,6 +1,6 @@
 ---
 /**
- * /executive-program — Executive Program en Digital Business Transformation
+ * /executive-program — Executive Program en Human AI-First Leadership
  * (réplica fiel de executive-programs/elementor-widget.html).
  *
  * Antes vivía en /digital-business-transformation; esa ruta queda como redirect
@@ -23,15 +23,15 @@ import { asset } from "../lib/assets";
  * Ver design/executive-banner/README.md.
  */
 const EXEC_BANNER_DESKTOP = asset(
-  "wp/2026/08/banner-executive-digital-business-transformation-desktop.webp",
+  "wp/2026/08/banner-executive-human-ai-first-leadership-desktop.webp",
 );
 const EXEC_BANNER_MOBILE = asset(
-  "wp/2026/08/banner-executive-digital-business-transformation-mobile.webp",
+  "wp/2026/08/banner-executive-human-ai-first-leadership-mobile.webp",
 );
 ---
 <Layout
-  title="Executive Program en Digital Business Transformation — ESIC Medellín"
-  description="Executive Program en Digital Business Transformation: 4 meses, 2h por semana, inmersión de 4 días en Madrid. Cocreado por ESIC, Prestigio y Accenture."
+  title="Executive Program en Human AI-First Leadership — ESIC Medellín"
+  description="Executive Program en Human AI-First Leadership: 4 meses, 2h por semana, inmersión de 4 días en Madrid. Cocreado por ESIC, Prestigio y Accenture."
   fullBleed
 >
   <main class="exec-program-widget">
@@ -40,15 +40,15 @@ const EXEC_BANNER_MOBILE = asset(
       <!-- El titular vive dentro del banner (imagen), así que el h1 de la
            página va aquí para SEO y lectores de pantalla. -->
       <h1 class="exec__sr-title">
-        Executive Program en Digital Business Transformation — ESIC Medellín
+        Executive Program en Human AI-First Leadership — ESIC Medellín
       </h1>
-      <a href="#contacto" aria-label="Solicitar información del Executive Program en Digital Business Transformation">
+      <a href="#contacto" aria-label="Solicitar información del Executive Program en Human AI-First Leadership">
         <picture>
           <source media="(max-width: 768px)" srcset={EXEC_BANNER_MOBILE} type="image/webp" />
           <source media="(min-width: 769px)" srcset={EXEC_BANNER_DESKTOP} type="image/webp" />
           <img
             src={EXEC_BANNER_DESKTOP}
-            alt="Executive Program en Digital Business Transformation — ESIC, Prestigio y Accenture"
+            alt="Executive Program en Human AI-First Leadership — ESIC, Prestigio y Accenture"
             loading="eager"
           />
         </picture>

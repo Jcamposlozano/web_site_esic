@@ -64,7 +64,7 @@ const data: Record<TabKey, Programa[]> = {
     {
       href: "/executive-program",
       title: "Executive Program",
-      duration: "4 meses · Liderazgo y transformación",
+      duration: "Human AI-First Leadership · 4 meses",
       image: asset("home/programas/executive-program.webp"),
       imageMobile: asset("home/programas/executive-program-mobile.webp"),
       titleColor: "#C09C2E",

@@ -1,7 +1,7 @@
 ---
 /**
  * ExecutiveProgramBody — cuerpo compartido del Executive Program
- * "Digital Business Transformation" (réplica fiel de executive-programs/*.html).
+ * "Human AI-First Leadership" (antes "Digital Business Transformation").
  *
  * Contiene todo lo que va DESPUÉS del hero (idéntico en ambas páginas):
  *  - Stats bar (4 / Madrid / $30.345.000 / 2h)
@@ -45,6 +45,50 @@ const BROCHURE_URL = asset("wp/2026/08/2026%20Executive%20Program.pdf");
  * La inversión, Madrid y los 4 meses siguen visibles en la barra de stats.
  */
 const SHOW_INFO_GENERAL = false;
+
+/**
+ * Claustro internacional. Las fotos vienen del documento de Marketing
+ * ("Revisión LANDING ExP.docx"): retrato circular en blanco y negro con la
+ * bandera del país incrustada, recortado a PNG con fondo transparente.
+ * Son de baja resolución (≈440px), por eso la tarjeta se mantiene pequeña.
+ */
+const DOCENTES = [
+  {
+    nombre: "Claudia Zapico",
+    cargo: "Experta en Transformación y Liderazgo · Prestigio & CLA Consulting",
+    foto: asset("wp/2026/08/docentes/claudia-zapico.webp"),
+  },
+  {
+    nombre: "Fernando “Bana” Benegas",
+    cargo: "Partner de Bleett · Ex Secretario de Innovación y Transformación Digital, Ciudad de Buenos Aires",
+    foto: asset("wp/2026/08/docentes/fernando-benegas.webp"),
+  },
+  {
+    nombre: "Juan Esteban Jaramillo",
+    cargo: "Presidente ESIC Medellín · Fundador Fugaku Digital · Ex-VP Administrativo Grupo Familia",
+    foto: asset("wp/2026/08/docentes/juan-esteban-jaramillo.webp"),
+  },
+  {
+    nombre: "Eva Cerrolaza",
+    cargo: "Directora I+D Prestigio",
+    foto: asset("wp/2026/08/docentes/eva-cerrolaza.webp"),
+  },
+  {
+    nombre: "Esteban Betancur",
+    cargo: "Presidente Prestigio",
+    foto: asset("wp/2026/08/docentes/esteban-betancur.webp"),
+  },
+  {
+    nombre: "Ignacio Martín",
+    cargo: "Consultor Prestigio & CLA Consulting",
+    foto: asset("wp/2026/08/docentes/ignacio-martin.webp"),
+  },
+  {
+    nombre: "Francisco “Curro” López",
+    cargo: "Global Head of Talent Acquisition & Employer Branding en PagoNxt",
+    foto: asset("wp/2026/08/docentes/francisco-lopez.webp"),
+  },
+];
 ---
 <!-- Stats Bar -->
 <div class="exec__container" style="position:relative; z-index:12;">
@@ -74,7 +118,7 @@ const SHOW_INFO_GENERAL = false;
     <div class="exec__proposito-grid">
       <div>
         <h2>PROPÓSITO DEL PROGRAMA</h2>
-        <p>Impulsar a los altos ejecutivos a liderar la transformación digital de manera estratégica y sistémica, acelerando el desarrollo de un pensamiento digital que genere impacto en la cultura, la innovación y la competitividad de sus organizaciones.</p>
+        <p>Impulsar a altos ejecutivos a evolucionar su liderazgo para transformar sus organizaciones en la era de la inteligencia artificial, integrando estrategia, innovación y tecnología con criterio humano, y desarrollando las capacidades y la cultura necesarias para crear valor, fortalecer la competitividad y generar un impacto sostenible.</p>
       </div>
       <div>
         <div class="exec__pilares">
@@ -87,7 +131,7 @@ const SHOW_INFO_GENERAL = false;
                 <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
               </svg>
             </div>
-            <span>Liderazgo</span>
+            <span>Liderazgo y cultura</span>
           </div>
           <div class="exec__pilar">
             <div class="exec__pilar-icon">
@@ -107,10 +151,23 @@ const SHOW_INFO_GENERAL = false;
                 <polyline points="2 12 12 17 22 12"/>
               </svg>
             </div>
-            <span>Innovación</span>
+            <span>Innovación estratégica</span>
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- Beneficios: "En este Executive Program" -->
+    <div class="exec__beneficios">
+      <h3>En este Executive Program</h3>
+      <ul>
+        <li>Prepara a los participantes para anticiparse a los cambios y aprovechar las oportunidades digitales.</li>
+        <li>Impulsa la capacidad de diseñar estrategias competitivas en entornos de alta disrupción.</li>
+        <li>Fortalece la visión global para conectar negocios tradicionales con la nueva economía digital.</li>
+        <li>Genera competencias clave para transformar modelos de negocio y crear valor sostenible.</li>
+        <li>Potencia la mentalidad de cambio y la capacidad de ejecución en escenarios complejos.</li>
+        <li>Promueve la construcción de redes de alto valor entre directivos de diferentes sectores.</li>
+      </ul>
     </div>
   </div>
 </section>
@@ -177,47 +234,83 @@ const SHOW_INFO_GENERAL = false;
 <section class:list={["exec__estructura", "exec__overlap", !SHOW_INFO_GENERAL && "exec__estructura--alt"]}>
   <div class="exec__container">
     <h2>ESTRUCTURA DEL PROGRAMA</h2>
+
+    <!-- El kick-off es transversal, por eso va aparte y antes del módulo 1 -->
+    <div class="exec__kickoff">
+      <div class="exec__kickoff-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91 0z"/>
+          <path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
+          <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/>
+          <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>
+        </svg>
+      </div>
+      <div>
+        <span class="exec__kickoff-tag">Transversal <span class="exec__badge-p">Presencial</span></span>
+        <h3>Kick-off</h3>
+      </div>
+    </div>
+
     <div class="exec__modulos-grid">
-      <!-- Liderazgo -->
+      <!-- Liderazgo y Cultura -->
       <div class="exec__modulo-col">
         <span class="exec__modulo-badge">Módulo 1</span>
-        <h3>Liderazgo</h3>
-        <!-- Sin fechas por sesión: la cohorte 2026 ya cerró y no hay fechas nuevas -->
+        <h3>Liderazgo y cultura</h3>
         <ul>
-          <li>KICKOFF <span class="exec__badge-p">Presencial</span></li>
-          <li>Los cambios sociales I</li>
-          <li>Los cambios sociales II</li>
-          <li>Cultura Digital</li>
-          <li>Liderazgo <span class="exec__badge-p">Presencial</span></li>
+          <li>Nuevos tiempos, nuevos desafíos</li>
+          <li>Liderazgo en la era de la IA</li>
+          <li>Experiencia de Liderazgo <span class="exec__badge-p">Presencial</span></li>
+          <li>Caso con protagonista</li>
+          <li>Peer mentoring</li>
         </ul>
       </div>
       <!-- Tecnologías Emergentes -->
       <div class="exec__modulo-col">
         <span class="exec__modulo-badge">Módulo 2</span>
-        <h3>Tecnologías Emergentes</h3>
+        <h3>Tecnologías emergentes</h3>
         <ul>
-          <li>Peer mentoring</li>
-          <li>Caso con protagonista</li>
-          <li>IoT</li>
-          <li>Ciberseguridad</li>
+          <li>IA en acción: tendencias, casos y posibilidades</li>
           <li>Blockchain</li>
+          <li>Gobernanza de IA</li>
           <li>Workshop IA <span class="exec__badge-p">Presencial</span></li>
+          <li>Caso con protagonista</li>
         </ul>
       </div>
-      <!-- Innovación -->
+      <!-- Innovación Estratégica -->
       <div class="exec__modulo-col">
         <span class="exec__modulo-badge">Módulo 3</span>
-        <h3>Innovación</h3>
+        <h3>Innovación estratégica</h3>
         <ul>
-          <li>Caso con protagonista</li>
-          <li>Innovación I</li>
-          <li>Innovación II</li>
+          <li>Innovación estratégica I</li>
+          <li>Innovación estratégica II</li>
           <li>Caso con protagonista</li>
         </ul>
       </div>
     </div>
-    <div class="exec__madrid-highlight">
-      <span>Experiencia Internacional Madrid — 4 días</span>
+  </div>
+</section>
+
+<!-- Experiencia Internacional — antes estaba duplicada (barra al final de
+     Estructura + barra al final de Metodología). Ahora es una sola sección,
+     con el protagonismo que pidió Comercial. -->
+<section class="exec__intl exec__overlap">
+  <div class="exec__container">
+    <div class="exec__intl-grid">
+      <div>
+        <div class="exec__spain-flag">
+          <div class="exec__stripe-red"></div>
+          <div class="exec__stripe-yellow"></div>
+          <div class="exec__stripe-red"></div>
+        </div>
+        <span class="exec__intl-kicker">Transversal al programa</span>
+        <h2>EXPERIENCIA INTERNACIONAL</h2>
+      </div>
+      <ul class="exec__intl-list">
+        <li>Inmersión de 4 días en Madrid, España</li>
+        <li>Sesiones académicas con docentes internacionales</li>
+        <li>Visitas empresariales de alto nivel</li>
+        <li>Experiencias sociales y culturales</li>
+      </ul>
     </div>
   </div>
 </section>
@@ -255,19 +348,19 @@ const SHOW_INFO_GENERAL = false;
       </div>
 
       <div class="exec__metodologia-circle-item">
-        <div class="exec__metodologia-circle"><span>Liderazgo</span></div>
+        <div class="exec__metodologia-circle"><span>Liderazgo<br />y cultura</span></div>
       </div>
 
       <span class="exec__metodologia-plus">+</span>
 
       <div class="exec__metodologia-circle-item">
-        <div class="exec__metodologia-circle"><span>Tecnologías<br />Emergentes</span></div>
+        <div class="exec__metodologia-circle"><span>Tecnologías<br />emergentes</span></div>
       </div>
 
       <span class="exec__metodologia-plus">+</span>
 
       <div class="exec__metodologia-circle-item">
-        <div class="exec__metodologia-circle"><span>Innovación</span></div>
+        <div class="exec__metodologia-circle"><span>Innovación<br />estratégica</span></div>
       </div>
     </div>
   </div>
@@ -284,14 +377,24 @@ const SHOW_INFO_GENERAL = false;
     <div class="exec__cat-item"><span>EXPERIENCIAS PRESENCIALES</span></div>
   </div>
 
-  <div class="exec__intl-bar">
-    <div class="exec__spain-flag">
-      <div class="exec__stripe-red"></div>
-      <div class="exec__stripe-yellow"></div>
-      <div class="exec__stripe-red"></div>
+  <!-- La barra de Experiencia Internacional que iba aquí se unificó con la
+       sección propia (arriba): antes el bloque estaba repetido. -->
+</section>
+
+<!-- Docentes internacionales -->
+<section class="exec__docentes exec__overlap">
+  <div class="exec__container">
+    <span class="exec__docentes-kicker">Claustro</span>
+    <h2>DOCENTES INTERNACIONALES</h2>
+    <div class="exec__docentes-grid">
+      {DOCENTES.map((d) => (
+        <article class="exec__docente">
+          <img src={d.foto} alt={d.nombre} loading="lazy" width="110" height="110" />
+          <h3>{d.nombre}</h3>
+          <p>{d.cargo}</p>
+        </article>
+      ))}
     </div>
-    <h3>EXPERIENCIA INTERNACIONAL</h3>
-    <p class="exec__intl-subtitle">Inmersión de 4 días en Madrid, España</p>
   </div>
 </section>
 
@@ -419,31 +522,78 @@ const SHOW_INFO_GENERAL = false;
     gap: 0.8rem;
     margin-bottom: 1.5rem;
   }
+  /* El ícono va en caja chica y sin fondo sólido: antes el cuadro azul pesaba
+     más que el propio nombre del pilar. */
   .exec__pilar {
     display: flex;
     align-items: center;
-    gap: 0.8rem;
-    padding: 0.8rem 1.2rem;
+    gap: 1rem;
+    padding: 1rem 1.4rem;
     background: #fff;
-    border-radius: 12px;
+    border-radius: 14px;
+    border-left: 4px solid #0047E9;
   }
   .exec__pilar-icon {
-    width: 36px;
-    height: 36px;
-    min-width: 36px;
-    border-radius: 10px;
-    background: #0047E9;
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
     display: grid;
     place-items: center;
-    color: #fff;
+    color: #0047E9;
   }
-  .exec__pilar-icon svg { width: 18px; height: 18px; }
+  .exec__pilar-icon svg { width: 24px; height: 24px; }
   .exec__pilar span {
     font-family: "Sofia Sans Extra Condensed", sans-serif;
-    font-size: 1.05rem;
-    font-weight: 700;
+    font-size: 1.6rem;
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: 0.01em;
     text-transform: uppercase;
     color: #00133F;
+  }
+
+  /* ── Beneficios ── */
+  .exec__beneficios {
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid rgba(0,19,63,0.1);
+  }
+  .exec__beneficios h3 {
+    font-family: "Sofia Sans Extra Condensed", sans-serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 0.95;
+    color: #00133F;
+    margin: 0 0 2rem;
+  }
+  .exec__beneficios ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+  .exec__beneficios li {
+    position: relative;
+    background: #fff;
+    border-radius: 16px;
+    padding: 1.5rem 1.5rem 1.5rem 3.4rem;
+    font-size: 0.98rem;
+    line-height: 1.55;
+    color: #3C4858;
+  }
+  .exec__beneficios li::before {
+    content: "";
+    position: absolute;
+    left: 1.5rem;
+    top: 1.85rem;
+    width: 14px;
+    height: 8px;
+    border-left: 2.5px solid #0047E9;
+    border-bottom: 2.5px solid #0047E9;
+    transform: rotate(-45deg);
   }
 
   /* ── Info General ── */
@@ -610,6 +760,166 @@ const SHOW_INFO_GENERAL = false;
     color: #0047E9;
     white-space: nowrap;
   }
+  /* ── Kick-off (transversal, antes del módulo 1) ── */
+  .exec__kickoff {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    background: #0047E9;
+    border-radius: 16px;
+    padding: 1.4rem 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+  .exec__kickoff-icon {
+    width: 46px;
+    height: 46px;
+    min-width: 46px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+  }
+  .exec__kickoff-icon svg { width: 24px; height: 24px; }
+  .exec__kickoff-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: rgba(255,255,255,0.75);
+  }
+  .exec__kickoff-tag .exec__badge-p { background: rgba(255,255,255,0.2); color: #fff; }
+  .exec__kickoff h3 {
+    font-family: "Sofia Sans Extra Condensed", sans-serif;
+    font-size: 1.9rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1;
+    color: #fff;
+    margin: 0.3rem 0 0;
+  }
+
+  /* ── Experiencia Internacional ── */
+  .exec__intl {
+    padding: 5rem 0 6rem;
+    background: linear-gradient(135deg, #8B7420 0%, #C09C2E 45%, #9A7A24 100%);
+    z-index: 5;
+  }
+  .exec__intl-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .exec__intl-kicker {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 0.6rem;
+  }
+  .exec__intl h2 {
+    font-family: "Sofia Sans Extra Condensed", sans-serif;
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 0.95;
+    color: #fff;
+    margin: 0;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.25);
+  }
+  .exec__intl-list { list-style: none; padding: 0; margin: 0; }
+  .exec__intl-list li {
+    position: relative;
+    padding: 1rem 0 1rem 2.2rem;
+    font-size: 1.02rem;
+    line-height: 1.5;
+    color: #fff;
+    border-bottom: 1px solid rgba(255,255,255,0.25);
+  }
+  .exec__intl-list li:last-child { border-bottom: none; }
+  .exec__intl-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 1.45rem;
+    width: 12px;
+    height: 7px;
+    border-left: 2.5px solid #fff;
+    border-bottom: 2.5px solid #fff;
+    transform: rotate(-45deg);
+  }
+
+  /* ── Docentes internacionales ── */
+  .exec__docentes {
+    padding: 5rem 0 6rem;
+    background: #F5F3EF;
+    text-align: center;
+    z-index: 8;
+  }
+  .exec__docentes-kicker {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #0047E9;
+    margin-bottom: 0.7rem;
+  }
+  .exec__docentes h2 {
+    font-family: "Sofia Sans Extra Condensed", sans-serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 0.95;
+    color: #00133F;
+    margin: 0 0 3rem;
+  }
+  /* Tarjeta chica a propósito: las fotos son de baja resolución.
+     Fila centrada y no grilla: son 7, y en grilla de 4 la última fila quedaba
+     coja contra la izquierda. */
+  .exec__docentes-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.25rem;
+  }
+  .exec__docente {
+    flex: 0 1 260px;
+    background: #fff;
+    border-radius: 16px;
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .exec__docente img {
+    width: 110px;
+    height: 110px;
+    object-fit: contain;
+    margin-bottom: 0.9rem;
+  }
+  .exec__docente h3 {
+    font-family: "Sofia Sans Extra Condensed", sans-serif;
+    font-size: 1.25rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.05;
+    color: #00133F;
+    margin: 0 0 0.4rem;
+  }
+  .exec__docente p {
+    font-size: 0.8rem;
+    line-height: 1.45;
+    color: #5F6B7A;
+    margin: 0;
+  }
+
   .exec__madrid-highlight {
     background: #0047E9;
     border-radius: 12px;
@@ -640,7 +950,7 @@ const SHOW_INFO_GENERAL = false;
     padding: 5rem 0 6rem;
     background: #fff;
     text-align: center;
-    z-index: 5;
+    z-index: 6;
   }
   .exec__cocreadores h2 {
     font-family: "Sofia Sans Extra Condensed", sans-serif;
@@ -680,7 +990,7 @@ const SHOW_INFO_GENERAL = false;
     padding: 0;
     background: #00133F;
     position: relative;
-    z-index: 6;
+    z-index: 7;
   }
   .exec__metodologia-header {
     background: linear-gradient(90deg, #8B7420 0%, #C09C2E 50%, #8B7420 100%);
@@ -861,7 +1171,7 @@ const SHOW_INFO_GENERAL = false;
     background: #00133F;
     color: #fff;
     text-align: center;
-    z-index: 7;
+    z-index: 9;
   }
   /* Con formulario: copy a la izquierda, tarjeta blanca a la derecha (misma
      estructura que el resto de páginas de programa). */
@@ -977,6 +1287,8 @@ const SHOW_INFO_GENERAL = false;
     .exec__proposito-grid { grid-template-columns: 1fr; gap: 2rem; }
     .exec__info-row { grid-template-columns: repeat(2, 1fr); }
     .exec__cta-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .exec__beneficios ul { grid-template-columns: repeat(2, 1fr); }
+    .exec__intl-grid { grid-template-columns: 1fr; gap: 2rem; }
     .exec__modulos-grid { grid-template-columns: 1fr; }
     .exec__metodologia-circle { width: 110px; height: 110px; }
     .exec__metodologia-plus { font-size: 2rem; }
@@ -993,6 +1305,22 @@ const SHOW_INFO_GENERAL = false;
     .exec__info-row { grid-template-columns: 1fr 1fr; }
     .exec__estructura { padding: 3rem 0; }
     .exec__cocreadores { padding: 3rem 0; }
+    .exec__intl { padding: 3rem 0; }
+    .exec__docentes { padding: 3rem 0; }
+    .exec__beneficios { margin-top: 2.5rem; padding-top: 2rem; }
+    .exec__beneficios ul { grid-template-columns: 1fr; gap: 0.8rem; }
+    .exec__beneficios li { padding: 1.1rem 1.1rem 1.1rem 3rem; text-align: left; }
+    .exec__beneficios li::before { left: 1.2rem; top: 1.45rem; }
+    .exec__docentes-grid { gap: 0.8rem; }
+    .exec__docente { flex: 0 1 calc(50% - 0.4rem); }
+    .exec__docente { padding: 1.2rem 0.8rem; }
+    .exec__docente img { width: 88px; height: 88px; }
+    .exec__docente h3 { font-size: 1.05rem; }
+    .exec__docente p { font-size: 0.74rem; }
+    .exec__kickoff { padding: 1.1rem 1.2rem; gap: 1rem; }
+    .exec__kickoff h3 { font-size: 1.5rem; }
+    .exec__pilar span { font-size: 1.3rem; }
+    .exec__intl-list li { font-size: 0.95rem; }
     .exec__quote-cta { padding: 3rem 0; }
     .exec__cta-card { padding: 1.6rem; border-radius: 18px; }
     .exec__cta-card h4 { font-size: 1.7rem; }

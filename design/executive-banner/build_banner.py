@@ -39,11 +39,11 @@ GRAD_FROM, GRAD_TO = GRADIENTS[CORCHETE]
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 PHOTO = os.environ.get("PHOTO") or os.path.expanduser(
-    "~/Downloads/esic-executive-hero.png"
+    "~/Downloads/DSC05139.jpg"
 )
 if not os.path.isabs(PHOTO):
     PHOTO = os.path.join(HERE, PHOTO)
-OUT = os.path.join(HERE, "banner-executive-digital-business-transformation-desktop.png")
+OUT = os.path.join(HERE, "banner-executive-human-ai-first-leadership-desktop.png")
 
 # Fuentes: se pasan por env para poder cambiar entre la de marca (Sofia Sans
 # Extra Condensed) y el fallback disponible en el equipo.
@@ -95,38 +95,64 @@ def corchete(img, x, y, bar_len, thick, *, filled, flip=False, line=WHITE):
         layer = layer.rotate(180)
     img.paste(layer, (x, y), layer)
 
-# ---------------------------------------------------------------- panel foto
-PANEL_X, PANEL_Y, PANEL_W, PANEL_H = 1560, 96, 800, 976
+# ---------------------------------------------------------------- foto + overlay
+# La foto ya no es un retrato en un panel lateral: es la foto real de la cohorte
+# (grupo ancho en las escaleras del campus). Va a sangre, con overlay azul ESIC
+# para que el texto tenga contraste, como manda la regla de imágenes del sitio.
+
+
+def cover(img, size, focus_y=0.5):
+    """Recorta y escala tipo `object-fit: cover`."""
+    tw, th = size
+    sw, sh = img.size
+    scale = max(tw / sw, th / sh)
+    nw, nh = int(sw * scale + 0.5), int(sh * scale + 0.5)
+    img = img.resize((nw, nh), Image.LANCZOS)
+    left = (nw - tw) // 2
+    top = int((nh - th) * focus_y)
+    return img.crop((left, top, left + tw, top + th))
+
+
+def overlay_navy(img, base=0.40, peak=0.94, flat=0.30, split=0.70):
+    """Overlay azul ESIC sobre la foto.
+
+    No es un degradado suave de punta a punta: es un scrim. Se mantiene casi
+    opaco hasta `flat` (la zona del titular y los logos, donde si no el texto
+    blanco cae encima de las caras) y de ahí baja hasta `base`, que es el
+    overlay mínimo que lleva toda imagen del sitio.
+    """
+    w, h = img.size
+    grad = Image.new("L", (w, 1))
+    for x in range(w):
+        t = x / max(1, w - 1)
+        if t <= flat:
+            a = peak
+        elif t >= split:
+            a = base
+        else:
+            k = (t - flat) / (split - flat)
+            a = peak + (base - peak) * (k * k * (3 - 2 * k))   # smoothstep
+        grad.putpixel((x, 0), int(255 * a))
+    ov = Image.new("RGBA", (w, h), NAVY + (0,))
+    ov.putalpha(grad.resize((w, h), Image.BILINEAR))
+    return Image.alpha_composite(img.convert("RGBA"), ov)
+
 
 photo = Image.open(PHOTO).convert("RGB")
-src_w, src_h = photo.size
-target_ratio = PANEL_W / PANEL_H
-crop_h = int(src_w / target_ratio)
-crop_top = int((src_h - crop_h) * 0.12)  # sesgo hacia arriba: conserva la cabeza
-photo = photo.crop((0, crop_top, src_w, crop_top + crop_h)).resize(
-    (PANEL_W, PANEL_H), Image.LANCZOS
-)
-canvas.paste(photo, (PANEL_X, PANEL_Y))
+canvas = overlay_navy(cover(photo, (W, H), focus_y=0.42)).convert("RGB")
+draw = ImageDraw.Draw(canvas)
 
 # ------------------------------------------------------------- corchetes
-# Ventana = el panel de la foto. Superior doble arriba a la izquierda (sobre el
-# fondo de la foto, lejos de la cara) e inferior en línea hueca abajo a la
-# derecha, como en los ejemplos del manual.
-BAR_T = int(PANEL_H * 0.052)
-BAR_L = int(PANEL_W * 0.60)
+# Ahora la "ventana" del manual es el banner completo: corchete doble arriba a
+# la izquierda (por encima del titular) y línea hueca abajo a la derecha.
+BAR_T = int(H * 0.048)
+BAR_L = int(W * 0.20)
 
+corchete(canvas, 90, 78, BAR_L, BAR_T, filled=True)
 corchete(
     canvas,
-    PANEL_X - int(BAR_L * 0.30),
-    PANEL_Y + int(PANEL_H * 0.04),
-    BAR_L,
-    BAR_T,
-    filled=True,
-)
-corchete(
-    canvas,
-    PANEL_X + PANEL_W - BAR_L + int(BAR_L * 0.24),
-    PANEL_Y + PANEL_H - 2 * BAR_T - int(PANEL_H * 0.05),
+    W - BAR_L - 90,
+    H - 2 * BAR_T - 78,
     BAR_L,
     BAR_T,
     filled=False,
@@ -170,7 +196,7 @@ draw_right("EXECUTIVE", f_head, TOP)
 # Singular: es UN programa (Digital Business Transformation), no la oferta
 # completa de executive programs.
 draw_right("PROGRAM", f_head, TOP + 186)
-draw_right("DIGITAL BUSINESS TRANSFORMATION", f_sub, TOP + 186 + 270)
+draw_right("HUMAN AI-FIRST LEADERSHIP", f_sub, TOP + 186 + 270)
 
 # --------------------------------------------------------------------- logos
 # Holgura abajo: la barra de stats de la pagina monta sobre el borde inferior
@@ -227,7 +253,9 @@ MW, MH = 2048, 2900
 m = Image.new("RGB", (MW, MH), NAVY)
 md = ImageDraw.Draw(m)
 
-MP_X, MP_Y, MP_W, MP_H = 300, 1300, 1448, 1150
+# La foto de grupo es muy ancha: en vertical va como banda a todo el ancho
+# (menos un margen), no como panel estrecho, o se perdería medio grupo.
+MP_X, MP_Y, MP_W, MP_H = 90, 1230, MW - 180, 1150
 
 
 def draw_center(d, text, font, y, cx, fill=WHITE, tracking=0):
@@ -248,33 +276,34 @@ mf_sub = fit("", FONT_LIGHT, 108, SUB_WEIGHT)
 CX = MW // 2
 draw_center(md, "EXECUTIVE", mf_head, 330, CX)
 draw_center(md, "PROGRAM", mf_head, 330 + 244, CX)
-draw_center(md, "DIGITAL BUSINESS", mf_sub, 924, CX)
-draw_center(md, "TRANSFORMATION", mf_sub, 1042, CX)
+draw_center(md, "HUMAN AI-FIRST", mf_sub, 924, CX)
+draw_center(md, "LEADERSHIP", mf_sub, 1042, CX)
 
-mphoto = Image.open(PHOTO).convert("RGB")
-sw, sh = mphoto.size
-ch = int(sw / (MP_W / MP_H))
-ct = int((sh - ch) * 0.12)
-mphoto = mphoto.crop((0, ct, sw, ct + ch)).resize((MP_W, MP_H), Image.LANCZOS)
+# Overlay más suave que en desktop: aquí la foto no lleva texto encima.
+mphoto = overlay_navy(
+    cover(Image.open(PHOTO).convert("RGB"), (MP_W, MP_H), focus_y=0.45),
+    base=0.26,
+    peak=0.26,
+).convert("RGB")
 m.paste(mphoto, (MP_X, MP_Y))
 
 # Mismos corchetes del manual, adaptados a la ventana vertical: la barra se
 # acorta para que ni el doble ni la línea hueca lleguen a la cara del sujeto.
-MBAR_T = int(MP_H * 0.075)
-MBAR_L = int(MP_W * 0.52)
+MBAR_T = int(MP_H * 0.062)
+MBAR_L = int(MP_W * 0.34)
 
 corchete(
     m,
-    MP_X - int(MBAR_L * 0.22),
-    MP_Y + int(MP_H * 0.05),
+    MP_X + 40,
+    MP_Y + 45,
     MBAR_L,
     MBAR_T,
     filled=True,
 )
 corchete(
     m,
-    MP_X + MP_W - MBAR_L + int(MBAR_L * 0.22),
-    MP_Y + MP_H - 2 * MBAR_T - int(MP_H * 0.06),
+    MP_X + MP_W - MBAR_L - 40,
+    MP_Y + MP_H - 2 * MBAR_T - 45,
     MBAR_L,
     MBAR_T,
     filled=False,
@@ -294,8 +323,8 @@ _widths = [load_logo(os.path.join(HERE, n), h).width for n, h in MOBILE_LOGOS]
 row_w = sum(_widths) + (len(_widths) - 1) * (6 + 2 * MPAD)
 # 2490 y no 2660: la barra blanca de stats monta sobre el borde inferior del
 # banner y los logos quedaban casi pegados a ella en mobile.
-draw_logo_row(m, md, MOBILE_LOGOS, CX - row_w // 2, 2490, MPAD, MSEP_H)
+draw_logo_row(m, md, MOBILE_LOGOS, CX - row_w // 2, 2560, MPAD, MSEP_H)
 
-OUT_M = os.path.join(HERE, "banner-executive-digital-business-transformation-mobile.png")
+OUT_M = os.path.join(HERE, "banner-executive-human-ai-first-leadership-mobile.png")
 m.save(OUT_M, quality=95)
 print(f"OK -> {OUT_M}  {m.size}")
