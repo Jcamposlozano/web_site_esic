@@ -15,6 +15,8 @@ const AB_LOGO = asset("dje/action-black-logo-white.svg");
 // sobre fondo blanco opaco y no sirve para el hero oscuro)
 const ESIC_LOGO = asset("wp/2026/02/logo-esic.png");
 const HERO_PHOTO = asset("dje/hero-action-black.webp");
+const CAMPANA_VIDEO = asset("dje/dje-video-campana.mp4");
+const CAMPANA_POSTER = asset("dje/dje-video-poster.webp");
 
 const HEADLINE = "El mejor gimnasio del mundo busca a los próximos líderes de ESIC".split(" ");
 // Palabras 5..10 ("busca a los próximos líderes") van en azul
@@ -301,8 +303,32 @@ const arrowIcon = `<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 
       </Container>
     </section>
 
-    <!-- ── PREMIOS — contador animado ── -->
+    <!-- ── VIDEO DE CAMPAÑA ── -->
     <section class="relative z-[4] -mt-[50px] rounded-t-[50px] bg-[#0A0A0A] py-20 md:py-24">
+      <Container class="max-w-[1100px]">
+        <div class="dje-reveal mb-10 text-center">
+          <span class="dje-kicker-line mx-auto mb-4 justify-center">El desafío en video</span>
+          <h2 class="font-display text-[clamp(2.4rem,5.5vw,4rem)] font-extrabold uppercase leading-[1] text-white">
+            Así se vive el reto
+          </h2>
+        </div>
+
+        <div class="dje-reveal relative mx-auto max-w-[980px] overflow-hidden rounded-[24px] bg-black shadow-[0_24px_60px_rgba(0,0,0,0.45)]">
+          <video
+            class="block aspect-video h-auto w-full"
+            src={CAMPANA_VIDEO}
+            poster={CAMPANA_POSTER}
+            controls
+            playsinline
+            preload="none"
+            aria-label="Video de campaña del Desafío Junior Empresarial × Action Black"
+          ></video>
+        </div>
+      </Container>
+    </section>
+
+    <!-- ── PREMIOS — contador animado ── -->
+    <section class="relative z-[5] -mt-[50px] rounded-t-[50px] bg-[#0A0A0A] py-20 md:py-24">
       <Container class="max-w-[1100px]">
         <div class="dje-reveal mb-12 text-center">
           <span class="dje-kicker-line mx-auto mb-4 justify-center">Premios</span>
@@ -335,7 +361,7 @@ const arrowIcon = `<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 
     </section>
 
     <!-- ── FECHA Y LUGAR — countdown ── -->
-    <section class="relative z-[5] -mt-[50px] rounded-t-[50px] bg-[#111214] py-20 md:py-24">
+    <section class="relative z-[6] -mt-[50px] rounded-t-[50px] bg-[#111214] py-20 md:py-24">
       <Container class="max-w-[1100px]">
         <div class="dje-reveal mb-12 text-center">
           <span class="dje-kicker-line mx-auto mb-4 justify-center">Fecha y lugar</span>
@@ -371,7 +397,7 @@ const arrowIcon = `<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 
     </section>
 
     <!-- ── QUIÉN PARTICIPA — marquee ── -->
-    <section class="relative z-[6] -mt-[50px] overflow-hidden rounded-t-[50px] bg-[#0A0A0A] py-20 md:py-24">
+    <section class="relative z-[7] -mt-[50px] overflow-hidden rounded-t-[50px] bg-[#0A0A0A] py-20 md:py-24">
       <Container class="max-w-[1100px]">
         <div class="dje-reveal mb-10 text-center">
           <span class="dje-kicker-line mx-auto mb-4 justify-center">¿Quién puede participar?</span>
@@ -406,7 +432,7 @@ const arrowIcon = `<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 
     </section>
 
     <!-- ── CIERRE — de vuelta al formulario ── -->
-    <section class="relative z-[7] -mt-[50px] rounded-t-[50px] bg-[#0047E9] py-16 text-center md:py-20">
+    <section class="relative z-[8] -mt-[50px] rounded-t-[50px] bg-[#0047E9] py-16 text-center md:py-20">
       <Container class="max-w-[760px]">
         <div class="dje-reveal">
           <h2 class="font-display text-[clamp(2.2rem,5vw,3.4rem)] font-extrabold uppercase leading-[1] text-white">
