@@ -12,11 +12,17 @@ type Slide = {
 
 const slides: Slide[] = [
   {
+    href: "/desafio-junior-empresarial/",
+    alt: "Boot Camp Desafío Junior Empresarial — ESIC × Action Black, 12 de septiembre",
+    mobile: asset("home/banner/bootcamp-mobile.webp"),
+    desktop: asset("home/banner/bootcamp-desktop.webp"),
+    priority: true,
+  },
+  {
     href: "/quienes-somos/",
     alt: "Aniversario ESIC Medellín — Escuela de negocios con visión global",
     mobile: asset("home/banner/aniversario-mobile.webp"),
     desktop: asset("home/banner/aniversario-desktop.webp"),
-    priority: true,
   },
   // El slide del Level Up con Claude salió del carrusel: la edición de
   // agosto/septiembre 2026 quedó SOLD OUT. Para reactivarlo cuando haya nuevas

@@ -29,7 +29,6 @@ const ZOHO_ACTION =
     accept-charset="UTF-8"
     enctype="multipart/form-data"
     data-esic-zoho-form
-    onsubmit="zf_ValidateAndSubmit(this, event); return false;"
   >
     <input type="hidden" name="zf_referrer_name" value="" />
     <input type="hidden" name="zf_redirect_url" value="https://esic.co/gracias/" />
@@ -63,14 +62,29 @@ const ZOHO_ACTION =
         <option value="Pregrado">Pregrado</option>
         <option value="Máster">Máster</option>
         <option value="Programa Ejecutivo">Programa Ejecutivo</option>
-        <option value="Empresariales">Empresariales</option>
+        <option value="Formaciones empresariales">Formaciones empresariales</option>
         <option value="Level Up">Level Up</option>
+        <option value="Open Day">Open Day</option>
       </select>
     </div>
 
-    <div class="esic-form-group" data-group="master" style="display:none">
-      <label for={`${idPrefix}_Dropdown2`}>Programa de interés Máster <em>*</em></label>
-      <select id={`${idPrefix}_Dropdown2`} name="Dropdown2">
+    {/*
+      Programa de interés: la automatización de Zoho usa UN SOLO campo
+      (Dropdown2) para todos los tipos de programa. Cada sub-select comparte
+      name="Dropdown2" y los inactivos van disabled para que no se envíen.
+    */}
+    <div class="esic-form-group" data-group="Pregrado" style="display:none">
+      <label for={`${idPrefix}_Dropdown2_pregrado`}>Programa de interés <em>*</em></label>
+      <select id={`${idPrefix}_Dropdown2_pregrado`} name="Dropdown2" disabled>
+        <option value="-Select-" disabled selected>-Select-</option>
+        <option value="Dirección de Marketing Global">Dirección de Marketing Global</option>
+        <option value="Digital Business">Digital Business</option>
+      </select>
+    </div>
+
+    <div class="esic-form-group" data-group="Máster" style="display:none">
+      <label for={`${idPrefix}_Dropdown2_master`}>Programa de interés <em>*</em></label>
+      <select id={`${idPrefix}_Dropdown2_master`} name="Dropdown2" disabled>
         <option value="-Select-" disabled selected>-Select-</option>
         <option value="Máster Digital Marketing">Máster en Digital Marketing</option>
         <option value="Máster Digital Business">Máster en Digital Business</option>
@@ -78,12 +92,24 @@ const ZOHO_ACTION =
       </select>
     </div>
 
-    <div class="esic-form-group" data-group="pregrado" style="display:none">
-      <label for={`${idPrefix}_Dropdown4`}>Programa de interés Pregrado <em>*</em></label>
-      <select id={`${idPrefix}_Dropdown4`} name="Dropdown4">
+    <div class="esic-form-group" data-group="Programa Ejecutivo" style="display:none">
+      <label for={`${idPrefix}_Dropdown2_exec`}>Programa de interés <em>*</em></label>
+      <select id={`${idPrefix}_Dropdown2_exec`} name="Dropdown2" disabled>
         <option value="-Select-" disabled selected>-Select-</option>
-        <option value="Dirección de Marketing Global">Dirección de Marketing Global</option>
-        <option value="Digital Business">Digital Business</option>
+        <option value="Programa ejecutivo en Digital Transformation">Programa ejecutivo en Digital Transformation</option>
+      </select>
+    </div>
+
+    <div class="esic-form-group" data-group="Formaciones empresariales" style="display:none">
+      <label for={`${idPrefix}_Dropdown2_emp`}>Programa de interés <em>*</em></label>
+      <select id={`${idPrefix}_Dropdown2_emp`} name="Dropdown2" disabled>
+        <option value="-Select-" disabled selected>-Select-</option>
+        <option value="Formaciones empresariales">Formaciones empresariales</option>
+        <option value="IA Creatividad">IA Creatividad</option>
+        <option value="IA Marketing Digital">IA Marketing Digital</option>
+        <option value="IA Inteligencia Artificial Nivel 1">IA Inteligencia Artificial Nivel 1</option>
+        <option value="IA Inteligencia Artificial Nivel 2">IA Inteligencia Artificial Nivel 2</option>
+        <option value="IA Inteligencia Artificial Nivel 3">IA Inteligencia Artificial Nivel 3</option>
       </select>
     </div>
 
@@ -117,21 +143,22 @@ const ZOHO_ACTION =
 </div>
 
 <script is:inline>
-  // Toggle del dropdown de programa (Pregrado/Máster) — robusto para N formularios.
+  // Toggle del sub-select de programa de interés — robusto para N formularios.
+  // Todos los sub-selects comparten name="Dropdown2"; el inactivo va disabled
+  // para que el navegador no lo envíe y Zoho reciba un único valor.
   if (typeof window.esicZohoToggle !== "function") {
     window.esicZohoToggle = function (sel) {
       var form = sel.closest("form");
       if (!form) return;
-      var mg = form.querySelector('[data-group="master"]');
-      var pg = form.querySelector('[data-group="pregrado"]');
-      var ms = mg && mg.querySelector("select");
-      var ps = pg && pg.querySelector("select");
-      var showM = sel.value === "Máster";
-      var showP = sel.value === "Pregrado";
-      if (mg) mg.style.display = showM ? "" : "none";
-      if (pg) pg.style.display = showP ? "" : "none";
-      if (ms) { ms.required = showM; if (!showM) ms.value = "-Select-"; }
-      if (ps) { ps.required = showP; if (!showP) ps.value = "-Select-"; }
+      form.querySelectorAll("[data-group]").forEach(function (group) {
+        var active = group.getAttribute("data-group") === sel.value;
+        var field = group.querySelector("select");
+        group.style.display = active ? "" : "none";
+        if (!field) return;
+        field.disabled = !active;
+        field.required = active;
+        if (!active) field.value = "-Select-";
+      });
     };
   }
   // Autollenado de UTM desde la URL (una sola vez por página, cubre todos los forms).
