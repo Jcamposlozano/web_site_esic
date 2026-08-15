@@ -12,6 +12,16 @@
       "runtimeExecutable": "pnpm",
       "runtimeArgs": ["--dir", "/Users/jero/Downloads/Programacion/esic-react-app", "preview"],
       "port": 4321
+    },
+    {
+      "_comment": "Sirve una COPIA del build en /tmp/esic-preview. Util para verificar assets que aun no estan en S3: copialos a /tmp/esic-preview/localassets/ y reescribe la URL de S3 en el HTML/JS del build. Refrescar con: (cd apps/web && ./node_modules/.bin/astro build) && rm -rf /tmp/esic-preview && cp -R apps/web/dist /tmp/esic-preview",
+      "name": "esic-dist",
+      "runtimeExecutable": "/usr/bin/python3",
+      "runtimeArgs": [
+        "-c",
+        "import os;os.chdir('/tmp/esic-preview');import http.server,socketserver;socketserver.TCPServer.allow_reuse_address=True;socketserver.TCPServer(('127.0.0.1',4321),http.server.SimpleHTTPRequestHandler).serve_forever()"
+      ],
+      "port": 4321
     }
   ]
 }

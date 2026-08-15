@@ -196,6 +196,16 @@ export default function BannerCarousel() {
           transition: none;
         }
         .eh-banner-slide { padding-top: 0; }
+
+        /*
+          Mobile: los banners verticales quedaban al ras. Arriba la nav (fixed,
+          56px) tapaba el logo del banner; abajo el overlap de -50px de la
+          siguiente seccion se comia el CTA. Se les da aire en negro — el mismo
+          fondo de la seccion — para que la pieza se vea completa.
+        */
+        @media (max-width: 768px) {
+          .eh-banner-slide { padding: 96px 0 96px; }
+        }
       `}</style>
     </section>
   );
