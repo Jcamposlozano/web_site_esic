@@ -34,6 +34,16 @@ test('la barra de datos del hero muestra esas mismas fechas', () => {
   }
 })
 
+test('el sello de fechas del hero dice lo mismo que la agenda', () => {
+  const sello = landing.match(/cc-hero-fechas[\s\S]*?<\/div>/)
+  assert.ok(sello, 'no se encontró el sello de fechas del hero')
+  for (const fecha of FECHAS) {
+    const [dia, mes] = fecha.split(' ')
+    assert.ok(sello[0].includes(dia), `falta el ${dia} en el sello del hero`)
+    assert.ok(sello[0].includes(mes), `el sello del hero no dice ${mes}`)
+  }
+})
+
 test('con el pago activo no quedan restos de la lista de espera', () => {
   const pagoActivo = /zf_redirect_url" value=\{WOMPI_URL\}/.test(landing)
   assert.ok(pagoActivo, 'el formulario ya no redirige a Wompi: ¿quedó en modo lista de espera?')

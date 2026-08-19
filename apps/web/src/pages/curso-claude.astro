@@ -166,7 +166,7 @@ const checkIcon = `<polyline points="20 6 9 17 4 12"/>`;
     <!-- ═══ HERO BANNER ═══ -->
     <section class="relative z-[1] block overflow-hidden bg-[#0B0B0C] pb-[54px] pt-[88px] leading-[0] md:pt-0">
       <h1 class="sr-only">Level Up con Claude — Domina Claude en 3 sesiones · ESIC Medellín</h1>
-      <a href="#inscripcion" aria-label="Separa tu cupo en Level Up con Claude" class="block">
+      <a href="#inscripcion" aria-label="Separa tu cupo en Level Up con Claude" class="relative block">
         <picture>
           <source media="(max-width: 767px)" srcset={asset("wp/2026/07/level-up-hero-mobile.webp")} type="image/webp" />
           <img
@@ -178,6 +178,18 @@ const checkIcon = `<polyline points="20 6 9 17 4 12"/>`;
             height="1095"
           />
         </picture>
+
+        <!-- Fechas de la edicion sobre el arte. Van en HTML y no quemadas en el
+             banner: cambiar de edicion no obliga a reexportar la imagen. La
+             esquina superior izquierda esta vacia en ambas versiones del arte. -->
+        <div class="cc-hero-fechas pointer-events-none absolute left-[5%] top-[5%] rounded-[14px] md:top-[17%] border-[1.5px] border-[rgba(217,119,87,0.55)] bg-[rgba(10,10,12,0.62)] px-[clamp(0.7rem,1.6vw,1.3rem)] py-[clamp(0.45rem,1vw,0.8rem)]">
+          <span class="block font-display text-[clamp(1rem,2.1vw,1.9rem)] font-extrabold uppercase leading-none tracking-[0.06em] text-white">
+            17 · 24 · 31 OCT
+          </span>
+          <span class="mt-[0.45em] block text-[clamp(0.46rem,0.78vw,0.7rem)] font-semibold uppercase leading-[1.4] tracking-[0.12em] text-[#D97757]">
+            3 sábados · 8:00 a 12:00 · Campus ESIC Medellín
+          </span>
+        </div>
       </a>
     </section>
 
