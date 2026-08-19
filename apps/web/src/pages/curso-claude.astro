@@ -10,18 +10,17 @@ import { asset } from "../lib/assets";
  * #F5F2EC (tutores) y #F8F6F2 (pilares).
  */
 
-const title = "Level Up con Claude — SOLD OUT | ESIC Medellín";
+const title = "Level Up con Claude — Domina Claude en 3 sesiones | ESIC Medellín";
 const description =
-  "La edición de Level Up con Claude está agotada: no quedan cupos disponibles. Déjanos tus datos y te avisamos primero cuando abramos la próxima edición en el Campus ESIC Medellín.";
+  "De consumir IA a crear con ella. Domina los 4 pilares de Claude (Chat, Cowork, Design y Code) en 3 sábados presenciales (17, 24 y 31 de octubre) en el Campus ESIC Medellín y sal con tu negocio publicado. Inversión: $1.200.000 COP.";
 
 /**
- * SOLD OUT (agosto 2026): la edición 22/29 AGO — 5 SEP quedó sin cupos.
- * El flujo ya NO pasa por pago: CTA → modal con formulario Zoho (el lead
- * entra al CRM) → Zoho redirige a /curso-claude/lista-de-espera.
- * Cuando se abra una nueva edición: reactivar el pago apuntando
- * zf_redirect_url al checkout de Wompi y restaurar los CTA de "Separa tu cupo".
+ * Flujo de inscripción (igual al de la landing original de WordPress):
+ * CTA → modal con formulario Zoho (captura el lead) → Zoho redirige a Wompi
+ * vía zf_redirect_url → pago → /curso-claude/confirmacion.
+ * El lead queda registrado aunque la persona no complete el pago.
  */
-const REDIRECT_URL = "https://esic.co/curso-claude/lista-de-espera/";
+const WOMPI_URL = "https://checkout.wompi.co/l/RCCkA3";
 const ZOHO_ACTION =
   "https://forms.zohopublic.com/esicmedellin/form/SeparayatulugarFormularioLevelUP110226/formperma/6suw077ABDvaL9ciYTgezsHxpmtBh6y2URfr6ZDbCGU/htmlRecords/submit";
 
@@ -57,7 +56,7 @@ const fuentes = [
 ];
 
 const stats = [
-  { label: "Fechas", a: "22 · 29 AGO", b: "5 SEP" },
+  { label: "Fechas", a: "17 · 24 OCT", b: "31 OCT" },
   { label: "Horario", a: "8:00 a 12:00", b: "3 sábados" },
   { label: "Modalidad", a: "Presencial", b: "Campus Medellín" },
   { label: "Te llevas", a: "Tu negocio", b: "publicado" },
@@ -107,7 +106,7 @@ const sesiones = [
   {
     n: "01",
     day: "Día 1",
-    date: "22 AGO",
+    date: "17 OCT",
     pilar: "Claude Chat",
     tema: "Contexto y prompting",
     items: [
@@ -119,7 +118,7 @@ const sesiones = [
   {
     n: "02",
     day: "Día 2",
-    date: "29 AGO",
+    date: "24 OCT",
     pilar: "Claude Cowork",
     tema: "Competencia y marca",
     items: [
@@ -131,7 +130,7 @@ const sesiones = [
   {
     n: "03",
     day: "Día 3",
-    date: "5 SEP",
+    date: "31 OCT",
     pilar: "Claude Code",
     tema: "Construcción y despliegue",
     items: [
@@ -166,27 +165,19 @@ const checkIcon = `<polyline points="20 6 9 17 4 12"/>`;
   <main class="esic-curso-claude bg-[#0A0A0A] text-[#F4EDE4]">
     <!-- ═══ HERO BANNER ═══ -->
     <section class="relative z-[1] block overflow-hidden bg-[#0B0B0C] pb-[54px] pt-[88px] leading-[0] md:pt-0">
-      <h1 class="sr-only">Level Up con Claude — SOLD OUT · Cupos agotados · ESIC Medellín</h1>
-      <a href="#inscripcion" aria-label="Déjanos tus datos para la próxima edición del Level Up con Claude" class="relative block">
+      <h1 class="sr-only">Level Up con Claude — Domina Claude en 3 sesiones · ESIC Medellín</h1>
+      <a href="#inscripcion" aria-label="Separa tu cupo en Level Up con Claude" class="block">
         <picture>
           <source media="(max-width: 767px)" srcset={asset("wp/2026/07/level-up-hero-mobile.webp")} type="image/webp" />
           <img
             src={asset("wp/2026/07/level-up-hero-desktop.webp")}
-            alt="Level Up con Claude — Cupos agotados. 22 ago / 29 ago / 05 sep."
+            alt="Level Up con Claude — Domina Claude en 3 sesiones. Usar Claude es fácil, dominarlo no."
             class="block h-auto w-full align-bottom"
             fetchpriority="high"
             width="2400"
             height="1095"
           />
         </picture>
-
-        <!-- Sello SOLD OUT sobre el banner (sobrio: sin caja ni rotación) -->
-        <div class="cc-soldout-veil absolute inset-0 grid place-items-center">
-          <div class="cc-soldout-stamp text-center">
-            <span class="cc-soldout-word">Sold out</span>
-            <span class="cc-soldout-sub">Cupos agotados · Déjanos tus datos para la próxima edición</span>
-          </div>
-        </div>
       </a>
     </section>
 
@@ -195,15 +186,15 @@ const checkIcon = `<polyline points="20 6 9 17 4 12"/>`;
       <Container class="max-w-[1100px]">
         <div class="flex flex-wrap items-center justify-between gap-6 pb-10 pt-12">
           <div class="flex flex-col">
-            <strong class="font-display text-[2.1rem] font-extrabold uppercase leading-none text-white">Sold out</strong>
-            <span class="mt-1.5 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-[#D97757]">Cupos agotados · Próxima edición por confirmar</span>
+            <strong class="font-display text-[2.1rem] font-extrabold leading-none text-white">$1.200.000</strong>
+            <span class="mt-1.5 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-[#D97757]">COP · Cupos limitados</span>
           </div>
           <div class="flex flex-wrap gap-3">
             <button
               type="button"
               class="cc-open-modal inline-flex items-center justify-center gap-2 rounded-full border-0 bg-[#D97757] px-8 py-3.5 text-[0.9rem] font-bold uppercase tracking-[0.05em] text-[#1a0e08] no-underline shadow-[0_10px_34px_rgba(217,119,87,0.34)] transition-all hover:-translate-y-0.5 hover:bg-[#E88C6D]"
             >
-              Avísame del próximo →
+              Separa tu cupo →
             </button>
             <a
               href="#agenda"
@@ -297,18 +288,21 @@ const checkIcon = `<polyline points="20 6 9 17 4 12"/>`;
       <Container class="max-w-[760px]">
         <div class="cc-reveal">
           <h2 class="font-display text-[clamp(2.8rem,7vw,5rem)] font-extrabold uppercase leading-[0.9] text-white">
-            Esta edición se<br /><span class="text-[#D97757]">agotó</span>
+            Deja de mirar la IA<br />y <span class="text-[#D97757]">empieza a construir</span>
           </h2>
           <p class="mx-auto mt-6 max-w-[520px] text-[1.1rem] leading-[1.7] text-[rgba(244,237,228,0.74)]">
-            Ya no quedan cupos para los 3 sábados de agosto y septiembre.
-            Déjanos tus datos y te avisamos primero cuando abramos la próxima edición.
+            Cupos limitados. Asegura tu lugar y sal con tu negocio publicado.
           </p>
-          <div class="mt-8">
+          <p class="mb-6 mt-8 inline-flex items-baseline gap-2">
+            <b class="font-display text-[3rem] font-extrabold leading-none text-white">$1.200.000</b>
+            <span class="text-[0.8rem] font-semibold uppercase tracking-[0.1em] text-[#D97757]">COP</span>
+          </p>
+          <div>
             <button
               type="button"
               class="cc-open-modal inline-flex items-center justify-center gap-2 rounded-full border-0 bg-[#D97757] px-9 py-4 text-[0.9rem] font-bold uppercase tracking-[0.05em] text-[#1a0e08] no-underline shadow-[0_10px_34px_rgba(217,119,87,0.34)] transition-all hover:-translate-y-0.5 hover:bg-[#E88C6D]"
             >
-              Avísame del próximo →
+              Separa tu cupo →
             </button>
           </div>
         </div>
@@ -378,24 +372,28 @@ const checkIcon = `<polyline points="20 6 9 17 4 12"/>`;
     <section id="inscripcion" class="cc-close relative z-[8] -mt-[50px] rounded-t-[50px] py-20 text-center md:py-24">
       <Container class="max-w-[760px]">
         <div class="cc-reveal">
-          <span class="cc-kicker justify-center">Lista de espera</span>
+          <span class="cc-kicker justify-center">Inscríbete al Level Up</span>
           <h2 class="font-display text-[clamp(2.8rem,7vw,5rem)] font-extrabold uppercase leading-[0.9] text-white">
-            No te pierdas <span class="cc-gradtext">la próxima</span>
+            Tu cupo te <span class="cc-gradtext">está esperando</span>
           </h2>
           <p class="mx-auto mt-6 max-w-[520px] text-[1.1rem] leading-[1.7] text-[rgba(244,237,228,0.74)]">
-            La edición del 22, 29 de agosto y 5 de septiembre está <b class="text-white">agotada</b>.
-            Déjanos tus datos y serás de los primeros en enterarte cuando abramos nuevas fechas.
+            Cupos limitados · 17, 24 y 31 oct · Presencial en Campus ESIC Medellín.
+            Completa tu inscripción y continúa al pago seguro con Wompi.
           </p>
-          <div class="mt-8">
+          <p class="relative mb-6 mt-8 inline-flex items-baseline gap-2" id="cc-price-final">
+            <b class="font-display text-[3rem] font-extrabold leading-none text-white">$1.200.000</b>
+            <span class="text-[0.8rem] font-semibold uppercase tracking-[0.1em] text-[#D97757]">COP</span>
+          </p>
+          <div>
             <button
               type="button"
               class="cc-open-modal cc-shine inline-flex items-center justify-center gap-2 rounded-full border-0 bg-[#D97757] px-9 py-4 text-[0.9rem] font-bold uppercase tracking-[0.05em] text-[#1a0e08] no-underline shadow-[0_10px_34px_rgba(217,119,87,0.34)] transition-all hover:-translate-y-0.5 hover:bg-[#E88C6D]"
             >
-              Déjanos tus datos →
+              Separa tu cupo →
             </button>
           </div>
           <p class="mt-5 text-[0.85rem] text-[rgba(244,237,228,0.5)]">
-            Sin pago ni compromiso · Solo te escribimos cuando abramos la próxima edición
+            Pago seguro con Wompi · Al confirmar el pago tu lugar queda asegurado
           </p>
         </div>
       </Container>
@@ -419,11 +417,10 @@ const checkIcon = `<polyline points="20 6 9 17 4 12"/>`;
 
         <div class="mb-6 pr-10">
           <h2 id="cc-modal-title" class="font-display text-[2rem] font-extrabold uppercase leading-none text-[#00133F]">
-            Lista de espera
+            Inscríbete al Level Up
           </h2>
           <p class="mt-1.5 text-[0.92rem] leading-[1.5] text-[rgba(20,18,16,0.62)]">
-            Esta edición está agotada. Déjanos tus datos y te avisamos primero
-            cuando abramos cupos para la próxima. No tienes que pagar nada.
+            Completa tus datos y continúa al pago seguro con Wompi.
           </p>
         </div>
 
@@ -436,7 +433,7 @@ const checkIcon = `<polyline points="20 6 9 17 4 12"/>`;
           class="cc-form"
         >
           <input type="hidden" name="zf_referrer_name" value="" />
-          <input type="hidden" name="zf_redirect_url" value={REDIRECT_URL} />
+          <input type="hidden" name="zf_redirect_url" value={WOMPI_URL} />
           <input type="hidden" name="zc_gad" value="" />
 
           <div class="cc-form-row">
@@ -529,10 +526,10 @@ const checkIcon = `<polyline points="20 6 9 17 4 12"/>`;
             class="mt-4 w-full rounded-full border-0 bg-[#D97757] px-6 py-4 text-[0.9rem] font-bold uppercase tracking-[0.05em] text-[#1a0e08] transition-colors hover:bg-[#C0603F] hover:text-white disabled:cursor-not-allowed disabled:opacity-70"
             id="cc-form-submit"
           >
-            Enviar mis datos →
+            Continuar al pago →
           </button>
           <p class="mt-3 text-center text-[0.78rem] text-[rgba(20,18,16,0.5)]">
-            Cupos agotados · Te contactamos cuando abramos la próxima edición
+            Inversión: $1.200.000 COP · Pago seguro con Wompi
           </p>
 
           {UTM_FIELDS.map((f) => <input type="hidden" name={f} />)}
@@ -562,7 +559,7 @@ const checkIcon = `<polyline points="20 6 9 17 4 12"/>`;
       reveals.forEach(function (el) { el.classList.add("cc-in"); });
     }
 
-    // Modal de lista de espera: el lead entra a Zoho (CRM), sin pago
+    // Modal de inscripcion: captura el lead en Zoho antes de mandar a Wompi
     var modal = document.getElementById("cc-modal");
     if (modal) {
       var form = document.getElementById("cc-form");
@@ -605,7 +602,7 @@ const checkIcon = `<polyline points="20 6 9 17 4 12"/>`;
         }
       );
 
-      // Evita doble envio mientras Zoho procesa y redirige a la confirmacion
+      // Evita doble envio mientras Zoho procesa y redirige a Wompi
       if (form) {
         form.addEventListener("submit", function () {
           var submit = document.getElementById("cc-form-submit");
@@ -661,62 +658,6 @@ const checkIcon = `<polyline points="20 6 9 17 4 12"/>`;
 </script>
 
 <style>
-  /* ── Sello SOLD OUT sobre el banner del hero ──
-     Sello con caja (como el original) pero compacto, rojo y a la derecha.
-     El velo es mínimo: la caja ya tiene su propio fondo. */
-  .cc-soldout-veil {
-    place-items: end end;
-    padding-right: clamp(1rem, 4vw, 4.5rem);
-    padding-bottom: clamp(1rem, 5%, 3.5rem);
-    background: linear-gradient(160deg, transparent 55%, rgba(10, 10, 12, 0.5) 100%);
-  }
-  .cc-soldout-stamp {
-    max-width: min(46%, 340px);
-    padding: clamp(0.6rem, 1.2vw, 0.95rem) clamp(0.9rem, 1.8vw, 1.5rem);
-    border: 2px solid #d63c1e;
-    border-radius: 12px;
-    background: rgba(10, 10, 12, 0.72);
-    transform: rotate(-4deg);
-    box-shadow: 0 12px 34px rgba(0, 0, 0, 0.45);
-  }
-  .cc-soldout-word {
-    display: block;
-    font-family: var(--font-display, inherit);
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-size: clamp(1.05rem, 2vw, 1.7rem);
-    line-height: 1;
-    color: #ff5a37;
-  }
-  .cc-soldout-sub {
-    display: block;
-    margin-top: 0.42em;
-    font-size: clamp(0.5rem, 0.78vw, 0.68rem);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    line-height: 1.45;
-    color: rgba(244, 237, 228, 0.82);
-  }
-  /* En móvil el banner es vertical: el sello va abajo a la derecha. */
-  @media (max-width: 767px) {
-    .cc-soldout-veil {
-      place-items: end end;
-      padding-right: 5%;
-      padding-bottom: 7%;
-      background: linear-gradient(180deg, transparent 55%, rgba(10, 10, 12, 0.5) 100%);
-    }
-    .cc-soldout-stamp {
-      max-width: 64%;
-    }
-    .cc-soldout-word {
-      font-size: 1.15rem;
-    }
-    .cc-soldout-sub {
-      font-size: 0.55rem;
-    }
-  }
   .cc-stats {
     background: #0a0a0a;
     box-shadow: 0 -30px 60px rgba(0, 0, 0, 0.45);

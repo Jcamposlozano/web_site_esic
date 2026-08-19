@@ -63,8 +63,11 @@ No hay dev server en el flujo habitual: se sirve una copia del build.
 
 ```bash
 cd apps/web && ./node_modules/.bin/astro build
-rm -rf /tmp/esic-preview && cp -R apps/web/dist /tmp/esic-preview
+mkdir -p /tmp/esic-preview && rsync -a --delete apps/web/dist/ /tmp/esic-preview/
 ```
+
+(`rsync` y no `rm -rf` + `cp`: el server hace `chdir` a `/tmp/esic-preview`, así
+que borrar la carpeta lo deja sirviendo un inode muerto y todo responde vacío.)
 
 Luego `preview_start` con la config `esic-dist` de `.claude/launch.json`
 (sirve `/tmp/esic-preview` en el puerto 4321).

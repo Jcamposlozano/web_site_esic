@@ -14,7 +14,7 @@
       "port": 4321
     },
     {
-      "_comment": "Sirve una COPIA del build en /tmp/esic-preview. Util para verificar assets que aun no estan en S3: copialos a /tmp/esic-preview/localassets/ y reescribe la URL de S3 en el HTML/JS del build. Refrescar con: (cd apps/web && ./node_modules/.bin/astro build) && rm -rf /tmp/esic-preview && cp -R apps/web/dist /tmp/esic-preview",
+      "_comment": "Sirve una COPIA del build en /tmp/esic-preview. Util para verificar assets que aun no estan en S3: copialos a /tmp/esic-preview/localassets/ y reescribe la URL de S3 en el HTML/JS del build. Refrescar con: (cd apps/web && ./node_modules/.bin/astro build) && rsync -a --delete apps/web/dist/ /tmp/esic-preview/  (rsync y no rm -rf: el server hace chdir a esa carpeta y borrarla lo deja sirviendo un inode muerto)",
       "name": "esic-dist",
       "runtimeExecutable": "/usr/bin/python3",
       "runtimeArgs": [

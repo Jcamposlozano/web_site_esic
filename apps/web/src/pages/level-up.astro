@@ -12,6 +12,7 @@ import { asset } from "../lib/assets";
  * fullBleed: el hero arranca pegado arriba (el Nav flota encima).
  */
 
+/** Edición abierta (octubre 2026): la landing con fechas y pago es /curso-claude/. */
 const niveles = [
   {
     title: "Nivel 1 – Iniciador",
@@ -60,6 +61,9 @@ const niveles = [
               Todos los Level Up son presenciales. Entrena las habilidades más
               demandadas en sesiones intensivas.
             </p>
+            <a class="elup-btn elup-btn-purple elup-agenda-cta" href="/curso-claude/">
+              Abierto: Level Up con Claude · 17, 24 y 31 OCT →
+            </a>
           </div>
           <div class="elup-event-grid">
             {niveles.map((n) => (
@@ -80,8 +84,9 @@ const niveles = [
         <div class="elup-cta-panel">
           <div>
             <h2>¿Listo para tu<br />próximo Level Up?</h2>
-            <p>Reserva tu cupo y recibe información de fechas, ponentes y temáticas.</p>
+            <p>La edición de octubre ya está abierta: 3 sábados presenciales en el Campus ESIC Medellín.</p>
           </div>
+          <a class="elup-btn elup-btn-dark" href="/curso-claude/#inscripcion">Separa tu cupo</a>
         </div>
       </div>
     </section>
@@ -146,6 +151,17 @@ const niveles = [
   .elup-btn-dark {
     background: var(--lup-navy);
     color: var(--lup-white);
+  }
+  .elup-btn-purple {
+    background: var(--lup-purple-solid);
+    color: var(--lup-white);
+  }
+  .elup-btn-purple:hover {
+    background: #6d28d9;
+    transform: translateY(-2px);
+  }
+  .elup-agenda-cta {
+    margin-top: 1.5rem;
   }
   .elup-btn-dark:hover {
     background: #001a5c;
